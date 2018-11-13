@@ -2,24 +2,17 @@
         1、LoadSir的错误页面参考主流app修改UI样式
         2、日志组件定期日志上传，筛选等功能
         3、第三方分享、登录组件
-
         5、统一的下拉刷新（SmartRefreshLayout，放base-common）
-
         6、本地数据库组件（greenDao和Realm选一个）
-
         8、支付组件
-
         9、h5组件
         10、二维码、条码扫码解码组件
-
         11、lbs位置服务组件
         12、im实时聊天组件
-
         13、实时推送「各个主流厂商的推送渠道」
-
         15、沉浸式状态栏处理、侧滑关闭等其他UI效果优化{https://github.com/gyf-dev/ImmersionBar}
 
-        #16、引入腾讯 MMKV 框架，替换SharedPreferences 来保存Key-value类型数据
+        #16、引入腾讯 MMKV 框架，替换SharedPreferences 来保存Key-value类型数据，替换现在的SPFUtil
 
         17.开发屏幕录制app{
             1.录制屏幕
@@ -30,6 +23,7 @@
         }
 
         18.func-db组件二次封装
+        19.网络请求添加页面生命周期绑定
 
 
 #sample://
