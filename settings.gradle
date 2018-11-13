@@ -1,1 +1,1 @@
-include ':app', ':biz-main', ':biz-login', ':core-jutils', ':core-ui', ':core-framework', ':base-common', ':core-router', ':core-log', ':func-media', ':func-download', ':func-lbs', ':func-db', ':func-scan', ':func-im', ':func-h5', ':func-pay', ':func-share-login', ':func-push', ':core-annotations', ':core-processor'
+include ':app', ':biz-main', ':biz-login', ':core-jutils', ':core-ui', ':core-framework', ':base-common', ':core-router', ':core-log',  ':core-annotations', ':core-processor'

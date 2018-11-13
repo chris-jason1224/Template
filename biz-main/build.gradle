@@ -50,11 +50,6 @@ dependencies {
     annotationProcessor project(':core-processor')
     implementation project(':core-annotations')
 
-    //测试分享组件
-    implementation project(':func-share-login')
 
-    //测试数据库组件
-    //使用数据库组件必须要依赖上,否则assets检索不到组件配置信息
-    implementation project(':func-db')
 
 }

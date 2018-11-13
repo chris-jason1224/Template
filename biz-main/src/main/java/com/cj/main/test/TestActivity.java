@@ -13,13 +13,9 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.cj.common.mvp.BaseMVPActivity;
 import com.cj.common.vlayout.VLayoutBaseAdapter;
 import com.cj.common.vlayout.VLayoutItemListener;
-import com.cj.db.helper.DBManager;
-import com.cj.db.helper.DBUtil;
 import com.cj.log.view.CrashDialog;
 import com.cj.main.R;
 import com.cj.main.R2;
-import com.cj.share_login.share.CJShare;
-import com.cj.share_login.share.entity.ShareEntity;
 import com.cj.ui.tip.UITipDialog;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,22 +93,7 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
         }
 
         if(R.id.share==id){
-            CJShare.getInstance(TestActivity.this).doShare(new ShareEntity(), new CJShare.OnShareResult() {
-                @Override
-                public void onSuccess() {
 
-                }
-
-                @Override
-                public void onCancel() {
-
-                }
-
-                @Override
-                public void onError() {
-
-                }
-            });
         }
 
         if(R.id.db==id){
