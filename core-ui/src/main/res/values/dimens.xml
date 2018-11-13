@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="core_ui_alerter_activity_horizontal_margin">18dp</dimen>
+    <dimen name="core_ui_alerter_activity_vertical_margin">16dp</dimen>
+
+    <dimen name="core_ui_alerter_padding_small">4dp</dimen>
+    <dimen name="core_ui_alerter_padding_half">8dp</dimen>
+    <dimen name="core_ui_alerter_padding_default">16dp</dimen>
+    <dimen name="core_ui_alerter_alert_padding">30dp</dimen>
+    <dimen name="core_ui_alerter_alert_negative_margin_top">-26dp</dimen>
+
+    <dimen name="core_ui_alerter_progress_bar_size">2dp</dimen>
+
+    <!--Alerts-->
+    <dimen name="core_ui_alerter_alert_min_height">64dp</dimen>
+    <dimen name="core_ui_alerter_alert_max_height">84dp</dimen>
+    <dimen name="core_ui_alerter_alert_icn_size">25dp</dimen>
+
+    <!--Text sizes-->
+    <dimen name="core_ui_alerter_text_small">14sp</dimen>
+    <dimen name="core_ui_alerter_text_medium">18sp</dimen>
+</resources>

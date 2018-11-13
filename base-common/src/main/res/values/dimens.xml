@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--统一的标题栏高度-->
+    <dimen name="base_common_normal_title_bar_height">45dp</dimen>
+
+
+
+
+</resources>

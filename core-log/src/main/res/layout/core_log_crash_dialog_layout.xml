@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/core_log_bg_crash_dialog_white_rectangle"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/core_log_icon_crash_dialog_bug" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="系统崩溃"
+            android:textColor="#333333"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <TextView
+        android:textSize="16dp"
+        android:textColor="#333333"
+        android:text="系统发生了未知异常，非常抱歉给您带来的不便！"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_alignParentLeft="true"
+                android:paddingRight="22dp"
+                android:paddingLeft="22dp"
+                android:id="@+id/rl_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/core_log_bg_crash_dialog_close_rectangle">
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关闭系统"
+                    android:textColor="#ffffff"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:id="@+id/rl_restart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/core_log_bg_crash_dialog_restart_rectangle">
+
+                <LinearLayout
+                    android:id="@+id/ll_restart"
+                    android:layout_marginRight="22dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:layout_marginRight="5dp"
+                        android:visibility="gone"
+                        android:indeterminateTint="#ffffff"
+                        android:id="@+id/progress"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp" />
+
+                    <TextView
+                        android:id="@+id/tv_msg"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="立即重启"
+                        android:textColor="#ffffff"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+

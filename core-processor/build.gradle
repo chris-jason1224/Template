@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':core-annotations')
+    implementation "com.google.code.gson:gson:${rootProject.gsonVersion}"
+}
+
+sourceCompatibility = rootProject.javaVersion
+targetCompatibility = rootProject.javaVersion

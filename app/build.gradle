@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    signingConfigs {
+        signature {
+            keyAlias 'Template'
+            keyPassword 'CD85118384'
+            storeFile file('/Users/mayikang/android/keystore/Template.jks')
+            storePassword 'CD85118384'
+        }
+    }
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.cj.mst"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+                includeCompileClasspath true
+            }
+        }
+
+        lintOptions {
+            abortOnError false
+        }
+
+        //multidex config
+        multiDexEnabled true
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signature
+        }
+        debug {
+            signingConfig signingConfigs.signature
+        }
+    }
+    //multidex config
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:${rootProject.ext.supportLibraryVersion}"
+}
+
+dependencies {
+    implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintVersion}"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    //合并时才依赖各个组件
+    if (!isModuleModle.toBoolean()) {
+        api project(':biz-main')
+        api project(':biz-login')
+
+    }
+    implementation project(':base-common')
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+
+}

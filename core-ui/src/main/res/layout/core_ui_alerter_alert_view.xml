@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/flClickShield"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@android:color/transparent"
+             android:clickable="false">
+
+    <FrameLayout
+        android:id="@+id/flAlertBackground"
+        style="@style/core_ui_AlerterStyle"
+        android:background="@android:color/darker_gray"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/core_ui_rlContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/core_ui_alerter_padding_half"
+            android:background="@null"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="@dimen/core_ui_alerter_activity_horizontal_margin">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/core_ui_ivIcon"
+                android:layout_width="@dimen/core_ui_alerter_alert_icn_size"
+                android:layout_height="@dimen/core_ui_alerter_alert_icn_size"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+
+                android:maxHeight="@dimen/core_ui_alerter_alert_icn_size"
+                android:maxWidth="@dimen/core_ui_alerter_alert_icn_size"
+                android:src="@drawable/core_ui_alerter_icon_notifications"
+                android:tint="@color/core_ui_alert_default_icon_color"/>
+
+            <LinearLayout
+                android:id="@+id/core_ui_llAlertTextContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/core_ui_alerter_activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/core_ui_alerter_activity_horizontal_margin"
+                android:layout_marginRight="@dimen/core_ui_alerter_activity_horizontal_margin"
+                android:layout_marginStart="@dimen/core_ui_alerter_activity_horizontal_margin"
+                android:layout_toEndOf="@id/core_ui_ivIcon"
+                android:layout_toRightOf="@id/core_ui_ivIcon"
+                android:background="@null"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="Title"
+                    android:id="@+id/core_ui_tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/core_ui_AlertTextAppearance.Title"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+                <TextView
+                    android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+                    android:id="@+id/core_ui_tvText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/core_ui_alerter_padding_small"
+                    android:paddingTop="@dimen/core_ui_alerter_padding_small"
+                    android:textAppearance="@style/core_ui_AlertTextAppearance.Text"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/core_ui_pbProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/core_ui_alerter_progress_bar_size"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            tools:progress="45"/>
+
+    </FrameLayout>
+
+</FrameLayout>

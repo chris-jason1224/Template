@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="core_ui_AlerterStyle" parent="@android:style/Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/core_ui_alerter_alert_min_height</item>
+        <item name="android:maxHeight">@dimen/core_ui_alerter_alert_max_height</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">top</item>
+        <item name="android:paddingTop">@dimen/core_ui_alerter_alert_padding</item>
+    </style>
+
+    <style name="core_ui_AlertTextAppearance">
+        <item name="android:textColor">@color/core_ui_alert_default_icon_color</item>
+    </style>
+
+    <style name="core_ui_AlertTextAppearance.Title">
+        <item name="android:textSize">@dimen/core_ui_alerter_text_medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="core_ui_AlertTextAppearance.Text">
+        <item name="android:textSize">@dimen/core_ui_alerter_text_small</item>
+    </style>
+
+
+    <style name="core_ui_QMUI.TipDialog" parent="android:Theme.Dialog">
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <declare-styleable name="core_ui_QMUILoadingView">
+        <attr name="core_ui_qmui_loading_view_size" format="dimension"/>
+        <attr name="android:color"/>
+    </declare-styleable>
+
+    <attr name="core_ui_QMUILoadingStyle" format="reference"/>
+
+</resources>

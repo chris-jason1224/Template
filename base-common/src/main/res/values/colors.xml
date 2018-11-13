@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="base_common_color_primary">#42bd56</color>
+    <color name="base_common_color_primary_dark">#42AA56</color>
+    <color name="base_common_color_accent">#42bd56</color>
+
+    <color name="base_common_color_ffffff">#ffffff</color>
+    <color name="base_common_color_fafafa">#fafafa</color>
+
+
+</resources>

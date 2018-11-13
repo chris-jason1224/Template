@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Template.iml" filepath="$PROJECT_DIR$/Template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base-common/base-common.iml" filepath="$PROJECT_DIR$/base-common/base-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz-login/biz-login.iml" filepath="$PROJECT_DIR$/biz-login/biz-login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz-main/biz-main.iml" filepath="$PROJECT_DIR$/biz-main/biz-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-annotations/core-annotations.iml" filepath="$PROJECT_DIR$/core-annotations/core-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-framework/core-framework.iml" filepath="$PROJECT_DIR$/core-framework/core-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-jutils/core-jutils.iml" filepath="$PROJECT_DIR$/core-jutils/core-jutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-log/core-log.iml" filepath="$PROJECT_DIR$/core-log/core-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-processor/core-processor.iml" filepath="$PROJECT_DIR$/core-processor/core-processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-router/core-router.iml" filepath="$PROJECT_DIR$/core-router/core-router.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-ui/core-ui.iml" filepath="$PROJECT_DIR$/core-ui/core-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-db/func-db.iml" filepath="$PROJECT_DIR$/func-db/func-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-download/func-download.iml" filepath="$PROJECT_DIR$/func-download/func-download.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-h5/func-h5.iml" filepath="$PROJECT_DIR$/func-h5/func-h5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-im/func-im.iml" filepath="$PROJECT_DIR$/func-im/func-im.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-lbs/func-lbs.iml" filepath="$PROJECT_DIR$/func-lbs/func-lbs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-media/func-media.iml" filepath="$PROJECT_DIR$/func-media/func-media.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-pay/func-pay.iml" filepath="$PROJECT_DIR$/func-pay/func-pay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-push/func-push.iml" filepath="$PROJECT_DIR$/func-push/func-push.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-scan/func-scan.iml" filepath="$PROJECT_DIR$/func-scan/func-scan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func-share-login/func-share-login.iml" filepath="$PROJECT_DIR$/func-share-login/func-share-login.iml" />
+    </modules>
+  </component>
+</project>

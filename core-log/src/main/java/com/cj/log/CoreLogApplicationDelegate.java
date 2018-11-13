@@ -1,0 +1,89 @@
+package com.cj.log;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
+import com.cj.annontations.module.ModuleRegister;
+import com.cj.log.util.CrashHandler;
+import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by mayikang on 2018/9/7.
+ */
+
+@ModuleRegister(moduleName = "core-log" , delegateName = "com.cj.log.CoreLogApplicationDelegate")
+public class CoreLogApplicationDelegate implements IModuleApplicationDelegate {
+
+    private Context applicationContext;
+
+    private static Activity mCurrentActivity;
+    private static List<Activity> activityList;
+
+    @Override
+    public void onCreate(Context context) {
+        this.applicationContext=context;
+        CJLog.getInstance().log_d("--日志组件初始化成功--");
+
+        //注入统一的java层异常捕获
+        Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance(context));
+    }
+
+    @Override
+    public void enterBackground() {
+
+    }
+
+    @Override
+    public void enterForeground() {
+
+    }
+
+    @Override
+    public void receiveRemoteNotification(Map<String, String> var1) {
+
+    }
+
+    @Override
+    public void onTerminate() {
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration var1) {
+
+    }
+
+    @Override
+    public void onLowMemory() {
+
+    }
+
+    @Override
+    public void onTrimMemory(int var1) {
+
+    }
+
+    @Override
+    public void onCurrentActivity(Activity activity) {
+        mCurrentActivity=activity;
+    }
+
+    @Override
+    public void onActivityTask(List<Activity> list) {
+        activityList = list;
+    }
+
+
+    public static Activity getCurrentActivity(){
+        return mCurrentActivity;
+    }
+
+    public static List<Activity> getActivityList(){
+        return activityList;
+    }
+
+}
