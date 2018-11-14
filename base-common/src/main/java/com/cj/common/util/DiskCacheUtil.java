@@ -21,7 +21,7 @@ public class DiskCacheUtil {
     public static DiskCacheUtil getInstance(){
         return Holder.instance;
     }
-    
+
     /**********用户登录Token相关********************/
 
     public boolean hasToken(){
