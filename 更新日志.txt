@@ -31,7 +31,8 @@
         {@link https://blog.csdn.net/hexingen/article/details/78504814}
 
 
-
+#20181114
+    1、引入MMKV，替代原有SharedPreferences，支持跨进程访问本地Key-Value类型缓存
 
 #20181023
     1、优化网络变化监听逻辑
