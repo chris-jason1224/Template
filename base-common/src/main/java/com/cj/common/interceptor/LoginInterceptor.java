@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Interceptor;
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback;
 import com.alibaba.android.arouter.facade.template.IInterceptor;
-import com.cj.common.util.TokenUtil;
+import com.cj.common.util.DiskCacheUtil;
 import com.cj.common.var.KeyTag;
 import com.cj.common.var.AsyncNotifyCode;
 /**
@@ -49,7 +49,7 @@ public class LoginInterceptor implements IInterceptor {
             mPostcard = postcard;
             mCallback = callback;
             //TODO 判断是否已经登录
-            if (TokenUtil.getInstance().hasToken()) {
+            if (DiskCacheUtil.getInstance().hasToken()) {
                 //跳转到登录页
                 //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {

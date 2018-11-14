@@ -3,14 +3,12 @@ package com.cj.common.http.repository;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.TextUtils;
 import android.webkit.WebSettings;
 
 import com.cj.common.BuildConfig;
 import com.cj.common.base.BaseApp;
 import com.cj.common.util.AndroidSystemUtil;
-import com.cj.common.util.SPFUtil;
-import com.cj.common.util.TokenUtil;
+import com.cj.common.util.DiskCacheUtil;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,7 +62,7 @@ public class RetrofitFactory {
                 Request.Builder builder = original_request.newBuilder();
                 builder.
                         //添加token，由登录成功后保存到本地
-                        addHeader("UserToken", TokenUtil.getInstance().getTokenString())
+                        addHeader("UserToken", DiskCacheUtil.getInstance().getTokenString())
 
                         //设置User-Agent
                         .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApp.getApp()) : System.getProperty("http.agent"))

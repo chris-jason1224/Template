@@ -88,4 +88,7 @@ ext {
 //   沉浸式状态栏
     immersionBarVersion = "2.3.2-beta01"
 
+//  腾讯mmkv 高速key-value本地存取框架，替代普通SharedPreference
+    tencentMMKVVersion = "1.0.12"
+
 }

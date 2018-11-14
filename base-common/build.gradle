@@ -83,4 +83,6 @@ dependencies {
 //    沉浸式状态栏
     api "com.gyf.immersionbar:immersionbar:${rootProject.ext.immersionBarVersion}"
 
+//    MMKV
+    api "com.tencent:mmkv:${rootProject.ext.tencentMMKVVersion}"
 }
