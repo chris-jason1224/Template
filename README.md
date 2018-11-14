@@ -1,7 +1,5 @@
 # Template
 
-
-
 ##更新日志##
 
 
@@ -9,6 +7,27 @@
 #20181114
 
     1、引入MMKV，替代原有SharedPreferences，支持跨进程访问本地Key-Value类型缓存
+    
+    
+#20181023
+
+    1、优化网络变化监听逻辑
+    2、基类加入沉浸式效果
+
+#20181018
+
+    1、优化了系统崩溃拦截处理逻辑，发生崩溃后交由用户自己选择是直接关闭系统还是重启app
+
+#20181017
+
+    1、引入greenDao3，完成基本配置项
+
+
+#20180916
+
+    1、完成EasyCompressor本地图片压缩库并上传到GitHub
+    @link「 https://github.com/chris-jason1224/EasyCompressor 」
+
 
 #20180907
     
