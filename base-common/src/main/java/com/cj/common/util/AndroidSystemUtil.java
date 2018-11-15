@@ -1,10 +1,13 @@
 package com.cj.common.util;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+
+import java.util.List;
 
 /**
  * Created by mayikang on 2018/8/21.
@@ -88,5 +91,23 @@ public class AndroidSystemUtil {
         return (String) packageManager.getApplicationLabel(applicationInfo);
 
     }
+
+    /**
+     * 注意：因为推送服务等设置为运行在另外一个进程，这导致本Application会被实例化两次。
+     * 而有些操作我们需要让应用的主进程时才进行，所以用到了这个方法
+     */
+    public static boolean isInMainProcess(Context context) {
+        ActivityManager am = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
+        List<ActivityManager.RunningAppProcessInfo> processes = am.getRunningAppProcesses();
+        String mainProcessName = context.getPackageName();
+        int myPid = android.os.Process.myPid();
+        for (ActivityManager.RunningAppProcessInfo info : processes) {
+            if (info.pid == myPid && mainProcessName.equals(info.processName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

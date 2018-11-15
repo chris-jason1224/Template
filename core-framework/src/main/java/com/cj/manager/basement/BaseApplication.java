@@ -19,6 +19,10 @@ import java.util.List;
 
 public class BaseApplication extends Application {
 
+    /**
+     * 多进程app会重复启动Application
+     */
+
     private  final String TAG = getClass().getSimpleName();
 
     private static BaseApplication sInstance;

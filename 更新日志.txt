@@ -9,7 +9,7 @@
         10、二维码、条码扫码解码组件
         11、lbs位置服务组件
         12、im实时聊天组件
-        13、实时推送「各个主流厂商的推送渠道」
+        13、func-push{小米+华为+友盟}
         15、沉浸式状态栏处理、侧滑关闭等其他UI效果优化{https://github.com/gyf-dev/ImmersionBar}
 
         #16、引入腾讯 MMKV 框架，替换SharedPreferences 来保存Key-value类型数据，替换现在的SPFUtil
