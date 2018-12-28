@@ -37,6 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/alert"
             android:text="goto_test" />
+
+        <Button
+            android:id="@+id/make_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/goto_test"
+            android:text="make_crash" />
     </RelativeLayout>
 
 </LinearLayout>

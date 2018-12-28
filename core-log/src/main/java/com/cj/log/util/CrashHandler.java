@@ -12,9 +12,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.cj.log.CJLog;
 import com.cj.log.CoreLogApplicationDelegate;
@@ -118,20 +116,22 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void showDialog() {
+        if(CoreLogApplicationDelegate.getCurrentActivity()!=null){
+            CrashDialog dialog = new CrashDialog(CoreLogApplicationDelegate.getCurrentActivity(), new CrashDialog.ClickCallback() {
+                @Override
+                public void onClickClose() {
+                    exit();
+                }
 
-        CrashDialog dialog = new CrashDialog(CoreLogApplicationDelegate.getCurrentActivity(), new CrashDialog.ClickCallback() {
-            @Override
-            public void onClickClose() {
-                exit();
-            }
+                @Override
+                public void onClickRestart() {
+                    //重启app
+                    restartApp();
+                }
+            });
+            dialog.show();
+        }
 
-            @Override
-            public void onClickRestart() {
-                //重启app
-                restartApp();
-            }
-        });
-        dialog.show();
     }
 
     /**

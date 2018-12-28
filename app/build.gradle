@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin:myPlugin
+
+class myPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project target) {
+        println("我的plugin 插件")
+    }
+}
 android {
     signingConfigs {
         signature {

@@ -12,6 +12,7 @@ import com.cj.common.base.IBaseView;
  */
 
 public  abstract class BaseMVPFragment<P extends IBasePresenter> extends BaseFragment implements IBaseView{
+
     private P mPresenter;
 
 

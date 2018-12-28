@@ -8,52 +8,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cj.main.test.TestActivity">
+    <HorizontalScrollView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/http"
+                android:text="http"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/http"
-        android:text="http"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <com.cj.ui.RoundShape.RoundTextView
-        app:core_ui_rv_cornerRadius="5dp"
-        android:padding="6dp"
-        app:core_ui_rv_strokeColor="#42bd56"
-        app:core_ui_rv_strokeWidth="1dp"
-        android:textColor="#42bd56"
-        android:text="RoundTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/pop_tip"
+                android:text="pop tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
-    <Button
-        android:id="@+id/pop_tip"
-        android:text="pop tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/crash"
-        android:text="make a crash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <Button
-        android:text="分享"
-        android:id="@+id/share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/db"
-        android:text="GreenDao3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
         android:id="@+id/rv"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+       android:layout_marginTop="100dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+        <com.cj.main.test.InfiniteView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
 
 
 

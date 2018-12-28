@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -55,9 +56,17 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test})
+    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash})
     public void onClick(View v) {
         int vid = v.getId();
+
+        //人造一个crash
+
+        if(R.id.make_crash == vid){
+            TextView tv=null;
+            tv.setText("fffff");
+            return;
+        }
 
         //打开biz-login module
         if (R.id.goto_biz_login == vid) {

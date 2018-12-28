@@ -45,6 +45,7 @@ public class SPFUtil {
      */
     public static void init(@NonNull Context con) {
         context = con;
+        MMKV.initialize(con);
         //设置MMKV跨进程使用
         mmkv = MMKV.mmkvWithID("InterProcessKV", MMKV.MULTI_PROCESS_MODE);
     }

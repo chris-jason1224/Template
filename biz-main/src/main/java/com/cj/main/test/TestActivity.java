@@ -2,6 +2,10 @@ package com.cj.main.test;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
+import android.os.MessageQueue;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -63,7 +67,7 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
 
 
 
-    @OnClick({R2.id.http,R2.id.pop_tip,R2.id.crash,R2.id.share,R2.id.db})
+    @OnClick({R2.id.http,R2.id.pop_tip})
     public void onClick(View v){
         int id=v.getId();
 
@@ -87,29 +91,7 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
             },1500);
         }
 
-        if(R.id.crash==id){
-            TextView tv=null;
-            tv.setText("hhah");
-        }
 
-        if(R.id.share==id){
-
-        }
-
-        if(R.id.db==id){
-            CrashDialog crashDialog=new CrashDialog(this, new CrashDialog.ClickCallback() {
-                @Override
-                public void onClickClose() {
-
-                }
-
-                @Override
-                public void onClickRestart() {
-
-                }
-            });
-            crashDialog.show();
-        }
 
 
 
@@ -138,4 +120,10 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
 
         mRV.setAdapter(delegateAdapter);
     }
+
+
+
+
+
+
 }
