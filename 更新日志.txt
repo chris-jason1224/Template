@@ -24,6 +24,7 @@
 
         18.func-db组件二次封装
         19.网络请求添加页面生命周期绑定
+        20.hermes-eventbus
 
 
 #sample://

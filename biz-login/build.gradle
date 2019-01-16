@@ -40,11 +40,11 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
-    implementation project(':base-common')
+    api project(':base-common')
     if(!isModuleModle.toBoolean()){
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
     }
-    implementation project(':core-annotations')
+
     annotationProcessor project(':core-processor')
 
 }

@@ -36,5 +36,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
     api "com.android.support:multidex:${rootProject.multidexVersion}"
-    implementation project(':core-annotations')
+    api project(':core-annotations')
 }

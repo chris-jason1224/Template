@@ -9,10 +9,14 @@
     tools:context="com.cj.login.LoginActivity">
 
 
-    <ImageView
-        android:src="#42bd56"
+    <TextView
+        android:textColor="@color/core_ui_white"
+        android:text="沉浸式效果"
+        android:background="#42bd56"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp">
+
+    </TextView>
 
     <TextView
         android:gravity="center"

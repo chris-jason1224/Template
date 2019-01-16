@@ -76,7 +76,6 @@ dependencies {
         api project(':biz-login')
 
     }
-    implementation project(':base-common')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
 
 }

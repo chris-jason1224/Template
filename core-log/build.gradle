@@ -32,6 +32,6 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
     api "com.orhanobut:logger:${rootProject.ext.loggerVersion}"
     annotationProcessor project(':core-processor')
-    implementation project(':core-framework')
-    implementation project(':core-annotations')
+    api project(':core-framework')
+
 }
