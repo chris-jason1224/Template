@@ -11,19 +11,20 @@
 
     <include layout="@layout/base_common_normal_title_layout"/>
 
+    <TextView
+        android:id="@+id/goto_biz_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="goto_biz-login"/>
 
     <RelativeLayout
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/goto_biz_login"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="goto_biz-login"/>
+
 
         <Button
             android:id="@+id/alert"
@@ -44,6 +45,14 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/goto_test"
             android:text="make_crash" />
+
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="前台测试" />
 
 </LinearLayout>

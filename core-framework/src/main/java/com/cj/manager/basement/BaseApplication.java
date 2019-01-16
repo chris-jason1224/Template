@@ -107,36 +107,6 @@ public class BaseApplication extends Application {
         return result;
     }
 
-    public void killAllActivity() {
-        try {
-            Iterator activityIterator = this.mActivityList.iterator();
-
-            while(activityIterator.hasNext()) {
-                Activity activity = (Activity) activityIterator.next();
-                activity.finish();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void killAllActivityExcept(Class<Activity> execptActivity) {
-        try {
-            Iterator activityIterator = this.mActivityList.iterator();
-
-            while(activityIterator.hasNext()) {
-                Activity activity = (Activity) activityIterator.next();
-                if(!activity.getClass().equals(execptActivity)) {
-                    activity.finish();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     //Activity生命周期监测回调
     private class ActivityLifecycleCallbacksImpl implements ActivityLifecycleCallbacks {
         private ActivityLifecycleCallbacksImpl() {}

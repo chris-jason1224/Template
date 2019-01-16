@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
 import com.cj.common.bus.DataBus;
+import com.cj.common.util.AndroidSystemUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import java.util.ArrayList;
@@ -56,12 +57,16 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash})
+    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash,R2.id.foreground})
     public void onClick(View v) {
         int vid = v.getId();
 
-        //人造一个crash
+        if(R.id.foreground ==vid){
+            AndroidSystemUtil.getInstance().isAppForeground(this);
+        }
 
+
+        //人造一个crash
         if(R.id.make_crash == vid){
             TextView tv=null;
             tv.setText("fffff");
