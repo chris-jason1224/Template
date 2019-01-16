@@ -15,7 +15,7 @@ public class ListUtil {
      * @param list
      * @return
      */
-    public static boolean isEmpty(List<?> list){
+    public static boolean isEmpty(List<? extends Object> list){
 
         if(list==null){
             return true;
