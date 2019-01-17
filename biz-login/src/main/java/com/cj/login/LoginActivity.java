@@ -3,10 +3,9 @@ package com.cj.login;
 import android.arch.lifecycle.Observer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -18,7 +17,6 @@ import com.cj.common.bus.DataBusKey;
 import com.cj.log.CJLog;
 import com.gyf.barlibrary.ImmersionBar;
 
-import java.util.ArrayList;
 @Route(path="/biz_login/login")
 public class LoginActivity extends BaseActivity {
 
