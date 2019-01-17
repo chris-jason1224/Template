@@ -22,18 +22,13 @@ import android.view.WindowManager;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
-/**
- * @author cginechen
- * @date 2016-03-17
- */
-public class QMUIDisplayHelper {
+public class DisplayHelper {
 
     /**
      * 屏幕密度,系统源码注释不推荐使用
      */
-    public static final float DENSITY = Resources.getSystem()
-            .getDisplayMetrics().density;
-    private static final String TAG = "QMUIDisplayHelper";
+    public static final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
+    private static final String TAG = "DisplayHelper";
 
     /**
      * 是否有摄像头
@@ -42,8 +37,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取 DisplayMetrics
-     *
-     * @return
      */
     public static DisplayMetrics getDisplayMetrics(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -52,25 +45,6 @@ public class QMUIDisplayHelper {
         return displayMetrics;
     }
 
-    /**
-     * 把以 dp 为单位的值，转化为以 px 为单位的值
-     *
-     * @param dpValue 以 dp 为单位的值
-     * @return px value
-     */
-    public static int dpToPx(int dpValue) {
-        return (int) (dpValue * DENSITY + 0.5f);
-    }
-
-    /**
-     * 把以 px 为单位的值，转化为以 dp 为单位的值
-     *
-     * @param pxValue 以 px 为单位的值
-     * @return dp值
-     */
-    public static int pxToDp(float pxValue) {
-        return (int) (pxValue / DENSITY + 0.5f);
-    }
 
     public static float getDensity(Context context) {
         return context.getResources().getDisplayMetrics().density;
@@ -82,8 +56,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取屏幕宽度
-     *
-     * @return
      */
     public static int getScreenWidth(Context context) {
         return getDisplayMetrics(context).widthPixels;
@@ -91,8 +63,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取屏幕高度
-     *
-     * @return
      */
     public static int getScreenHeight(Context context) {
         return getDisplayMetrics(context).heightPixels;
@@ -100,9 +70,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取屏幕的真实宽高
-     *
-     * @param context
-     * @return
      */
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -152,51 +119,27 @@ public class QMUIDisplayHelper {
         return false;
     }
 
-    /**
-     * 单位转换: dp -> px
-     *
-     * @param dp
-     * @return
-     */
-    public static int dp2px(Context context, int dp) {
-        return (int) (getDensity(context) * dp + 0.5);
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
-    /**
-     * 单位转换: sp -> px
-     *
-     * @param sp
-     * @return
-     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
     public static int sp2px(Context context, int sp) {
         return (int) (getFontDensity(context) * sp + 0.5);
     }
 
-    /**
-     * 单位转换:px -> dp
-     *
-     * @param px
-     * @return
-     */
-    public static int px2dp(Context context, int px) {
-        return (int) (px / getDensity(context) + 0.5);
-    }
-
-    /**
-     * 单位转换:px -> sp
-     *
-     * @param px
-     * @return
-     */
     public static int px2sp(Context context, int px) {
         return (int) (px / getFontDensity(context) + 0.5);
     }
 
     /**
      * 判断是否有状态栏
-     *
-     * @param context
-     * @return
      */
     public static boolean hasStatusBar(Context context) {
         if (context instanceof Activity) {
@@ -209,9 +152,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取ActionBar高度
-     *
-     * @param context
-     * @return
      */
     public static int getActionBarHeight(Context context) {
         int actionBarHeight = 0;
@@ -225,9 +165,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取状态栏高度
-     *
-     * @param context
-     * @return
      */
     public static int getStatusBarHeight(Context context) {
         Class<?> c;
@@ -249,9 +186,6 @@ public class QMUIDisplayHelper {
 
     /**
      * 获取虚拟菜单的高度,若无则返回0
-     *
-     * @param context
-     * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static int getNavMenuHeight(Context context) {
@@ -268,6 +202,9 @@ public class QMUIDisplayHelper {
         return getRealScreenSize(context)[1] - getScreenHeight(context);
     }
 
+    /**
+     * 是否有相机
+     */
     public static final boolean hasCamera(Context context) {
         if (sHasCamera == null) {
             PackageManager pckMgr = context.getPackageManager();
@@ -282,10 +219,7 @@ public class QMUIDisplayHelper {
     }
 
     /**
-     * 是否有硬件menu
-     *
-     * @param context
-     * @return
+     * 是否有物理键盘
      */
     @SuppressWarnings("SimplifiableIfStatement")
     public static boolean hasHardwareMenuKey(Context context) {
@@ -299,33 +233,6 @@ public class QMUIDisplayHelper {
         return flag;
     }
 
-    /**
-     * 是否有网络功能
-     *
-     * @param context
-     * @return
-     */
-    public static boolean hasInternet(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }
-
-    /**
-     * 判断是否存在pckName包
-     *
-     * @param pckName
-     * @return
-     */
-    public static boolean isPackageExist(Context context, String pckName) {
-        try {
-            PackageInfo pckInfo = context.getPackageManager()
-                    .getPackageInfo(pckName, 0);
-            if (pckInfo != null)
-                return true;
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        return false;
-    }
 
     /**
      * 判断 SD Card 是否 ready
@@ -419,7 +326,5 @@ public class QMUIDisplayHelper {
     }
 
 
-    public static boolean isElevationSupported() {
-        return Build.VERSION.SDK_INT >= 21;
-    }
+
 }

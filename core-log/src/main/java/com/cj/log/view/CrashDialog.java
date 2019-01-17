@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cj.log.R;
-import com.cj.log.util.ScreenUtil;
+
 
 /**
  * Created by mayikang on 2018/10/16.
@@ -29,15 +29,15 @@ public class CrashDialog extends Dialog implements View.OnClickListener {
     private TextView tvMsg;
     private LinearLayout llRestart;
 
-    public CrashDialog(@NonNull Context context,ClickCallback callback) {
+    public CrashDialog(@NonNull Context context, ClickCallback callback) {
         super(context, R.style.core_log_crash_dialog_style);
-        this.callback=callback;
+        this.callback = callback;
         init(context);
     }
 
 
-    private void init(Context context){
-        this.context=context;
+    private void init(Context context) {
+        this.context = context;
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View windowView = inflater.inflate(R.layout.core_log_crash_dialog_layout, null);
@@ -51,14 +51,14 @@ public class CrashDialog extends Dialog implements View.OnClickListener {
         setCanceledOnTouchOutside(false);
 
         Window window = getWindow();
-        window.getDecorView().setPadding(ScreenUtil.dip2px(context,20f),0,ScreenUtil.dip2px(context,20f),0);
+        window.getDecorView().setPadding(dip2px(context, 20f), 0, dip2px(context, 20f), 0);
         //显示在中间
         window.setGravity(Gravity.CENTER);
 
         //设置宽高
         WindowManager.LayoutParams params = window.getAttributes();
 
-        Display display=getWindow().getWindowManager().getDefaultDisplay();
+        Display display = getWindow().getWindowManager().getDefaultDisplay();
 
         //设置宽度全屏
         params.width = display.getWidth();
@@ -75,25 +75,25 @@ public class CrashDialog extends Dialog implements View.OnClickListener {
     public void setView(View view) {
         view.findViewById(R.id.rl_close).setOnClickListener(this);
         view.findViewById(R.id.rl_restart).setOnClickListener(this);
-        progressBar=view.findViewById(R.id.progress);
-        tvMsg=view.findViewById(R.id.tv_msg);
-        llRestart=view.findViewById(R.id.ll_restart);
+        progressBar = view.findViewById(R.id.progress);
+        tvMsg = view.findViewById(R.id.tv_msg);
+        llRestart = view.findViewById(R.id.ll_restart);
     }
 
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        if(R.id.rl_close==id){
+        int id = view.getId();
+        if (R.id.rl_close == id) {
             dismiss();
             callback.onClickClose();
             return;
         }
 
-        if(R.id.rl_restart==id){
+        if (R.id.rl_restart == id) {
             callback.onClickRestart();
-            RelativeLayout.LayoutParams lp= (RelativeLayout.LayoutParams) llRestart.getLayoutParams();
-            lp.leftMargin=0;
-            lp.rightMargin=ScreenUtil.dip2px(context,22);
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) llRestart.getLayoutParams();
+            lp.leftMargin = 0;
+            lp.rightMargin = dip2px(context, 22);
             llRestart.setLayoutParams(lp);
             progressBar.setVisibility(View.VISIBLE);
             tvMsg.setText("重启中...");
@@ -102,9 +102,15 @@ public class CrashDialog extends Dialog implements View.OnClickListener {
 
     }
 
-    public interface ClickCallback{
+    public interface ClickCallback {
         void onClickClose();
+
         void onClickRestart();
+    }
+
+    private int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
 

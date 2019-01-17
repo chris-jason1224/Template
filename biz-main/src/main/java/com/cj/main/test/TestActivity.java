@@ -62,7 +62,7 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
         if(R.id.pop_tip==id){
 
             final UITipDialog tipDialog = new UITipDialog.Builder(this)
-                    .setIconType(UITipDialog.Builder.ICON_TYPE_FAIL)
+                    .setIconType(UITipDialog.Builder.ICON_TYPE_LOADING)
                     .setTipWord("发送失败")
                     .create();
             tipDialog.show();
