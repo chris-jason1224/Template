@@ -49,7 +49,7 @@ public class LoginInterceptor implements IInterceptor {
             mPostcard = postcard;
             mCallback = callback;
             //TODO 判断是否已经登录
-            if (DiskCacheUtil.getInstance().hasToken()) {
+            if (!DiskCacheUtil.getInstance().hasToken()) {
                 //跳转到登录页
                 //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {
@@ -61,6 +61,7 @@ public class LoginInterceptor implements IInterceptor {
             /**无需登录**/
             callback.onContinue(postcard);
         }
+
     }
 
     @Override

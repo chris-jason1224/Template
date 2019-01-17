@@ -94,7 +94,11 @@ public class NetUtil {
     public static int getCurrentNetType(Context context) {
         int type = -1;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
+
+        NetworkInfo info = null;
+        if(cm!=null){
+            info = cm.getActiveNetworkInfo();
+        }
 
         //无网络时
         if (info == null) {

@@ -116,15 +116,6 @@ public class BaseApplication extends Application {
         return mActivityList;
     }
 
-
-    public boolean isAppRunningBackground() {
-        boolean result = false;
-        if (this.mCurrentCount == 0) {
-            result = true;
-        }
-        return result;
-    }
-
     //Activity生命周期监测回调
     private class ActivityLifecycleCallbacksImpl implements ActivityLifecycleCallbacks {
         private ActivityLifecycleCallbacksImpl() {

@@ -1,7 +1,5 @@
 package com.cj.common.exception;
 
-import android.content.Context;
-
 /**
  * Created by mayikang on 17/5/4.
  */
