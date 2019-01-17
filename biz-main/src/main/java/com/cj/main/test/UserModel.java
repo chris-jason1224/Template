@@ -2,9 +2,7 @@ package com.cj.main.test;
 
 import java.io.Serializable;
 
-/**
- * SpringMVC 方式写的第一个model
- */
+
 public class UserModel implements Serializable {
     private int id;
     private String userId;

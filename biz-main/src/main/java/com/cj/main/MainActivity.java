@@ -61,6 +61,7 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         int vid = v.getId();
 
+
         if(R.id.foreground ==vid){
             AndroidSystemUtil.getInstance().isAppForeground(this);
         }

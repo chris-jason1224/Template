@@ -67,8 +67,6 @@ public  class HttpResultObserver<T> extends DisposableObserver<BaseHttpResultEnt
                 if(callback!=null){
                     if(resultEntity.getData()!=null){
                         callback.onSuccess(resultEntity.getData());
-                    }else {
-                        callback.onSuccess(HttpErrorCode.CODE_STR_REQUEST_RESULT_EMPTY);
                     }
                 }
 
@@ -112,7 +110,6 @@ public  class HttpResultObserver<T> extends DisposableObserver<BaseHttpResultEnt
             int errorCode=exception.code();
             showAlerter(BaseApp.getInstance().getCurrentActivity(),errorCode+"",exception.response().toString());
         }
-
 
 
         if(callback!=null){

@@ -17,12 +17,9 @@ public class HttpErrorCode {
 
     /*********字符串***********/
 
-    public static final String CODE_STR_REQUEST_OK = "请求成功";
 
-    public static final String CODE_STR_REQUEST_FAILED = "请求失败";
+    public static final String CODE_STR_REQUEST_UNDEFINED = "请求结果未定义";
 
-    public static final String CODE_STR_REQUEST_UNDEFINED = "请求结果异常";
 
-    public static final String CODE_STR_REQUEST_RESULT_EMPTY = "请求结果为空";
 
 }

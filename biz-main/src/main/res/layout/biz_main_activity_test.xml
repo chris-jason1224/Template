@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     tools:context="com.cj.main.test.TestActivity">
     <HorizontalScrollView
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -30,27 +30,6 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </HorizontalScrollView>
-
-
-
-
-    <android.support.v7.widget.RecyclerView
-        android:visibility="gone"
-        android:id="@+id/rv"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <RelativeLayout
-       android:layout_marginTop="100dp"
-        android:layout_width="300dp"
-        android:layout_height="300dp">
-        <com.cj.main.test.InfiniteView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
-
-
 
 
 </LinearLayout>
