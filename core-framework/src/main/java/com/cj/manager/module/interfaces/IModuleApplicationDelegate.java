@@ -30,9 +30,5 @@ public interface IModuleApplicationDelegate {
 
     void onTrimMemory(int var1);
 
-    //获取当前所在的activity
-    void onCurrentActivity(Activity activity);
-
-    void onActivityTask(List<Activity> activityList);
 
 }

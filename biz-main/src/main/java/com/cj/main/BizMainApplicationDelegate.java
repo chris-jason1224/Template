@@ -61,13 +61,4 @@ public class BizMainApplicationDelegate  implements IModuleApplicationDelegate{
 
     }
 
-    @Override
-    public void onCurrentActivity(Activity activity) {
-
-    }
-
-    @Override
-    public void onActivityTask(List<Activity> activityList) {
-
-    }
 }

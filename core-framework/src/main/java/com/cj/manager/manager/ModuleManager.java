@@ -81,8 +81,8 @@ public class ModuleManager {
                         continue;
                     }
                     moduleInfoList.add(moduleInfo);
+                    //反射获取代理实例
                     delegateNameList.add(moduleInfo.getDelegateName());
-                    Log.d(TAG, "load Module succeed: " + moduleInfo.getModuleName());
                 }
             }
             //ModuleInfo对应写到json描述文件的结构

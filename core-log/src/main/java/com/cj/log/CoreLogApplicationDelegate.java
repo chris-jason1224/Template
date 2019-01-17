@@ -18,18 +18,14 @@ import java.util.Map;
 @ModuleRegister(moduleName = "core-log" , delegateName = "com.cj.log.CoreLogApplicationDelegate")
 public class CoreLogApplicationDelegate implements IModuleApplicationDelegate {
 
-    private Context applicationContext;
-
-    private static Activity mCurrentActivity;
-    private static List<Activity> activityList;
+    private Context context;
 
     @Override
     public void onCreate(Context context) {
-        this.applicationContext=context;
-        CJLog.getInstance().log_d("--日志组件初始化成功--");
-
+        this.context=context;
         //注入统一的java层异常捕获
         Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance(context));
+        CJLog.getInstance().log_d("--日志组件初始化成功--");
     }
 
     @Override
@@ -67,23 +63,5 @@ public class CoreLogApplicationDelegate implements IModuleApplicationDelegate {
 
     }
 
-    @Override
-    public void onCurrentActivity(Activity activity) {
-        mCurrentActivity=activity;
-    }
-
-    @Override
-    public void onActivityTask(List<Activity> list) {
-        activityList = list;
-    }
-
-
-    public static Activity getCurrentActivity(){
-        return mCurrentActivity;
-    }
-
-    public static List<Activity> getActivityList(){
-        return activityList;
-    }
 
 }

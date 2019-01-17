@@ -117,10 +117,10 @@ public class ModuleClassUtils {
     /**
      * 获取多路径下所有实现了接口的类对象
      *
-     * @param context  U know
-     * @param clazz    接口
+     * @param context       U know
+     * @param clazz         接口
      * @param classNameList 具体实现类路径列表
-     * @param <T>      U know
+     * @param <T>           U know
      * @return 对象列表
      */
     //反射获取各个代理的实力
@@ -129,7 +129,10 @@ public class ModuleClassUtils {
         try {
             for (String className : classNameList) {
                 Class aClass = Class.forName(className);
+                //判断clazz对应的类 是否是 aClass对应的类的父类或者接口
+                //aClass不能是接口
                 if (clazz.isAssignableFrom(aClass) && !clazz.equals(aClass) && !aClass.isInterface()) {
+                    //这里逻辑上单例，实例化一次clazz对应类的实例
                     objectList.add((T) Class.forName(className).getConstructor().newInstance());
                 }
             }
@@ -171,11 +174,9 @@ public class ModuleClassUtils {
                         classNames.add(className);
                     }
                 }
-            }
-            catch (Throwable ignore) {
-                Log.e(TAG, "Scan map file in dex files made error. "+ ignore);
-            }
-            finally {
+            } catch (Throwable ignore) {
+                Log.e(TAG, "Scan map file in dex files made error. " + ignore);
+            } finally {
                 if (null != dexfile) {
                     try {
                         dexfile.close();

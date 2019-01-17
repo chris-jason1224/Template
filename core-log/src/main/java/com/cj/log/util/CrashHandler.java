@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import com.cj.log.CJLog;
 import com.cj.log.CoreLogApplicationDelegate;
 import com.cj.log.view.CrashDialog;
+import com.cj.manager.basement.BaseApplication;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -116,8 +117,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void showDialog() {
-        if(CoreLogApplicationDelegate.getCurrentActivity()!=null){
-            CrashDialog dialog = new CrashDialog(CoreLogApplicationDelegate.getCurrentActivity(), new CrashDialog.ClickCallback() {
+        if(BaseApplication.getInstance().getCurrentActivity()!=null){
+            CrashDialog dialog = new CrashDialog(BaseApplication.getInstance().getCurrentActivity(), new CrashDialog.ClickCallback() {
                 @Override
                 public void onClickClose() {
                     exit();
@@ -251,8 +252,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void exit() {
-        List<Activity> list = CoreLogApplicationDelegate.getActivityList();
-        if (list != null) {
+        List<Activity> list = BaseApplication.getInstance().getActivityTaskStack();
+        if (list != null && list.size()>0) {
             try {
                 Iterator activityIterator = list.iterator();
                 while (activityIterator.hasNext()) {
