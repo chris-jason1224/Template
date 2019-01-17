@@ -31,6 +31,9 @@
         1、android动态权限处理（google easyPermissions)
         {@link https://blog.csdn.net/hexingen/article/details/78504814}
 
+#20199117
+    1、优化架构层次
+    2、引入MultiTypeAdapter简化RecyclerView适配器工作
 
 #20181114
     1、引入MMKV，替代原有SharedPreferences，支持跨进程访问本地Key-Value类型缓存
