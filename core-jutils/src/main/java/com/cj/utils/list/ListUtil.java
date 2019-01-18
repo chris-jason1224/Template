@@ -1,4 +1,4 @@
-package com.cj.common.util;
+package com.cj.utils.list;
 
 import java.util.List;
 

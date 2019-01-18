@@ -54,6 +54,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="前台测试" />
+    <Button
+        android:id="@+id/encrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="encrypt" />
+    <Button
+        android:id="@+id/decrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="decrypt" />
 
 
 </LinearLayout>

@@ -9,8 +9,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import com.cj.utils.list.ListUtil;
+
 import java.util.List;
 
 /**

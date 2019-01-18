@@ -36,9 +36,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     /**
      * 通过viewId获取控件
-     *
-     * @param viewId
-     * @return
      */
     public <T extends View> T getView(int viewId) {
         View view = mViews.get(viewId);
@@ -70,7 +67,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public View getConvertView() {
         return mConvertView;
     }
-
 
 
     public Object getTag(int viewId) {

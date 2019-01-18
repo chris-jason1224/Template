@@ -1,15 +1,10 @@
 package com.cj.main;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.res.Configuration;
-
 import com.cj.annontations.module.ModuleRegister;
-import com.cj.log.CJLog;
-import com.cj.manager.manager.ModuleManager;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
-
-import java.util.List;
 import java.util.Map;
 
 /**

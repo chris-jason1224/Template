@@ -62,6 +62,7 @@ dependencies {
     api project(':core-ui')
     api project(':core-router')
     api project(':core-log')
+    api project(':core-jutils')
     api files('libs/adapter-rxjava2-2.4.0.jar')
     api files('libs/converter-gson-2.4.0.jar')
     api files('libs/okhttp-3.11.0.jar')

@@ -15,6 +15,8 @@ import com.cj.common.bus.DataBus;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
+import com.cj.utils.list.ListUtil;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,7 +25,7 @@ import butterknife.OnClick;
 @Route(path = "/biz_main/main")
 public class MainActivity extends BaseActivity {
 
-
+    String str="dfefeffeeeeeeeeeeeeeee3wwwwww122221!!!!!!";
     @BindView(R2.id.base_common_toolbar)
     Toolbar toolbar;
 
@@ -57,9 +59,20 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash,R2.id.foreground})
+    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash,R2.id.foreground,R2.id.encrypt,R2.id.decrypt})
     public void onClick(View v) {
+
         int vid = v.getId();
+
+        //加密测试
+        if(R.id.encrypt == vid){
+
+        }
+        //解密测试
+        if(R.id.decrypt == vid){
+
+
+        }
 
 
         if(R.id.foreground ==vid){

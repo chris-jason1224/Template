@@ -22,6 +22,8 @@ public class DiskCacheUtil {
         return Holder.instance;
     }
 
+
+
     /**********用户登录Token相关********************/
 
     public boolean hasToken(){
@@ -40,6 +42,7 @@ public class DiskCacheUtil {
     public void saveToken(String token){
         SPFUtil.getInstance().saveString(KeyTag.TAG_USER_TOKEN,token);
     }
+
 
 
 

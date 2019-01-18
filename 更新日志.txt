@@ -10,9 +10,6 @@
         11、lbs位置服务组件
         12、im实时聊天组件
         13、func-push{小米+华为+友盟}
-        15、沉浸式状态栏处理、侧滑关闭等其他UI效果优化{https://github.com/gyf-dev/ImmersionBar}
-
-        #16、引入腾讯 MMKV 框架，替换SharedPreferences 来保存Key-value类型数据，替换现在的SPFUtil
 
         17.开发屏幕录制app{
             1.录制屏幕
@@ -34,9 +31,12 @@
 #20199117
     1、优化架构层次
     2、引入MultiTypeAdapter简化RecyclerView适配器工作
+    3、移除vLayout二次封装
+    4、实际项目中，简单的Recyclerview列表用MultiTypeAdapter，复杂效果如首页用VLayout
 
 #20181114
     1、引入MMKV，替代原有SharedPreferences，支持跨进程访问本地Key-Value类型缓存
+    2、实际项目中，SPFUtil做底层数据存取，DiskCacheUtil做业务上隔离，调用SPFUtil
 
 #20181023
     1、优化网络变化监听逻辑
