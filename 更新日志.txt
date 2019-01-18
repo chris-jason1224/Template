@@ -28,7 +28,10 @@
         1、android动态权限处理（google easyPermissions)
         {@link https://blog.csdn.net/hexingen/article/details/78504814}
 
-#20199117
+#20190118
+    1、新增AES加密、解密工具类
+
+#20190117
     1、优化架构层次
     2、引入MultiTypeAdapter简化RecyclerView适配器工作
     3、移除vLayout二次封装

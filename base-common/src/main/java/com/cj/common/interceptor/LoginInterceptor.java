@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.widget.Toast;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Interceptor;
@@ -49,11 +50,11 @@ public class LoginInterceptor implements IInterceptor {
             mPostcard = postcard;
             mCallback = callback;
             //TODO 判断是否已经登录
-            if (!DiskCacheUtil.getInstance().hasToken()) {
+            if (TextUtils.isEmpty(DiskCacheUtil.getInstance().getToken())) {
                 //跳转到登录页
+                //todo 未登录，被拦截，跳转登录页面
                 //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {
-                //TODO 如果已经登录，直接 callback.onContunue;否则跳转到登录页
                 callback.onContinue(postcard);
             }
 

@@ -62,7 +62,7 @@ public class RetrofitFactory {
                 Request.Builder builder = original_request.newBuilder();
                 builder.
                         //添加token，由登录成功后保存到本地
-                        addHeader("UserToken", DiskCacheUtil.getInstance().getTokenString())
+                        addHeader("UserToken", DiskCacheUtil.getInstance().getToken())
 
                         //设置User-Agent
                         .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApp.getApp()) : System.getProperty("http.agent"))

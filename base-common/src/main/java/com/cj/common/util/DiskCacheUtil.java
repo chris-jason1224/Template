@@ -3,9 +3,10 @@ package com.cj.common.util;
 /**
  * Created by mayikang on 2018/7/24.
  */
-import android.text.TextUtils;
 
 import com.cj.common.var.KeyTag;
+import com.cj.utils.safe.AESUtil;
+
 /**
  * 磁盘缓存管理类
  * 存取本地 K-V 类型的用户数据
@@ -24,23 +25,42 @@ public class DiskCacheUtil {
 
 
 
-    /**********用户登录Token相关********************/
+    /**********用户登录Token相关 start ********************/
 
-    public boolean hasToken(){
-        String k= (String) SPFUtil.getInstance().getString(KeyTag.TAG_USER_TOKEN,"");
-        return !TextUtils.isEmpty(k);
+    //存储token
+    public void saveToken(String token){
+        String encrypt = AESUtil.getInstance().encrypt(token);
+        SPFUtil.getInstance().saveString(KeyTag.TAG_USER_TOKEN,encrypt);
     }
 
-    public void clearToken(){
+    //获取token
+    public String getToken(){
+        //加密后存储的数据
+        String encrypt = SPFUtil.getInstance().getString(KeyTag.TAG_USER_TOKEN,"");
+        //解密
+        String decrypt=AESUtil.getInstance().decrypt(encrypt);
+
+        return decrypt;
+    }
+
+    //删除token
+    public void deleteToken(){
         SPFUtil.getInstance().removeOne(KeyTag.TAG_USER_TOKEN);
     }
 
-    public String getTokenString(){
-        return (String) SPFUtil.getInstance().getString(KeyTag.TAG_USER_TOKEN,"");
-    }
+    /**********用户登录Token相关 end ********************/
 
-    public void saveToken(String token){
-        SPFUtil.getInstance().saveString(KeyTag.TAG_USER_TOKEN,token);
+
+
+
+
+    //清除用户本地数据
+    public void clearUserVestige(){
+        //1.删除登录token
+        deleteToken();
+
+        //2.删除用户信息
+
     }
 
 
