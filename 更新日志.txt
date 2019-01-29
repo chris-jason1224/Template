@@ -10,6 +10,8 @@
         11、lbs位置服务组件
         12、im实时聊天组件
         13、func-push{小米+华为+友盟}
+        14、精准的缓存管理{每一次网络请求结果、每一次图片下载}
+        15、添加接口版本号，统一多端请求访问一套接口
 
         17.开发屏幕录制app{
             1.录制屏幕
@@ -27,6 +29,9 @@
 #sample://
         1、android动态权限处理（google easyPermissions)
         {@link https://blog.csdn.net/hexingen/article/details/78504814}
+
+#20190129
+    1、封装Fresco图片加载框架
 
 #20190118
     1、新增AES加密、解密工具类

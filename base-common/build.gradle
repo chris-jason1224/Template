@@ -86,4 +86,19 @@ dependencies {
 
 //    MMKV
     api "com.tencent:mmkv:${rootProject.ext.tencentMMKVVersion}"
+
+
+    // fresco 主框架
+    api "com.facebook.fresco:fresco:${rootProject.frescoMainLibVersion}"
+    // 支持 GIF 动图
+    api "com.facebook.fresco:animated-gif:${rootProject.frescoSupGifVersion}"
+    // 支持 WebP动图
+    api "com.facebook.fresco:animated-webp:${rootProject.frescoSupWebPAnimationVersion}"
+    //支持WebP静态图
+    api "com.facebook.fresco:webpsupport:${rootProject.frescoSupWebPVersion}"
+
+
+
+
+
 }

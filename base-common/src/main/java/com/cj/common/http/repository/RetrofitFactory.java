@@ -9,6 +9,7 @@ import com.cj.common.BuildConfig;
 import com.cj.common.base.BaseApp;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.DiskCacheUtil;
+import com.cj.manager.basement.BaseApplication;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,13 +66,13 @@ public class RetrofitFactory {
                         addHeader("UserToken", DiskCacheUtil.getInstance().getToken())
 
                         //设置User-Agent
-                        .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApp.getApp()) : System.getProperty("http.agent"))
+                        .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApplication.getInstance().getApplicationContext()) : System.getProperty("http.agent"))
 
                         //app版本号
-                        .addHeader("AppVersionCode",AndroidSystemUtil.getInstance().getAppVersionCode(BaseApp.getApp())+"")
+                        .addHeader("AppVersionCode",AndroidSystemUtil.getInstance().getAppVersionCode(BaseApplication.getInstance().getApplicationContext())+"")
 
                         //app版本名
-                        .addHeader("AppVersionName",AndroidSystemUtil.getInstance().getAppVersionName(BaseApp.getApp())+"")
+                        .addHeader("AppVersionName",AndroidSystemUtil.getInstance().getAppVersionName(BaseApplication.getInstance().getApplicationContext())+"")
 
                         //Content-Type
                         .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
@@ -107,7 +108,7 @@ public class RetrofitFactory {
             builder.addInterceptor(loggingInterceptor);
         }
 
-        builder.cache(getCache(BaseApp.getApp()))//缓存
+        builder.cache(getCache(BaseApplication.getInstance().getApplicationContext()))//缓存
                 .readTimeout(5, TimeUnit.SECONDS)//读取超时
                 .writeTimeout(5, TimeUnit.SECONDS)//写入超时
                 .connectTimeout(15, TimeUnit.SECONDS)//连接超时

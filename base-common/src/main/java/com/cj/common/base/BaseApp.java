@@ -15,6 +15,7 @@ import com.cj.common.states.OnErrorStateCallback;
 import com.cj.common.states.OnLoadingStateCallback;
 import com.cj.common.states.OnTimeoutStateCallback;
 import com.cj.common.util.SPFUtil;
+import com.cj.common.util.image.ImageLoader;
 import com.cj.manager.basement.BaseApplication;
 import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
@@ -28,15 +29,11 @@ import com.orhanobut.logger.Logger;
 
 public class BaseApp extends BaseApplication {
 
-    private static Context app;
-
 
     @Override
     public void onCreate() {
 
         super.onCreate();
-
-        app = this;
 
         //初始化SharedPreferences工具类
         SPFUtil.init(this);
@@ -46,6 +43,9 @@ public class BaseApp extends BaseApplication {
 
         //注册多布局
         registerLoadSir();
+
+        //初始化图片加载框架
+        ImageLoader.init(this);
 
     }
 
@@ -96,10 +96,6 @@ public class BaseApp extends BaseApplication {
         registerReceiver(receiver, filter);
     }
 
-
-    public static Context getApp() {
-        return app;
-    }
 
 
 }

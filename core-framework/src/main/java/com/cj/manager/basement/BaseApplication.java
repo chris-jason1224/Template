@@ -39,6 +39,7 @@ public class BaseApplication extends Application {
 
     public BaseApplication() {}
 
+
     public static BaseApplication getInstance() {
         return sInstance;
     }
@@ -47,11 +48,13 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        sInstance = this;
+
         /**
          * 多进程app会重复启动Application，只在主进程中执行一次即可
          */
         if (isCurrentMainProcess()) {
-            sInstance = this;
+
 
             this.mCurrentCount = 0;
 

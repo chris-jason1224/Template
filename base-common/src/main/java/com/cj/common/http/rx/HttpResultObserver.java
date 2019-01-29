@@ -10,6 +10,7 @@ import com.cj.common.http.base.HttpCallback;
 import com.cj.common.http.base.HttpErrorCode;
 import com.cj.common.util.LooperUtil;
 import com.cj.log.CJLog;
+import com.cj.manager.basement.BaseApplication;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.Alerter;
 import com.google.gson.Gson;
@@ -133,7 +134,7 @@ public  class HttpResultObserver<T> extends DisposableObserver<BaseHttpResultEnt
     private void showAlerter(final Activity activity, final String title, final String message){
 
         if(activity==null){
-            Toast.makeText(BaseApp.getApp(), title, Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseApplication.getInstance().getApplicationContext(), title, Toast.LENGTH_SHORT).show();
             return;
         }
 

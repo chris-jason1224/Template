@@ -66,4 +66,23 @@
         android:text="decrypt" />
 
 
+    <com.facebook.drawee.view.SimpleDraweeView
+        app:roundTopLeft="false"
+        app:roundBottomEnd="false"
+        android:background="#000000"
+        app:roundTopEnd="true"
+        app:roundedCornerRadius="10dp"
+        app:roundAsCircle="false"
+        app:placeholderImage="@drawable/placeholder"
+        android:id="@+id/drawee"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+
+        app:placeholderImage="@drawable/biz_main_shape"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+
 </LinearLayout>
