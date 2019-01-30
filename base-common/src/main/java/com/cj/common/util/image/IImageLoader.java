@@ -1,6 +1,7 @@
 package com.cj.common.util.image;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 
@@ -27,5 +28,11 @@ public interface IImageLoader {
     //加载本地文件图
 //    void loadFileImage(Context context,@NonNull SimpleDraweeView view,@NonNull File file);
 //    void loadFileImage(Context context,@NonNull SimpleDraweeView view,@NonNull File file,IImageLoadCallback loadCallback);
+
+
+    /*****删除缓存*******/
+    void removeOneCache(Uri uri);
+
+    void removeAllCache();
 
 }

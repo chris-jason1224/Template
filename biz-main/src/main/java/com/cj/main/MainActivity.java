@@ -23,6 +23,7 @@ import com.cj.main.test.ImageLoadingDrawable;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import com.cj.utils.list.ListUtil;
+import com.cj.utils.safe.AESUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
@@ -152,7 +153,7 @@ public class MainActivity extends BaseActivity {
 //        //设置每个圆角额不同弧度
 //        RoundingParams rp= new RoundingParams();
 //        rp.setCornersRadii(1,2,3,4);
-//        draweeView.getHierarchy().setRoundingParams(rp);
+//        draweeView.getHierarchy().setRoundingParams(rp);1
 
     }
 
@@ -163,12 +164,11 @@ public class MainActivity extends BaseActivity {
 
         //加密测试
         if(R.id.encrypt == vid){
-
+            AESUtil.getInstance().encrypt("");
         }
         //解密测试
         if(R.id.decrypt == vid){
-
-
+            AESUtil.getInstance().decrypt("");
         }
 
 

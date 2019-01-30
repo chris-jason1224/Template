@@ -6,19 +6,17 @@ import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.SimpleDraweeControllerBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-import java.io.File;
+
 
 /**
  * Author:chris - jason
@@ -70,7 +68,41 @@ public class ImageLoader implements IImageLoader {
         }
     }
 
+    @Override
+    public void removeOneCache(Uri uri) {
 
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        if(imagePipeline!=null){
+            try{
+                //imagePipeline.evictFromMemoryCache(uri);//移除内存缓存
+                //imagePipeline.evictFromDiskCache(uri);//移除磁盘缓存
+
+
+                imagePipeline.evictFromCache(uri);//内存磁盘都移除
+
+            }catch (Exception e){
+
+            }
+
+        }
+
+
+    }
+
+    @Override
+    public void removeAllCache() {
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        if(imagePipeline!=null){
+            try{
+                //imagePipeline.clearMemoryCaches();//移除所有内存缓存
+                //imagePipeline.clearDiskCaches();//移除所有磁盘缓存
+                imagePipeline.clearCaches();//移除所有内存+磁盘缓存
+            }catch (Exception e){
+
+            }
+        }
+
+    }
 
     private static class Holder{
         private static final ImageLoader instance = new ImageLoader();
