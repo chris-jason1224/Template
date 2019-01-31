@@ -11,7 +11,7 @@ import java.math.RoundingMode;
  */
 
 public class PriceUtil {
-    
+
     private PriceUtil(){
 
     }
