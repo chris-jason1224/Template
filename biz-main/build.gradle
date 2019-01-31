@@ -45,7 +45,6 @@ dependencies {
     if (!isModuleModle.toBoolean()) {
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
     }
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterKnifeCompilerVersion}"
     annotationProcessor project(':core-processor')
 

@@ -26,6 +26,15 @@
         20.hermes-eventbus
 
 
+页面路由规则：
+    //路由中包含/USR/即说明该页面需要登录
+    //页面名字由多个单词组成时，由下划线分隔
+    //由于Fragment需要装载在activity上，无需做登录拦截
+    1.Activity：组件代号/ACT/{USR}/activity_name
+    2.Fragment：组件代号/FRG/fragment_name
+    3.组件服务：组件代号/SEV/service_name
+
+
 #sample://
         1、android动态权限处理（google easyPermissions)
         {@link https://blog.csdn.net/hexingen/article/details/78504814}

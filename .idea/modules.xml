@@ -14,7 +14,6 @@
       <module fileurl="file://$PROJECT_DIR$/core-processor/core-processor.iml" filepath="$PROJECT_DIR$/core-processor/core-processor.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-router/core-router.iml" filepath="$PROJECT_DIR$/core-router/core-router.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-ui/core-ui.iml" filepath="$PROJECT_DIR$/core-ui/core-ui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/func-web/func-web.iml" filepath="$PROJECT_DIR$/func-web/func-web.iml" />
     </modules>
   </component>
 </project>

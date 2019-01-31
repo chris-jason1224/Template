@@ -1,44 +1,47 @@
 package com.cj.main.test;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.webkit.WebView;
+import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-
-import com.cj.common.multitype.Items;
-import com.cj.common.multitype.MultiTypeAdapter;
-import com.cj.common.multitype.MultiTypeViewBinder;
-import com.cj.common.multitype.ViewHolder;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.mvp.BaseMVPActivity;
-
+import com.cj.common.provider.func$web.IWebService;
 import com.cj.main.R;
 import com.cj.main.R2;
-import com.cj.ui.tip.UITipDialog;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
-@Route(path = "/biz_main/test")
+@Route(path = "/biz_main/ACT/com.cj.main.test.TestActivity")
 public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITestView {
 
-    @BindView(R2.id.rv)
-    RecyclerView rv;
+
+    IWebService webService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getLoadService().showSuccess();
+        Fragment fragment = (Fragment) ARouter.getInstance().build("/func_web/FRG/com.cj.web.fragment.BaseWebFragment").navigation();
+
+        webService = (IWebService) ARouter.getInstance().build("/func_web/SEV/com.cj.web.base").navigation();
+        if(fragment!=null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.box,fragment)
+                    .commit();
+        }
+        if(webService!=null){
+            WebView web= webService.getWebView();
+            if(web!=null){
+                Toast.makeText(this, "fff", Toast.LENGTH_SHORT).show();
             }
-        },1500);
-        initAdapter();
+        }
+
     }
 
     @Override
@@ -61,66 +64,12 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
         return new TestPresenter();
     }
 
-    @OnClick({R2.id.http,R2.id.pop_tip})
+    @OnClick({})
     public void onClick(View v){
         int id=v.getId();
 
-        if(R.id.http==id){
-            mPresenter.doTest("123");
-        }
-
-        if(R.id.pop_tip==id){
-
-            final UITipDialog tipDialog = new UITipDialog.Builder(this)
-                    .setIconType(UITipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord("发送失败")
-                    .create();
-            tipDialog.show();
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    tipDialog.dismiss();
-                }
-            },1500);
-        }
 
 
-
-
-
-    }
-
-
-
-    private void initAdapter(){
-        Items items = new Items();
-        items.add("哈哈");
-        items.add(R.drawable.core_log_icon_crash_dialog_close);
-
-        items.add("嘻嘻");
-        items.add(R.drawable.core_log_icon_crash_dialog_bug);
-
-        MultiTypeAdapter adapter =new MultiTypeAdapter(items);
-        MultiTypeViewBinder<String> binder1=new MultiTypeViewBinder<String>(this,R.layout.biz_main_lay_1) {
-            @Override
-            protected void convert(ViewHolder holder, String s, int position) {
-                TextView tv =holder.getView(R.id.tv);
-                tv.setText(s);
-            }
-        };
-
-        MultiTypeViewBinder<Integer> binder2 =new MultiTypeViewBinder<Integer>(this,R.layout.biz_main_lay_2) {
-            @Override
-            protected void convert(ViewHolder holder, Integer integer, int position) {
-                ImageView iv=holder.getView(R.id.iv);
-                iv.setImageResource(integer);
-            }
-        };
-        adapter.register(String.class,binder1);
-        adapter.register(Integer.class,binder2);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
     }
 
 

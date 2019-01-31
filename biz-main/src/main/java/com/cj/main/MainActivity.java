@@ -1,12 +1,9 @@
 package com.cj.main;
 
-
-import android.graphics.Color;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -19,29 +16,17 @@ import com.cj.common.bus.DataBus;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
-import com.cj.main.test.ImageLoadingDrawable;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
-import com.cj.utils.list.ListUtil;
 import com.cj.utils.safe.AESUtil;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
-import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
-import com.facebook.imagepipeline.image.QualityInfo;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
-@Route(path = "/biz_main/main")
+@Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
 public class MainActivity extends BaseActivity {
 
 
@@ -192,7 +177,7 @@ public class MainActivity extends BaseActivity {
             for (int i=0;i<10;i++){
                 list.add(i);
             }
-            ARouter.getInstance().build("/biz_login/login").navigation();
+            ARouter.getInstance().build("/biz_login/ACT/com.cj.login.LoginActivity").navigation();
             return;
         }
 
@@ -219,7 +204,7 @@ public class MainActivity extends BaseActivity {
 
         //跳转TestActivity
         if(R.id.goto_test == vid){
-            ARouter.getInstance().build("/biz_main/test").navigation();
+            ARouter.getInstance().build("/biz_main/ACT/com.cj.main.test.TestActivity").navigation();
         }
 
 

@@ -74,7 +74,6 @@ dependencies {
     if (!isModuleModle.toBoolean()) {
         api project(':biz-main')
         api project(':biz-login')
-
     }
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
 
