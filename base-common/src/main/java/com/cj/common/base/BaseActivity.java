@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.R;
 
 import com.cj.common.receiver.NetworkStateOBReceiver;
@@ -61,6 +62,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         //注册Butterknife
         unbinder=ButterKnife.bind(this);
+
+        //ARouter注入
+        ARouter.getInstance().inject(this);
 
 
         //沉浸式处理
@@ -123,6 +127,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (unbinder != null) {
             unbinder.unbind();
         }
+
+        //解绑ARouter注入
+        ARouter.getInstance().destroy();
 
         if (immersionBar != null)
             immersionBar.destroy();

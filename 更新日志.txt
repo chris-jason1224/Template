@@ -5,7 +5,7 @@
         5、统一的下拉刷新（SmartRefreshLayout，放base-common）
         6、本地数据库组件（greenDao和Realm选一个）
         8、支付组件
-        9、h5组件  腾讯X5内核
+        9、h5组件封装系统webview
         10、二维码、条码扫码解码组件
         11、lbs位置服务组件
         12、im实时聊天组件
