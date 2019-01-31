@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
@@ -70,13 +72,18 @@ public class ImageLoader implements IImageLoader {
 
     @Override
     public void removeOneCache(Uri uri) {
-
+        /**
+         *   远程图片	            http://, https://
+         *   本地文件	            file://	    FileInputStream
+         *   Content provider	    content://	ContentResolver
+         *   asset目录下的资源	    asset://	AssetManager
+         *   res目录下的资源	        res://	    Resources.openRawResource
+         */
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         if(imagePipeline!=null){
             try{
                 //imagePipeline.evictFromMemoryCache(uri);//移除内存缓存
                 //imagePipeline.evictFromDiskCache(uri);//移除磁盘缓存
-
 
                 imagePipeline.evictFromCache(uri);//内存磁盘都移除
 
