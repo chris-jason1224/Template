@@ -1,1 +1,1 @@
-include ':app', ':biz-main', ':biz-login', ':core-jutils', ':core-ui', ':core-framework', ':base-common', ':core-router', ':core-log',  ':core-annotations', ':core-processor'
+include ':app', ':biz-main', ':biz-login', ':core-jutils', ':core-ui', ':core-framework', ':base-common', ':core-router', ':core-log',  ':core-annotations', ':core-processor', ':fun-business'

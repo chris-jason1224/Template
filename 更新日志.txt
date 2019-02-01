@@ -2,13 +2,10 @@
         1、LoadSir的错误页面参考主流app修改UI样式
         2、日志组件定期日志上传，筛选等功能
         3、第三方分享、登录组件
-        5、统一的下拉刷新（SmartRefreshLayout，放base-common）
         6、本地数据库组件（greenDao和Realm选一个）
         8、支付组件
-        9、h5组件封装系统webview
+
         10、二维码、条码扫码解码组件
-        11、lbs位置服务组件
-        12、im实时聊天组件
         13、func-push{小米+华为+友盟}
         14、精准的缓存管理{每一次网络请求结果、每一次图片下载}
         15、添加接口版本号，统一多端请求访问一套接口
@@ -29,7 +26,7 @@
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
     //页面名字由多个单词组成时，由下划线分隔
-    //由于Fragment需要装载在activity上，无需做登录拦截
+
     1.Activity：组件代号/ACT/{USR}/activity_name
     2.Fragment：组件代号/FRG/fragment_name
     3.组件服务：组件代号/SEV/service_name
