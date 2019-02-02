@@ -9,19 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
 import com.cj.common.bus.DataBus;
-import com.cj.common.provider.fun$business.IPayProvider;
-import com.cj.common.provider.fun$business.IPayResultCallback;
-import com.cj.common.provider.fun$business.PayParams;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
-import com.cj.log.CJLog;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import com.cj.utils.safe.AESUtil;
@@ -42,9 +36,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R2.id.base_common_toolbar)
     Toolbar toolbar;
 
-    @Autowired(name = "/fun_business/SEV/com.cj.business.pay.service.PayService")
-    IPayProvider pay;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +54,7 @@ public class MainActivity extends BaseActivity {
     protected int resourceLayout() {
         return R.layout.biz_main_activity_main;
     }
+
 
     @Override
     public void onReloadClick() {
@@ -150,39 +142,10 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash,R2.id.foreground,
-            R2.id.encrypt,R2.id.decrypt,R2.id.pay})
+    @OnClick({ R2.id.goto_biz_login,R2.id.alert,R2.id.goto_test,R2.id.make_crash,R2.id.foreground,R2.id.encrypt,R2.id.decrypt})
     public void onClick(View v) {
 
         int vid = v.getId();
-        if(R.id.pay==vid){
-
-            if(pay!=null){
-
-                String extra = " {\"appid\":\"wx529bf812fe26c929\",\"noncestr\":\"b605b10a8054478289b248df2a862f12\",\"package\":\"Sign=WXPay\",\"packageValue\":\"Sign=WXPay\",\"partnerid\":\"1498803022\",\"prepayid\":\"wx02102704848674779bb5938b2166506728\",\"sign\":\"8B72AF273C00EB6DD3F0C3A14B93B79D\",\"timestamp\":\"1549074425\"}";
-                PayParams<String> payParams = new PayParams<>("123456",2,extra);
-
-                pay.invokePay(payParams, new IPayResultCallback() {
-                    @Override
-                    public void onSuccess() {
-                        CJLog.getInstance().log_e("支付成功回调");
-                    }
-
-                    @Override
-                    public void onFailed() {
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-
-                    }
-                });
-
-            }else {
-                AlertManager.create(this).setMessage("Pay == null").show();
-            }
-        }
 
         //加密测试
         if(R.id.encrypt == vid){
@@ -208,6 +171,8 @@ public class MainActivity extends BaseActivity {
 
         //打开biz-login module
         if (R.id.goto_biz_login == vid) {
+            //通过数据总线发送给 biz_login
+            DataBus.get().with("login").setValue("发送数据，注意接收");
             ArrayList<Integer> list=new ArrayList<>();
             for (int i=0;i<10;i++){
                 list.add(i);

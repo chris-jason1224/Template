@@ -13,6 +13,7 @@ import com.cj.log.CJLog;
  * Created by mayikang on 2018/8/3.
  */
 
+//todo BaseMVP 架构层都需要绑定到生命周期上
 public abstract class BaseMVPActivity<P extends IBasePresenter> extends BaseActivity implements IBaseView{
 
     protected P mPresenter;

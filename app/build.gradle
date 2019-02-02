@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin:myPlugin
 
+class myPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project target) {
+        println("我的plugin 插件")
+    }
+}
 android {
     signingConfigs {
         signature {
@@ -51,17 +59,7 @@ android {
         javaMaxHeapSize "4g"
         preDexLibraries = false
     }
-
 }
-
-//因为app模块依赖了fun-business模块，而fun-business模块依赖了支付宝sdk（aar），所以在app模块也需要依赖上路径
-repositories{
-    flatDir {
-        dirs 'libs','../fun-business/libs'
-    }
-}
-
-
 
 configurations.all {
     resolutionStrategy.force "com.android.support:support-annotations:${rootProject.ext.supportLibraryVersion}"
@@ -78,7 +76,5 @@ dependencies {
         api project(':biz-login')
     }
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
-
-    api project(':fun-business')
 
 }

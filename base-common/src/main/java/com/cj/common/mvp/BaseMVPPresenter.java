@@ -17,6 +17,11 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by mayikang on 2018/8/3.
  */
 
+    //todo P需要和V绑定生命周期
+    //todo 定义统一的网络数据返回模型
+    //todo 定义线程切换控制器
+    //todo 定义统一的网络请求观察者模型
+
 public class BaseMVPPresenter<V extends IBaseView> implements IBasePresenter<V> {
 
     protected V mView;

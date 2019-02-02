@@ -53,7 +53,7 @@ public class LoginInterceptor implements IInterceptor {
             if (TextUtils.isEmpty(DiskCacheUtil.getInstance().getToken())) {
                 //跳转到登录页
                 //todo 未登录，被拦截，跳转登录页面
-                //ARouter.get().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
+                //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {
                 callback.onContinue(postcard);
             }
@@ -86,7 +86,7 @@ public class LoginInterceptor implements IInterceptor {
          * 登录成功后发送本地广播
          * Intent intent=new Intent(Tag.TAG_LOGIN_FILTER);
          * intent.putExtra(TAG_LOGIN_RESULT,CODE_LOGIN_SUCCESS);
-         * LocalBroadcastManager.get(getApplicationContext()).sendBroadcast(intent);
+         * LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
          */
         public LoginResultReceiver() {
 

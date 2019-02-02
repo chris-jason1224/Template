@@ -1,14 +1,31 @@
 package com.cj.login;
 
+import android.arch.lifecycle.Observer;
 import android.os.Handler;
+import android.support.annotation.Nullable;
+
 import android.os.Bundle;
+
+
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.cj.annontations.module.ModuleRegister;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.bus.DataBus;
+import com.cj.common.bus.DataBusKey;
+import com.cj.log.CJLog;
 import com.gyf.barlibrary.ImmersionBar;
 
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
 
+    private Observer<String> observer=new Observer<String>() {
+        @Override
+        public void onChanged(@Nullable String s) {
+            CJLog.getInstance().log_e("我接受到了数据："+s);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +37,18 @@ public class LoginActivity extends BaseActivity {
             }
         },3000);
 
+        //注册接收
+        DataBus.get().with(DataBusKey.login.getKey(),DataBusKey.login.getT()).observe(this,observer);
 
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
+
+        //移除注册
+        DataBus.get().with(DataBusKey.login.getKey(),DataBusKey.login.getT()).removeObserver(observer);
+
     }
 
     @Override

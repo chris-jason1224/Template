@@ -19,12 +19,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-
-
-        flatDir {
-            dirs 'libs'
-        }
-
     }
     configurations{
         all*.exclude group: 'com.android.support', module: 'support-v4'
@@ -108,8 +102,5 @@ ext {
     frescoSupWebPAnimationVersion="1.11.0"
 //  fresco WebP静态图支持库
     frescoSupWebPVersion="1.11.0"
-
-//  微信sdk
-    wechatVersion = "5.3.1"
 
 }

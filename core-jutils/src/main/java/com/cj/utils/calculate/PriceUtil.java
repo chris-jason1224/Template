@@ -16,7 +16,7 @@ public class PriceUtil {
 
     }
 
-    private static class Holder{
+    static class Holder{
         private static final PriceUtil instance = new PriceUtil();
     }
 
