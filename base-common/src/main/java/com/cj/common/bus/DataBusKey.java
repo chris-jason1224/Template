@@ -7,7 +7,12 @@ package com.cj.common.bus;
 
 public class DataBusKey {
 
-    public static final DataBusEntity<String> login=new DataBusEntity<>("login",String.class);
+
+    //支付宝支付结果 数据发射、接收 key
+    public static final DataBusEntity<String> AliPayResult = new DataBusEntity<>("AliPayResult",String.class);
+
+    //微信支付支付结果 数据发射、接收 key
+    public static final DataBusEntity<String> WeChatPayResult = new DataBusEntity<>("WeChatPayResult",String.class);
 
 
 

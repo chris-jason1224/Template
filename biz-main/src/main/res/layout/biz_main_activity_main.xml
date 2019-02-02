@@ -65,6 +65,12 @@
         android:layout_height="wrap_content"
         android:text="decrypt" />
 
+    <Button
+        android:id="@+id/pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pay" />
+
 
     <com.facebook.drawee.view.SimpleDraweeView
         app:roundTopLeft="false"
