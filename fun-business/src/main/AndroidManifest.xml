@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:allowBackup="true">
 
-
         <!--微信分享结果页面-->
         <activity
             android:screenOrientation="portrait"
@@ -25,25 +24,10 @@
 
         <!-- 微信支付结果页面 -->
         <activity
+            android:theme="@style/base_common_Theme"
             android:name="com.cj.mst.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </application>
 
