@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:allowBackup="true">
 
+        
         <!--微信分享结果页面-->
         <activity
             android:screenOrientation="portrait"
