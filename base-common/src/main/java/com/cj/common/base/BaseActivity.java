@@ -64,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         unbinder=ButterKnife.bind(this);
 
         //ARouter注入
+        //ARouter注入服务，子类中可以直接使用 @Autowired注解来获得服务
         ARouter.getInstance().inject(this);
 
 

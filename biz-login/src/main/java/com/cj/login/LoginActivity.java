@@ -20,12 +20,7 @@ import com.gyf.barlibrary.ImmersionBar;
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
 
-    private Observer<String> observer=new Observer<String>() {
-        @Override
-        public void onChanged(@Nullable String s) {
-            CJLog.getInstance().log_e("我接受到了数据："+s);
-        }
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +31,11 @@ public class LoginActivity extends BaseActivity {
                 getLoadService().showSuccess();
             }
         },3000);
-
-        //注册接收
-        DataBus.get().with(DataBusKey.login.getKey(),DataBusKey.login.getT()).observe(this,observer);
-
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-
-        //移除注册
-        DataBus.get().with(DataBusKey.login.getKey(),DataBusKey.login.getT()).removeObserver(observer);
-
     }
 
     @Override

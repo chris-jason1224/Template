@@ -60,6 +60,7 @@ public final class DataBus {
 
         void observeStickyForever(@NonNull Observer<T> observer);
 
+        //移除注册（将注册到map中的key移除掉，不反注册也不会引发内存泄漏）
         void removeObserver(@NonNull Observer<T> observer);
     }
 
