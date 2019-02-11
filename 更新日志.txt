@@ -36,6 +36,10 @@
         1、android动态权限处理（google easyPermissions)
         {@link https://blog.csdn.net/hexingen/article/details/78504814}
 
+#20190211
+    1、fun-business组件增加微信支付、支付宝支付功能
+    2、增加微信分享功能
+
 #20190129
     1、封装Fresco图片加载框架
 
