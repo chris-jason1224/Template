@@ -71,6 +71,12 @@
         android:layout_height="wrap_content"
         android:text="pay" />
 
+    <Button
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="share" />
+
 
     <com.facebook.drawee.view.SimpleDraweeView
         app:roundTopLeft="false"

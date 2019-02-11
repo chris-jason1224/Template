@@ -1,4 +1,4 @@
-package com.cj.common.provider.fun$business;
+package com.cj.common.provider.fun$business.pay;
 
 /**
  * Author:chris - jason

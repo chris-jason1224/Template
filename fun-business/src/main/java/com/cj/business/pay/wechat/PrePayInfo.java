@@ -4,6 +4,7 @@ package com.cj.business.pay.wechat;
  * Author:chris - jason
  * Date:2019/2/1.
  * Package:com.cj.business.pay.wechat
+ * 微信（官方）预付单信息实体
  */
 
 public class PrePayInfo {

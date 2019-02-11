@@ -9,13 +9,12 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.cj.business.Config;
-import com.cj.business.pay.Result;
 import com.cj.business.pay.lifecycle.PayEventLifecycleObserver;
 import com.cj.business.pay.IPay;
 import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.http.util.JSONUtils;
-import com.cj.common.provider.fun$business.IPayResultCallback;
+import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.util.LooperUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
@@ -65,13 +64,21 @@ public class WeChatPay implements IPay,LifecycleOwner {
 
         this.callback = callback;
 
+        if(TextUtils.isEmpty(Config.WECHAT_APP_ID)){
+            CJLog.getInstance().log_d("微信AppID为空!!!");
+            return;
+        }
+
         if(TextUtils.isEmpty(prePayInfoStr)){
             CJLog.getInstance().log_e("微信预付单信息为空，支付失败");
             return;
         }
 
         IWXAPI wxapi = WXAPIFactory.createWXAPI(BaseApplication.getInstance(), Config.WECHAT_APP_ID, true);
-
+        if(wxapi == null){
+            CJLog.getInstance().log_d("WXAPI == null");
+            return;
+        }
         //监测是否安装微信app
         if(!wxapi.isWXAppInstalled()){
             LooperUtil.getInstance().runOnUiThread(new Runnable() {
@@ -129,13 +136,13 @@ public class WeChatPay implements IPay,LifecycleOwner {
         public void onChanged(@Nullable String msg) {
             if(!TextUtils.isEmpty(msg) && callback!=null){
                 switch (msg){
-                    case Result.SUCCESS:
+                    case WeChatPayResult.SUCCESS:
                         callback.onSuccess();
                         break;
-                    case Result.FAILED:
+                    case WeChatPayResult.FAILED:
                         callback.onFailed();
                         break;
-                    case Result.CANCEL:
+                    case WeChatPayResult.CANCEL:
                         callback.onCancel();
                         break;
                 }

@@ -21,7 +21,7 @@ public class Config {
         return Holder.instance;
     }
 
-    public static final String WECHAT_APP_ID = "";//微信appID
+    public static final String WECHAT_APP_ID = "wx39d4de0570bd3f5e";//微信appID
 
     public static final String ALIPAY_APP_ID="";//支付宝appID
 

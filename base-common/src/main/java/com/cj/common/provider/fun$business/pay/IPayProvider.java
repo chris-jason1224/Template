@@ -1,4 +1,4 @@
-package com.cj.common.provider.fun$business;
+package com.cj.common.provider.fun$business.pay;
 
 import com.alibaba.android.arouter.facade.template.IProvider;
 
@@ -11,6 +11,6 @@ import com.alibaba.android.arouter.facade.template.IProvider;
 
 public interface IPayProvider extends IProvider{
 
-    void invokePay(PayParams payParams ,IPayResultCallback callback);
+    void invokePay(PayParams payParams , IPayResultCallback callback);
 
 }

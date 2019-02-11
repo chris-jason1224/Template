@@ -2,29 +2,18 @@ package com.cj.business.pay.alipay;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.Observer;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.cj.business.pay.IPay;
-import com.cj.business.pay.lifecycle.PayEventLifecycleObserver;
-import com.cj.common.bus.DataBus;
-import com.cj.common.bus.DataBusKey;
-import com.cj.common.provider.fun$business.IPayResultCallback;
+import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.util.LooperUtil;
 import com.cj.common.util.pkg.PackageUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
-
-import org.w3c.dom.Text;
 
 import java.util.Map;
 

@@ -4,8 +4,8 @@ import android.support.annotation.IntDef;
 
 import com.cj.business.pay.alipay.AliPay;
 import com.cj.business.pay.wechat.WeChatPay;
-import com.cj.common.provider.fun$business.IPayResultCallback;
-import com.cj.common.provider.fun$business.PayParams;
+import com.cj.common.provider.fun$business.pay.IPayResultCallback;
+import com.cj.common.provider.fun$business.pay.PayParams;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -43,7 +43,6 @@ public class PayCenter {
     public static PayCenter getInstance(){
         return Holder.instance;
     }
-
 
 
 

@@ -1,4 +1,4 @@
-package com.cj.business.pay;
+package com.cj.business.pay.wechat;
 
 /**
  * Author:chris - jason
@@ -7,7 +7,7 @@ package com.cj.business.pay;
  * 支付结果
  */
 
-public class Result {
+public class WeChatPayResult {
     //成功
     public static final String SUCCESS = "PAY_SUCCESS";
     //失败

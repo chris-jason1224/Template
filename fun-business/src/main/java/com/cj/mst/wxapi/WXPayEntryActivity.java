@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.cj.business.Config;
-import com.cj.business.pay.Result;
+import com.cj.business.pay.wechat.WeChatPayResult;
 import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -48,15 +48,15 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 			switch (resp.errCode){
 				//成功
 				case 0:
-					DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).setValue(Result.SUCCESS);
+					DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).setValue(WeChatPayResult.SUCCESS);
 					break;
 				//错误
 				case -1:
-					DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).setValue(Result.FAILED);
+					DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).setValue(WeChatPayResult.FAILED);
 					break;
 				//取消
 				case -2:
-					DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).setValue(Result.CANCEL);
+					DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).setValue(WeChatPayResult.CANCEL);
 					break;
 			}
 

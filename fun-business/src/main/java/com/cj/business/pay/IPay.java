@@ -1,6 +1,6 @@
 package com.cj.business.pay;
 
-import com.cj.common.provider.fun$business.IPayResultCallback;
+import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 
 /**
  * Author:chris - jason

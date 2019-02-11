@@ -7,6 +7,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cj.business.Config;
+import com.cj.business.pay.wechat.WeChatPayResult;
+import com.cj.business.share.wechat.WeChatShare;
+import com.cj.business.share.wechat.WeChatShareResult;
+import com.cj.common.bus.DataBus;
+import com.cj.common.bus.DataBusKey;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -44,39 +49,34 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         switch (baseResp.errCode) {
 
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
-
-                finish();
                 break;
 
             case BaseResp.ErrCode.ERR_COMM:
-
-                finish();
                 break;
-            //分享成功
-            case BaseResp.ErrCode.ERR_OK:
 
+            //分享成功
+            //微信新规，分享成功或者失败，回调的结果都是 BaseResp.ErrCode.ERR_OK
+            case BaseResp.ErrCode.ERR_OK:
+                DataBus.get().with(DataBusKey.WeChatShareResult.getKey(),DataBusKey.WeChatShareResult.getT()).setValue(WeChatShareResult.SUCCESS);
                 break;
 
             case BaseResp.ErrCode.ERR_SENT_FAILED:
-
-                finish();
                 break;
 
             case BaseResp.ErrCode.ERR_UNSUPPORT:
-
-                finish();
                 break;
 
+            //取消分享
             case BaseResp.ErrCode.ERR_USER_CANCEL:
-
-                finish();
+                DataBus.get().with(DataBusKey.WeChatShareResult.getKey(),DataBusKey.WeChatShareResult.getT()).setValue(WeChatShareResult.CANCEL);
                 break;
 
             default:
 
-                finish();
                 break;
         }
+
+        finish();
 
 
     }
