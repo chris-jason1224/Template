@@ -55,9 +55,9 @@ public class WeChatUtil {
     //通过url链接，获取图片的byte 数组
     public byte[] getByteArrayFromUrl(final String url) {
 
-        CountDownLatch latch = new CountDownLatch(1);
+        CountDownLatch latch = new CountDownLatch(1);//创建一个CountDownLatch，只有一个任务数
 
-        UrlDecodeTask thread = new UrlDecodeTask(url, latch);
+        UrlDecodeTask thread = new UrlDecodeTask(url, latch);//创建并启动我们的异步任务
         thread.start();
 
         try {
@@ -66,7 +66,7 @@ public class WeChatUtil {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        //等待异步任务执行完成之后，主线程就会继续执行
         InputStream is = thread.getInputStream();
         return is == null ? null : inputStreamToByte(is);
 
@@ -228,14 +228,12 @@ public class WeChatUtil {
             this.url = url;
             this.countDownLatch = countDownLatch;
         }
-
         public InputStream getInputStream() {
             return isArray[0];
         }
 
         @Override
         public void run() {
-
             try {
                 URL htmlUrl = new URL(url);
                 URLConnection connection = htmlUrl.openConnection();
