@@ -12,7 +12,7 @@ import com.cj.common.provider.fun$business.share.ShareParams;
  * Date:2019/2/3.
  * Package:com.cj.business.share
  */
-@Route(path = "/fun_business/SEV/com.cj.business.share.ShareService")
+@Route(path = "/fun-business/SEV/com.cj.business.share.ShareService")
 public class ShareService implements IShareProvider {
 
     @Override

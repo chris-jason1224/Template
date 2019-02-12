@@ -15,7 +15,7 @@ import com.cj.common.provider.fun$business.pay.PayParams;
  * fun-business 对外提供支付能力的服务
  */
 
-@Route(path = "/fun_business/SEV/com.cj.business.pay.PayService")
+@Route(path = "/fun-business/SEV/com.cj.business.pay.PayService")
 public class PayService implements IPayProvider {
 
 
