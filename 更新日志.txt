@@ -34,7 +34,10 @@
 
 #sample://
         1、android动态权限处理（google easyPermissions)
-        {@link https://blog.csdn.net/hexingen/article/details/78504814}
+        {@link
+                https://blog.csdn.net/hexingen/article/details/78504814
+                https://github.com/googlesamples/easypermissions
+        }
 
 
 
