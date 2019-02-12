@@ -15,6 +15,9 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.provider.fun$business.auth.AuthParams;
+import com.cj.common.provider.fun$business.auth.IAuthProvider;
+import com.cj.common.provider.fun$business.auth.IAuthResultCallback;
 import com.cj.common.provider.fun$business.pay.IPayProvider;
 import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.provider.fun$business.pay.PayParams;
@@ -53,6 +56,9 @@ public class MainActivity extends BaseActivity {
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.share.ShareService")
     IShareProvider share;
+
+    @Autowired(name = "/fun_business/SEV/com.cj.business.auth.AuthService")
+    IAuthProvider auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,10 +166,39 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick({R2.id.goto_biz_login, R2.id.alert, R2.id.goto_test, R2.id.make_crash, R2.id.foreground,
-            R2.id.encrypt, R2.id.decrypt, R2.id.pay,R2.id.share})
+            R2.id.encrypt, R2.id.decrypt, R2.id.pay,R2.id.share,R2.id.auth})
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if(R.id.auth == vid){
+
+            AuthParams<String> params = new AuthParams<>();
+            params.setPlatform(1);
+            params.setData("哈哈哈哈哈");
+            if(auth!=null){
+                auth.invokeAuth(params, new IAuthResultCallback() {
+                    @Override
+                    public void onSuccess(String code) {
+                        CJLog.getInstance().log_e("授权成功"+code);
+                    }
+
+                    @Override
+                    public void onFailed() {
+                        CJLog.getInstance().log_e("授权失败");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        CJLog.getInstance().log_e("授权取消");
+                    }
+                });
+            }
+
+
+
+            return;
+        }
 
         if(R.id.share == vid){
             if(share != null){
@@ -177,17 +212,17 @@ public class MainActivity extends BaseActivity {
                 share.invokeShare(shareParams, new IShareResultCallback() {
                     @Override
                     public void onSuccess() {
-
+                        CJLog.getInstance().log_e("分享成功");
                     }
 
                     @Override
                     public void onFailed(@Nullable Throwable throwable) {
-
+                        CJLog.getInstance().log_e("分享失败");
                     }
 
                     @Override
                     public void onCancel() {
-
+                        CJLog.getInstance().log_e("分享取消");
                     }
                 });
             }else {

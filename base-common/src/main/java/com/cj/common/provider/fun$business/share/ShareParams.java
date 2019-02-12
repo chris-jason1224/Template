@@ -20,7 +20,7 @@ import static com.cj.common.provider.fun$business.share.ShareParams.Type.WEBPAGE
 
 public abstract class ShareParams {
 
-    //分享平台定义
+    //分享平台字典值
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({WECHAT_SESSION,WECHAT_TIMELINE})
     public @interface Platform{
@@ -31,7 +31,7 @@ public abstract class ShareParams {
 
     }
 
-    //分享类型定义
+    //分享类型字典值
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({TEXT,WEBPAGE,IMAGE})
     public @interface Type{

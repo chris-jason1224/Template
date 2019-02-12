@@ -23,7 +23,7 @@ import static com.cj.business.pay.PayCenter.PayWay.WECHAT;
 
 public class PayCenter {
 
-    //支付方式
+    //支付方式字典值
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({ALIPAY,WECHAT,UNION})
     public @interface PayWay{

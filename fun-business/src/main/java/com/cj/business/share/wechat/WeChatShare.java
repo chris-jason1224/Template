@@ -195,7 +195,9 @@ public class WeChatShare implements IShare, LifecycleOwner {
 
         //调用api接口，发送数据到微信
         boolean sendRes = wxapi.sendReq(req);
-        CJLog.getInstance().log_d("send to wx" + sendRes);
+        //激活微信分享结果接收器
+        //当观察者的生命周期处于STARTED或RESUMED状态时，LiveData会通知观察者数据变化；在观察者处于其他状态时，即使LiveData的数据变化了，也不会通知。
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
     }
 
     /**

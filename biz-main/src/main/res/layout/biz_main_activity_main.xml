@@ -49,33 +49,53 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/foreground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="前台测试" />
-    <Button
-        android:id="@+id/encrypt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="encrypt" />
-    <Button
-        android:id="@+id/decrypt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="decrypt" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/foreground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="前台测试" />
+        <Button
+            android:id="@+id/encrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="encrypt" />
+        <Button
+            android:id="@+id/decrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="decrypt" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pay" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pay" />
 
-    <Button
-        android:id="@+id/share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="share" />
+        <Button
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="share" />
+
+        <Button
+            android:id="@+id/auth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="auth" />
+
+    </LinearLayout>
+
+
+
+
 
 
     <com.facebook.drawee.view.SimpleDraweeView
