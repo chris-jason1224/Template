@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cj.ui.R;
-import com.cj.ui.util.DisplayHelper;
+import com.cj.ui.util.ScreenUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -135,7 +135,7 @@ public class UITipDialog extends Dialog {
             if (mCurrentIconType == ICON_TYPE_LOADING) {
                 UILoadingView loadingView = new UILoadingView(mContext);
                 loadingView.setColor(Color.WHITE);
-                loadingView.setSize(DisplayHelper.dip2px(mContext, 32));
+                loadingView.setSize(ScreenUtil.dip2px(mContext, 32));
                 LinearLayout.LayoutParams loadingViewLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 loadingView.setLayoutParams(loadingViewLP);
                 contentWrap.addView(loadingView);
@@ -162,7 +162,7 @@ public class UITipDialog extends Dialog {
                 LinearLayout.LayoutParams tipViewLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                 if (mCurrentIconType != ICON_TYPE_NOTHING) {
-                    tipViewLP.topMargin = DisplayHelper.dip2px(mContext, 12);
+                    tipViewLP.topMargin = ScreenUtil.dip2px(mContext, 12);
                 }
                 tipView.setLayoutParams(tipViewLP);
 

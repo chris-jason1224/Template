@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.cj.ui.R;
-import com.cj.ui.util.DisplayHelper;
+import com.cj.ui.util.ScreenUtil;
 
 /**
  * 用于显示 Loading 的 {@link View}，支持颜色和大小的设置。
@@ -41,7 +41,7 @@ public class UILoadingView extends View {
     public UILoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.core_ui_QMUILoadingView, defStyleAttr, 0);
-        mSize = array.getDimensionPixelSize(R.styleable.core_ui_QMUILoadingView_core_ui_qmui_loading_view_size, DisplayHelper.dip2px(context, 32));
+        mSize = array.getDimensionPixelSize(R.styleable.core_ui_QMUILoadingView_core_ui_qmui_loading_view_size, ScreenUtil.dip2px(context, 32));
         mPaintColor = array.getInt(R.styleable.core_ui_QMUILoadingView_android_color, Color.WHITE);
         array.recycle();
         initPaint();

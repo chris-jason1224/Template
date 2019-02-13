@@ -13,7 +13,7 @@ import com.cj.common.provider.fun$business.auth.IAuthResultCallback;
  * Package:com.cj.business.auth
  */
 
-@Route(path = "/fun-business/SEV/com.cj.business.auth.AuthService")
+@Route(path = "/fun_business/SEV/com.cj.business.auth.AuthService")
 public class AuthService implements IAuthProvider {
     @Override
     public void invokeAuth(AuthParams params, IAuthResultCallback callback) {

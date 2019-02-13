@@ -25,7 +25,6 @@ public class CoreLogApplicationDelegate implements IModuleApplicationDelegate {
         this.context=context;
         //注入统一的java层异常捕获
         Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance(context));
-        CJLog.getInstance().log_d("--日志组件初始化成功--");
     }
 
     @Override

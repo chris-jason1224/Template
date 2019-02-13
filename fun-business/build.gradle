@@ -35,7 +35,7 @@ android {
 
 
 dependencies {
-    //支持aar包
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"

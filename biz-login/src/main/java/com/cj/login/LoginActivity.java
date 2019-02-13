@@ -17,7 +17,7 @@ import com.cj.common.bus.DataBusKey;
 import com.cj.log.CJLog;
 import com.gyf.barlibrary.ImmersionBar;
 
-@Route(path="/biz-login/ACT/com.cj.login.LoginActivity")
+@Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
 
 

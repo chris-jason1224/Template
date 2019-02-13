@@ -18,12 +18,12 @@ import android.support.annotation.Nullable;
  */
 public interface IBasePresenter<V>  extends LifecycleObserver{
 
-    public void attachView(V v);
+     void attachView(V v);
 
-    public void detachView();
+     void detachView();
 
     //View层执行onDestroy时会回调到此方法
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onDestroy(@NonNull LifecycleOwner owner);
+    void onDestroy(@NonNull LifecycleOwner owner);
 
 }

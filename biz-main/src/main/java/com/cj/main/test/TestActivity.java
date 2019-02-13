@@ -10,7 +10,7 @@ import com.cj.main.R;
 
 import butterknife.OnClick;
 
-@Route(path = "/biz-main/ACT/com.cj.main.test.TestActivity")
+@Route(path = "/biz_main/ACT/com.cj.main.test.TestActivity")
 public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITestView {
 
 

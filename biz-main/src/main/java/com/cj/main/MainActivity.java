@@ -41,7 +41,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-@Route(path = "/biz-main/ACT/com.cj.main.MainActivity")
+@Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
 public class MainActivity extends BaseActivity {
 
 
@@ -51,13 +51,13 @@ public class MainActivity extends BaseActivity {
     @BindView(R2.id.base_common_toolbar)
     Toolbar toolbar;
 
-    @Autowired(name = "/fun-business/SEV/com.cj.business.pay.PayService")
+    @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
 
-    @Autowired(name = "/fun-business/SEV/com.cj.business.share.ShareService")
+    @Autowired(name = "/fun_business/SEV/com.cj.business.share.ShareService")
     IShareProvider share;
 
-    @Autowired(name = "/fun-business/SEV/com.cj.business.auth.AuthService")
+    @Autowired(name = "/fun_business/SEV/com.cj.business.auth.AuthService")
     IAuthProvider auth;
 
     @Override
@@ -295,7 +295,7 @@ public class MainActivity extends BaseActivity {
             for (int i = 0; i < 10; i++) {
                 list.add(i);
             }
-            ARouter.getInstance().build("/biz-login/ACT/com.cj.login.LoginActivity").navigation();
+            ARouter.getInstance().build("/biz_login/ACT/com.cj.login.LoginActivity").navigation();
             return;
         }
 
@@ -322,7 +322,7 @@ public class MainActivity extends BaseActivity {
 
         //跳转TestActivity
         if (R.id.goto_test == vid) {
-            ARouter.getInstance().build("/biz-main/ACT/com.cj.main.test.TestActivity").navigation();
+            ARouter.getInstance().build("/biz_main/ACT/com.cj.main.test.TestActivity").navigation();
             return;
         }
 
