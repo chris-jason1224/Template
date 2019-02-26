@@ -1,26 +1,18 @@
 package com.cj.common.base;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.util.TypedValue;
 
-import com.cj.common.R;
 import com.cj.common.receiver.NetworkStateOBReceiver;
 import com.cj.common.states.OnPlaceHolderCallback;
 import com.cj.common.states.OnEmptyStateCallback;
-import com.cj.common.states.OnErrorStateCallback;
-import com.cj.common.states.OnLoadingStateCallback;
 import com.cj.common.states.OnTimeoutStateCallback;
 import com.cj.common.util.SPFUtil;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.manager.basement.BaseApplication;
 import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.Logger;
 
 
 /**
@@ -62,11 +54,9 @@ public class BaseApp extends BaseApplication {
     private void registerLoadSir() {
         //全局配置
         LoadSir.beginBuilder()
-                .addCallback(new OnErrorStateCallback())//错误页面
-                .addCallback(new OnEmptyStateCallback())//空页面
-                .addCallback(new OnLoadingStateCallback())//加载中页面
-                .addCallback(new OnTimeoutStateCallback())//连接超时页面
-                .addCallback(new OnPlaceHolderCallback())//自定义页面
+                .addCallback(new OnEmptyStateCallback())//空数据页面
+                .addCallback(new OnTimeoutStateCallback())//连接超时、网络错误页面
+                .addCallback(new OnPlaceHolderCallback())//占位页面
                 .setDefaultCallback(SuccessCallback.class)//默认显示加载成功页面
                 .commit();
 

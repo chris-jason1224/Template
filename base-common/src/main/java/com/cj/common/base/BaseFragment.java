@@ -13,6 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kingja.loadsir.callback.Callback;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -23,6 +27,8 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
 
     private Unbinder unBinder;
+
+    private LoadService loadService;
 
     //是否懒加载
     private boolean isLazyload=true;
@@ -73,7 +79,17 @@ public abstract class BaseFragment extends Fragment {
         //1.加载布局 XML 文件
         mRootView = inflater.inflate(setLayoutResource(), container, false);
         unBinder=ButterKnife.bind(this,mRootView);
-        return mRootView;
+
+        //第二步：注册布局View
+         loadService = LoadSir.getDefault().register(mRootView, new Callback.OnReloadListener() {
+            @Override
+            public void onReload(View v) {
+                // 重新加载逻辑
+            }
+        });
+
+        //返回LoadSir生成的LoadLayout
+        return loadService.getLoadLayout();
     }
 
     @Override
@@ -131,5 +147,9 @@ public abstract class BaseFragment extends Fragment {
         return (T) mRootView.findViewById(id);
     }
 
+
+    public LoadService getLoadService(){
+        return loadService;
+    }
 
 }

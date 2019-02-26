@@ -4,6 +4,7 @@ package com.cj.main;
 import android.content.Context;
 import android.content.res.Configuration;
 import com.cj.annontations.module.ModuleRegister;
+import com.cj.common.http.util.JSONUtils;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
 import java.util.Map;
 

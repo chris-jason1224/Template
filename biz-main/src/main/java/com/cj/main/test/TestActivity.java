@@ -27,8 +27,8 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
     }
 
     @Override
-    public void onReloadClick() {
-
+    public View initStatusLayout() {
+        return null;
     }
 
     @Override

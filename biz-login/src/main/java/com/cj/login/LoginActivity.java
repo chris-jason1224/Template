@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import android.os.Bundle;
+import android.view.View;
 
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -49,11 +50,11 @@ public class LoginActivity extends BaseActivity {
         return R.layout.activity_login;
     }
 
-
     @Override
-    public void onReloadClick() {
-
+    public View initStatusLayout() {
+        return null;
     }
+
 
     @Override
     protected void initData() {

@@ -2,7 +2,6 @@ package com.cj.log.util;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import com.cj.log.CJLog;
-import com.cj.log.CoreLogApplicationDelegate;
 import com.cj.log.view.CrashDialog;
 import com.cj.manager.basement.BaseApplication;
 

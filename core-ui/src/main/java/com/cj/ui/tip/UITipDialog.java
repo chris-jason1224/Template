@@ -137,6 +137,7 @@ public class UITipDialog extends Dialog {
                 loadingView.setColor(Color.WHITE);
                 loadingView.setSize(ScreenUtil.dip2px(mContext, 32));
                 LinearLayout.LayoutParams loadingViewLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                loadingViewLP.topMargin=ScreenUtil.dip2px(mContext,20);
                 loadingView.setLayoutParams(loadingViewLP);
                 contentWrap.addView(loadingView);
 

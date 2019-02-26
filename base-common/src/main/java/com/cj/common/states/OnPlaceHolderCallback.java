@@ -10,6 +10,6 @@ import com.kingja.loadsir.callback.Callback;
 public class OnPlaceHolderCallback extends Callback {
     @Override
     protected int onCreateView() {
-        return R.layout.base_common_on_custom_state_layout;
+        return R.layout.base_common_on_place_holder_state_layout;
     }
 }

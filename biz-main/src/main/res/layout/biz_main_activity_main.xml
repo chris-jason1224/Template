@@ -7,114 +7,114 @@
     android:orientation="vertical"
     tools:context="com.cj.main.MainActivity">
 
-
-
     <include layout="@layout/base_common_normal_title_layout"/>
 
-    <TextView
-        android:id="@+id/goto_biz_login"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="goto_biz-login"/>
-
-    <RelativeLayout
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-
-        <Button
-            android:id="@+id/alert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="alert" />
-
-        <Button
-            android:id="@+id/goto_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/alert"
-            android:text="goto_test" />
-
-        <Button
-            android:id="@+id/make_crash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/goto_test"
-            android:text="make_crash" />
-
-
-    </RelativeLayout>
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/ll_parent"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/foreground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="前台测试" />
-        <Button
-            android:id="@+id/encrypt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="encrypt" />
-        <Button
-            android:id="@+id/decrypt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="decrypt" />
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/goto_biz_login"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="goto_biz-login"/>
+
+        <RelativeLayout
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <Button
+                android:id="@+id/alert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alert" />
+
+            <Button
+                android:id="@+id/goto_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/alert"
+                android:text="goto_test" />
+
+            <Button
+                android:id="@+id/make_crash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/goto_test"
+                android:text="make_crash" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/foreground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="前台测试" />
+            <Button
+                android:id="@+id/encrypt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="encrypt" />
+            <Button
+                android:id="@+id/decrypt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="decrypt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pay" />
+
+            <Button
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="share" />
+
+            <Button
+                android:id="@+id/auth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="auth" />
+
+        </LinearLayout>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundTopLeft="false"
+            app:roundBottomEnd="false"
+            android:background="#000000"
+            app:roundTopEnd="true"
+            app:roundedCornerRadius="10dp"
+            app:roundAsCircle="false"
+            app:placeholderImage="@drawable/placeholder"
+            android:id="@+id/drawee"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:placeholderImage="@drawable/biz_main_shape"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/pay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="pay" />
 
-        <Button
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="share" />
-
-        <Button
-            android:id="@+id/auth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="auth" />
-
-    </LinearLayout>
-
-
-
-
-
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        app:roundTopLeft="false"
-        app:roundBottomEnd="false"
-        android:background="#000000"
-        app:roundTopEnd="true"
-        app:roundedCornerRadius="10dp"
-        app:roundAsCircle="false"
-        app:placeholderImage="@drawable/placeholder"
-        android:id="@+id/drawee"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-
-    <com.facebook.drawee.view.SimpleDraweeView
-
-        app:placeholderImage="@drawable/biz_main_shape"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
 
 
 </LinearLayout>

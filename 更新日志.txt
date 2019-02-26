@@ -1,7 +1,8 @@
 #todo://
         1、LoadSir的错误页面参考主流app修改UI样式
 
-        10、二维码、条码扫码解码组件
+        2、裁剪Zxing库
+        { https://blog.csdn.net/chenzujie/article/details/54948037 }
 
         13、func-push{小米+华为+友盟}
 

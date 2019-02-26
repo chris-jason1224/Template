@@ -1,7 +1,5 @@
 package com.cj.common.base;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +13,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.R;
 
 import com.cj.common.receiver.NetworkStateOBReceiver;
-import com.cj.common.states.OnPlaceHolderCallback;
-import com.cj.common.states.OnEmptyStateCallback;
-import com.cj.common.states.OnErrorStateCallback;
-import com.cj.common.states.OnLoadingStateCallback;
-import com.cj.common.states.OnTimeoutStateCallback;
 import com.cj.ui.tip.UITipDialog;
 import com.gyf.barlibrary.ImmersionBar;
-import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
-import com.kingja.loadsir.core.Transport;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -43,7 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected View mContentView;
 
 
-
     /**
      * 判断 activity 是否处于激活状态
      **/
@@ -57,25 +47,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         //为activity指定全屏的主题，隐藏掉actionbar
         setTheme(R.style.base_common_Theme);
         //加载布局
-        mContentView = LayoutInflater.from(this).inflate(resourceLayout(),null);
+        mContentView = LayoutInflater.from(this).inflate(resourceLayout(), null);
         setContentView(mContentView);
 
         //注册Butterknife
-        unbinder=ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
 
         //ARouter注入
         //ARouter注入服务，子类中可以直接使用 @Autowired注解来获得服务
         ARouter.getInstance().inject(this);
 
-
         //沉浸式处理
-        if(useImmersionBar()){
+        if (useImmersionBar()) {
             initImmersionBar();
         }
 
-
         //多布局初始化
-        initLoadSir();
+        initLoadSir(initStatusLayout());
 
         //注入网络变化监听回调
         NetworkStateOBReceiver.setOnNetworkChangedListener(new NetworkStateOBReceiver.OnNetworkChangedListener() {
@@ -84,7 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 //每一个继承自BaseActivity的activity都会回调这个方法，避免重复提醒，需要判断当前activity是否在栈顶
                 if (isActivityReady) {
                     //有网络
-                    if(!isConnected){
+                    if (!isConnected) {
                         final UITipDialog tipDialog = new UITipDialog.Builder(BaseActivity.this)
                                 .setIconType(UITipDialog.Builder.ICON_TYPE_INFO)
                                 .setTipWord("网络断开")
@@ -129,9 +117,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             unbinder.unbind();
         }
 
-        //解绑ARouter注入
-        ARouter.getInstance().destroy();
-
         if (immersionBar != null)
             immersionBar.destroy();
 
@@ -146,85 +131,23 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     public LoadService getLoadService() {
         return loadService;
     }
 
 
-    private void initLoadSir() {
+    //注册多状态缺省页面
+    public abstract View initStatusLayout();
+
+    private void initLoadSir(View view) {
 
         //注册loadSir
-        loadService = LoadSir.getDefault().register(this, new Callback.OnReloadListener() {
-            @Override
-            public void onReload(View v) {
-
-            }
-        });
-
-
-        /*****loadSir动态设置callback，将页面上按钮的点击事件接管******/
-        //todo 确定好各个状态页面UI之后再写具体点击事件，已经预留事件回调
-        //错误页面
-        loadService.setCallBack(OnErrorStateCallback.class, new Transport() {
-            @Override
-            public void order(Context context, View view) {
-                //点击重试按钮
-                view.findViewById(R.id.base_common_retry).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (isActivityReady) {//当前Activity可见时回调点击重试按钮
-                            onReloadClick();
-                        }
-                    }
-                });
-                //点击设置按钮
-                view.findViewById(R.id.base_common_setting).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-            }
-        });
-        //空页面
-        loadService.setCallBack(OnEmptyStateCallback.class, new Transport() {
-            @Override
-            public void order(Context context, View view) {
-
-            }
-        });
-        //加载页面
-        loadService.setCallBack(OnLoadingStateCallback.class, new Transport() {
-            @Override
-            public void order(Context context, View view) {
-
-            }
-        });
-        //连接超时
-        loadService.setCallBack(OnTimeoutStateCallback.class, new Transport() {
-            @Override
-            public void order(Context context, View view) {
-
-            }
-        });
-        //请求占位
-        loadService.setCallBack(OnPlaceHolderCallback.class, new Transport() {
-            @Override
-            public void order(Context context, View view) {
-
-            }
-        });
+        loadService = LoadSir.getDefault().register(view == null ? this : view);
 
     }
 
-    //todo 这里感觉还不太好。每个页面都要自定义reload逻辑，待定
-    //页面发生错误后，重试操作回调
-    public abstract void onReloadClick();
 
-
-    //todo
-    //权限申请的工作考虑之后还是决定放到具体的页面来申请，毕竟大部分的页面不需要这项工作，所以不放在基类里面了
+    //todo 权限申请的工作,考虑之后还是决定放到具体的页面来申请，毕竟大部分的页面不需要这项工作，所以不放在基类里面了
 
     //是否使用沉浸式状态栏，默认不使用
     protected boolean useImmersionBar() {
@@ -248,10 +171,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     //子类请求数据入口
     protected abstract void initData();
 
-
     //获取 actionBarHeight
-    public  int getActionBarHeight() {
-        int actionbarHeight=0;
+    public int getActionBarHeight() {
+        int actionbarHeight = 0;
         TypedValue typedValue = new TypedValue();
 
         if (getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true)) {
@@ -262,8 +184,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     //获取沉浸式状态栏高度
-    public int getStatusBarHeight(){
-        int statusBarHeight=0;
+    public int getStatusBarHeight() {
+        int statusBarHeight = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);

@@ -16,7 +16,7 @@ import com.cj.ui.util.ScreenUtil;
 
 /**
  * 用于显示 Loading 的 {@link View}，支持颜色和大小的设置。
- *
+ * 不可直接使用，通过UITipDialog设置类型
  * @author cginechen
  * @date 2016-09-21
  */

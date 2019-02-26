@@ -54,10 +54,7 @@ public class BaseApplication extends Application {
          * 多进程app会重复启动Application，只在主进程中执行一次即可
          */
         if (isCurrentMainProcess()) {
-
-
             this.mCurrentCount = 0;
-
             this.registerActivityLifecycleCallbacks(new BaseApplication.ActivityLifecycleCallbacksImpl());
             //加载各个组件
             ModuleManager.getInstance().loadModules();

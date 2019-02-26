@@ -41,7 +41,7 @@ public final class MultiTypeAsserts {
    * @param adapter the MultiTypeAdapter
    * @param items the items list
    * @throws BinderNotFoundException if check failed
-   * @throws IllegalArgumentException if your Items/List is empty
+   * @throws IllegalArgumentException if your Items/List is base_common_pic_empty
    */
   @SuppressWarnings("unchecked")
   public static void assertAllRegistered(@NonNull MultiTypeAdapter adapter, @NonNull List<?> items)
@@ -49,7 +49,7 @@ public final class MultiTypeAsserts {
     checkNotNull(adapter);
     checkNotNull(items);
     if (items.isEmpty()) {
-      throw new IllegalArgumentException("Your Items/List is empty.");
+      throw new IllegalArgumentException("Your Items/List is base_common_pic_empty.");
     }
     for (int i = 0; i < items.size(); i++) {
       adapter.indexInTypesOf(i, items.get(0));
