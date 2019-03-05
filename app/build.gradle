@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
+//沪江 aspectJ插件
+apply plugin: 'android-aspectjx'
 
 android {
     signingConfigs {
@@ -20,13 +21,6 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        //ARouter配置
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-                includeCompileClasspath true
-            }
-        }
 
         lintOptions {
             abortOnError false
@@ -61,12 +55,6 @@ repositories{
     }
 }
 
-
-
-configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:${rootProject.ext.supportLibraryVersion}"
-}
-
 dependencies {
     implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintVersion}"
@@ -76,9 +64,24 @@ dependencies {
     if (!isModuleModle.toBoolean()) {
         api project(':biz-main')
         api project(':biz-login')
+        //只需要在app中依赖AOP module
+        api project(':fun-aop')
     }
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
-
     api project(':fun-business')
 
+
 }
+
+//AspectJX插件配置项
+aspectjx{
+    enabled true
+    //mac系统下，包名分隔用.
+    //不去掉支付宝sdk会导致崩溃
+    exclude 'com.alipay', 'com.tencent'
+
+    //windows系统下,包名分隔用/
+    //exclude 'com/alipay'
+
+}
+
+

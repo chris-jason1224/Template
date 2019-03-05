@@ -7,6 +7,7 @@ import android.webkit.WebSettings;
 
 import com.cj.common.BuildConfig;
 import com.cj.common.base.BaseApp;
+import com.cj.common.http.base.BaseProgressResponseBody;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.DiskCacheUtil;
 import com.cj.manager.basement.BaseApplication;
@@ -51,46 +52,6 @@ public class RetrofitFactory {
     }
 
 
-    //请求拦截器
-    private Interceptor createInterceptor() {
-
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                //原始请求
-                Request original_request = chain.request();
-                //修改后的请求
-                Request.Builder builder = original_request.newBuilder();
-                builder.
-                        //添加token，由登录成功后保存到本地
-                        addHeader("UserToken", DiskCacheUtil.getInstance().getToken())
-
-                        //设置User-Agent
-                        .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApplication.getInstance().getApplicationContext()) : System.getProperty("http.agent"))
-
-                        //app版本号
-                        .addHeader("AppVersionCode",AndroidSystemUtil.getInstance().getAppVersionCode(BaseApplication.getInstance().getApplicationContext())+"")
-
-                        //app版本名
-                        .addHeader("AppVersionName",AndroidSystemUtil.getInstance().getAppVersionName(BaseApplication.getInstance().getApplicationContext())+"")
-
-                        //Content-Type
-                        .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-
-                        //
-                        .addHeader("Accept-Encoding", "gzip,deflate")
-
-                        //
-                        .addHeader("Connection", "keep-alive")
-
-                        //
-                        .addHeader("Accept", "*/*");
-
-                return chain.proceed(builder.build());
-            }
-        };
-    }
-
     //网络缓存，只会缓存GET方式
     //todo 后面把数据库模块规划好之后，设计一个POST缓存逻辑
     private Cache getCache(Context context) {
@@ -112,9 +73,53 @@ public class RetrofitFactory {
                 .readTimeout(5, TimeUnit.SECONDS)//读取超时
                 .writeTimeout(5, TimeUnit.SECONDS)//写入超时
                 .connectTimeout(15, TimeUnit.SECONDS)//连接超时
-                .retryOnConnectionFailure(true)//自动重连
-                .addInterceptor(createInterceptor());
+                .retryOnConnectionFailure(true);//自动重连
 
+        //添加请求拦截器
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                //原始请求
+                Request original_request = chain.request();
+                //修改后的请求
+                Request.Builder builder = original_request.newBuilder();
+                builder.
+                        //添加token，由登录成功后保存到本地
+                        addHeader("UserToken", DiskCacheUtil.getInstance().getToken())
+                        //设置User-Agent
+                        .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApplication.getInstance().getApplicationContext()) : System.getProperty("http.agent"))
+                        //app版本号
+                        .addHeader("AppVersionCode", AndroidSystemUtil.getInstance().getAppVersionCode(BaseApplication.getInstance().getApplicationContext()) + "")
+                        //app版本名
+                        .addHeader("AppVersionName", AndroidSystemUtil.getInstance().getAppVersionName(BaseApplication.getInstance().getApplicationContext()) + "")
+                        //Content-Type
+                        .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                        //
+                        .addHeader("Accept-Encoding", "gzip,deflate")
+                        //
+                        .addHeader("Connection", "keep-alive")
+                        //
+                        .addHeader("Accept", "*/*");
+
+                return chain.proceed(builder.build());
+            }
+        });
+
+        //监听加载进度
+        builder.addNetworkInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Response response = chain.proceed(chain.request());
+                return response.newBuilder().body(new BaseProgressResponseBody(response.body(),
+                        new BaseProgressResponseBody.ProgressListener() {
+                            @Override
+                            public void onProgress(long totalSize, long downSize) {
+                                //todo 这里回调请求结果的进度
+
+                            }
+                        })).build();
+            }
+        });
 
         return builder.build();
     }
@@ -130,7 +135,7 @@ public class RetrofitFactory {
                 .build();
     }
 
-    private Gson gson(){
+    private Gson gson() {
         Gson gson = new GsonBuilder()
                 .enableComplexMapKeySerialization()
                 .serializeNulls()

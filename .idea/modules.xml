@@ -14,7 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/core-processor/core-processor.iml" filepath="$PROJECT_DIR$/core-processor/core-processor.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-router/core-router.iml" filepath="$PROJECT_DIR$/core-router/core-router.iml" />
       <module fileurl="file://$PROJECT_DIR$/core-ui/core-ui.iml" filepath="$PROJECT_DIR$/core-ui/core-ui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun-barcode/fun-barcode.iml" filepath="$PROJECT_DIR$/fun-barcode/fun-barcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fun-aop/fun-aop.iml" filepath="$PROJECT_DIR$/fun-aop/fun-aop.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun-business/fun-business.iml" filepath="$PROJECT_DIR$/fun-business/fun-business.iml" />
     </modules>
   </component>

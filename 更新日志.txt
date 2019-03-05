@@ -1,12 +1,22 @@
 #todo://
-        1、LoadSir的错误页面参考主流app修改UI样式
+
+        1、接入AspectJ
+            https://blog.csdn.net/xwh_1230/article/details/78225258
+            https://blog.csdn.net/xinzhou201/article/details/81566653
+            https://blog.csdn.net/qq_25412055/article/details/79640196
+
+            aspect系列 1.2.3   http://johnnyshieh.me/posts/aspectj-in-android-basic/
+            美团性能监测  https://tech.meituan.com/2016/12/19/hertz.html
+
 
         2、裁剪Zxing库
         { https://blog.csdn.net/chenzujie/article/details/54948037 }
 
         13、func-push{小米+华为+友盟}
 
-        18.func-db组件二次封装（realm）
+        18.func-db组件二次封装（realm） ，网络层加入接口缓存
+
+        19.网络层添加请求进度回调
 
         21.迁移到androidX
 
@@ -14,7 +24,6 @@
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
     //页面名字由多个单词组成时，由下划线分隔
-
     1.Activity：组件代号/ACT/{USR}/activity_name
     2.Fragment：组件代号/FRG/fragment_name
     3.组件服务：组件代号/SEV/service_name
@@ -28,7 +37,10 @@
         }
 
 
-
+#20190305
+    1、完成AOP组件创建
+    2、防止重复提交切面
+    3、方法执行耗时统计切面
 
 #20190212
     1、fun-business组件增加微信授权功能

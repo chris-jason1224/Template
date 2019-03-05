@@ -11,7 +11,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.0.1'
         //butterknife8 插件
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
-
+        //沪江 aspectJ插件
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
     }
 }
 
@@ -28,6 +29,10 @@ allprojects {
     }
     configurations{
         all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+    configurations.all{
+        resolutionStrategy.force "com.android.support:support-annotations:${rootProject.ext.supportLibraryVersion}"
     }
 
 }
@@ -111,5 +116,10 @@ ext {
 
 //  微信sdk
     wechatVersion = "5.3.1"
+
+// AspectJ RT Version
+    aspectJRTVersion = "1.9.2"
+
+
 
 }

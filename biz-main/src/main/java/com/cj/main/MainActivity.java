@@ -1,7 +1,6 @@
 package com.cj.main;
 
 import android.graphics.drawable.Animatable;
-import android.os.Handler;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -28,10 +27,12 @@ import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.ProgressUtil;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
+import com.cj.fun_aop.annotation.ExecutionTimeTrace;
+import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.log.CJLog;
+import com.cj.main.test.fragment.MFragment;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
-import com.cj.ui.tip.UITipDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.EasyPermissions;
 
 
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
@@ -54,6 +56,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R2.id.ll_parent)
     LinearLayout mLLParent;
 
+    MFragment fragment;
+
+
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
 
@@ -66,7 +71,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (fragment == null) {
+            fragment = new MFragment();
+        }
+        getSupportFragmentManager().beginTransaction().add(R.id.frg_container, fragment).show(fragment).commit();
     }
 
     @Override
@@ -96,21 +104,23 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @ExecutionTimeTrace
+    @SingleSubmit
     @OnClick({R2.id.goto_biz_login, R2.id.alert, R2.id.goto_test, R2.id.make_crash, R2.id.foreground,
-            R2.id.encrypt, R2.id.decrypt, R2.id.pay,R2.id.share,R2.id.auth})
+            R2.id.encrypt, R2.id.decrypt, R2.id.pay, R2.id.share, R2.id.auth})
     public void onClick(View v) {
 
         int vid = v.getId();
 
-        if(R.id.auth == vid){
+        if (R.id.auth == vid) {
             AuthParams<String> params = new AuthParams<>();
             params.setPlatform(1);
             params.setData("哈哈哈哈哈");
-            if(auth!=null){
+            if (auth != null) {
                 auth.invokeAuth(params, new IAuthResultCallback() {
                     @Override
                     public void onSuccess(String code) {
-                        CJLog.getInstance().log_e("授权成功"+code);
+                        CJLog.getInstance().log_e("授权成功" + code);
                     }
 
                     @Override
@@ -128,8 +138,8 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
-        if(R.id.share == vid){
-            if(share != null){
+        if (R.id.share == vid) {
+            if (share != null) {
                 WeChatShareParams shareParams = new WeChatShareParams();
                 shareParams.setSharePlatform(ShareParams.Platform.WECHAT_SESSION);
                 shareParams.setShareType(ShareParams.Type.WEBPAGE);
@@ -153,7 +163,7 @@ public class MainActivity extends BaseActivity {
                         CJLog.getInstance().log_e("分享取消");
                     }
                 });
-            }else {
+            } else {
                 AlertManager.create(this).setMessage("Share == null").show();
             }
         }

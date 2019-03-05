@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
@@ -35,6 +36,11 @@ public class ModuleCompiler extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         this.messager = processingEnv.getMessager();
+
+        Map<String,String> options = processingEnv.getOptions();
+        //这个是gradle文件中 配置的javaCompileOptions
+        String module_name = options.get("module_name");
+
     }
 
     //扫描、解析自定义注解
