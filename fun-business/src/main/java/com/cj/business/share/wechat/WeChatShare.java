@@ -21,7 +21,7 @@ import com.cj.common.util.LooperUtil;
 import com.cj.common.util.pkg.PackageUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
-import com.cj.mst.wxapi.WeChatUtil;
+import com.cj.utils.io.IOUtil;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -29,9 +29,6 @@ import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-import java.io.InputStream;
-import java.util.concurrent.CountDownLatch;
 
 
 /**
@@ -232,7 +229,7 @@ public class WeChatShare implements IShare, LifecycleOwner {
         } else if (!TextUtils.isEmpty(params.getImagePath())) {
             //网络图片
             if (params.getImagePath().startsWith("http")) {
-                byte[] bytes = WeChatUtil.getInstance().getByteArrayFromUrl(params.getImagePath());
+                byte[] bytes = IOUtil.getInstance().getByteArrayFromUrl(params.getImagePath());
                 if (bytes == null || bytes.length > maxImageSize) {
                     CJLog.getInstance().log_e(tag + str_imageOverSize);
                     return null;
@@ -240,7 +237,7 @@ public class WeChatShare implements IShare, LifecycleOwner {
                 return bytes;
             } else {
                 //本地文件图片
-                byte[] bytes = WeChatUtil.getInstance().readFromFile(params.getImagePath(), 0, -1);
+                byte[] bytes = IOUtil.getInstance().readFromFile(params.getImagePath(), 0, -1);
                 if (bytes == null || bytes.length > maxImageSize) {
                     CJLog.getInstance().log_e(tag + str_imageOverSize);
                     return null;
