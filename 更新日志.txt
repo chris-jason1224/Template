@@ -7,9 +7,12 @@
             aspect系列 1.2.3   http://johnnyshieh.me/posts/aspectj-in-android-basic/
             美团性能监测  https://tech.meituan.com/2016/12/19/hertz.html
 
-
         2、裁剪Zxing库
         { https://blog.csdn.net/chenzujie/article/details/54948037 }
+
+        3.网络请求缓存逻辑
+
+        4.设计一个下载模块
 
         13、func-push{小米+华为+友盟}
 

@@ -6,8 +6,6 @@ import android.os.Build;
 import android.webkit.WebSettings;
 
 import com.cj.common.BuildConfig;
-import com.cj.common.base.BaseApp;
-import com.cj.common.http.base.BaseProgressResponseBody;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.DiskCacheUtil;
 import com.cj.manager.basement.BaseApplication;
@@ -36,7 +34,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFactory {
 
+    //基地址
     public static final String BASE_URL = "http://192.168.2.13:8080";
+
     private Retrofit retrofit;
 
     private RetrofitFactory() {
@@ -102,22 +102,6 @@ public class RetrofitFactory {
                         .addHeader("Accept", "*/*");
 
                 return chain.proceed(builder.build());
-            }
-        });
-
-        //监听加载进度
-        builder.addNetworkInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Response response = chain.proceed(chain.request());
-                return response.newBuilder().body(new BaseProgressResponseBody(response.body(),
-                        new BaseProgressResponseBody.ProgressListener() {
-                            @Override
-                            public void onProgress(long totalSize, long downSize) {
-                                //todo 这里回调请求结果的进度
-
-                            }
-                        })).build();
             }
         });
 

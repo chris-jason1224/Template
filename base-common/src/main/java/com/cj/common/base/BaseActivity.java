@@ -140,14 +140,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract View initStatusLayout();
 
     private void initLoadSir(View view) {
-
         //注册loadSir
         loadService = LoadSir.getDefault().register(view == null ? this : view);
-
     }
 
-
-    //todo 权限申请的工作,考虑之后还是决定放到具体的页面来申请，毕竟大部分的页面不需要这项工作，所以不放在基类里面了
 
     //是否使用沉浸式状态栏，默认不使用
     protected boolean useImmersionBar() {

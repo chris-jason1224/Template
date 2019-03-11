@@ -49,10 +49,9 @@ public class LoginInterceptor implements IInterceptor {
         if (postcard.getPath().contains(KeyTag.TAG_USER_NEED_LOGIN)) {
             mPostcard = postcard;
             mCallback = callback;
-            //TODO 判断是否已经登录
+            //todo 未登录，被拦截，跳转登录页面
             if (TextUtils.isEmpty(DiskCacheUtil.getInstance().getToken())) {
-                //跳转到登录页
-                //todo 未登录，被拦截，跳转登录页面
+
                 //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {
                 callback.onContinue(postcard);
