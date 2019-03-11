@@ -17,7 +17,6 @@ public class BizMainApplicationDelegate  implements IModuleApplicationDelegate{
     @Override
     public void onCreate(Context context) {
         this.context=context;
-
     }
 
     @Override
