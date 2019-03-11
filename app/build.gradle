@@ -67,8 +67,10 @@ dependencies {
         //只需要在app中依赖AOP module
         api project(':fun-aop')
     }
+
     api project(':fun-business')
 
+    api project(':fun-compressor')
 
 }
 
@@ -77,7 +79,7 @@ aspectjx{
     enabled true
     //mac系统下，包名分隔用.
     //不去掉支付宝sdk会导致崩溃
-    exclude 'com.alipay', 'com.tencent'
+    exclude 'com.alipay', 'com.tencent','com.jakewharton'
 
     //windows系统下,包名分隔用/
     //exclude 'com/alipay'

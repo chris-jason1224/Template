@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -23,6 +22,8 @@ import com.cj.common.provider.fun$business.share.IShareProvider;
 import com.cj.common.provider.fun$business.share.IShareResultCallback;
 import com.cj.common.provider.fun$business.share.ShareParams;
 import com.cj.common.provider.fun$business.share.WeChatShareParams;
+import com.cj.common.provider.fun$compressor.compress.ICompressCallback;
+import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.ProgressUtil;
 import com.cj.common.util.image.IImageLoadCallback;
@@ -36,16 +37,15 @@ import com.cj.ui.notify.Alerter.AlerterListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import pub.devrel.easypermissions.EasyPermissions;
 
 
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
 public class MainActivity extends BaseActivity {
-
 
     @BindView(R2.id.drawee)
     SimpleDraweeView draweeView;
@@ -67,6 +67,9 @@ public class MainActivity extends BaseActivity {
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.auth.AuthService")
     IAuthProvider auth;
+
+    @Autowired(name = "/fun_compressor/SEV/com.cj.easycompressor.CompressService")
+    ICompressProvider compress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +110,24 @@ public class MainActivity extends BaseActivity {
     @ExecutionTimeTrace
     @SingleSubmit
     @OnClick({R2.id.goto_biz_login, R2.id.alert, R2.id.goto_test, R2.id.make_crash, R2.id.foreground,
-            R2.id.encrypt, R2.id.decrypt, R2.id.pay, R2.id.share, R2.id.auth})
+            R2.id.encrypt, R2.id.decrypt, R2.id.pay, R2.id.share, R2.id.auth,R2.id.compress})
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if(R.id.compress == vid){
+            compress.invokeCompress("", new ICompressCallback() {
+                @Override
+                public void onSuccess(File compressedFile) {
+
+                }
+
+                @Override
+                public void onFailed(Throwable throwable) {
+
+                }
+            });
+        }
 
         if (R.id.auth == vid) {
             AuthParams<String> params = new AuthParams<>();
