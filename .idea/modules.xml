@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/core-ui/core-ui.iml" filepath="$PROJECT_DIR$/core-ui/core-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun-aop/fun-aop.iml" filepath="$PROJECT_DIR$/fun-aop/fun-aop.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun-business/fun-business.iml" filepath="$PROJECT_DIR$/fun-business/fun-business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fun-compressor/fun-compressor.iml" filepath="$PROJECT_DIR$/fun-compressor/fun-compressor.iml" />
     </modules>
   </component>
 </project>

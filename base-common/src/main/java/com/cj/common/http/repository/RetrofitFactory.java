@@ -51,9 +51,7 @@ public class RetrofitFactory {
         public static final RetrofitFactory instance = new RetrofitFactory();
     }
 
-
-    //网络缓存，只会缓存GET方式
-    //todo 后面把数据库模块规划好之后，设计一个POST缓存逻辑
+    //缓存地址 10M
     private Cache getCache(Context context) {
         return new Cache(new File(context.getCacheDir(), "httpCache"), 1024 * 1024 * 10);
     }

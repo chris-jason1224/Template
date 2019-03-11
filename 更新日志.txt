@@ -10,7 +10,6 @@
         2、裁剪Zxing库
         { https://blog.csdn.net/chenzujie/article/details/54948037 }
 
-        3.网络请求缓存逻辑
 
         4.设计一个下载模块
 
@@ -37,6 +36,8 @@
                 https://blog.csdn.net/hexingen/article/details/78504814
                 https://github.com/googlesamples/easypermissions
         }
+
+
 
 
 #20190305

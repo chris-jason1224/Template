@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -11,9 +9,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        resourcePrefix "biz_main_"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         if (!isModuleModle.toBoolean()) {
             //ARouter配置
             javaCompileOptions {
@@ -32,21 +29,15 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     api project(':base-common')
     if (!isModuleModle.toBoolean()) {
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
     }
-    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterKnifeCompilerVersion}"
     annotationProcessor project(':core-processor')
-    provided project(':fun-aop')
-
 
 }
