@@ -1,26 +1,3 @@
-#todo://
-
-        1、接入AspectJ
-            https://blog.csdn.net/xwh_1230/article/details/78225258
-            https://blog.csdn.net/xinzhou201/article/details/81566653
-            https://blog.csdn.net/qq_25412055/article/details/79640196
-            aspect系列 1.2.3   http://johnnyshieh.me/posts/aspectj-in-android-basic/
-            美团性能监测  https://tech.meituan.com/2016/12/19/hertz.html
-
-        2、裁剪Zxing库
-        { https://blog.csdn.net/chenzujie/article/details/54948037 }
-
-
-        4.设计一个下载模块
-
-        13、func-push{小米+华为+友盟}
-
-        18.func-db组件二次封装（realm） ，网络层加入接口缓存
-
-        19.网络层添加请求进度回调
-
-        21.迁移到androidX
-
 
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
@@ -36,7 +13,6 @@
                 https://blog.csdn.net/hexingen/article/details/78504814
                 https://github.com/googlesamples/easypermissions
         }
-
 
 #20190311
     1.完成fun-compressor组件，封装压缩服务
@@ -78,7 +54,6 @@
 
 #20181017
     1、引入greenDao3，完成基本配置项
-
 
 #20180916
     1、完成EasyCompressor本地图片压缩库并上传到GitHub
