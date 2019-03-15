@@ -1,6 +1,7 @@
 package com.cj.common.base;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -188,6 +189,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         return statusBarHeight;
+    }
+
+    //绑定控件
+    protected <T extends View> T fb(@IdRes int resID){
+        return (T)findViewById(resID);
     }
 
 
