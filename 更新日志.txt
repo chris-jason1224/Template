@@ -1,4 +1,9 @@
 
+
+//todo
+    1、封装统一的Dialog （DialogFragment）
+    2、fun-bluetooth
+
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
     //页面名字由多个单词组成时，由下划线分隔
