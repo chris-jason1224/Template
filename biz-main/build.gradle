@@ -46,7 +46,7 @@ dependencies {
     }
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterKnifeCompilerVersion}"
     annotationProcessor project(':core-processor')
-    provided project(':fun-aop')
+    compileOnly project(':fun-aop')
 
 
 }
