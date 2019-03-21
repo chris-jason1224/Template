@@ -211,4 +211,23 @@ public class BaseApplication extends Application {
         return false;
     }
 
+    private void exit() {
+
+        if (mActivityList != null && mActivityList.size()>0) {
+            try {
+                Iterator activityIterator = mActivityList.iterator();
+                while (activityIterator.hasNext()) {
+                    Activity activity = (Activity) activityIterator.next();
+                    activity.finish();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        }
+
+
+    }
+
 }
