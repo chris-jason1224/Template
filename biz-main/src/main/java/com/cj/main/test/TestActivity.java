@@ -3,16 +3,14 @@ package com.cj.main.test;
 import android.os.Bundle;
 
 import android.view.View;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.mvp.BaseMVPActivity;
 import com.cj.main.R;
 
 
-import butterknife.OnClick;
-
 @Route(path = "/biz_main/ACT/com.cj.main.test.TestActivity")
 public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITestView {
-
 
 
     @Override
@@ -37,20 +35,13 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected ITestPresenter createPresenter() {
         return new TestPresenter();
     }
-
-    @OnClick({})
-    public void onClick(View v){
-        int id=v.getId();
-
-
-
-    }
-
-
-
-
 
 }

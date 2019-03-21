@@ -17,16 +17,12 @@ import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 /**
  * 封装的 Fragment 基类
  */
 public abstract class BaseFragment extends Fragment {
-
-    private Unbinder unBinder;
 
     private LoadService loadService;
 
@@ -78,7 +74,6 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //1.加载布局 XML 文件
         mRootView = inflater.inflate(setLayoutResource(), container, false);
-        unBinder=ButterKnife.bind(this,mRootView);
 
         //第二步：注册布局View
          loadService = LoadSir.getDefault().register(mRootView, new Callback.OnReloadListener() {
@@ -97,11 +92,17 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mIsPrepare=true;
         isLazyload=setLazyLod();
+
+        initView();
+
         //非懒加载模式，直接初始化数据
         if(!isLazyload){
             initData();
         }
+
     }
+
+    protected abstract void initView();
 
     protected abstract void initData();
 
@@ -139,7 +140,7 @@ public abstract class BaseFragment extends Fragment {
 
 
     @SuppressWarnings("unchecked")
-    protected <T extends View> T getView(int id) {
+    protected <T extends View> T fb(int id) {
         if (mRootView == null) {
             return null;
         }

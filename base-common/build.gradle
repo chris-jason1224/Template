@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -42,9 +41,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintVersion}"
-    //    butterknife
-    api "com.jakewharton:butterknife:${rootProject.ext.butterKnifeVersion}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterKnifeCompilerVersion}"
+
     //    loadSir
     api "com.kingja.loadsir:loadsir:${rootProject.ext.loadSirVersion}"
     //    ARouter

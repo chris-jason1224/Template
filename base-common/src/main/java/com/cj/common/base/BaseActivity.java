@@ -19,9 +19,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by mayikang on 2018/7/24.
  * Activity最基础的基类
@@ -29,7 +26,6 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Unbinder unbinder;
     private LoadService loadService;
     protected ImmersionBar immersionBar;
     protected View mContentView;
@@ -42,7 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         //为activity指定全屏的主题，隐藏掉actionbar
@@ -50,10 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //加载布局
         mContentView = LayoutInflater.from(this).inflate(resourceLayout(), null);
         setContentView(mContentView);
-
-        //注册Butterknife
-        unbinder = ButterKnife.bind(this);
-
+        initView();
         //ARouter注入
         //ARouter注入服务，子类中可以直接使用 @Autowired注解来获得服务
         ARouter.getInstance().inject(this);
@@ -113,11 +105,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //解绑butterKnife
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
-
         if (immersionBar != null)
             immersionBar.destroy();
 
@@ -167,6 +154,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     //子类请求数据入口
     protected abstract void initData();
+
+    protected abstract void initView();
 
     //获取 actionBarHeight
     public int getActionBarHeight() {

@@ -62,6 +62,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected boolean useImmersionBar() {
         return true;
     }
