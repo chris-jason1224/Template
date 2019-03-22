@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.cj.common.util.DiskCacheUtil;
+import com.cj.common.util.SPFUtil;
+import com.cj.log.CJLog;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -20,20 +25,30 @@ public class BluetoothService {
     // Unique UUID for this application
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    // Member fields
     private final BluetoothAdapter mAdapter;
     private final Handler mHandler;
     private AcceptThread mAcceptThread;
 
-    private ConnectThread mConnectThread;/**作为Client端，连接其他蓝牙设备**/
-    private ConnectedThread mConnectedThread;/**作为Server端，等待其他蓝牙设备连接**/
+    private ConnectThread mConnectThread;
+    /**
+     * 作为Client端，连接其他蓝牙设备
+     **/
+    private ConnectedThread mConnectedThread;
+    /**
+     * 作为Server端，等待其他蓝牙设备连接
+     **/
 
     private Context context;
+
+    private static final String NAME = "BTPrinter";
+
 
     //当前状态
     private int mState;
 
-    /**打印机16进制命令**/
+    /**
+     * 打印机16进制命令
+     **/
     public static final byte[][] byteCommands = {
             {0x1b, 0x40},// 复位打印机
             {0x1b, 0x4d, 0x00},// 标准ASCII字体
@@ -119,7 +134,9 @@ public class BluetoothService {
         write(byteCommands[15]);
     }
 
-    /**构造方法**/
+    /**
+     * 构造方法
+     **/
     public BluetoothService(Context context, Handler handler) {
         this.context = context;
         mAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -128,13 +145,17 @@ public class BluetoothService {
         mHandler = handler;
     }
 
-    /**修改状态**/
+    /**
+     * 修改状态
+     **/
     private synchronized void setState(int state) {
         mState = state;
         mHandler.obtainMessage(BTCenter.KeyCode.CODE_STATE_CHANGE, state, 0).sendToTarget();
     }
 
-    /**获取当前蓝牙连接状态*/
+    /**
+     * 获取当前蓝牙连接状态
+     */
     public synchronized int getState() {
         return mState;
     }
@@ -163,11 +184,13 @@ public class BluetoothService {
         }
 
         //等待其他设备连接
-        setState(BTCenter.BTState.STATE_LISTEN);
+        setState(BTCenter.BTState.STATE_LISTENING);
 
     }
 
-    /**开启连接线程，作为C端连接其他远程蓝牙设备*/
+    /**
+     * 开启连接线程，作为C端连接其他远程蓝牙设备
+     */
     public synchronized void connect(BluetoothDevice device) {
 
         //断开作为C端已经连接的设备
@@ -178,7 +201,7 @@ public class BluetoothService {
             }
         }
 
-       //断开作为S端已经连接的设备
+        //断开作为S端已经连接的设备
         if (mConnectedThread != null) {
             mConnectedThread.cancel();
             mConnectedThread = null;
@@ -189,12 +212,21 @@ public class BluetoothService {
         //连接 socket
         mConnectThread.start();
 
+        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
+        Bundle bundle = new Bundle();
+        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECTING);
+        msg.setData(bundle);
+        mHandler.sendMessage(msg);
+
+
         //修改当前状态为正在连接中
         setState(BTCenter.BTState.STATE_CONNECTING);
 
     }
 
-    /**设备连接成功后回调**/
+    /**
+     * 设备连接成功后回调
+     **/
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
 
         /**断开作为C端连接的设备**/
@@ -219,20 +251,26 @@ public class BluetoothService {
         mConnectedThread = new ConnectedThread(socket);
         mConnectedThread.start();
 
-        // Send the name of the connected device back to the UI Activity
-        Message msg = mHandler.obtainMessage(MESSAGE_DEVICE_NAME);
+        //连接成功后返回远程设备名
+        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
         Bundle bundle = new Bundle();
-        bundle.putString(DEVICE_NAME, device.getName());
+        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECT_SUCCESS);
+        bundle.putString("remote_bt_device_name", device.getName());
+        bundle.putString("remote_bt_device_mac", device.getAddress());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
         //连接成功后，保存mac地址，用于下一次自动连接
-        app.getSpf().edit().putString("LinkedBTMAC", device.getAddress()).commit();
+        DiskCacheUtil.getInstance().saveBTDeviceAddress(device.getAddress());
+
 
         setState(BTCenter.BTState.STATE_CONNECTED);
+
     }
 
-    /**停止所有线程**/
+    /**
+     * 停止所有线程
+     **/
     public synchronized void stop() {
 
         setState(BTCenter.BTState.STATE_NONE);
@@ -250,56 +288,59 @@ public class BluetoothService {
         }
     }
 
+
     /**
-     * Write to the ConnectedThread in an unsynchronized manner
-     *
-     * @param out The bytes to write
-     * @see ConnectedThread#write(byte[])
-     */
+     * 写出数据
+     **/
     public void write(byte[] out) {
-        // Create temporary object
         ConnectedThread r;
-        // Synchronize a copy of the ConnectedThread
+
         synchronized (this) {
-            if (mState != BTCenter.BTState.STATE_CONNECTED) return;
+            if (mState != BTCenter.BTState.STATE_CONNECTED) {
+                return;
+            }
+
             r = mConnectedThread;
         }
-        // Perform the write unsynchronized
+
+        //调用ConnectedThread的写出方法
         r.write(out);
     }
 
-    /**连接失败后回调**/
+    /**
+     * 连接失败后回调
+     **/
     private void connectionFailed() {
 
-        Message msg = mHandler.obtainMessage(MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
         Bundle bundle = new Bundle();
-        bundle.putString(TOAST, "Unable to connect device");
+        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECT_FAILED);
         msg.setData(bundle);
         mHandler.sendMessage(msg);
-        setState(BTCenter.BTState.STATE_CONNECT_FAILED);
+
+
+        setState(BTCenter.BTState.STATE_NONE);
     }
 
     /**
-     * Indicate that the connection was lost and notify the UI Activity.
-     */
+     * 连接断开后回调
+     **/
     private void connectionLost() {
 
-        // Send a failure message back to the Activity
-        Message msg = mHandler.obtainMessage(MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
         Bundle bundle = new Bundle();
-        bundle.putString(TOAST, "Device connection was lost");
+        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECT_LOST);
         msg.setData(bundle);
         mHandler.sendMessage(msg);
-        setState(BTCenter.BTState.STATE_DISCONNECTED);
+
+        setState(BTCenter.BTState.STATE_NONE);
     }
 
     /**
-     * This thread runs while listening for incoming connections. It behaves
-     * like a server-side client. It runs until a connection is accepted
-     * (or until cancelled).
-     */
+     * 作为S端等待其他远程设备连接
+     **/
     private class AcceptThread extends Thread {
-        // The local server socket
+
         private final BluetoothServerSocket mmServerSocket;
 
         public AcceptThread() {
@@ -309,13 +350,13 @@ public class BluetoothService {
             try {
                 tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
             } catch (IOException e) {
-                Log.e(TAG, "listen() failed", e);
+                CJLog.getInstance().log_e("listen() failed");
             }
             mmServerSocket = tmp;
         }
 
         public void run() {
-            if (D) Log.d(TAG, "BEGIN mAcceptThread" + this);
+
             setName("AcceptThread");
             BluetoothSocket socket = null;
 
@@ -326,7 +367,7 @@ public class BluetoothService {
                     // successful connection or an exception
                     socket = mmServerSocket.accept();
                 } catch (IOException e) {
-                    Log.e(TAG, "accept() failed", e);
+                    CJLog.getInstance().log_e("accept() failed");
                     break;
                 }
 
@@ -334,43 +375,43 @@ public class BluetoothService {
                 if (socket != null) {
                     synchronized (BluetoothService.this) {
                         switch (mState) {
-                            case BTCenter.BTState.STATE_LISTEN:
+
+                            case BTCenter.BTState.STATE_LISTENING:
                             case BTCenter.BTState.STATE_CONNECTING:
-                                // Situation normal. Start the connected thread.
                                 connected(socket, socket.getRemoteDevice());
                                 break;
+
                             case BTCenter.BTState.STATE_NONE:
                             case BTCenter.BTState.STATE_CONNECTED:
-                                // Either not ready or already connected. Terminate new socket.
+
+
                                 try {
                                     socket.close();
                                 } catch (IOException e) {
-                                    Log.e(TAG, "Could not close unwanted socket", e);
+
                                 }
                                 break;
                         }
                     }
                 }
             }
-            if (D) Log.i(TAG, "END mAcceptThread");
+
         }
 
         public void cancel() {
-            if (D) Log.d(TAG, "cancel " + this);
+
             try {
                 mmServerSocket.close();
             } catch (IOException e) {
-                Log.e(TAG, "close() of server failed", e);
+
             }
         }
     }
 
 
     /**
-     * This thread runs while attempting to make an outgoing connection
-     * with a device. It runs straight through; the connection either
-     * succeeds or fails.
-     */
+     * 作为C端主动连接其他设备
+     **/
     private class ConnectThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final BluetoothDevice mmDevice;
@@ -378,19 +419,18 @@ public class BluetoothService {
         public ConnectThread(BluetoothDevice device) {
             mmDevice = device;
             BluetoothSocket tmp = null;
-            // Get a BluetoothSocket for a connection with the
-            // given BluetoothDevice
+
             //通过 Socket 连接设备
             try {
                 tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
             } catch (IOException e) {
-                Log.e(TAG, "create() failed", e);
+
             }
             mmSocket = tmp;
         }
 
         public void run() {
-            Log.i(TAG, "BEGIN mConnectThread");
+
             setName("ConnectThread");
 
             // Always cancel discovery because it will slow down a connection
@@ -407,14 +447,14 @@ public class BluetoothService {
                 try {
                     mmSocket.close();
                 } catch (IOException e2) {
-                    Log.e(TAG, "unable to close() socket during connection failure", e2);
+
                 }
                 // Start the service over to restart listening mode
-                BluetoothService.this.start();
+                //BluetoothService.this.start();
                 return;
             }
 
-            // Reset the ConnectThread because we're done
+            // 连接成功后结束该线程
             synchronized (BluetoothService.this) {
                 mConnectThread = null;
             }
@@ -423,26 +463,27 @@ public class BluetoothService {
             connected(mmSocket, mmDevice);
         }
 
+
         public void cancel() {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Log.e(TAG, "close() of connect socket failed", e);
+
             }
         }
+
     }
 
     /**
-     * This thread runs during a connection with a remote device.
-     * It handles all incoming and outgoing transmissions.
-     */
+     * 蓝牙连接成功后，数据传输线程
+     **/
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
 
         public ConnectedThread(BluetoothSocket socket) {
-            Log.d(TAG, "create ConnectedThread");
+
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
@@ -452,7 +493,7 @@ public class BluetoothService {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-                Log.e(TAG, "temp sockets not created", e);
+
             }
 
             mmInStream = tmpIn;
@@ -460,7 +501,7 @@ public class BluetoothService {
         }
 
         public void run() {
-            Log.i(TAG, "BEGIN mConnectedThread");
+
             int bytes;
 
             // Keep listening to the InputStream while connected
@@ -473,54 +514,34 @@ public class BluetoothService {
                     //当bytes=-1表示蓝牙断开连接，并且会抛出异常
 
                     if (bytes > 0) {
-                        // Send the obtained bytes to the UI Activity
-                        mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
-                                .sendToTarget();
+                        //作为S端，接收到输入流中传输的数据
+                        mHandler.obtainMessage(BTCenter.KeyCode.CODE_DATA_READ, bytes, -1, buffer).sendToTarget();
                     } else {
-                        Log.e(TAG, "蓝牙断开连接");
+                        CJLog.getInstance().log_e("蓝牙断开连接");
                         connectionLost();
-
-                        //不用再尝试重连了
-//                        if(mState != STATE_NONE)
-//                        {
-//                            Log.e(TAG, "disconnected");
-//                            // Start the service over to restart listening mode
-//                            BluetoothService.this.start();
-//                        }
 
                         break;
                     }
                 } catch (IOException e) {
-                    Log.e(TAG, "蓝牙断开连接", e);
+                    CJLog.getInstance().log_e("蓝牙断开连接");
 
                     connectionLost();
-                    //不用再尝试重连了
 
-                    //add by chongqing jinou
-//                    if(mState != STATE_NONE)
-//                    {
-//                        // Start the service over to restart listening mode
-//                        BluetoothService.this.start();
-//                    }
                     break;
                 }
             }
         }
 
         /**
-         * Write to the connected OutStream.
-         *
-         * @param buffer The bytes to write
-         */
+         * 发送数据
+         **/
         public void write(byte[] buffer) {
             try {
                 mmOutStream.write(buffer);
-
-                // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(MESSAGE_WRITE, -1, -1, buffer)
-                        .sendToTarget();
+                //作为C端向输出流写出数据
+                mHandler.obtainMessage(BTCenter.KeyCode.CODE_DATA_WRITE, -1, -1, buffer).sendToTarget();
             } catch (IOException e) {
-                Log.e(TAG, "Exception during write", e);
+
             }
         }
 
@@ -528,7 +549,7 @@ public class BluetoothService {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Log.e(TAG, "close() of connect socket failed", e);
+
             }
         }
     }

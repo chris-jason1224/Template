@@ -13,49 +13,44 @@ import com.cj.utils.safe.AESUtil;
  */
 public class DiskCacheUtil {
 
-    private DiskCacheUtil(){}
-
-    private static class Holder{
-        private static final DiskCacheUtil instance=new DiskCacheUtil();
+    private DiskCacheUtil() {
     }
 
-    public static DiskCacheUtil getInstance(){
+    private static class Holder {
+        private static final DiskCacheUtil instance = new DiskCacheUtil();
+    }
+
+    public static DiskCacheUtil getInstance() {
         return Holder.instance;
     }
-
 
 
     /**********用户登录Token相关 start ********************/
 
     //存储token
-    public void saveToken(String token){
+    public void saveToken(String token) {
         String encrypt = AESUtil.getInstance().encrypt(token);
-        SPFUtil.getInstance().saveString(KeyTag.TAG_USER_TOKEN,encrypt);
+        SPFUtil.getInstance().saveString(KeyTag.TAG_USER_TOKEN, encrypt);
     }
 
     //获取token
-    public String getToken(){
+    public String getToken() {
         //加密后存储的数据
-        String encrypt = SPFUtil.getInstance().getString(KeyTag.TAG_USER_TOKEN,"");
+        String encrypt = SPFUtil.getInstance().getString(KeyTag.TAG_USER_TOKEN, "");
         //解密
-        String decrypt=AESUtil.getInstance().decrypt(encrypt);
+        String decrypt = AESUtil.getInstance().decrypt(encrypt);
 
         return decrypt;
     }
 
     //删除token
-    public void deleteToken(){
+    public void deleteToken() {
         SPFUtil.getInstance().removeOne(KeyTag.TAG_USER_TOKEN);
     }
 
-    /**********用户登录Token相关 end ********************/
-
-
-
-
 
     //清除用户本地数据
-    public void clearUserVestige(){
+    public void clearUserVestige() {
         //1.删除登录token
         deleteToken();
 
@@ -64,8 +59,20 @@ public class DiskCacheUtil {
     }
 
 
+    /**********用户登录Token相关 end ********************/
 
 
+    //保存连接过的蓝牙设备地址
+    public void saveBTDeviceAddress(String address) {
+        String encrypt = AESUtil.getInstance().encrypt(address);
+        SPFUtil.getInstance().saveString(KeyTag.TAG_LINKED_BT_DEVICE_MAC_ADDRESS, encrypt);
+    }
+
+    //获取连接过的蓝牙设备地址
+    public String getBTDeviceAddress() {
+        String encrypt = SPFUtil.getInstance().getString(KeyTag.TAG_LINKED_BT_DEVICE_MAC_ADDRESS, "");
+        return AESUtil.getInstance().decrypt(encrypt);
+    }
 
 
 }
