@@ -27,18 +27,22 @@ public class BluetoothService {
 
     private final BluetoothAdapter mAdapter;
     private final Handler mHandler;
-    private AcceptThread mAcceptThread;
 
-    private ConnectThread mConnectThread;
-    /**
-     * 作为Client端，连接其他蓝牙设备
-     **/
-    private ConnectedThread mConnectedThread;
     /**
      * 作为Server端，等待其他蓝牙设备连接
      **/
+    private AcceptThread mAcceptThread;
 
-    private Context context;
+    /**
+     * 作为Client端，连接其他蓝牙设备
+     **/
+    private ConnectThread mConnectThread;
+
+    /**
+     * C、S端连接成功后，管理连接BluetoothSocket，进行数据读写传输
+     */
+    private ConnectedThread mConnectedThread;
+
 
     private static final String NAME = "BTPrinter";
 
@@ -137,8 +141,7 @@ public class BluetoothService {
     /**
      * 构造方法
      **/
-    public BluetoothService(Context context, Handler handler) {
-        this.context = context;
+    public BluetoothService(Handler handler) {
         mAdapter = BluetoothAdapter.getDefaultAdapter();
         //初始化时蓝牙状态
         mState = BTCenter.BTState.STATE_NONE;
@@ -503,11 +506,14 @@ public class BluetoothService {
         public void run() {
 
             int bytes;
-
-            // Keep listening to the InputStream while connected
+            /**
+             * read(byte[]) 读取流是阻塞的方法，直到读取到内容
+             * write(byte[]) 通常不会阻塞，如果远程设备调用read不够快导致中间缓冲区满，也可能会阻塞
+             * 所以线程主循环要用来读取输入流
+             */
             while (true) {
                 try {
-                    byte[] buffer = new byte[256];
+                    byte[] buffer = new byte[1024];
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);
 
