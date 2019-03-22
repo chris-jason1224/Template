@@ -52,7 +52,7 @@ android {
 //因为app模块依赖了fun-business模块，而fun-business模块依赖了支付宝sdk（aar），所以在app模块也需要依赖上路径
 repositories{
     flatDir {
-        dirs 'libs','../fun-business/libs'
+        dirs 'libs','../fun_business/libs'
     }
 }
 
@@ -63,15 +63,14 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
     //合并时才依赖各个组件
     if (!isModuleModle.toBoolean()) {
-        api project(':biz-main')
-        api project(':biz-login')
+        api project(':biz_main')
+        api project(':biz_login')
         //只需要在app中依赖AOP module
-        api project(':fun-aop')
+        api project(':fun_aop')
     }
 
-    api project(':fun-business')
-
-    api project(':fun-compressor')
+    api project(':fun_business')
+    api project(':fun_compressor')
 
 }
 

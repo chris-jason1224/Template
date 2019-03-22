@@ -4,20 +4,20 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Template.iml" filepath="$PROJECT_DIR$/Template.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/base-common/base-common.iml" filepath="$PROJECT_DIR$/base-common/base-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/biz-login/biz-login.iml" filepath="$PROJECT_DIR$/biz-login/biz-login.iml" />
-      <module fileurl="file://$PROJECT_DIR$/biz-main/biz-main.iml" filepath="$PROJECT_DIR$/biz-main/biz-main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-annotations/core-annotations.iml" filepath="$PROJECT_DIR$/core-annotations/core-annotations.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-framework/core-framework.iml" filepath="$PROJECT_DIR$/core-framework/core-framework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-jutils/core-jutils.iml" filepath="$PROJECT_DIR$/core-jutils/core-jutils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-log/core-log.iml" filepath="$PROJECT_DIR$/core-log/core-log.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-processor/core-processor.iml" filepath="$PROJECT_DIR$/core-processor/core-processor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-router/core-router.iml" filepath="$PROJECT_DIR$/core-router/core-router.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core-ui/core-ui.iml" filepath="$PROJECT_DIR$/core-ui/core-ui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun-aop/fun-aop.iml" filepath="$PROJECT_DIR$/fun-aop/fun-aop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun-business/fun-business.iml" filepath="$PROJECT_DIR$/fun-business/fun-business.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun-compressor/fun-compressor.iml" filepath="$PROJECT_DIR$/fun-compressor/fun-compressor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base_common/base_common.iml" filepath="$PROJECT_DIR$/base_common/base_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz_login/biz_login.iml" filepath="$PROJECT_DIR$/biz_login/biz_login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz_main/biz_main.iml" filepath="$PROJECT_DIR$/biz_main/biz_main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_annotations/core_annotations.iml" filepath="$PROJECT_DIR$/core_annotations/core_annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_framework/core_framework.iml" filepath="$PROJECT_DIR$/core_framework/core_framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_jutils/core_jutils.iml" filepath="$PROJECT_DIR$/core_jutils/core_jutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_log/core_log.iml" filepath="$PROJECT_DIR$/core_log/core_log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_processor/core_processor.iml" filepath="$PROJECT_DIR$/core_processor/core_processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_router/core_router.iml" filepath="$PROJECT_DIR$/core_router/core_router.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_ui/core_ui.iml" filepath="$PROJECT_DIR$/core_ui/core_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fun_aop/fun_aop.iml" filepath="$PROJECT_DIR$/fun_aop/fun_aop.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" filepath="$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fun_business/fun_business.iml" filepath="$PROJECT_DIR$/fun_business/fun_business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fun_compressor/fun_compressor.iml" filepath="$PROJECT_DIR$/fun_compressor/fun_compressor.iml" />
     </modules>
   </component>
 </project>

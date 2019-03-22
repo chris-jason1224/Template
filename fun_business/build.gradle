@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        resourcePrefix "fun_business_"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        if (!isModuleModle.toBoolean()) {
+            //ARouter配置
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [moduleName: project.getName()]
+                    includeCompileClasspath true
+                }
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+
+    api project(':base_common')
+
+    api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:${rootProject.ext.wechatVersion}"
+
+    if (!isModuleModle.toBoolean()) {
+        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+    }
+
+    annotationProcessor project(':core_processor')
+    //支付宝sdk aar包
+    implementation(name:'alipaySdk-15.5.9' ,ext:'aar')
+
+}

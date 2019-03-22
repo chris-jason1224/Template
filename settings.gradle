@@ -1,2 +1,2 @@
-include ':app', ':biz-main', ':biz-login', ':core-jutils', ':core-ui', ':core-framework', ':base-common', ':core-router', ':core-log', ':core-annotations', ':core-processor', ':fun-business', ':fun-aop', ':fun_bluetooth', 'fun-compressor'
+include ':app', ':biz_main', ':biz_login', ':core_jutils', ':core_ui', ':core_framework', ':base_common', ':core_router', ':core_log', ':core_annotations', ':core_processor', ':fun_business', ':fun_aop', ':fun_bluetooth', 'fun_compressor'
 
