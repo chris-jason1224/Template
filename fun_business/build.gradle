@@ -38,8 +38,6 @@ dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
-
     api project(':base_common')
 
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:${rootProject.ext.wechatVersion}"

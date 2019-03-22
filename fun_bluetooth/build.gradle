@@ -1,18 +1,30 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
 
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        resourcePrefix "fun_bluetooth_"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+                includeCompileClasspath true
+            }
+        }
 
+        lintOptions {
+            abortOnError false
+        }
     }
 
     buildTypes {
@@ -27,8 +39,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api project(':base_common')
+
+    if (!isModuleModle.toBoolean()) {
+        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+    }
+
+    annotationProcessor project(':core_processor')
+
+
+
 }

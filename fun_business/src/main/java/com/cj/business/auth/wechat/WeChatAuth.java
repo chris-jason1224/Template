@@ -10,10 +10,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.cj.business.Config;
-import com.cj.business.auth.IAuth;
 import com.cj.business.auth.lifecycle.AuthEventLifecycleObserver;
-import com.cj.business.pay.lifecycle.PayEventLifecycleObserver;
-import com.cj.business.pay.wechat.WeChatPayResult;
 import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.provider.fun$business.auth.AuthParams;

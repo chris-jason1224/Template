@@ -29,7 +29,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    compileOnly "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
     api "com.orhanobut:logger:${rootProject.ext.loggerVersion}"
     annotationProcessor project(':core_processor')
     api project(':core_framework')
