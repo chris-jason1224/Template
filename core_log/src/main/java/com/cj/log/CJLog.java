@@ -20,8 +20,10 @@ public class CJLog {
 
     private int Log_Level_Error =2;//错误信息日志
 
+
     /**
      * //todo 日志加密、筛选、定时上传
+     *   推送命令触发日志回捞
      */
 
 

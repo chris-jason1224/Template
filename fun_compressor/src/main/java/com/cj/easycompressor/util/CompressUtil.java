@@ -67,7 +67,7 @@ public class CompressUtil {
         //第一次采样，获取实际尺寸
         BitmapFactory.Options options = new BitmapFactory.Options();
         //解码模式默认是 argb_8888 32位 1像素占4字节
-        options.inPreferredConfig = Bitmap.Config.RGB_565;//rgb_565 5+6+5=1位，一个像素占用两个字节
+        options.inPreferredConfig = Bitmap.Config.RGB_565;//rgb_565 5+6+5=16位，一个像素占用两个字节
         //设置值读取图片边界
         options.inJustDecodeBounds = true;
         //第一次采样：读取原始图片宽高，不加载到内存
