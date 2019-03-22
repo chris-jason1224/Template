@@ -25,7 +25,7 @@ public interface IBTProvider extends IProvider {
      //断开连接
      void disConnect(String address);
 
-     //自动连接至
-     void autoConnectTo(String address);
+     //自动连接上一次的设备
+     void autoConnectTo();
 
 }
