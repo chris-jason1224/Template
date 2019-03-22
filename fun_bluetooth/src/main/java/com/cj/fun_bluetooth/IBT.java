@@ -6,4 +6,5 @@ package com.cj.fun_bluetooth;
  * Package:com.cj.fun_bluetooth
  */
 public interface IBT {
+
 }
