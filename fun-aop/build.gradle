@@ -12,7 +12,7 @@ android {
         resourcePrefix "fun_aop_"
 
 
-        
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         if (!isModuleModle.toBoolean()) {
             //ARouter配置
