@@ -6,9 +6,9 @@ android {
     signingConfigs {
         signature {
             keyAlias 'Template'
-            keyPassword 'CD85118384'
-            storeFile file('/Users/mayikang/android/keystore/Template.jks')
-            storePassword 'CD85118384'
+            keyPassword 'admin123456'
+            storeFile file('../Template.jks')
+            storePassword 'admin123456'
         }
     }
     buildToolsVersion rootProject.ext.buildToolsVersion
