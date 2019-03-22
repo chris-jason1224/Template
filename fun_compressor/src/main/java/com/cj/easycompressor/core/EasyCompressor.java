@@ -23,9 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -39,22 +42,25 @@ public class EasyCompressor implements IEasyCompressor {
     private static Context mContext;
     //压缩参数
     private static volatile CompressOptions mOptions;
+
     private EasyCompressor() {
     }
 
     /**
      * EasyCompressor的初始化方法，只调用一次即可
+     *
      * @param context
      */
     public static void init(@NonNull Context context) {
         //保证只需要初始化一次
-        if(mContext==null){
+        if (mContext == null) {
             mContext = context;
         }
     }
 
     /**
      * EasyCompressor调用入口
+     *
      * @return
      */
     public static EasyCompressor getInstance(CompressOptions options) {
@@ -75,7 +81,7 @@ public class EasyCompressor implements IEasyCompressor {
     }
 
     public static Context getContext() {
-        if(mContext==null){
+        if (mContext == null) {
             try {
                 throw new Exception("请先初始化EasyCompressor！！！");
             } catch (Exception e) {
@@ -93,65 +99,84 @@ public class EasyCompressor implements IEasyCompressor {
     }
 
     @Override
-    public void compress(@NonNull final String filePath,@NonNull final CompressCallback callback) {
+    public void compress(@NonNull final String filePath, @NonNull final CompressCallback callback) {
 
-        Observable.just(filePath).map(new Function<String, File>() {
-            @Override
-            public File apply(String s) throws Exception {
-
-                String lowerPath = filePath.toLowerCase();
-                //图片后缀名
-                String suffix = ImageOption.IMG_PNG_SUFFIX;
-
-                if (lowerPath.endsWith(ImageOption.IMG_JPG_SUFFIX)) {
-                    suffix = ImageOption.IMG_JPG_SUFFIX;
-                } else if (lowerPath.endsWith(ImageOption.IMG_JPEG_SUFFIX)) {
-                    suffix = ImageOption.IMG_JPEG_SUFFIX;
-                }
-                return CompressUtil.create().invokeCompress(filePath, suffix);
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<File>() {
+        getCompressedFile(filePath).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<File>() {
             @Override
             public void accept(File file) throws Exception {
-                if (file != null) {
-                    Log.e(TAG,"--压缩完成--");
+                if (callback != null) {
                     callback.onSuccess(file);
-                } else {
-                    callback.onFailed(new Throwable("--压缩后 file == null ！！！--"));
+                }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                if (callback != null) {
+                    callback.onFailed(throwable);
                 }
             }
         });
+
     }
 
     @Override
-    public void batchCompress(@NonNull final List<String> filePaths,@NonNull final BatchCompressCallback callback) {
-        final List<File>files=new ArrayList<>();
-        final int[] index = {0};
-        Observable.fromIterable(filePaths).concatMap(new Function<String, ObservableSource<String>>() {
-            @Override
-            public ObservableSource<String> apply(String s) throws Exception {
-                return Observable.just(s);
-            }
-        }).subscribe(new Consumer<String>() {
-            @Override
-            public void accept(String s) throws Exception {
-                compress(s, new CompressCallback() {
-                    @Override
-                    public void onSuccess(File compressedFile) {
-                        index[0]++;
-                        files.add(compressedFile);
-                        if(index[0]==filePaths.size()){
-                            callback.onSuccess(files);
-                        }
-                    }
+    public void batchCompress(@NonNull final List<String> filePaths, @NonNull final BatchCompressCallback callback) {
+        final List<File> files = new ArrayList<>();
 
-                    @Override
-                    public void onFailed(Throwable throwable) {
-                        callback.onFailed(throwable);
-                    }
-                });
+        Observable.fromIterable(filePaths).concatMap(new Function<String, ObservableSource<File>>() {
+            @Override
+            public ObservableSource<File> apply(String s) throws Exception {
+                return getCompressedFile(s);
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<File>() {
+            @Override
+            public void accept(File file) throws Exception {
+                files.add(file);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                if(callback!=null){
+                    callback.onFailed(throwable);
+                }
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                if(callback!=null){
+                    callback.onSuccess(files);
+                }
             }
         });
+
     }
+
+
+    private Observable<File> getCompressedFile(final String filePath) {
+
+        return Observable.create(new ObservableOnSubscribe<File>() {
+            @Override
+            public void subscribe(ObservableEmitter<File> emitter) throws Exception {
+                try {
+                    String lowerPath = filePath.toLowerCase();
+                    //图片后缀名
+                    String suffix = ImageOption.IMG_PNG_SUFFIX;
+
+                    if (lowerPath.endsWith(ImageOption.IMG_JPG_SUFFIX)) {
+                        suffix = ImageOption.IMG_JPG_SUFFIX;
+                    } else if (lowerPath.endsWith(ImageOption.IMG_JPEG_SUFFIX)) {
+                        suffix = ImageOption.IMG_JPEG_SUFFIX;
+                    }
+                    File file = CompressUtil.create().invokeCompress(filePath, suffix);
+                    emitter.onNext(file);
+                } catch (Exception e) {
+                    emitter.onError(e);
+                }
+
+                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.io());
+    }
+
 
 }
