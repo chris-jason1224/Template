@@ -13,6 +13,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.provider.fun$bluetooth.BTState;
+import com.cj.common.provider.fun$bluetooth.BTStateObserver;
 import com.cj.common.provider.fun$bluetooth.IBTProvider;
 import com.cj.common.provider.fun$business.auth.AuthParams;
 import com.cj.common.provider.fun$business.auth.IAuthProvider;
@@ -91,6 +93,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             }
         });
+
+
+        bt.registerBTStateObserver(new BTStateObserver() {
+            @Override
+            public void onStateChanged(BTState btState) {
+                CJLog.getInstance().log_e("main - state  -" +btState.getState());
+            }
+        });
+
     }
 
     @Override

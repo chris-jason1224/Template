@@ -1,4 +1,4 @@
-package com.cj.business.pay.lifecycle;
+package com.cj.bluetooth.lifecycle;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
@@ -7,15 +7,20 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import com.cj.log.CJLog;
 
 /**
- * Author:chris - jason
- * Date:2019/2/2.
- * Package:com.cj.business.pay.lifecycle
- * 支付事件，生命周期观察者
+ * Author:chris-jason
+ *
+ * Date:2019/3/23 0023
+ *
+ * Package:com.cj.bluetooth.lifecycle
+ *
+ * 蓝牙事件 生命周期观察者
  */
 
-public class PayEventLifecycleObserver implements LifecycleObserver {
 
-    private String tag = "PayEventLifeCycle - ";
+public class BTEvnetLifecycleObserver implements LifecycleObserver {
+
+
+    private String tag = "BTEventLifeCycle - ";
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
@@ -46,5 +51,4 @@ public class PayEventLifecycleObserver implements LifecycleObserver {
     public void onDestroy() {
         CJLog.getInstance().log_e(tag+"onDestroy");
     }
-
 }
