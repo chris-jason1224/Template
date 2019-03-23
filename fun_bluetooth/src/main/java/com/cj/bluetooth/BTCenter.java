@@ -20,7 +20,7 @@ import android.support.annotation.StringDef;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.cj.bluetooth.lifecycle.BTEvnetLifecycleObserver;
+import com.cj.bluetooth.lifecycle.BTEventLifecycleObserver;
 import com.cj.bluetooth.view.PopBTScanDialog;
 import com.cj.common.base.BaseApp;
 import com.cj.common.bus.DataBus;
@@ -117,7 +117,7 @@ public class BTCenter implements LifecycleOwner {
 
         lifecycleRegistry = new LifecycleRegistry(this);
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
-        lifecycleRegistry.addObserver(new BTEvnetLifecycleObserver());
+        lifecycleRegistry.addObserver(new BTEventLifecycleObserver());
 
         //注册DataBus接收器
         DataBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).observe(this, btEventObserver);

@@ -17,7 +17,7 @@ import com.cj.log.CJLog;
  */
 
 
-public class BTEvnetLifecycleObserver implements LifecycleObserver {
+public class BTEventLifecycleObserver implements LifecycleObserver {
 
 
     private String tag = "BTEventLifeCycle - ";
