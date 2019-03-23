@@ -1,4 +1,4 @@
-package com.cj.fun_bluetooth;
+package com.cj.bluetooth.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,7 +11,7 @@ import android.util.Log;
  * @author nsz
  * 2015年1月30日
  */
-public class PicFromPrintUtils {
+public class PicFromPrintUtil {
      
      
     /*************************************************************************

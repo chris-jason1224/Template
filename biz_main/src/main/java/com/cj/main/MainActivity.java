@@ -13,6 +13,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.provider.fun$bluetooth.IBTProvider;
 import com.cj.common.provider.fun$business.auth.AuthParams;
 import com.cj.common.provider.fun$business.auth.IAuthProvider;
 import com.cj.common.provider.fun$business.auth.IAuthResultCallback;
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     IAuthProvider auth;
     @Autowired(name = "/fun_compressor/SEV/com.cj.easycompressor.CompressService")
     ICompressProvider compress;
+    @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
+    IBTProvider bt;
 
 
     @Override
@@ -73,7 +76,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public View initStatusLayout() {
         return mLLParent;
     }
-
 
     @Override
     protected void initData() {
@@ -108,15 +110,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fb(R.id.share).setOnClickListener(this);
         fb(R.id.auth).setOnClickListener(this);
         fb(R.id.compress).setOnClickListener(this);
+        fb(R.id.bt).setOnClickListener(this);
 
     }
 
     @ExecutionTimeTrace
     @SingleSubmit
     @Override
+
     public void onClick(View v) {
 
         int vid = v.getId();
+        if(R.id.bt ==vid){
+            bt.scan();
+        }
 
         if (R.id.compress == vid) {
             compress.invokeCompress("", new ICompressCallback() {

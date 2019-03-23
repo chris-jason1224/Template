@@ -19,7 +19,9 @@ public interface IBTProvider extends IProvider {
      //发起蓝牙扫描
      void scan();
 
-     //@param = 远程设备的mac地址
+     /**
+      * @param address 远程设备的mac地址
+      */
      void connect(String address);
 
      //断开连接
@@ -27,5 +29,8 @@ public interface IBTProvider extends IProvider {
 
      //自动连接上一次的设备
      void autoConnectTo();
+
+     //获取蓝牙连接状态
+     int getBTState();
 
 }

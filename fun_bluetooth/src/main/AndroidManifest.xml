@@ -1,8 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cj.fun_bluetooth">
+    package="com.cj.bluetooth">
 
     <!-- 蓝牙权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!--搜索蓝牙需要定位权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:allowBackup="true">
+        <!--申明蓝牙广播接收器-->
+        <receiver android:name="com.cj.bluetooth.receiver.BTReceiver"/>
+    </application>
 
 </manifest>

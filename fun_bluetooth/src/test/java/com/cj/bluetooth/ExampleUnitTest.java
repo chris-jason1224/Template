@@ -1,4 +1,4 @@
-package com.cj.fun_bluetooth;
+package com.cj.bluetooth;
 
 import org.junit.Test;
 

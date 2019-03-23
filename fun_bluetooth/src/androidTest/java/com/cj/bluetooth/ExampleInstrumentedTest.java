@@ -1,4 +1,4 @@
-package com.cj.fun_bluetooth;
+package com.cj.bluetooth;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

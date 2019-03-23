@@ -1,17 +1,17 @@
-package com.cj.fun_bluetooth;
+package com.cj.bluetooth.util;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.cj.common.util.DiskCacheUtil;
-import com.cj.common.util.SPFUtil;
+import com.cj.bluetooth.BTCenter;
 import com.cj.log.CJLog;
 
 import java.io.IOException;
@@ -141,11 +141,11 @@ public class BluetoothService {
     /**
      * 构造方法
      **/
-    public BluetoothService(Handler handler) {
-        mAdapter = BluetoothAdapter.getDefaultAdapter();
+    public BluetoothService(@NonNull Handler handler,BluetoothAdapter adapter) {
+        mAdapter = adapter;
+        mHandler = handler;
         //初始化时蓝牙状态
         mState = BTCenter.BTState.STATE_NONE;
-        mHandler = handler;
     }
 
     /**
@@ -154,6 +154,25 @@ public class BluetoothService {
     private synchronized void setState(int state) {
         mState = state;
         mHandler.obtainMessage(BTCenter.KeyCode.CODE_STATE_CHANGE, state, 0).sendToTarget();
+    }
+
+    /**
+     * 发出通知事件
+     *
+     * @param device
+     * @param notifyEvent
+     */
+    private synchronized void sendNotify(String notifyEvent, @Nullable BluetoothDevice device) {
+
+        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
+        Bundle bundle = new Bundle();
+        bundle.putString("msg", notifyEvent);
+        if (device != null) {
+            bundle.putString("remote_bt_device_name", device.getName());
+            bundle.putString("remote_bt_device_mac", device.getAddress());
+        }
+        msg.setData(bundle);
+        mHandler.sendMessage(msg);
     }
 
     /**
@@ -215,12 +234,8 @@ public class BluetoothService {
         //连接 socket
         mConnectThread.start();
 
-        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
-        Bundle bundle = new Bundle();
-        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECTING);
-        msg.setData(bundle);
-        mHandler.sendMessage(msg);
-
+        //发出通知事件
+        sendNotify(BTCenter.NotifyEvent.EVENT_CONNECTING,null);
 
         //修改当前状态为正在连接中
         setState(BTCenter.BTState.STATE_CONNECTING);
@@ -254,21 +269,13 @@ public class BluetoothService {
         mConnectedThread = new ConnectedThread(socket);
         mConnectedThread.start();
 
-        //连接成功后返回远程设备名
-        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
-        Bundle bundle = new Bundle();
-        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECT_SUCCESS);
-        bundle.putString("remote_bt_device_name", device.getName());
-        bundle.putString("remote_bt_device_mac", device.getAddress());
-        msg.setData(bundle);
-        mHandler.sendMessage(msg);
-
         //连接成功后，保存mac地址，用于下一次自动连接
         DiskCacheUtil.getInstance().saveBTDeviceAddress(device.getAddress());
 
-
+        //发出通知事件
+        sendNotify(BTCenter.NotifyEvent.EVENT_CONNECT_SUCCESS,device);
+        //修改蓝牙连接状态
         setState(BTCenter.BTState.STATE_CONNECTED);
-
     }
 
     /**
@@ -276,7 +283,6 @@ public class BluetoothService {
      **/
     public synchronized void stop() {
 
-        setState(BTCenter.BTState.STATE_NONE);
         if (mConnectThread != null) {
             mConnectThread.cancel();
             mConnectThread = null;
@@ -289,6 +295,7 @@ public class BluetoothService {
             mAcceptThread.cancel();
             mAcceptThread = null;
         }
+        setState(BTCenter.BTState.STATE_NONE);
     }
 
 
@@ -315,13 +322,7 @@ public class BluetoothService {
      **/
     private void connectionFailed() {
 
-        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
-        Bundle bundle = new Bundle();
-        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECT_FAILED);
-        msg.setData(bundle);
-        mHandler.sendMessage(msg);
-
-
+        sendNotify(BTCenter.NotifyEvent.EVENT_CONNECT_FAILED,null);
         setState(BTCenter.BTState.STATE_NONE);
     }
 
@@ -330,11 +331,7 @@ public class BluetoothService {
      **/
     private void connectionLost() {
 
-        Message msg = mHandler.obtainMessage(BTCenter.KeyCode.CODE_NOTIFY);
-        Bundle bundle = new Bundle();
-        bundle.putString("msg", BTCenter.NotifyEvent.EVENT_CONNECT_LOST);
-        msg.setData(bundle);
-        mHandler.sendMessage(msg);
+        sendNotify(BTCenter.NotifyEvent.EVENT_CONNECT_LOST,null);
 
         setState(BTCenter.BTState.STATE_NONE);
     }
@@ -386,8 +383,6 @@ public class BluetoothService {
 
                             case BTCenter.BTState.STATE_NONE:
                             case BTCenter.BTState.STATE_CONNECTED:
-
-
                                 try {
                                     socket.close();
                                 } catch (IOException e) {
