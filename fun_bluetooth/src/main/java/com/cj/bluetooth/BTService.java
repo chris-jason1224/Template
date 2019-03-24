@@ -3,13 +3,17 @@ package com.cj.bluetooth;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.cj.bluetooth.util.BluetoothService;
 import com.cj.common.base.BaseApp;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
 import com.cj.common.provider.fun$bluetooth.IBTProvider;
 import com.cj.ui.notify.Alerter.AlertManager;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +38,7 @@ public class BTService implements IBTProvider {
     public synchronized void registerBTStateObserver(BTStateObserver observer) {
         synchronized (BTService.this) {
             if (observer != null) {
-                BTCenter.register(observer);
+                BTCenter.getInstance().register(observer);
             }
         }
     }
@@ -97,5 +101,33 @@ public class BTService implements IBTProvider {
         this.context = context;
     }
 
+    /**
+     * 打印具体信息
+     */
+    @Override
+    public void printMessage(@NonNull String message) {
+        BTCenter.getInstance().print(message);
+    }
+
+    /******打印格式控制****/
+    @Override
+    public void printLeft(){
+        BTCenter.getInstance().prinLeft();
+    }
+
+    @Override
+    public void printRight(){
+        BTCenter.getInstance().prinRight();
+    }
+
+    @Override
+    public void printCenter(){
+        BTCenter.getInstance().printCenter();
+    }
+
+    @Override
+    public void printSize(int size){
+        BTCenter.getInstance().printSize(size);
+    }
 
 }

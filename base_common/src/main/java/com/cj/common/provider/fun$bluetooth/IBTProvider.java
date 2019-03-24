@@ -1,5 +1,7 @@
 package com.cj.common.provider.fun$bluetooth;
 
+import android.support.annotation.NonNull;
+
 import com.alibaba.android.arouter.facade.template.IProvider;
 
 /**
@@ -33,4 +35,13 @@ public interface IBTProvider extends IProvider {
      //获取蓝牙连接状态
      int getBTState();
 
+     void printMessage(@NonNull String message);
+
+     void printLeft();
+
+     void printRight();
+
+     void printCenter();
+
+     void printSize(int size);
 }

@@ -50,10 +50,12 @@
         android:layout_width="match_parent"
         android:layout_height="1dp" />
     <RelativeLayout
+        android:background="@color/core_ui_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_empty"
             android:orientation="vertical"
             android:layout_centerInParent="true"
@@ -70,14 +72,13 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="#333333"
                 android:textSize="14dp"
-                android:text="没有可用蓝牙设备~"
+                android:text="附近没有可用蓝牙设备~"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             
         </LinearLayout>
         
         <android.support.v7.widget.RecyclerView
-            android:background="@color/core_ui_white"
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

@@ -31,7 +31,9 @@ import com.cj.common.util.DiskCacheUtil;
 import com.cj.bluetooth.receiver.BTReceiver;
 import com.cj.bluetooth.util.BluetoothService;
 import com.cj.log.CJLog;
+import com.cj.ui.tip.UITipDialog;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -120,8 +122,8 @@ public class BTCenter implements LifecycleOwner {
     }
 
     //注册观察者回调接口
-    public static void register(BTStateObserver observer){
-        if(observerList!=null && !observerList.contains(observer)){
+    public  void register(BTStateObserver observer) {
+        if (observerList != null && !observerList.contains(observer)) {
             observerList.add(observer);
         }
     }
@@ -271,7 +273,7 @@ public class BTCenter implements LifecycleOwner {
             return;
         }
 
-        if(!enableBT()){
+        if (!enableBT()) {
             return;
         }
 
@@ -316,6 +318,87 @@ public class BTCenter implements LifecycleOwner {
     public int getBTState() {
         return mBTService.getState();
     }
+
+    //打印数据
+    public void print(String message) {
+
+        //不支持蓝牙模块
+        if (!isSupportBT()) {
+            return;
+        }
+
+        //蓝牙未开启
+        if (!enableBT()) {
+            return;
+        }
+
+
+        if (mBTService == null) {
+            return;
+        }
+
+        //已连接才能打印
+        if (mBTService.getState() != STATE_CONNECTED) {
+            return;
+        }
+        //检查打印数据
+        if (message.length() > 0) {
+            byte[] send;
+            try {
+                send = message.getBytes("GB2312");
+            } catch (UnsupportedEncodingException e) {
+                send = message.getBytes();
+            }
+            mBTService.write(send);
+        }
+
+    }
+
+    public void prinLeft(){
+        mBTService.printLeft();
+    }
+    public void prinRight(){
+        mBTService.printRight();
+    }
+    public void printCenter(){
+        mBTService.printCenter();
+    }
+    public void printSize(int size){
+        mBTService.printSize(size);
+    }
+
+    /****
+     *     //title
+     *     String start = "*** 懒购外卖 ***\n\n";
+     *                 mBTService.printCenter();
+     *                 mBTService.printSize(1);
+     *     print(start);
+     *
+     *     //订单小号
+     *     String StoreOrderNo = orderBean.getStoreOrderNo() + "\n\n";
+     *                 mBTService.printCenter();
+     *                 mBTService.printSize(1);
+     *     print(StoreOrderNo);
+     *
+     *     //店铺名字
+     *     String storeName = orderBean.getShopBean().getName() + "\n\n";
+     *                 mBTService.printCenter();
+     *                 mBTService.printSize(1);
+     *     print(storeName);
+     *
+     *     //订单号
+     *     String orderNum = "订单号:" + orderBean.getName() + "\n\n";
+     *                 mBTService.printLeft();
+     *                 mBTService.printSize(0);
+     *     print(orderNum);
+     *
+     *     //下单时间
+     *     String payTime = "支付时间:" + orderBean.getInsertTime() + "\n\n";
+     *                 mBTService.printLeft();
+     *                 mBTService.printSize(0);
+     *     print(payTime);
+     *
+     */
 
 
     //使用Handler来接收BluetoothService传递的消息，该Handler属于子线程
@@ -387,7 +470,6 @@ public class BTCenter implements LifecycleOwner {
 
         }
     }
-
 
     //蓝牙事件观察者 接收BTReceiver发射的 intent 数据
     //蓝牙扫描相关事件
@@ -474,9 +556,9 @@ public class BTCenter implements LifecycleOwner {
                 /***连接相关******/
 
                 //接收到请求连接
-                if(TextUtils.equals(action,"quest_for_bt_connect")){
+                if (TextUtils.equals(action, "quest_for_bt_connect")) {
                     BluetoothDevice remote_device = intent.getParcelableExtra("remote_device");
-                    if(remote_device!=null && !TextUtils.isEmpty(remote_device.getAddress())){
+                    if (remote_device != null && !TextUtils.isEmpty(remote_device.getAddress())) {
                         connect(remote_device.getAddress());
                     }
                 }
@@ -500,8 +582,8 @@ public class BTCenter implements LifecycleOwner {
     };
 
 
-    private void t(String msg){
-        Toast.makeText(BaseApp.getInstance(),msg,Toast.LENGTH_SHORT).show();
+    private void t(String msg) {
+        Toast.makeText(BaseApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
     }
 
 }

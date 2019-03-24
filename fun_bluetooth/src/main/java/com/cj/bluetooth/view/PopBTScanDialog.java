@@ -115,7 +115,6 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
     private void initRV() {
 
         data = new Items();
-        data.add(new PairedEntity());
 
         adapter = new MultiTypeAdapter(data);
 

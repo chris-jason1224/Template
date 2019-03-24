@@ -125,16 +125,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fb(R.id.auth).setOnClickListener(this);
         fb(R.id.compress).setOnClickListener(this);
         fb(R.id.bt).setOnClickListener(this);
+        fb(R.id.print).setOnClickListener(this);
 
     }
 
     @ExecutionTimeTrace
     @SingleSubmit
     @Override
-
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if(R.id.print ==vid){
+
+
+            String start = "*** 懒购外卖 ***\n\n";
+            bt.printCenter();
+            bt.printSize(1);
+            bt.printMessage(start);
+
+            //订单小号
+            String StoreOrderNo = "NO:1234567890abc%$#@" + "\n\n";
+            bt.printCenter();
+            bt.printSize(1);
+            bt.printMessage(StoreOrderNo);
+
+            //店铺名字
+            String storeName = "韩式烤肉" + "\n\n";
+            bt.printCenter();
+            bt.printSize(1);
+            bt.printMessage(storeName);
+
+            //下单时间
+            String payTime = "支付时间:" + "2019-03-24 12:26" + "\n\n";
+            bt.printLeft();
+            bt.printSize(0);
+            bt.printMessage(payTime);
+
+        }
+
         if(R.id.bt ==vid){
             bt.scan();
         }
