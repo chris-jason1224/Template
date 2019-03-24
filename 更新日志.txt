@@ -2,7 +2,8 @@
 
 //todo
     1、封装统一的Dialog （DialogFragment）
-    2、fun-bluetooth
+    2、AOP组件增加findViewByID的功能注解
+    3、AOP组件增加setOnClickListener的注解
 
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
@@ -80,9 +81,9 @@
     3、崩溃后自动重启
 
 #20180830
-    1、core-ui添加RoundShape系列控件
-    2、core-ui添加CircleImageView
-    3、core-ui天机消息提示QMUITipDialog
+    1、core_ui添加RoundShape系列控件
+    2、core_ui添加CircleImageView
+    3、core_ui天机消息提示QMUITipDialog
     4、添加基于VLayout的万能适配器
 
 #20180829
