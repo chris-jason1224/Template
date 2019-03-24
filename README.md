@@ -5,7 +5,7 @@
 ##更新日志##
       
     #20190324
-        1、完成fun-bluetooth
+        1、完成fun_bluetooth
             a.附近蓝牙搜索
             b.蓝牙连接
             c.蓝牙自动连接
@@ -14,7 +14,7 @@
 
 
     #20190311
-        1、完成fun-compressor组件，封装图片压缩服务
+        1、完成fun_compressor组件，封装图片压缩服务
 
     #20190305
         1、完成AOP组件创建
@@ -23,10 +23,10 @@
 
 
     #20190212
-        1、fun-business组件增加微信授权功能
+        1、fun_business组件增加微信授权功能
 
     #20190211
-        1、fun-business组件增加微信支付、支付宝支付功能
+        1、fun_business组件增加微信支付、支付宝支付功能
         2、增加微信分享功能
     
     #20190129
@@ -79,7 +79,7 @@
         1、引入google easyPermissions动态权限处理框架
 
     #20180823
-        1、base-common组件中增加DataBus数据总线
+        1、base_common组件中增加DataBus数据总线
 
     #20180822
         1、BaseMVPActivity和BaseMVPFragment添加了Lifecycle来管理Presenter层
