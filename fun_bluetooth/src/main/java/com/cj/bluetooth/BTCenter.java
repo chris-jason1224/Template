@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cj.bluetooth.lifecycle.BTEventLifecycleObserver;
 import com.cj.bluetooth.view.PopBTScanDialog;
@@ -55,21 +56,14 @@ import static com.cj.bluetooth.BTCenter.NotifyEvent.EVENT_CONNECT_SUCCESS;
  */
 public class BTCenter implements LifecycleOwner {
 
-
-    //Handler what
+    //Handler消息分类
     @IntDef({CODE_STATE_CHANGE, CODE_NOTIFY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface KeyCode {
-
         int CODE_STATE_CHANGE = 1;//蓝牙状态发生变化 key
-
         int CODE_NOTIFY = 2;//发布通知 key
-
         int CODE_DATA_READ = 3;//数据传输
-
         int CODE_DATA_WRITE = 4;//数据传输
-
-
     }
 
     //蓝牙连接状态字典值
@@ -100,28 +94,20 @@ public class BTCenter implements LifecycleOwner {
     private BTReceiver mBTReceiver;
     private IntentFilter mIntentFilter;
 
-    private PopBTScanDialog mDialog;
-
+    private PopBTScanDialog mDialog;//弹出扫描框
     private List<BluetoothDevice> pairedList;//已配对蓝牙设备集合
     private List<BluetoothDevice> unPairedList;//未配对蓝牙设备集合
-
-    private static List<BTStateObserver> observerList;
-
-    public static void init(List<BTStateObserver> observers) {
-        observerList = observers;
-    }
-
+    private static List<BTStateObserver> observerList;//蓝牙观察者集合
 
     //构造方法
     private BTCenter() {
+        observerList = new ArrayList<>();
 
         lifecycleRegistry = new LifecycleRegistry(this);
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         lifecycleRegistry.addObserver(new BTEventLifecycleObserver());
-
         //注册DataBus接收器
         DataBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).observe(this, btEventObserver);
-
         initBT();
     }
 
@@ -133,6 +119,12 @@ public class BTCenter implements LifecycleOwner {
         private static final BTCenter instance = new BTCenter();
     }
 
+    //注册观察者回调接口
+    public static void register(BTStateObserver observer){
+        if(observerList!=null && !observerList.contains(observer)){
+            observerList.add(observer);
+        }
+    }
 
     @NonNull
     @Override
@@ -140,15 +132,12 @@ public class BTCenter implements LifecycleOwner {
         return lifecycleRegistry;
     }
 
-
     /*****蓝牙操作方法******/
 
     private void initBT() {
-
         mBTHandler = new BTHandler();
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
         mBTService = new BluetoothService(mBTHandler, mBTAdapter);
-
         //初始化蓝牙广播接收器
         mBTReceiver = new BTReceiver();
         mIntentFilter = new IntentFilter();
@@ -163,9 +152,7 @@ public class BTCenter implements LifecycleOwner {
 
         pairedList = new ArrayList<>();
         unPairedList = new ArrayList<>();
-
     }
-
 
     //判断当前设备是否支持蓝牙
     public boolean isSupportBT() {
@@ -185,11 +172,6 @@ public class BTCenter implements LifecycleOwner {
             return false;
         }
 
-
-        if (mBTAdapter.isDiscovering()) {
-            mBTAdapter.cancelDiscovery();
-        }
-
         //注册广播接收器
         try {
             Activity topAct = BaseApp.getInstance().getCurrentActivity();
@@ -204,7 +186,6 @@ public class BTCenter implements LifecycleOwner {
         if (mDialog == null && BaseApp.getInstance().getCurrentActivity() != null) {
 
             mDialog = new PopBTScanDialog(BaseApp.getInstance().getCurrentActivity());
-
             //当dialog 关闭后，强制销毁dialog，避免切换栈顶Activity导致窗体泄露
             mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
@@ -216,18 +197,19 @@ public class BTCenter implements LifecycleOwner {
             });
         }
 
-        if(mDialog!=null && !mDialog.isShowing()){
-
+        if (mDialog != null) {
             mDialog.show();
-
         }
 
         //扫描框弹出后，开始接收蓝牙事件，扫描框关闭后，暂停接收蓝牙事件
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
+        //停止正在扫描的动作，重新开始扫描
+        if (mBTAdapter.isDiscovering()) {
+            mBTAdapter.cancelDiscovery();
+        }
 
         return mBTAdapter.startDiscovery();
     }
-
 
     //开启蓝牙
     public boolean enableBT() {
@@ -235,6 +217,7 @@ public class BTCenter implements LifecycleOwner {
         if (!isSupportBT()) {
             return false;
         }
+        //用户打开蓝牙是个异步过程，最好是使用扫描前请用户开启蓝牙功能
 
         //蓝牙未开启，请求开启蓝牙
         if (!mBTAdapter.isEnabled()) {
@@ -251,9 +234,7 @@ public class BTCenter implements LifecycleOwner {
                 }
             }
 
-
         }
-
 
         return mBTAdapter.isEnabled();
     }
@@ -290,6 +271,10 @@ public class BTCenter implements LifecycleOwner {
             return;
         }
 
+        if(!enableBT()){
+            return;
+        }
+
         //获取上一次连接的蓝牙打印机设备mac地址
         String pairedMAC = DiskCacheUtil.getInstance().getBTDeviceAddress();
         //获取已经配对的设备列表
@@ -309,7 +294,7 @@ public class BTCenter implements LifecycleOwner {
             if (mBTService.getState() != BTCenter.BTState.STATE_CONNECTED
                     && targetDevice != null
                     && targetDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
-                //其实发起蓝牙连接
+                //自动连接发起蓝牙连接
                 mBTService.connect(targetDevice);
             }
         }
@@ -352,29 +337,29 @@ public class BTCenter implements LifecycleOwner {
                      * mess对应BTCenter.NotifyEvent
                      */
                     String mess = bundle.getString("msg");//信息
+                    //连接成功后会返回 name + address
                     String name = bundle.getString("remote_bt_device_name");//远程设备的name
                     String address = bundle.getString("remote_bt_device_mac");//远程设备的mac address
 
                     //蓝牙正在连接中
                     if (TextUtils.equals(mess, NotifyEvent.EVENT_CONNECTING)) {
-
+                        t("蓝牙正在连接");
                     }
 
                     //蓝牙连接失败
                     if (TextUtils.equals(mess, NotifyEvent.EVENT_CONNECT_FAILED)) {
-
+                        t("蓝牙连接失败");
                     }
                     //连接成功
                     if (TextUtils.equals(mess, NotifyEvent.EVENT_CONNECT_SUCCESS)) {
-
+                        t("蓝牙连接成功");
                     }
                     //连接丢失（断开）
                     if (TextUtils.equals(mess, NotifyEvent.EVENT_CONNECT_LOST)) {
-
+                        t("蓝牙连接断开");
                     }
 
                 }
-
                 return;
             }
 
@@ -390,17 +375,13 @@ public class BTCenter implements LifecycleOwner {
             if (KeyCode.CODE_DATA_READ == what) {
                 //接受到的数据 256字节缓冲
                 byte[] buffer_read = (byte[]) msg.obj;
-
                 return;
             }
 
             //向远程设备发送消息的回执
             if (KeyCode.CODE_DATA_WRITE == what) {
-
                 //刚刚发送出去的数据
                 byte[] buffer_write = (byte[]) msg.obj;
-
-
                 return;
             }
 
@@ -414,16 +395,13 @@ public class BTCenter implements LifecycleOwner {
     private Observer<Intent> btEventObserver = new Observer<Intent>() {
         @Override
         public void onChanged(@Nullable Intent intent) {
-
             if (intent != null) {
-
                 String action = intent.getAction();
-
 
                 /*****扫描相关*******/
                 //扫描开始
                 if ("android.bluetooth.adapter.action.DISCOVERY_STARTED".equals(action)) {
-                    CJLog.getInstance().log_e("开始扫描");
+                    CJLog.getInstance().log_e("蓝牙开始扫描");
                     //蓝牙开始扫描，清空数据
                     pairedList.clear();
                     unPairedList.clear();
@@ -431,25 +409,22 @@ public class BTCenter implements LifecycleOwner {
                     if (mDialog != null) {
                         mDialog.setScanProgress(1);
                     }
-
                 }
 
                 //扫描结束
                 if ("android.bluetooth.adapter.action.DISCOVERY_FINISHED".equals(action)) {
+                    CJLog.getInstance().log_e("蓝牙扫描结束");
                     //取消注册监听
                     try {
                         // unregisterReceiver(btReceiver);
                     } catch (Exception e) {
                         CJLog.getInstance().log_e("扫描结束异常:" + e.toString());
                     } finally {
-
                         if (mDialog != null) {
                             mDialog.setDeviceList(pairedList, unPairedList);
                             mDialog.setScanProgress(2);
                         }
-
                     }
-
                     return;
                 }
 
@@ -470,7 +445,6 @@ public class BTCenter implements LifecycleOwner {
                         }
 
                     }
-
                     return;
                 }
 
@@ -480,7 +454,6 @@ public class BTCenter implements LifecycleOwner {
                 if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
 
                     int state = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, -1);
-
                     switch (state) {
                         //配对失败
                         case BluetoothDevice.BOND_NONE:
@@ -488,17 +461,25 @@ public class BTCenter implements LifecycleOwner {
                             break;
                         //正在配对中
                         case BluetoothDevice.BOND_BONDING:
-
+                            t("蓝牙正在配对中");
                             break;
                         //配对成功
                         case BluetoothDevice.BOND_BONDED:
                             scan();
                             break;
                     }
-
                     return;
                 }
 
+                /***连接相关******/
+
+                //接收到请求连接
+                if(TextUtils.equals(action,"quest_for_bt_connect")){
+                    BluetoothDevice remote_device = intent.getParcelableExtra("remote_device");
+                    if(remote_device!=null && !TextUtils.isEmpty(remote_device.getAddress())){
+                        connect(remote_device.getAddress());
+                    }
+                }
 
                 if (action.equals("android.bluetooth.device.action.ACL_DISCONNECTED")) {
                     Log.e("gg", "android.bluetooth.device.action.ACL_DISCONNECTED");
@@ -515,9 +496,12 @@ public class BTCenter implements LifecycleOwner {
 
             }
 
-
         }
     };
 
+
+    private void t(String msg){
+        Toast.makeText(BaseApp.getInstance(),msg,Toast.LENGTH_SHORT).show();
+    }
 
 }

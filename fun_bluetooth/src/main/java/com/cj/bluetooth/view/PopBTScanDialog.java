@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,14 +27,18 @@ import android.widget.Toast;
 import com.cj.bluetooth.R;
 import com.cj.bluetooth.entity.NotPairedEntity;
 import com.cj.bluetooth.entity.PairedEntity;
+import com.cj.common.base.BaseApp;
 import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.multitype.Items;
 import com.cj.common.multitype.MultiTypeAdapter;
 import com.cj.common.multitype.MultiTypeViewBinder;
 import com.cj.common.multitype.ViewHolder;
+import com.cj.ui.tip.UITipDialog;
 import com.cj.ui.util.ScreenUtil;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +54,7 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
     private Context mContext;
     private TextView mTVCancel;
     private RecyclerView mRV;
+    private LinearLayout mLLEmpty;
     private Items data;
     private MultiTypeAdapter adapter;
     private List<BluetoothDevice> pairedList = new ArrayList<>();
@@ -99,7 +107,7 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
         mTVCancel.setOnClickListener(this);
         mRV = root.findViewById(R.id.rv);
         mPB = root.findViewById(R.id.pb);
-
+        mLLEmpty = root.findViewById(R.id.ll_empty);
         initRV();
 
     }
@@ -125,7 +133,6 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
             }
         };
 
-
         MultiTypeViewBinder<BluetoothDevice> binder_device = new MultiTypeViewBinder<BluetoothDevice>(mContext, R.layout.fun_bluetooth_item_bt_device_layout) {
             @Override
             protected void convert(ViewHolder holder, final BluetoothDevice bluetoothDevice, int position) {
@@ -145,7 +152,7 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
                 } else if (state == BluetoothDevice.BOND_NONE) {
                     mTVState.setText("未配对");
                 } else {
-                    mTVState.setText("配对中");
+                    mTVState.setText("蓝牙配对中...");
                 }
 
                 //点击ITEM
@@ -154,49 +161,74 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
                     public void onClick(View view) {
 
                         //已经配对的设备，去连接
-//                        if (state == BluetoothDevice.BOND_BONDED) {
-//
-//                            //发送连接事件
-//                            Intent intent = new Intent();
-//                            intent.setAction("ask_for_connect");
-//                            intent.putExtra("remote_device",bluetoothDevice);
-//                            DataBus.get().with(DataBusKey.BluetoothEvent.getKey(),DataBusKey.BluetoothEvent.getT()).setValue(intent);
-//
-//
-//
-//
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    dismiss();
-//                                }
-//                            },200);
-//
-//
-//                        } else {
-//                            //没有配对的设备，去配对
-//                            final SweetAlertDialog dialog = new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE);
-//                            dialog.setTitleText("");
-//                            dialog.setContentText("确认和该设备的配对？");
-//                            dialog.setConfirmText("确认");
-//                            dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                                @Override
-//                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-//                                    String address = bluetoothDevice.getAddress();
-//                                    if (BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-//                                        BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(address);
-//                                        device.createBond();
-//                                        Toast.makeText(mContext, "开始创建蓝牙配对", Toast.LENGTH_LONG).show();
-//                                        dialog.dismiss();
-//                                        ((IndexActivity) mContext).invokeAutoLinkDevice();
-//                                    }
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
+                        if (state == BluetoothDevice.BOND_BONDED) {
+                            //pop tip
+                            //发送连接事件
+                            Intent intent = new Intent();
+                            intent.setAction("quest_for_bt_connect");
+                            intent.putExtra("remote_device", bluetoothDevice);
+                            DataBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).setValue(intent);
 
+                            if (BaseApp.getInstance().getCurrentActivity() != null) {
+                                final UITipDialog dialog = new UITipDialog.Builder(BaseApp.getInstance().getCurrentActivity()).
+                                        setIconType(UITipDialog.Builder.ICON_TYPE_INFO).
+                                        setTipWord("蓝牙连接中...").create();
+                                if (dialog != null) {
+                                    dialog.show();
+                                }
+                                //延迟两秒关闭PopBTScanDialog，避免BTCenter.btEventObserver无法接收到连接请求的Action
+                                dialog.setOnDismissListener(new OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        //Tip关闭后关闭Dialog
+                                        dismiss();
+                                    }
+                                });
+                                //2s后关闭Tip
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dialog.dismiss();
+                                    }
+                                }, 2000);
+
+                            }
+
+                        } else {
+                            //点击未配对设备去配对
+                            String address = bluetoothDevice.getAddress();
+                            if (BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+                                final BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(address);
+                                if (device == null) {
+                                    return;
+                                }
+                                if (BaseApp.getInstance().getCurrentActivity() != null) {
+                                    final UITipDialog dialog = new UITipDialog.Builder(BaseApp.getInstance().getCurrentActivity()).
+                                            setIconType(UITipDialog.Builder.ICON_TYPE_INFO).
+                                            setTipWord("蓝牙配对中...").create();
+                                    if (dialog != null) {
+                                        dialog.show();
+                                    }
+
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dialog.dismiss();
+                                        }
+                                    }, 2000);
+
+                                    dialog.setOnDismissListener(new OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialog) {
+                                            bondDevice(device);
+                                        }
+                                    });
+
+                                }
+
+                            }
+
+                        }
                     }
                 });
 
@@ -211,7 +243,6 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
         mRV.setAdapter(adapter);
 
     }
-
 
 
     @Override
@@ -238,6 +269,16 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
         if (unPairedList != null && unPairedList.size() > 0) {
             this.unPairedList.addAll(unPairedList);
         }
+
+        //展示空数据
+        if (pairedList.size() == 0 && unPairedList.size() == 0) {
+            mLLEmpty.setVisibility(View.VISIBLE);
+            mRV.setVisibility(View.GONE);
+            return;
+        }
+
+        mLLEmpty.setVisibility(View.GONE);
+        mRV.setVisibility(View.VISIBLE);
 
         data.clear();
         data.add(new PairedEntity());
@@ -269,5 +310,27 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
 
     }
 
+    //配对设备
+    private boolean bondDevice(BluetoothDevice device) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return device.createBond();
+        }
+
+        //api 19以下反射调用配对
+        boolean res = false;
+        try {
+            Method method = device.getClass().getMethod("createBond", null);
+            res = (boolean) method.invoke(device, (Object[]) null);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
 
 }

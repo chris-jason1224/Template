@@ -43,9 +43,7 @@ public class BluetoothService {
      */
     private ConnectedThread mConnectedThread;
 
-
     private static final String NAME = "BTPrinter";
-
 
     //当前状态
     private int mState;

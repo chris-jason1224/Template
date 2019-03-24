@@ -128,8 +128,8 @@
                 android:layout_height="100dp" />
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/frg_container"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -139,7 +139,15 @@
                 android:layout_height="wrap_content"
                 android:text="BT" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="100dp"
+                android:layout_height="45dp" />
+
+
+
+        </LinearLayout>
+
 
 
     </LinearLayout>

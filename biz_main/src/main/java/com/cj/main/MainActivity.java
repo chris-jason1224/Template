@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private SimpleDraweeView draweeView;
     private Toolbar toolbar;
     private LinearLayout mLLParent;
-
+    private TextView mTVState;
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -99,6 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onStateChanged(BTState btState) {
                 CJLog.getInstance().log_e("main - state  -" +btState.getState());
+                mTVState.setText("状态="+btState.getState());
             }
         });
 
@@ -109,6 +110,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         draweeView = fb(R.id.drawee);
         toolbar = fb(R.id.base_common_toolbar);
         mLLParent = fb(R.id.ll_parent);
+
+        mTVState =fb(R.id.tv_state);
 
         fb(R.id.goto_biz_login).setOnClickListener(this);
         fb(R.id.alert).setOnClickListener(this);
