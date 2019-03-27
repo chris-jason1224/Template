@@ -2,8 +2,7 @@
 
 //todo
     1、封装统一的Dialog （DialogFragment）
-    2、AOP组件增加findViewByID的功能注解
-    3、AOP组件增加setOnClickListener的注解
+ 
 
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录

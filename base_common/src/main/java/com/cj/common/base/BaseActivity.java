@@ -24,7 +24,7 @@ import com.kingja.loadsir.core.LoadSir;
  * Activity最基础的基类
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
 
     private LoadService loadService;
     protected ImmersionBar immersionBar;
@@ -107,7 +107,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         if (immersionBar != null)
             immersionBar.destroy();
-
     }
 
 

@@ -83,5 +83,11 @@ public class LoginActivity extends BaseActivity {
                 init();
     }
 
+    //重写点击事件
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
 }

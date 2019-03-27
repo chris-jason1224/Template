@@ -44,4 +44,8 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
         return new TestPresenter();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

@@ -28,12 +28,8 @@ public abstract class BaseMVPActivity<P extends IBasePresenter> extends BaseActi
             //管理presenter层的生命周期
             getLifecycle().addObserver(mPresenter);
         }
-
-
-
     }
 
     protected abstract P createPresenter();
-
 
 }
