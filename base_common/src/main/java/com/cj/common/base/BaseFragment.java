@@ -49,13 +49,13 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected View mRootView;
 
     /**
-     * Fg是否对用户可见
+     * Frg是否对用户可见
      **/
     protected boolean mIsVisible;
 
     /**
      * 是否加载完成
-     * 当执行完onCreatview方法后即为true，标识碎片加载完成
+     * 当执行完onCreateView方法后即为true，标识碎片加载完成
      */
     protected boolean mIsPrepare;
 
@@ -68,12 +68,12 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //Activity被回收后，Fragment不会被回收
         mActivity = getActivity();
     }
 
     /**
      * 加载碎片
-     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -86,7 +86,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         mRootView = inflater.inflate(setLayoutResource(), container, false);
         return mRootView;
     }
-
 
     //注册多状态缺省页面
     public abstract View initStatusLayout();
@@ -176,12 +175,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         //绑定控件，初始化布局
         initView();
 
+        //初始化多布局
+        initLoadSir(initStatusLayout());
+
         //非懒加载模式，直接初始化数据
         if(!isLazyLoad){
             initData();
         }
-        //初始化多布局
-        initLoadSir(initStatusLayout());
+
     }
 
     protected abstract void initView();
@@ -241,7 +242,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (loadService == null) {
             return;
         }
-        loadService.showWithConvertor(new StateEntity(1, 0, ""));
+        loadService.showWithConvertor(new StateEntity(1));
     }
 
     //显示空数据页面

@@ -143,7 +143,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onReload(View v) {
-                // 重新加载逻辑
 
             }
         }, new Convertor<StateEntity>() {
@@ -151,7 +150,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             public Class<? extends Callback> map(StateEntity stateEntity) {
                 //默认是success
                 Class<? extends Callback> result = SuccessCallback.class;
-
                 switch (stateEntity.getState()) {
 
                     //显示成功页面 --> 原始页面
@@ -223,7 +221,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         if (loadService == null) {
             return;
         }
-        loadService.showWithConvertor(new StateEntity(1, 0, ""));
+        loadService.showWithConvertor(new StateEntity(1));
     }
 
     //显示空数据页面
