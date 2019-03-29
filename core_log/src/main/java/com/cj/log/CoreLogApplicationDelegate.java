@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by mayikang on 2018/9/7.
  */
 
-@ModuleRegister(moduleName = "core-log" , delegateName = "com.cj.log.CoreLogApplicationDelegate")
+@ModuleRegister(moduleName = "core_log" , delegateName = "com.cj.log.CoreLogApplicationDelegate")
 public class CoreLogApplicationDelegate implements IModuleApplicationDelegate {
 
     private Context context;

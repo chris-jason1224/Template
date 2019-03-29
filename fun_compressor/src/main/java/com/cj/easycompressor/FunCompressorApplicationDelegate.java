@@ -14,7 +14,7 @@ import java.util.Map;
  * Date:2019/3/11.
  * Package:com.cj.easycompressor
  */
-@ModuleRegister(moduleName = "fun-compressor",delegateName = "com.cj.easycompressor.FunCompressorApplicationDelegate")
+@ModuleRegister(moduleName = "fun_compressor",delegateName = "com.cj.easycompressor.FunCompressorApplicationDelegate")
 public class FunCompressorApplicationDelegate implements IModuleApplicationDelegate {
     @Override
     public void onCreate(Context context) {
