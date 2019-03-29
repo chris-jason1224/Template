@@ -139,6 +139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         if(R.id.print ==vid){
 
+            CJLog.getInstance().log_file("ffffffff{}fff");
 
             String start = "*** 懒购外卖 ***\n\n";
             bt.printCenter();
