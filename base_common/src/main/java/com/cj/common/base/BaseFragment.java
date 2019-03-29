@@ -9,25 +9,35 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.cj.common.R;
+import com.cj.common.states.OnEmptyStateCallback;
+import com.cj.common.states.OnPlaceHolderCallback;
+import com.cj.common.states.OnTimeoutStateCallback;
+import com.cj.common.states.StateEntity;
 import com.kingja.loadsir.callback.Callback;
+import com.kingja.loadsir.callback.SuccessCallback;
+import com.kingja.loadsir.core.Convertor;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
-
+import com.kingja.loadsir.core.Transport;
 
 
 /**
  * 封装的 Fragment 基类
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener{
 
     private LoadService loadService;
+    private TextView mTVEmpty, mTVTimeOut;
 
     //是否懒加载
-    private boolean isLazyload=true;
+    private boolean isLazyLoad=true;
     /**
      * 宿主的activity
      **/
@@ -45,7 +55,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 是否加载完成
-     * 当执行完oncreatview方法后即为true，标识碎片加载完成
+     * 当执行完onCreatview方法后即为true，标识碎片加载完成
      */
     protected boolean mIsPrepare;
 
@@ -74,32 +84,104 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //1.加载布局 XML 文件
         mRootView = inflater.inflate(setLayoutResource(), container, false);
+        return mRootView;
+    }
 
-        //第二步：注册布局View
-         loadService = LoadSir.getDefault().register(mRootView, new Callback.OnReloadListener() {
+
+    //注册多状态缺省页面
+    public abstract View initStatusLayout();
+
+    //初始化LoadSir
+    private void initLoadSir(View view) {
+
+        loadService = LoadSir.getDefault().register(view == null ? mRootView : view, new Callback.OnReloadListener() {
+
             @Override
             public void onReload(View v) {
                 // 重新加载逻辑
+
+            }
+        }, new Convertor<StateEntity>() {
+            @Override
+            public Class<? extends Callback> map(StateEntity stateEntity) {
+                //默认是success
+                Class<? extends Callback> result = SuccessCallback.class;
+
+                switch (stateEntity.getState()) {
+
+                    //显示成功页面 --> 原始页面
+                    case StateEntity.StateCode.SUCCESS_LAYOUT:
+                        result = SuccessCallback.class;
+                        break;
+
+                    //显示空数据页面 --> OnEmptyStateCallback
+                    case StateEntity.StateCode.EMPTY_LAYOUT:
+                        result = OnEmptyStateCallback.class;
+
+                        //修改文字
+                        if (!TextUtils.isEmpty(stateEntity.getMessage())) {
+                            if (mTVEmpty != null) {
+                                mTVEmpty.setText(stateEntity.getMessage());
+                            }
+                        }
+
+                        break;
+
+                    //显示占位图页面 --> onPlaceHolderCallback
+                    case StateEntity.StateCode.PLACEHOLDER_LAYOUT:
+                        result = OnPlaceHolderCallback.class;
+                        break;
+
+                    //显示连接超时页面 --> onTimeoutStateLayout
+                    case StateEntity.StateCode.TIMEOUT_LAYOUT:
+                        result = OnTimeoutStateCallback.class;
+                        if (!TextUtils.isEmpty(stateEntity.getMessage())) {
+                            if (mTVTimeOut != null) {
+                                mTVTimeOut.setText(stateEntity.getMessage());
+                            }
+                        }
+                        break;
+                }
+
+                return result;
             }
         });
 
-        //返回LoadSir生成的LoadLayout
-        return loadService.getLoadLayout();
+        //动态修改Callback
+        loadService.setCallBack(OnEmptyStateCallback.class, new Transport() {
+            @Override
+            public void order(Context context, View view) {
+                if (view != null) {
+                    mTVEmpty = view.findViewById(R.id.tv_empty);
+                }
+            }
+        });
+
+        loadService.setCallBack(OnTimeoutStateCallback.class, new Transport() {
+            @Override
+            public void order(Context context, View view) {
+                if (view != null) {
+                    mTVTimeOut = view.findViewById(R.id.tv_timeout);
+                }
+            }
+        });
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mIsPrepare=true;
-        isLazyload=setLazyLod();
+        isLazyLoad=setLazyLod();
 
+        //绑定控件，初始化布局
         initView();
 
         //非懒加载模式，直接初始化数据
-        if(!isLazyload){
+        if(!isLazyLoad){
             initData();
         }
-
+        //初始化多布局
+        initLoadSir(initStatusLayout());
     }
 
     protected abstract void initView();
@@ -149,8 +231,41 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
+    @Deprecated
     public LoadService getLoadService(){
         return loadService;
+    }
+
+    //显示加载成功布局
+    protected void showSuccessLayout() {
+        if (loadService == null) {
+            return;
+        }
+        loadService.showWithConvertor(new StateEntity(1, 0, ""));
+    }
+
+    //显示空数据页面
+    protected void showEmptyLayout(@Nullable String message) {
+        if (loadService == null) {
+            return;
+        }
+        loadService.showWithConvertor(new StateEntity(2, message));
+    }
+
+    //显示PlaceHolder页面
+    protected void showPlaceHolderLayout() {
+        if (loadService == null) {
+            return;
+        }
+        loadService.showWithConvertor(new StateEntity(3));
+    }
+
+    //显示连接超时页面数据
+    protected void showTimeoutLayout(@Nullable String message) {
+        if (loadService == null) {
+            return;
+        }
+        loadService.showWithConvertor(new StateEntity(4, message));
     }
 
 }

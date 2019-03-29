@@ -13,11 +13,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_timeout"
             android:src="@drawable/base_common_pic_timeout"
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
         <TextView
+            android:singleLine="true"
+            android:id="@+id/tv_timeout"
             android:layout_marginTop="10dp"
             android:textColor="#333333"
             android:textSize="14dp"

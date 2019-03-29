@@ -2,6 +2,7 @@ package com.cj.main;
 
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.cj.common.provider.fun$business.share.ShareParams;
 import com.cj.common.provider.fun$business.share.WeChatShareParams;
 import com.cj.common.provider.fun$compressor.compress.ICompressCallback;
 import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
+import com.cj.common.states.OnEmptyStateCallback;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.ProgressUtil;
 import com.cj.common.util.image.IImageLoadCallback;

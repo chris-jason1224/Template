@@ -14,12 +14,15 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_empty"
             android:layout_centerInParent="true"
             android:src="@drawable/base_common_pic_empty"
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
         <TextView
+            android:singleLine="true"
+            android:id="@+id/tv_empty"
             android:textColor="#333333"
             android:textSize="14dp"
             android:text="页面走丢啦~"
