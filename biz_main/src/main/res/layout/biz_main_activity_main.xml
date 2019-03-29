@@ -20,7 +20,7 @@
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="goto_biz-login"/>
+            android:text="goto_biz_login"/>
 
         <RelativeLayout
             android:background="#ffffff"

@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by mayikang on 2018/8/29.
  */
-@ModuleRegister(moduleName = "biz-login",delegateName = "com.cj.login.BizLoginModuleDelegate")
+@ModuleRegister(moduleName = "biz_login",delegateName = "com.cj.login.BizLoginModuleDelegate")
 public class BizLoginModuleDelegate implements IModuleApplicationDelegate {
     private Context context;
     @Override
