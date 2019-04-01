@@ -37,6 +37,8 @@ import com.cj.common.util.image.ImageLoader;
 import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.log.CJLog;
+import com.cj.ui.dialog.DialogUtil;
+import com.cj.ui.dialog.MessageDialog;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -129,7 +131,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fb(R.id.compress).setOnClickListener(this);
         fb(R.id.bt).setOnClickListener(this);
         fb(R.id.print).setOnClickListener(this);
-
+        fb(R.id.dialog).setOnClickListener(this);
     }
 
     @ExecutionTimeTrace
@@ -138,6 +140,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if(R.id.dialog == vid){
+
+            DialogUtil.getInstance().showMessageDialog(this, "即将删除该消息", new DialogUtil.ClickCallback() {
+                @Override
+                public void onClick(int position) {
+
+                }
+            });
+        }
 
         if(R.id.print ==vid){
 

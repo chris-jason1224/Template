@@ -151,6 +151,13 @@
                 android:layout_height="45dp" />
 
 
+            <Button
+                android:id="@+id/dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dialog" />
+
+
 
         </LinearLayout>
 

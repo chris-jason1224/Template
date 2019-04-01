@@ -1,9 +1,4 @@
 
-
-//todo
-    1、封装统一的Dialog （DialogFragment）
- 
-
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
     //页面名字由多个单词组成时，由下划线分隔
@@ -19,6 +14,8 @@
                 https://github.com/googlesamples/easypermissions
         }
 
+#20190401
+    1、增加统一dialog弹窗
 
 #20190329
     1、优化BaseActivity和BaseFragment中多状态布局切换方式
