@@ -1,10 +1,10 @@
 package com.cj.annontations.module;
 
-
 /**
- * 组件代理信息实体
+ * Author:chris - jason
+ * Date:2019/4/1.
+ * Package:com.cj.annontations.module
  */
-
 public class ModuleInfo {
 
     //组件描述文件名字前缀
@@ -19,7 +19,7 @@ public class ModuleInfo {
     //组件代理名{代理类的绝对路径}
     private String delegateName;
 
-    public ModuleInfo() {
+    public ModuleInfo(){
 
     }
 
