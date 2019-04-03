@@ -113,7 +113,7 @@ public class WeChatAuth implements IAuth, LifecycleOwner {
                 if (TextUtils.equals(auth_result, WeChatAuthResult.SUCCESS)) {
                     callback.onSuccess(code);
                 } else if (TextUtils.equals(auth_result, WeChatAuthResult.CANCEL)) {
-                    callback.onFailed();
+                    callback.onCancel();
                 } else {
                     callback.onFailed();
                 }
