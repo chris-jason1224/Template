@@ -51,7 +51,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
         //磁盘/Android/data/
         PATH = context.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/crash/log/";
-        FILE_PREFIX = "crash";
+        FILE_PREFIX = "_crash_";
     }
 
 

@@ -1,4 +1,4 @@
-package com.cj.main.test;
+package com.cj.common.util.image;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
