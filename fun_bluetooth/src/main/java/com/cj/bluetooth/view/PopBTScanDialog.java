@@ -319,7 +319,7 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
         //api 19以下反射调用配对
         boolean res = false;
         try {
-            Method method = device.getClass().getMethod("createBond", null);
+            Method method = device.getClass().getMethod("createBond");
             res = (boolean) method.invoke(device, (Object[]) null);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

@@ -2,11 +2,9 @@ package com.cj.main.test;
 
 import com.cj.common.http.base.BaseHttpResultEntity;
 import com.cj.common.http.base.HttpCallback;
-import com.cj.common.http.repository.APIStore;
-import com.cj.common.http.repository.RetrofitFactory;
 import com.cj.common.http.rx.CJSchedulers;
 import com.cj.common.http.rx.HttpResultObserver;
-import com.cj.common.http.util.JSONUtils;
+import com.cj.common.util.JSONUtils;
 import com.cj.common.mvp.BaseMVPPresenter;
 import com.cj.log.CJLog;
 

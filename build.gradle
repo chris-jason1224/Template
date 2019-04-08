@@ -15,6 +15,7 @@ buildscript {
 
         //沪江 aspectJ插件
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+
     }
 }
 
@@ -28,11 +29,12 @@ allprojects {
         }
 
     }
-    configurations{
+    configurations {
         all*.exclude group: 'com.android.support', module: 'support-v4'
     }
 
-    configurations.all{
+//    强制指定支持库的版本
+    configurations.all {
         resolutionStrategy.force "com.android.support:support-annotations:${rootProject.ext.supportLibraryVersion}"
     }
 
@@ -103,20 +105,19 @@ ext {
     tencentMMKVVersion = "1.0.12"
 
 //  fresco 主框架
-    frescoMainLibVersion ="1.11.0"
+    frescoMainLibVersion = "1.11.0"
 //  fresco gif支持库
-    frescoSupGifVersion= "1.11.0"
+    frescoSupGifVersion = "1.11.0"
 //  fresco WebP动图支持库
-    frescoSupWebPAnimationVersion="1.11.0"
+    frescoSupWebPAnimationVersion = "1.11.0"
 //  fresco WebP静态图支持库
-    frescoSupWebPVersion="1.11.0"
+    frescoSupWebPVersion = "1.11.0"
 
 //  微信sdk
     wechatVersion = "5.3.1"
 
 // AspectJ RT Version
     aspectJRTVersion = "1.9.2"
-
 
 
 }

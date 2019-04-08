@@ -1,5 +1,4 @@
-package com.cj.main;
-
+package com.cj.fun_orm;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -7,15 +6,19 @@ import com.cj.annontations.module.ModuleRegister;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
 import java.util.Map;
 
+
 /**
- * Created by mayikang on 2018/8/23.
+ * Author:chris - jason
+ * Date:2019/4/4.
+ * Package:com.cj.fun_orm
  */
-@ModuleRegister(moduleName = "biz_main",delegateName = "com.cj.main.BizMainApplicationDelegate")
-public class BizMainApplicationDelegate  implements IModuleApplicationDelegate{
-    private Context context;
+
+@ModuleRegister(moduleName = "fun_orm",delegateName = "com.cj.fun_orm.FunOrmApplicationDelegate")
+public class FunOrmApplicationDelegate implements IModuleApplicationDelegate {
+
     @Override
     public void onCreate(Context context) {
-        this.context=context;
+
     }
 
     @Override
@@ -33,7 +36,6 @@ public class BizMainApplicationDelegate  implements IModuleApplicationDelegate{
 
     }
 
-
     @Override
     public void onTerminate() {
 
@@ -44,7 +46,6 @@ public class BizMainApplicationDelegate  implements IModuleApplicationDelegate{
 
     }
 
-
     @Override
     public void onLowMemory() {
 
@@ -54,5 +55,6 @@ public class BizMainApplicationDelegate  implements IModuleApplicationDelegate{
     public void onTrimMemory(int var1) {
 
     }
+
 
 }

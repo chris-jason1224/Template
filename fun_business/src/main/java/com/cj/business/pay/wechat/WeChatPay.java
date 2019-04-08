@@ -13,7 +13,7 @@ import com.cj.business.pay.lifecycle.PayEventLifecycleObserver;
 import com.cj.business.pay.IPay;
 import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
-import com.cj.common.http.util.JSONUtils;
+import com.cj.common.util.JSONUtils;
 import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.util.LooperUtil;
 import com.cj.log.CJLog;
