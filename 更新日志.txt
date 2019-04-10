@@ -19,6 +19,9 @@
                 https://github.com/googlesamples/easypermissions
         }
 
+#20190410
+    1、增加异步任务工具类
+
 #20190401
     1、增加统一dialog弹窗
 
