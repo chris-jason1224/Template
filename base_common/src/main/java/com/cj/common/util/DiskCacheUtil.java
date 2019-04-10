@@ -14,6 +14,7 @@ import com.cj.utils.safe.AESUtil;
 public class DiskCacheUtil {
 
     private DiskCacheUtil() {
+
     }
 
     private static class Holder {

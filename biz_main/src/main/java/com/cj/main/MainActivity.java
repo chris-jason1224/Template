@@ -1,5 +1,7 @@
 package com.cj.main;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,6 +35,9 @@ import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
 import com.cj.common.states.OnEmptyStateCallback;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.ProgressUtil;
+import com.cj.common.util.async.AsyncCenter;
+import com.cj.common.util.async.Exec;
+import com.cj.common.util.async.IAsyncCallback;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.fun_aop.annotation.ExecutionTimeTrace;
@@ -41,11 +47,23 @@ import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.dialog.MessageDialog;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
+import com.cj.utils.io.IOUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
@@ -55,6 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Toolbar toolbar;
     private LinearLayout mLLParent;
     private TextView mTVState;
+    private ImageView mIVTest;
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -66,7 +85,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     ICompressProvider compress;
     @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
     IBTProvider bt;
-
 
 
     @Override
@@ -103,8 +121,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         bt.registerBTStateObserver(new BTStateObserver() {
             @Override
             public void onStateChanged(BTState btState) {
-                CJLog.getInstance().log_e("main - state  -" +btState.getState());
-                mTVState.setText("状态="+btState.getState());
+                CJLog.getInstance().log_e("main - state  -" + btState.getState());
+                mTVState.setText("状态=" + btState.getState());
             }
         });
 
@@ -116,7 +134,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         toolbar = fb(R.id.base_common_toolbar);
         mLLParent = fb(R.id.ll_parent);
 
-        mTVState =fb(R.id.tv_state);
+        mTVState = fb(R.id.tv_state);
+        mIVTest = fb(R.id.iv_test);
 
         fb(R.id.goto_biz_login).setOnClickListener(this);
         fb(R.id.alert).setOnClickListener(this);
@@ -132,6 +151,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fb(R.id.bt).setOnClickListener(this);
         fb(R.id.print).setOnClickListener(this);
         fb(R.id.dialog).setOnClickListener(this);
+        fb(R.id.async).setOnClickListener(this);
     }
 
     @ExecutionTimeTrace
@@ -141,8 +161,56 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         int vid = v.getId();
 
-        if(R.id.dialog == vid){
+        if (R.id.async == vid) {
 
+            AsyncCenter.getInstance().submit(new Exec<Bitmap>() {
+                @Override
+                public Bitmap execute() {
+                    Bitmap bmp = null;
+                    URL url;
+                    try {
+                        url = new URL("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547813416419&di=cd93b735d229213f2e0dee2759ad81d3&imgtype=0&src=http%3A%2F%2Fattimg.dospy.com%2Fimg%2Fday_111004%2F20111004_f4e8d9f067a3542375c920PXx4HtkkZZ.jpg");
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        if (connection.getResponseCode() == 200) {
+                            InputStream inputStream = connection.getInputStream();
+                            if (inputStream != null) {
+                                byte[] bb = IOUtil.getInstance().inputStreamToByte(inputStream);
+                                BitmapFactory.Options options = new BitmapFactory.Options();
+                                options.inJustDecodeBounds = false;
+                                bmp = BitmapFactory.decodeByteArray(bb, 0, bb.length, options);
+                            }
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                       return bmp;
+                    }
+                }
+            }, new IAsyncCallback<Bitmap>() {
+                @Override
+                public void onSuccess(Bitmap bitmap) {
+                    if(bitmap!=null){
+                        mIVTest.setImageBitmap(bitmap);
+                    }
+                }
+
+                @Override
+                public void onFailed(Throwable throwable) {
+
+                }
+
+                @Override
+                public void onComplete(){
+                    CJLog.getInstance().log_e("结束");
+                }
+
+            });
+
+        }
+
+        if (R.id.dialog == vid) {
             DialogUtil.getInstance().showMessageDialog(this, "即将删除该消息", new DialogUtil.ClickCallback() {
                 @Override
                 public void onClick(int position) {
@@ -151,7 +219,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             });
         }
 
-        if(R.id.print ==vid){
+        if (R.id.print == vid) {
 
             CJLog.getInstance().log_file("ffffffff{}fff");
 
@@ -180,7 +248,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         }
 
-        if(R.id.bt ==vid){
+        if (R.id.bt == vid) {
             bt.scan();
         }
 
@@ -352,6 +420,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
 
+    }
+
+    class TT implements Callable<String> {
+        private String str;
+
+        public TT(String str) {
+            this.str = str;
+        }
+
+        @Override
+        public String call() throws Exception {
+            CJLog.getInstance().log_e("进入call方法");
+            Thread.sleep(10000);
+            CJLog.getInstance().log_e("休眠结束");
+            return str + "fffff";
+        }
     }
 
     @Override

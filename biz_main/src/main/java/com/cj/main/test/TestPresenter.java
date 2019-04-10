@@ -22,7 +22,7 @@ public class TestPresenter extends BaseMVPPresenter implements ITestPresenter {
     public void doTest(String obj) {
         mAPIStore.testJSON("u_4")
                 .compose(CJSchedulers.<BaseHttpResultEntity<List<Object>>>compose()).
-                subscribe(new HttpResultObserver<>(mDisposable, new HttpCallback<List<Object>>() {
+                subscribe(new HttpResultObserver(mDisposable, new HttpCallback<List<Object>>() {
                     @Override
                     public void onSuccess(List<Object> jsonArray) {
                         if(jsonArray!=null){
@@ -41,8 +41,6 @@ public class TestPresenter extends BaseMVPPresenter implements ITestPresenter {
 
                     }
                 }));
-
-
     }
 
 
