@@ -422,22 +422,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    class TT implements Callable<String> {
-        private String str;
-
-        public TT(String str) {
-            this.str = str;
-        }
-
-        @Override
-        public String call() throws Exception {
-            CJLog.getInstance().log_e("进入call方法");
-            Thread.sleep(10000);
-            CJLog.getInstance().log_e("休眠结束");
-            return str + "fffff";
-        }
-    }
-
     @Override
     protected boolean useImmersionBar() {
         return true;
