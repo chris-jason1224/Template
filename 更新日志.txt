@@ -1,7 +1,6 @@
 
 //todo
-        1、线程池，锁
-        2、OpenGL图像处理
+        2、OpenCV 图像处理
         3、jni
         4、ffmpeg音视频处理
 
