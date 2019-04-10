@@ -3,6 +3,11 @@
 #Contact me : 851183849@qq.com
 
 ##更新日志##
+
+     
+    #20190410
+        1、增加异步任务执行工具类
+
       
     #20190329
         1、优化BaseActivity和BaseFragment中多状态布局切换方式
