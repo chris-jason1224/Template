@@ -36,6 +36,7 @@ public class BTService implements IBTProvider {
     //注册回调接口，方便页面接收 蓝牙状态变化
     @Override
     public synchronized void registerBTStateObserver(BTStateObserver observer) {
+        //给PushService的对象加锁，一个Activity中一般只有一个实例
         synchronized (BTService.this) {
             if (observer != null) {
                 BTCenter.getInstance().register(observer);

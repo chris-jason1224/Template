@@ -18,7 +18,11 @@ public class PushService implements IPushProvider {
 
     @Override
     public void registerPushObserver(PushObserver observer) {
-
+        synchronized (PushService.class){
+            if(observer!=null){
+                PushCenter.getInstance().register(observer);
+            }
+        }
     }
 
     @Override
