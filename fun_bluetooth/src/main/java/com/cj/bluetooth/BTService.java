@@ -112,12 +112,12 @@ public class BTService implements IBTProvider {
     /******打印格式控制****/
     @Override
     public void printLeft(){
-        BTCenter.getInstance().prinLeft();
+        BTCenter.getInstance().printLeft();
     }
 
     @Override
     public void printRight(){
-        BTCenter.getInstance().prinRight();
+        BTCenter.getInstance().printRight();
     }
 
     @Override

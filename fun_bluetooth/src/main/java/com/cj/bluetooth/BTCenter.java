@@ -354,10 +354,10 @@ public class BTCenter implements LifecycleOwner {
 
     }
 
-    public void prinLeft(){
+    public void printLeft(){
         mBTService.printLeft();
     }
-    public void prinRight(){
+    public void printRight(){
         mBTService.printRight();
     }
     public void printCenter(){
