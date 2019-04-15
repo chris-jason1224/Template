@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.facade.template.IProvider;
  * Author:chris - jason
  * Date:2019/4/15.
  * Package:com.cj.common.provider.fun$push
+ * fun_push对外提供服务的约束接口
  */
 public interface IPushProvider extends IProvider {
 

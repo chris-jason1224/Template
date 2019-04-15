@@ -35,5 +35,5 @@ public class PushService implements IPushProvider {
     public void init(Context context) {
 
     }
-    
+
 }
