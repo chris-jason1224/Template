@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.provider.fun$orm.IOrmProvider;
-import io.realm.Realm;
 
 /**
  * Author:chris - jason

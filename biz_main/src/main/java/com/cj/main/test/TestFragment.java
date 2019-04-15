@@ -32,7 +32,7 @@ public class TestFragment extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               showPlaceHolderLayout();
+               showEmptyLayout("暂时没有数据啦啦啦啦~");
             }
         },2000);
     }
