@@ -3,28 +3,28 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/base-common" />
-            <option value="$PROJECT_DIR$/biz-login" />
-            <option value="$PROJECT_DIR$/biz-main" />
-            <option value="$PROJECT_DIR$/core-annotations" />
-            <option value="$PROJECT_DIR$/core-framework" />
-            <option value="$PROJECT_DIR$/core-jutils" />
-            <option value="$PROJECT_DIR$/core-log" />
-            <option value="$PROJECT_DIR$/core-processor" />
-            <option value="$PROJECT_DIR$/core-router" />
-            <option value="$PROJECT_DIR$/core-ui" />
-            <option value="$PROJECT_DIR$/fun-aop" />
-            <option value="$PROJECT_DIR$/fun-business" />
-            <option value="$PROJECT_DIR$/fun-compressor" />
+            <option value="$PROJECT_DIR$/base_common" />
+            <option value="$PROJECT_DIR$/biz_login" />
+            <option value="$PROJECT_DIR$/biz_main" />
+            <option value="$PROJECT_DIR$/core_annotations" />
+            <option value="$PROJECT_DIR$/core_framework" />
+            <option value="$PROJECT_DIR$/core_jutils" />
+            <option value="$PROJECT_DIR$/core_log" />
+            <option value="$PROJECT_DIR$/core_processor" />
+            <option value="$PROJECT_DIR$/core_router" />
+            <option value="$PROJECT_DIR$/core_ui" />
+            <option value="$PROJECT_DIR$/fun_aop" />
+            <option value="$PROJECT_DIR$/fun_bluetooth" />
+            <option value="$PROJECT_DIR$/fun_business" />
+            <option value="$PROJECT_DIR$/fun_compressor" />
+            <option value="$PROJECT_DIR$/fun_orm" />
+            <option value="$PROJECT_DIR$/fun_push" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
