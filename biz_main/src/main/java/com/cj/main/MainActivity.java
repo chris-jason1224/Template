@@ -327,8 +327,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             if (pay != null) {
 
-                String extra = " {\"appid\":\"wx529bf812fe26c929\",\"noncestr\":\"b605b10a8054478289b248df2a862f12\",\"package\":\"Sign=WXPay\",\"packageValue\":\"Sign=WXPay\",\"partnerid\":\"1498803022\",\"prepayid\":\"wx02102704848674779bb5938b2166506728\",\"sign\":\"8B72AF273C00EB6DD3F0C3A14B93B79D\",\"timestamp\":\"1549074425\"}";
-                PayParams<String> payParams = new PayParams<>("123456", 1, extra);
+                String extra = " {\"appid\":\"wx39d4de0570bd3f5e\",\"noncestr\":\"b605b10a8054478289b248df2a862f12\",\"package\":\"Sign=WXPay\",\"packageValue\":\"Sign=WXPay\",\"partnerid\":\"1498803022\",\"prepayid\":\"wx02102704848674779bb5938b2166506728\",\"sign\":\"8B72AF273C00EB6DD3F0C3A14B93B79D\",\"timestamp\":\"1549074425\"}";
+                PayParams<String> payParams = new PayParams<>("123456", 2, extra);
 
                 pay.invokePay(payParams, new IPayResultCallback() {
                     @Override

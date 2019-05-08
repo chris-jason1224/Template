@@ -9,7 +9,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cj.fun_push.PushCenter.Platform.HUA_WEI;
 import static com.cj.fun_push.PushCenter.Platform.JPUSH;
+import static com.cj.fun_push.PushCenter.Platform.XIAO_MI;
 
 /**
  * Author:chris - jason
@@ -19,13 +21,15 @@ import static com.cj.fun_push.PushCenter.Platform.JPUSH;
 public class PushCenter {
 
     //各大推送平台的字典值
-    @IntDef({JPUSH})
+    @IntDef({JPUSH,HUA_WEI,XIAO_MI})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Platform {
 
         int JPUSH = 1;//极光推送
 
         int HUA_WEI = 2;//华为推送
+
+        int XIAO_MI = 3;//小米推送
 
     }
 

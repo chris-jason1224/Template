@@ -11,9 +11,9 @@ public class PayParams<T> {
 
     private String orderCode;//业务订单编号
 
-    private int payWay;//支付方式
+    private int payWay;//支付方式，@Link Paycenter.PayWay
 
-    private T extra;//携带的各大平台实际支付参数，支付宝传签名信息，微信传整个预付单信息
+    private T extra;//携带的各大平台实际支付参数,泛型选择String即可，支付宝传签名信息，微信传整个预付单信息
 
     public PayParams() {
 

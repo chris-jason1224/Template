@@ -25,11 +25,7 @@ public interface APIStore {
     @POST("/dev/api/json")
     Observable<BaseHttpResultEntity<List<Object>>> testJSON(@Field("uid") String uid);
 
-    //下载文件
-    @Streaming
-    @POST
-    @FormUrlEncoded
-    Observable<ResponseBody> download(@Field("file")String param);
+
 
 
 }

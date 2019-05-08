@@ -1,7 +1,6 @@
 package com.cj.fun_push;
 
 import android.content.Context;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.provider.fun$push.IPushProvider;
 import com.cj.common.provider.fun$push.PushObserver;
