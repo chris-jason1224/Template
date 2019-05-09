@@ -1,6 +1,12 @@
 # Template
 
-#Contact me : 851183849@qq.com
+#feature
+
+   1、android组件化
+   2、自定义注解
+   3、retrofit2 + okhttp3
+   4、Arouter
+   5、JPush
 
 ##更新日志##
 
