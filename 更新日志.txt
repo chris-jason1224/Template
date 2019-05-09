@@ -19,6 +19,9 @@
                 https://github.com/googlesamples/easypermissions
         }
 
+#20190509
+    1、完成fun_push组件，集成极光推送
+
 #20190410
     1、增加异步任务工具类
 
