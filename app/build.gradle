@@ -30,6 +30,14 @@ android {
         //multidex config
         multiDexEnabled true
 
+        //极光推送配置「」
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "${applicationId}",
+                JPUSH_APPKEY : "ebc918c62b95b99795db7fab", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "Template-debug-channel", //暂时填写默认值即可.
+        ]
+
+
     }
     buildTypes {
         release {
@@ -72,6 +80,7 @@ dependencies {
     api project(':fun_business')
     api project(':fun_compressor')
     api project(':fun_bluetooth')
+    api project(':fun_push')
 
 }
 

@@ -42,8 +42,9 @@ dependencies {
     api project(':base_common')
     if (!isModuleModle.toBoolean()) {
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+        annotationProcessor project(':core_processor')
     }
-    annotationProcessor project(':core_processor')
+
     compileOnly project(':fun_aop')
 
 

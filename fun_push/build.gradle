@@ -22,6 +22,18 @@ android {
             }
         }
 
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a'
+            // 还可以添加 'arm64-v8a' ，'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+
+    }
+    
+    packagingOptions {
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
     }
 
     buildTypes {
@@ -36,4 +48,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':base_common')
+
+    if (!isModuleModle.toBoolean()) {
+        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+        annotationProcessor project(':core_processor')
+    }
+
+    //极光推送sdk
+    api "cn.jiguang.sdk:jpush:${rootProject.ext.jpushSdkVersion}"
+    api "cn.jiguang.sdk:jcore:${rootProject.ext.jpushCoreVersion}"
+
 }

@@ -45,6 +45,8 @@ task clean(type: Delete) {
 }
 
 ext {
+
+
     // Sdk and tools
     buildToolsVersion = "27.0.3"
 
@@ -119,5 +121,9 @@ ext {
 // AspectJ RT Version
     aspectJRTVersion = "1.9.2"
 
+//  极光推送版本
+    jpushSdkVersion ="3.2.0"
+//  极光推送核心版本
+    jpushCoreVersion = "2.0.0"
 
 }

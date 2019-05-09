@@ -1,5 +1,6 @@
 package com.cj.fun_push;
 
+import android.content.Context;
 import android.support.annotation.IntDef;
 
 import com.cj.common.provider.fun$push.PushObserver;
@@ -8,6 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.jpush.android.api.JPushInterface;
 
 import static com.cj.fun_push.PushCenter.Platform.HUA_WEI;
 import static com.cj.fun_push.PushCenter.Platform.JPUSH;
@@ -53,11 +56,21 @@ public class PushCenter {
         }
     }
 
-    private void dispatchPush(Object object) {
+    public void dispatchPush(String object) {
         for (PushObserver observer : observerList) {
             observer.onPush(object);
         }
     }
 
+
+    public void turnOff(Context context){
+        JPushInterface.stopPush(context);
+    }
+
+    public void turnOn(Context context){
+        if(JPushInterface.isPushStopped(context)){
+            JPushInterface.resumePush(context);
+        }
+    }
 
 }

@@ -14,7 +14,7 @@ import com.cj.common.provider.fun$push.PushObserver;
 
 @Route(path = "/fun_push/SEV/com.cj.fun_push.PushService")
 public class PushService implements IPushProvider {
-
+    private Context context;
     @Override
     public void registerPushObserver(PushObserver observer) {
         synchronized (PushService.class){
@@ -26,17 +26,17 @@ public class PushService implements IPushProvider {
 
     @Override
     public void turnOn() {
-
+        PushCenter.getInstance().turnOn(context);
     }
 
     @Override
     public void turnOff() {
-
+        PushCenter.getInstance().turnOff(context);
     }
 
     @Override
     public void init(Context context) {
-
+        this.context = context;
     }
 
 }

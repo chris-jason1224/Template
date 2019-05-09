@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import com.cj.annontations.module.ModuleRegister;
+import com.cj.fun_push.jpush.JPushService;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
 
 import java.util.Map;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Author:chris - jason
@@ -18,6 +21,11 @@ public class FunPushApplicationDelegate implements IModuleApplicationDelegate {
 
     @Override
     public void onCreate(Context context) {
+        //初始化极光推送
+        if(BuildConfig.DEBUG){
+            JPushInterface.setDebugMode(true);
+        }
+        JPushInterface.init(context.getApplicationContext());
 
     }
 

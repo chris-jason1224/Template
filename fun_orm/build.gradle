@@ -13,6 +13,17 @@ android {
         resourcePrefix "fun_orm_"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        if (!isModuleModle.toBoolean()) {
+            //ARouter配置
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [moduleName: project.getName()]
+                    includeCompileClasspath true
+                }
+            }
+        }
+
     }
 
     buildTypes {
@@ -27,5 +38,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':base_common')
+
+    if (!isModuleModle.toBoolean()) {
+        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+        annotationProcessor project(':core_processor')
+    }
 
 }

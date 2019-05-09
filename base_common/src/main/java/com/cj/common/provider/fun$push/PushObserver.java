@@ -8,6 +8,6 @@ package com.cj.common.provider.fun$push;
  */
 public interface PushObserver {
 
-    void onPush(Object object);
+    void onPush(String object);
 
 }
