@@ -86,8 +86,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
     IBTProvider bt;
 
-    IOrmService orm;
-
+    private IOrmService orm = new OrmService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +126,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTVState.setText("状态=" + btState.getState());
             }
         });
-
-        orm = new OrmService();
 
     }
 

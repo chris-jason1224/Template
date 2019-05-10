@@ -1,7 +1,6 @@
 package com.cj.common.db;
 
 import android.content.Context;
-
 import com.cj.common.exception.NotInitException;
 import com.cj.common.model.MyObjectBox;
 import io.objectbox.Box;

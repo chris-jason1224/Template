@@ -15,11 +15,10 @@ import io.objectbox.query.QueryBuilder;
 public class OrmService implements IOrmService {
 
     /**
-     * 多进程时，只能一写多读，否则数据会不同步
+     * 1、多进程时，只能一写多读，否则数据会不同步
+     * 2、Query无法进行二次封装，所以fun_orm失去了独立成组件的条件，只能迁移到base_common中
      * @param context
      */
-
-
 
     /**
      * 通过主键id 插入或更新一个已经存在的object对象
