@@ -12,7 +12,7 @@ import io.objectbox.query.QueryBuilder;
  * 通过调用DBCenter实现功能
  */
 
-public class OrmService implements IOrmService {
+public class OrmUtil implements IOrm {
 
     /**
      * 1、多进程时，只能一写多读，否则数据会不同步

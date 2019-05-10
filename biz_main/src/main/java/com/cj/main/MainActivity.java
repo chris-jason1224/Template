@@ -16,8 +16,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.db.IOrmService;
-import com.cj.common.db.OrmService;
+import com.cj.common.db.IOrm;
+import com.cj.common.db.OrmUtil;
 import com.cj.common.model.StudentEntity;
 import com.cj.common.model.StudentEntity_;
 import com.cj.common.provider.fun$bluetooth.BTState;
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
     IBTProvider bt;
 
-    private IOrmService orm = new OrmService();
+    private IOrm orm = new OrmUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

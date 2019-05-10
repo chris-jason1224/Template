@@ -10,7 +10,7 @@ import io.objectbox.query.QueryBuilder;
  * Package:com.cj.common.provider.fun$orm
  * fun_orm对外提供服务的约束接口
  */
-public interface IOrmService{
+public interface IOrm {
 
     <T> void put(Class<T> clz, T... entity);
 
