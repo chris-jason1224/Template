@@ -32,6 +32,7 @@ public class JSONUtils {
     }
 
 
+
     /**
      * jsonArray转javaList --》 泛型在编译期类型被擦除导致报错
      * List<T> = new Gson().fromJson(gsonString, new TypeToken<List<T>>() {}.getType());

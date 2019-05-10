@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.BuildConfig;
+import com.cj.common.db.DBCenter;
 import com.cj.common.receiver.NetworkStateOBReceiver;
 import com.cj.common.states.OnPlaceHolderCallback;
 import com.cj.common.states.OnEmptyStateCallback;
@@ -48,6 +49,9 @@ public class BaseApp extends BaseApplication {
 
         //初始化图片加载框架
         ImageLoader.init(this);
+
+        //初始化DBCenter
+        DBCenter.init(this);
 
     }
 

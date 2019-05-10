@@ -73,7 +73,7 @@ dependencies {
     if (!isModuleModle.toBoolean()) {
         api project(':biz_main')
         api project(':biz_login')
-        //只需要在app中依赖AOP module
+        //只需要在app中依赖fun_aop module，其他module 用 provide only
         api project(':fun_aop')
     }
 
@@ -81,6 +81,7 @@ dependencies {
     api project(':fun_compressor')
     api project(':fun_bluetooth')
     api project(':fun_push')
+    api project(':fun_orm')
 
 }
 

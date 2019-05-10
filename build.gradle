@@ -2,6 +2,9 @@
 
 buildscript {
 
+//  ObjectBox插件版本
+    ext.objectBoxVersion = "2.3.4"
+
     repositories {
         google()
         jcenter()
@@ -15,6 +18,10 @@ buildscript {
 
         //沪江 aspectJ插件
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+
+        //ObjectBox插件
+        classpath "io.objectbox:objectbox-gradle-plugin:$objectBoxVersion"
+
 
     }
 }

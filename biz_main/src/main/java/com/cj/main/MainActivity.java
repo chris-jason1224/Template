@@ -17,6 +17,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.model.StudentEntity;
+import com.cj.common.model.StudentEntity_;
 import com.cj.common.provider.fun$bluetooth.BTState;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
 import com.cj.common.provider.fun$bluetooth.IBTProvider;
@@ -32,8 +34,12 @@ import com.cj.common.provider.fun$business.share.ShareParams;
 import com.cj.common.provider.fun$business.share.WeChatShareParams;
 import com.cj.common.provider.fun$compressor.compress.ICompressCallback;
 import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
+import com.cj.common.provider.fun$orm.IOrmProvider;
+import com.cj.common.provider.fun$push.IPushProvider;
+import com.cj.common.provider.fun$push.PushObserver;
 import com.cj.common.states.OnEmptyStateCallback;
 import com.cj.common.util.AndroidSystemUtil;
+import com.cj.common.util.JSONUtils;
 import com.cj.common.util.ProgressUtil;
 import com.cj.common.util.async.AsyncCenter;
 import com.cj.common.util.async.Exec;
@@ -48,6 +54,7 @@ import com.cj.ui.dialog.MessageDialog;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import com.cj.utils.io.IOUtil;
+import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
@@ -61,9 +68,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+
+import io.objectbox.query.Query;
 
 
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
@@ -85,6 +95,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     ICompressProvider compress;
     @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
     IBTProvider bt;
+    @Autowired(name = "/fun_orm/SEV/com.cj.fun_orm.OrmService")
+    IOrmProvider orm;
 
 
     @Override
@@ -152,6 +164,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fb(R.id.print).setOnClickListener(this);
         fb(R.id.dialog).setOnClickListener(this);
         fb(R.id.async).setOnClickListener(this);
+        fb(R.id.put).setOnClickListener(this);
+        fb(R.id.get).setOnClickListener(this);
     }
 
     @ExecutionTimeTrace
@@ -160,6 +174,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if (R.id.put == vid) {
+            StudentEntity stu = new StudentEntity();
+            stu.setAge(26);
+            stu.setName("chris.Jason");
+            orm.put(StudentEntity.class, stu);
+        }
+
+        if (R.id.get == vid) {
+            //List<StudentEntity> list =orm.getAll(StudentEntity.class);
+
+            Query<StudentEntity> query = orm.QueryBuilder(StudentEntity.class).equal(StudentEntity_.id, 1).build();
+            List<StudentEntity> list = query.find();
+
+
+            if (!ListUtil.isEmpty(list)) {
+                String json = JSONUtils.javaObject2JsonString(list);
+                CJLog.getInstance().log_json(json);
+            }
+
+        }
 
         if (R.id.async == vid) {
 
@@ -185,13 +220,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
-                       return bmp;
+                        return bmp;
                     }
                 }
             }, new IAsyncCallback<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
-                    if(bitmap!=null){
+                    if (bitmap != null) {
                         mIVTest.setImageBitmap(bitmap);
                     }
                 }
@@ -202,7 +237,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
 
                 @Override
-                public void onComplete(){
+                public void onComplete() {
                     CJLog.getInstance().log_e("结束");
                 }
 
@@ -322,7 +357,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         }
 
-
         if (R.id.pay == vid) {
 
             if (pay != null) {
@@ -361,6 +395,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             return;
         }
+
         //解密测试
         if (R.id.decrypt == vid) {
             //AESUtil.getInstance().decrypt("");
@@ -368,12 +403,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             return;
         }
 
-
         if (R.id.foreground == vid) {
             AndroidSystemUtil.getInstance().isAppForeground(this);
             return;
         }
-
 
         //人造一个crash
         if (R.id.make_crash == vid) {
@@ -418,7 +451,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             ARouter.getInstance().build("/biz_main/ACT/com.cj.main.test.TestActivity").navigation();
             return;
         }
-
 
     }
 

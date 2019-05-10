@@ -3,7 +3,7 @@
         2、OpenCV 图像处理
         3、jni
         4、ffmpeg音视频处理
-        5、基于realm封装fun_orm
+        5、基于realm 或者 ObjectBox 封装fun_orm
 
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
