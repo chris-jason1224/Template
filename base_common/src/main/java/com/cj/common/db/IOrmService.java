@@ -1,7 +1,4 @@
-package com.cj.common.provider.fun$orm;
-
-import com.alibaba.android.arouter.facade.template.IProvider;
-
+package com.cj.common.db;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,8 +10,7 @@ import io.objectbox.query.QueryBuilder;
  * Package:com.cj.common.provider.fun$orm
  * fun_orm对外提供服务的约束接口
  */
-public interface IOrmProvider extends IProvider {
-
+public interface IOrmService{
 
     <T> void put(Class<T> clz, T... entity);
 
@@ -41,4 +37,5 @@ public interface IOrmProvider extends IProvider {
     <T> boolean isOverCountX(Class<T> clz, long max);
 
     <T> QueryBuilder<T> QueryBuilder(Class<T> clz);
+
 }

@@ -1,9 +1,5 @@
-package com.cj.fun_orm;
+package com.cj.common.db;
 
-import android.content.Context;
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.cj.common.db.DBCenter;
-import com.cj.common.provider.fun$orm.IOrmProvider;
 import java.util.Collection;
 import java.util.List;
 import io.objectbox.Box;
@@ -12,21 +8,17 @@ import io.objectbox.query.QueryBuilder;
 /**
  * Author:chris - jason
  * Date:2019/4/4.
- * Package:com.cj.fun_orm
- * fun_orm对外提供服务的类
+ * Package:com.cj.common
  * 通过调用DBCenter实现功能
  */
-@Route(path = "/fun_orm/SEV/com.cj.fun_orm.OrmService")
-public class OrmService implements IOrmProvider {
+
+public class OrmService implements IOrmService {
 
     /**
-     * 多进程时，只能一写多度，否则数据会不同步
-     *
+     * 多进程时，只能一写多读，否则数据会不同步
      * @param context
      */
-    @Override
-    public void init(Context context) {
-    }
+
 
 
     /**
@@ -185,5 +177,7 @@ public class OrmService implements IOrmProvider {
             throw new NullPointerException(obj.getClass().toString());
         }
     }
+
+
 
 }

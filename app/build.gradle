@@ -81,7 +81,6 @@ dependencies {
     api project(':fun_compressor')
     api project(':fun_bluetooth')
     api project(':fun_push')
-    api project(':fun_orm')
 
 }
 

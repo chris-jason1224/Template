@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +16,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.db.IOrmService;
+import com.cj.common.db.OrmService;
 import com.cj.common.model.StudentEntity;
 import com.cj.common.model.StudentEntity_;
 import com.cj.common.provider.fun$bluetooth.BTState;
@@ -34,10 +35,6 @@ import com.cj.common.provider.fun$business.share.ShareParams;
 import com.cj.common.provider.fun$business.share.WeChatShareParams;
 import com.cj.common.provider.fun$compressor.compress.ICompressCallback;
 import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
-import com.cj.common.provider.fun$orm.IOrmProvider;
-import com.cj.common.provider.fun$push.IPushProvider;
-import com.cj.common.provider.fun$push.PushObserver;
-import com.cj.common.states.OnEmptyStateCallback;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.JSONUtils;
 import com.cj.common.util.ProgressUtil;
@@ -50,7 +47,6 @@ import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.log.CJLog;
 import com.cj.ui.dialog.DialogUtil;
-import com.cj.ui.dialog.MessageDialog;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import com.cj.utils.io.IOUtil;
@@ -58,20 +54,14 @@ import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 
 import io.objectbox.query.Query;
 
@@ -95,8 +85,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     ICompressProvider compress;
     @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
     IBTProvider bt;
-    @Autowired(name = "/fun_orm/SEV/com.cj.fun_orm.OrmService")
-    IOrmProvider orm;
+
+    IOrmService orm;
 
 
     @Override
@@ -137,6 +127,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTVState.setText("状态=" + btState.getState());
             }
         });
+
+        orm = new OrmService();
 
     }
 

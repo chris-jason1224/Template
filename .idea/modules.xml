@@ -18,7 +18,6 @@
       <module fileurl="file://$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" filepath="$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_business/fun_business.iml" filepath="$PROJECT_DIR$/fun_business/fun_business.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_compressor/fun_compressor.iml" filepath="$PROJECT_DIR$/fun_compressor/fun_compressor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_orm/fun_orm.iml" filepath="$PROJECT_DIR$/fun_orm/fun_orm.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_push/fun_push.iml" filepath="$PROJECT_DIR$/fun_push/fun_push.iml" />
     </modules>
   </component>
