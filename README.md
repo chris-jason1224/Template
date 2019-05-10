@@ -7,6 +7,9 @@
 
 ##更新日志##
 
+    #20190310
+        1、引入ObjectBox作为orm框架，封装OrmService
+
 
     #20190509
         1、完成fun_push组件，集成极光推送
