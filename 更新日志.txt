@@ -3,7 +3,6 @@
         2、OpenCV 图像处理
         3、jni
         4、ffmpeg音视频处理
-        5、基于realm 或者 ObjectBox 封装fun_orm
 
 页面路由规则：
     //路由中包含/USR/即说明该页面需要登录
@@ -18,6 +17,10 @@
                 https://blog.csdn.net/hexingen/article/details/78504814
                 https://github.com/googlesamples/easypermissions
         }
+
+
+#20190510
+    1、引入ObjectBox作为ORM框架，封装OrmService
 
 #20190509
     1、完成fun_push组件，集成极光推送
