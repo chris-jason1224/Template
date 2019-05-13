@@ -21,7 +21,12 @@
           "name": "age"
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "id": "1:3026648496123154551",
+          "name": "teachers"
+        }
+      ]
     },
     {
       "id": "2:4786428463484096888",
@@ -53,8 +58,6 @@
   "retiredEntityUids": [],
   "retiredIndexUids": [],
   "retiredPropertyUids": [],
-  "retiredRelationUids": [
-    3026648496123154551
-  ],
+  "retiredRelationUids": [],
   "version": 1
 }

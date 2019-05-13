@@ -4,6 +4,9 @@ import com.cj.common.model.base.IBaseObject;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Index;
+import io.objectbox.annotation.TargetIdProperty;
+import io.objectbox.relation.ToMany;
 
 /**
  * Author:chris - jason

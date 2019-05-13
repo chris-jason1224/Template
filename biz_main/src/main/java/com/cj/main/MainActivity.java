@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -53,7 +52,6 @@ import com.cj.utils.io.IOUtil;
 import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,7 +60,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import io.objectbox.query.Query;
 
 
@@ -74,6 +71,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout mLLParent;
     private TextView mTVState;
     private ImageView mIVTest;
+
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -118,7 +116,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
-
         bt.registerBTStateObserver(new BTStateObserver() {
             @Override
             public void onStateChanged(BTState btState) {
@@ -137,6 +134,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         mTVState = fb(R.id.tv_state);
         mIVTest = fb(R.id.iv_test);
+
 
         fb(R.id.goto_biz_login).setOnClickListener(this);
         fb(R.id.alert).setOnClickListener(this);
@@ -173,10 +171,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         if (R.id.get == vid) {
             //List<StudentEntity> list =orm.getAll(StudentEntity.class);
-
-            Query<StudentEntity> query = orm.QueryBuilder(StudentEntity.class).equal(StudentEntity_.id, 1).build();
+            Query<StudentEntity> query = orm.QueryBuilder(StudentEntity.class).build();
             List<StudentEntity> list = query.find();
-
 
             if (!ListUtil.isEmpty(list)) {
                 String json = JSONUtils.javaObject2JsonString(list);
@@ -381,7 +377,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (R.id.encrypt == vid) {
             //AESUtil.getInstance().encrypt("");
             ProgressUtil.getInstance().showLoading();
-
             return;
         }
 
@@ -406,10 +401,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //打开biz-login module
         if (R.id.goto_biz_login == vid) {
-            ArrayList<Integer> list = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                list.add(i);
-            }
             ARouter.getInstance().build("/biz_login/ACT/com.cj.login.LoginActivity").navigation();
             return;
         }
