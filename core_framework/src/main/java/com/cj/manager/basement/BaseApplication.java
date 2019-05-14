@@ -9,15 +9,12 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.cj.manager.manager.ModuleManager;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 
 public class BaseApplication extends Application {
 
@@ -39,7 +36,6 @@ public class BaseApplication extends Application {
 
     public BaseApplication() {}
 
-
     public static BaseApplication getInstance() {
         return sInstance;
     }
@@ -60,8 +56,10 @@ public class BaseApplication extends Application {
             ModuleManager.getInstance().loadModules();
 
             mAppDelegateList = ModuleManager.getInstance().getAppDelegateList();
-            for (IModuleApplicationDelegate delegate : mAppDelegateList) {
-                delegate.onCreate(this);
+            if(mAppDelegateList!=null && mAppDelegateList.size()>0){
+                for (IModuleApplicationDelegate delegate : mAppDelegateList) {
+                    delegate.onCreate(this);
+                }
             }
         }
 
@@ -77,32 +75,43 @@ public class BaseApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        for (IModuleApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onTerminate();
+        if(mAppDelegateList!=null && mAppDelegateList.size()>0){
+            for (IModuleApplicationDelegate delegate : mAppDelegateList) {
+                delegate.onTerminate();
+            }
         }
     }
 
     @Override
     public void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
-        for (IModuleApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onConfigurationChanged(configuration);
+        if(mAppDelegateList!=null && mAppDelegateList.size()>0){
+            for (IModuleApplicationDelegate delegate : mAppDelegateList) {
+                delegate.onConfigurationChanged(configuration);
+            }
         }
+
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        for (IModuleApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onLowMemory();
+        if(mAppDelegateList!=null && mAppDelegateList.size()>0){
+            for (IModuleApplicationDelegate delegate : mAppDelegateList) {
+                delegate.onLowMemory();
+            }
         }
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        for (IModuleApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onTrimMemory(level);
+        if(mAppDelegateList!=null && mAppDelegateList.size()>0){
+            for (IModuleApplicationDelegate delegate : mAppDelegateList) {
+                if(delegate!=null){
+                    delegate.onTrimMemory(level);
+                }
+            }
         }
     }
 

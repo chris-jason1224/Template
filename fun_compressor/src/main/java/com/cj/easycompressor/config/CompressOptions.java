@@ -5,7 +5,7 @@ package com.cj.easycompressor.config;
  */
 
 /**
- * 图片压缩配置，单例，可在初始化EasyCompressor时设置压缩参数
+ * EasyCompressor压缩参数
  */
 public class CompressOptions {
 
