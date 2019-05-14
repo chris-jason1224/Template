@@ -76,7 +76,7 @@ dependencies {
         //只需要在app中依赖fun_aop module，其他module 用 provide only
         api project(':fun_aop')
     }
-
+    
     api project(':fun_business')
     api project(':fun_compressor')
     api project(':fun_bluetooth')

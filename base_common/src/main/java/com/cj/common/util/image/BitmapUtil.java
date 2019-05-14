@@ -4,9 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-
-import junit.framework.Assert;
-
 import java.io.ByteArrayOutputStream;
 
 public class BitmapUtil {
@@ -46,7 +43,6 @@ public class BitmapUtil {
     
     //将本地图片生成缩略图
     public Bitmap extractThumbNail(final String path, final int height, final int width, final boolean crop) {
-        Assert.assertTrue(path != null && !path.equals("") && height > 0 && width > 0);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
 
