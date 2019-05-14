@@ -17,7 +17,6 @@
             <option value="$PROJECT_DIR$/core_jutils" />
             <option value="$PROJECT_DIR$/core_log" />
             <option value="$PROJECT_DIR$/core_processor" />
-            <option value="$PROJECT_DIR$/core_router" />
             <option value="$PROJECT_DIR$/core_ui" />
             <option value="$PROJECT_DIR$/fun_aop" />
             <option value="$PROJECT_DIR$/fun_bluetooth" />

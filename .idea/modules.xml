@@ -12,7 +12,6 @@
       <module fileurl="file://$PROJECT_DIR$/core_jutils/core_jutils.iml" filepath="$PROJECT_DIR$/core_jutils/core_jutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/core_log/core_log.iml" filepath="$PROJECT_DIR$/core_log/core_log.iml" />
       <module fileurl="file://$PROJECT_DIR$/core_processor/core_processor.iml" filepath="$PROJECT_DIR$/core_processor/core_processor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_router/core_router.iml" filepath="$PROJECT_DIR$/core_router/core_router.iml" />
       <module fileurl="file://$PROJECT_DIR$/core_ui/core_ui.iml" filepath="$PROJECT_DIR$/core_ui/core_ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_aop/fun_aop.iml" filepath="$PROJECT_DIR$/fun_aop/fun_aop.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" filepath="$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" />

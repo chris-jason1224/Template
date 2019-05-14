@@ -40,14 +40,13 @@ android {
 
 dependencies {
     //implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    implementation "com.android.support:design:${rootProject.ext.supportLibraryVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintVersion}"
 
     //    loadSir
     api "com.kingja.loadsir:loadsir:${rootProject.ext.loadSirVersion}"
-    //    ARouter
-    annotationProcessor "com.alibaba:arouter-compiler:${rootProject.ext.arouterAnnotationProcessor}"
+
     //    Rx系列
     api "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidVersion}"
     api "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJavaVersion}"
@@ -58,7 +57,6 @@ dependencies {
     //    api "com.squareup.retrofit2:converter-gson:${rootProject.ext.gsonConvertVersion}"
     api project(':core_framework')
     api project(':core_ui')
-    api project(':core_router')
     api project(':core_log')
     api project(':core_jutils')
     api files('libs/adapter-rxjava2-2.4.0.jar')
@@ -93,6 +91,10 @@ dependencies {
     api "com.facebook.fresco:animated-webp:${rootProject.frescoSupWebPAnimationVersion}"
     //支持WebP静态图
     api "com.facebook.fresco:webpsupport:${rootProject.frescoSupWebPVersion}"
+
+    //ARouter
+    api "com.alibaba:arouter-api:${rootProject.ext.arouterApiVersion}"
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
 
 
 }
