@@ -1,5 +1,4 @@
 package com.cj.fun_push;
-
 import android.content.Context;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.provider.fun$push.IPushProvider;
@@ -14,7 +13,9 @@ import com.cj.common.provider.fun$push.PushObserver;
 
 @Route(path = "/fun_push/SEV/com.cj.fun_push.PushService")
 public class PushService implements IPushProvider {
+
     private Context context;
+
     @Override
     public void registerPushObserver(PushObserver observer) {
         synchronized (PushService.class){

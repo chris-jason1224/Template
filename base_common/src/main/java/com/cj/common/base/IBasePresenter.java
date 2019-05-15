@@ -3,13 +3,11 @@ package com.cj.common.base;
 /**
  * Created by mayikang on 2018/8/3.
  */
-
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * Presenter层的基础约束
@@ -19,8 +17,6 @@ import android.support.annotation.Nullable;
 public interface IBasePresenter<V>  extends LifecycleObserver{
 
      void attachView(V v);
-
-     void detachView();
 
     //View层执行onDestroy时会回调到此方法
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

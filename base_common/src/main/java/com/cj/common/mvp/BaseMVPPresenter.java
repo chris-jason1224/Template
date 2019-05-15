@@ -33,8 +33,8 @@ public class BaseMVPPresenter<V extends IBaseView> implements IBasePresenter<V> 
         mAPIStore= RetrofitFactory.getInstance().createApi(APIStore.class);
     }
 
-    @Override
-    public void detachView() {
+
+    private void detachView() {
 
         if(reference!=null){
             reference.clear();

@@ -1,14 +1,10 @@
 package com.cj.log;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import com.cj.annontations.module.ModuleRegister;
 import com.cj.log.util.CrashHandler;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -12,15 +12,6 @@ android {
         resourcePrefix "fun_aop_"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        if (!isModuleModle.toBoolean()) {
-            //ARouter配置
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [AROUTER_MODULE_NAME: project.getName()]
-                    includeCompileClasspath true
-                }
-            }
-        }
 
     }
 

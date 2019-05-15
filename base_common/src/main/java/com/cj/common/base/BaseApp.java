@@ -3,7 +3,6 @@ package com.cj.common.base;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.BuildConfig;
 import com.cj.common.db.DBCenter;
