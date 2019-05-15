@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/fun_bluetooth" />
             <option value="$PROJECT_DIR$/fun_business" />
             <option value="$PROJECT_DIR$/fun_compressor" />
+            <option value="$PROJECT_DIR$/fun_lbs" />
             <option value="$PROJECT_DIR$/fun_push" />
           </set>
         </option>
