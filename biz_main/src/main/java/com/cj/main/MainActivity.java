@@ -1,9 +1,12 @@
 package com.cj.main;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,7 +21,6 @@ import com.cj.common.base.BaseActivity;
 import com.cj.common.db.IOrm;
 import com.cj.common.db.OrmUtil;
 import com.cj.common.model.StudentEntity;
-import com.cj.common.model.StudentEntity_;
 import com.cj.common.provider.fun$bluetooth.BTState;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
 import com.cj.common.provider.fun$bluetooth.IBTProvider;
@@ -34,6 +36,9 @@ import com.cj.common.provider.fun$business.share.ShareParams;
 import com.cj.common.provider.fun$business.share.WeChatShareParams;
 import com.cj.common.provider.fun$compressor.compress.ICompressCallback;
 import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
+import com.cj.common.provider.fun$lbs.ILBSProvider;
+import com.cj.common.provider.fun$lbs.ILocateResultCallback;
+import com.cj.common.provider.fun$lbs.LocationInfoEntity;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.JSONUtils;
 import com.cj.common.util.ProgressUtil;
@@ -52,6 +57,7 @@ import com.cj.utils.io.IOUtil;
 import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,18 +66,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import io.objectbox.query.Query;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
 
     private SimpleDraweeView draweeView;
     private Toolbar toolbar;
     private LinearLayout mLLParent;
     private TextView mTVState;
     private ImageView mIVTest;
-
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -83,6 +91,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     ICompressProvider compress;
     @Autowired(name = "/fun_bluetooth/SEV/com.cj.bluetooth.BTService")
     IBTProvider bt;
+    @Autowired(name = "/fun_lbs/SEV/com.cj.fun_lbs.LBSService")
+    ILBSProvider lbs;
 
     private IOrm orm = new OrmUtil();
 
@@ -131,7 +141,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         draweeView = fb(R.id.drawee);
         toolbar = fb(R.id.base_common_toolbar);
         mLLParent = fb(R.id.ll_parent);
-
         mTVState = fb(R.id.tv_state);
         mIVTest = fb(R.id.iv_test);
 
@@ -153,6 +162,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fb(R.id.async).setOnClickListener(this);
         fb(R.id.put).setOnClickListener(this);
         fb(R.id.get).setOnClickListener(this);
+        fb(R.id.to_locate).setOnClickListener(this);
+        fb(R.id.to_map).setOnClickListener(this);
     }
 
     @ExecutionTimeTrace
@@ -161,6 +172,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if(R.id.to_locate == vid){
+            //6.0以上系统动态申请定位权限
+            if(Build.VERSION.SDK_INT >= 23 && getApplicationInfo().targetSdkVersion >= 23){
+                if(!EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
+                    EasyPermissions.requestPermissions(this,"请授予我定位权限",1,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    return;
+                }
+            }
+
+
+            lbs.startLocate(new ILocateResultCallback() {
+                @Override
+                public void onLocation(LocationInfoEntity info) {
+                    if(info!=null){
+                        CJLog.getInstance().log_e("定位信息："+info.toString());
+                    }
+                }
+            });
+        }
+
+        if(R.id.to_map == vid){
+            ARouter.getInstance().build("/fun_lbs/ACT/map").navigation();
+        }
 
         if (R.id.put == vid) {
             StudentEntity stu = new StudentEntity();
@@ -448,4 +483,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        lbs.startLocate(new ILocateResultCallback() {
+            @Override
+            public void onLocation(LocationInfoEntity info) {
+                if(info!=null){
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+
+    }
 }

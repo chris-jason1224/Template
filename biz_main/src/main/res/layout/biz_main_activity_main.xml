@@ -193,6 +193,18 @@
                     android:layout_height="wrap_content"
                     android:text="Get" />
 
+                <Button
+                    android:id="@+id/to_locate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="定位" />
+
+                <Button
+                    android:id="@+id/to_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Map" />
+
             </LinearLayout>
 
         </LinearLayout>

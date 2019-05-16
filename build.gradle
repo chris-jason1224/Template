@@ -22,7 +22,6 @@ buildscript {
         //ObjectBox插件
         classpath "io.objectbox:objectbox-gradle-plugin:$objectBoxVersion"
 
-
     }
 }
 

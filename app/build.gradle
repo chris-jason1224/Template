@@ -35,6 +35,7 @@ android {
                 JPUSH_PKGNAME : "${applicationId}",
                 JPUSH_APPKEY : "ebc918c62b95b99795db7fab", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "Template-debug-channel", //暂时填写默认值即可.
+                GAO_DE_MAP_KEY : "89be9f853395b8c3ee9f9241ddc9c6c8",//高德地图key
         ]
 
 
@@ -60,11 +61,12 @@ android {
 //因为app模块依赖了fun-business模块，而fun-business模块依赖了支付宝sdk（aar），所以在app模块也需要依赖上路径
 repositories{
     flatDir {
-        dirs 'libs','../fun_business/libs'
+        dirs 'libs','../fun_business/libs','../fun_lbs/libs'
     }
 }
 
 dependencies {
+    testImplementation 'junit:junit:4.12'
     implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintVersion}"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -75,12 +77,14 @@ dependencies {
         api project(':biz_login')
         //只需要在app中依赖fun_aop module，其他module 用 provide only
         api project(':fun_aop')
+        api project(':fun_push')
     }
     
     api project(':fun_business')
     api project(':fun_compressor')
     api project(':fun_bluetooth')
-    api project(':fun_push')
+
+    api project(':fun_lbs')
 
 }
 
