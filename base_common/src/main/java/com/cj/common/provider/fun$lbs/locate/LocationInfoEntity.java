@@ -1,4 +1,4 @@
-package com.cj.common.provider.fun$lbs;
+package com.cj.common.provider.fun$lbs.locate;
 
 
 

@@ -1,5 +1,7 @@
 package com.cj.common.provider.fun$lbs;
 
+import com.cj.common.provider.fun$lbs.locate.LocationInfoEntity;
+
 /**
  * Author:chris - jason
  * Date:2019-05-16.

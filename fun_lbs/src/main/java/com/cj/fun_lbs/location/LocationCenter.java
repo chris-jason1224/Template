@@ -8,13 +8,12 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.cj.common.exception.NotInitException;
 import com.cj.common.provider.fun$lbs.ILocateResultCallback;
-import com.cj.common.provider.fun$lbs.LocationInfoEntity;
+import com.cj.common.provider.fun$lbs.locate.LocationInfoEntity;
 import com.cj.log.CJLog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -42,6 +41,10 @@ public class LocationCenter {
         return Holder.instance;
     }
 
+    /**
+     * this method must invoke firstly
+     * @param con
+     */
     public void register(Context con) {
         if (context == null) {
             context = con;

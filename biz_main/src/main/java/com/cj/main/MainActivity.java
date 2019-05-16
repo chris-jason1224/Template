@@ -38,7 +38,7 @@ import com.cj.common.provider.fun$compressor.compress.ICompressCallback;
 import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
 import com.cj.common.provider.fun$lbs.ILBSProvider;
 import com.cj.common.provider.fun$lbs.ILocateResultCallback;
-import com.cj.common.provider.fun$lbs.LocationInfoEntity;
+import com.cj.common.provider.fun$lbs.locate.LocationInfoEntity;
 import com.cj.common.util.AndroidSystemUtil;
 import com.cj.common.util.JSONUtils;
 import com.cj.common.util.ProgressUtil;
@@ -64,11 +64,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import io.objectbox.query.Query;
-import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 
