@@ -7,7 +7,11 @@
 
 ##更新日志##
 
-    #20190310
+    #20190517
+        1、fun_lbs封装定位服务
+        2、fun_lbs封装BaseMapFragment地图
+
+    #20190510
         1、引入ObjectBox作为orm框架，封装OrmService
 
 
