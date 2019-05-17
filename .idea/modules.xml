@@ -18,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/fun_business/fun_business.iml" filepath="$PROJECT_DIR$/fun_business/fun_business.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_compressor/fun_compressor.iml" filepath="$PROJECT_DIR$/fun_compressor/fun_compressor.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_lbs/fun_lbs.iml" filepath="$PROJECT_DIR$/fun_lbs/fun_lbs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fun_media/fun_media.iml" filepath="$PROJECT_DIR$/fun_media/fun_media.iml" />
       <module fileurl="file://$PROJECT_DIR$/fun_push/fun_push.iml" filepath="$PROJECT_DIR$/fun_push/fun_push.iml" />
     </modules>
   </component>
