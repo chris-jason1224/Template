@@ -2,9 +2,7 @@ package com.cj.fun_lbs;
 
 import android.content.Context;
 import android.content.res.Configuration;
-
 import com.cj.annontations.module.ModuleRegister;
-import com.cj.log.util.CrashHandler;
 import com.cj.manager.module.interfaces.IModuleApplicationDelegate;
 
 import java.util.Map;
