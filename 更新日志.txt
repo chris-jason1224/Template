@@ -11,6 +11,11 @@
         {@link  https://blog.csdn.net/hexingen/article/details/78504814  、  https://github.com/googlesamples/easypermissions }
 
 #更新日志
+
+    #20190517
+            1、fun_lbs封装定位服务
+            2、fun_lbs封装BaseMapFragment地图
+            
     #20190510
         1、引入ObjectBox作为ORM框架，封装OrmService
 
