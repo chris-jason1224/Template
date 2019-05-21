@@ -138,7 +138,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     //初始化LoadSir
     private void initLoadSir(View view) {
-
+        if(view == null){
+            return;
+        }
         loadService = LoadSir.getDefault().register(view == null ? this : view, new Callback.OnReloadListener() {
 
             @Override

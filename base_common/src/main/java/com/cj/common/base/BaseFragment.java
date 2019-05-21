@@ -31,13 +31,13 @@ import com.kingja.loadsir.core.Transport;
 /**
  * 封装的 Fragment 基类
  */
-public abstract class BaseFragment extends Fragment implements View.OnClickListener{
+public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
     private LoadService loadService;
     private TextView mTVEmpty, mTVTimeOut;
 
     //是否懒加载
-    private boolean isLazyLoad=true;
+    private boolean isLazyLoad = true;
     /**
      * 宿主的activity
      **/
@@ -74,6 +74,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     /**
      * 加载碎片
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -92,7 +93,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     //初始化LoadSir
     private void initLoadSir(View view) {
-
+        if (view == null) {
+            return;
+        }
         loadService = LoadSir.getDefault().register(view == null ? mRootView : view, new Callback.OnReloadListener() {
 
             @Override
@@ -169,8 +172,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mIsPrepare=true;
-        isLazyLoad=setLazyLod();
+        mIsPrepare = true;
+        isLazyLoad = setLazyLod();
 
         //绑定控件，初始化布局
         initView();
@@ -179,7 +182,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         initLoadSir(initStatusLayout());
 
         //非懒加载模式，直接初始化数据
-        if(!isLazyLoad){
+        if (!isLazyLoad) {
             initData();
         }
 
@@ -209,7 +212,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         //只有碎片加载完成和可见的时候，执行懒加载数据
         if (mIsPrepare && mIsVisible) {
             //只需要懒加载一次
-            mIsPrepare=false;
+            mIsPrepare = false;
             initData();
         }
     }
@@ -233,7 +236,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
 
     @Deprecated
-    public LoadService getLoadService(){
+    public LoadService getLoadService() {
         return loadService;
     }
 
