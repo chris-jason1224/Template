@@ -18,13 +18,14 @@ public  abstract class BaseMVPFragment<P extends IBasePresenter> extends BaseFra
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         if(mPresenter==null){
             mPresenter=createPresenter();
             //管理presenter层生命周期
             getLifecycle().addObserver(mPresenter);
             mPresenter.attachView(this);
         }
+        super.onCreate(savedInstanceState);
     }
 
     protected abstract P createPresenter();
