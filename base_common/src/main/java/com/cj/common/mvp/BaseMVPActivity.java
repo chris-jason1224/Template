@@ -19,7 +19,7 @@ public abstract class BaseMVPActivity<P extends IBasePresenter> extends BaseActi
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
 
         //绑定Presenter
         if(mPresenter==null){
@@ -28,6 +28,7 @@ public abstract class BaseMVPActivity<P extends IBasePresenter> extends BaseActi
             //管理presenter层的生命周期
             getLifecycle().addObserver(mPresenter);
         }
+        super.onCreate(savedInstanceState);
     }
 
     protected abstract P createPresenter();
