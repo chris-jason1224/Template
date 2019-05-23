@@ -50,7 +50,14 @@ public class NetUtil {
 
         if (cm == null)
             return false;
-        return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+        //可能报空
+        NetworkInfo info =cm.getActiveNetworkInfo();
+
+        if(info!=null && info.getType() == ConnectivityManager.TYPE_WIFI){
+            return true;
+        }
+
+        return false;
 
     }
 

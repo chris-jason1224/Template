@@ -30,6 +30,7 @@ dependencies {
     //不能依赖传递，必须使用api或者compile的方式
     api "org.aspectj:aspectjrt:${rootProject.ext.aspectJRTVersion}"
 
+    implementation project(':base_common')
 
 }
 

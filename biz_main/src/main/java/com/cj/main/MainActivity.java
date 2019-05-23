@@ -49,6 +49,7 @@ import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
+import com.cj.fun_aop.annotation.WifiNeed;
 import com.cj.log.CJLog;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
@@ -164,6 +165,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fb(R.id.to_map).setOnClickListener(this);
     }
 
+    @WifiNeed
     @ExecutionTimeTrace
     @SingleSubmit
     @Override
@@ -461,6 +463,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         //跳转TestActivity
         if (R.id.goto_test == vid) {
+
             ARouter.getInstance().build("/biz_main/ACT/com.cj.main.test.TestActivity").navigation();
             return;
         }
