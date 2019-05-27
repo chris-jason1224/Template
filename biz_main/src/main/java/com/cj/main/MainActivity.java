@@ -165,7 +165,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fb(R.id.to_map).setOnClickListener(this);
     }
 
-    @WifiNeed
     @ExecutionTimeTrace
     @SingleSubmit
     @Override
