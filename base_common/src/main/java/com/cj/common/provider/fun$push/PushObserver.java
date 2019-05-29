@@ -8,6 +8,11 @@ package com.cj.common.provider.fun$push;
  */
 public interface PushObserver {
 
-    void onPush(String object);
+    /**
+     *
+     * @param message 消息主体
+     * @param extras 附带数据
+     */
+    void onPush(String message,Object ...extras);
 
 }

@@ -85,55 +85,38 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //1.加载布局 XML 文件
         mRootView = inflater.inflate(setLayoutResource(), container, false);
-        return mRootView;
-    }
 
-    //注册多状态缺省页面
-    public abstract View initStatusLayout();
-
-    //初始化LoadSir
-    private void initLoadSir(View view) {
-        if (view == null) {
-            return;
-        }
-        loadService = LoadSir.getDefault().register(view == null ? mRootView : view, new Callback.OnReloadListener() {
+        //注册loadSir
+        loadService = LoadSir.getDefault().register(mRootView, new Callback.OnReloadListener() {
 
             @Override
             public void onReload(View v) {
                 // 重新加载逻辑
-
             }
         }, new Convertor<StateEntity>() {
             @Override
             public Class<? extends Callback> map(StateEntity stateEntity) {
                 //默认是success
                 Class<? extends Callback> result = SuccessCallback.class;
-
                 switch (stateEntity.getState()) {
-
                     //显示成功页面 --> 原始页面
                     case StateEntity.StateCode.SUCCESS_LAYOUT:
                         result = SuccessCallback.class;
                         break;
-
                     //显示空数据页面 --> OnEmptyStateCallback
                     case StateEntity.StateCode.EMPTY_LAYOUT:
                         result = OnEmptyStateCallback.class;
-
                         //修改文字
                         if (!TextUtils.isEmpty(stateEntity.getMessage())) {
                             if (mTVEmpty != null) {
                                 mTVEmpty.setText(stateEntity.getMessage());
                             }
                         }
-
                         break;
-
                     //显示占位图页面 --> onPlaceHolderCallback
                     case StateEntity.StateCode.PLACEHOLDER_LAYOUT:
                         result = OnPlaceHolderCallback.class;
                         break;
-
                     //显示连接超时页面 --> onTimeoutStateLayout
                     case StateEntity.StateCode.TIMEOUT_LAYOUT:
                         result = OnTimeoutStateCallback.class;
@@ -144,7 +127,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                         }
                         break;
                 }
-
                 return result;
             }
         });
@@ -167,6 +149,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                 }
             }
         });
+
+        return loadService.getLoadLayout();
     }
 
     @Override
@@ -177,9 +161,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
         //绑定控件，初始化布局
         initView();
-
-        //初始化多布局
-        initLoadSir(initStatusLayout());
 
         //非懒加载模式，直接初始化数据
         if (!isLazyLoad) {

@@ -12,6 +12,9 @@
 
 #更新日志
 
+    #20190524
+        1、wifi环境监测切面
+
     #20190517
             1、fun_lbs封装定位服务
             2、fun_lbs封装BaseMapFragment地图

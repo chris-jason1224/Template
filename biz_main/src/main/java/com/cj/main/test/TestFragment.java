@@ -15,16 +15,15 @@ import com.cj.main.R;
  */
 public class TestFragment extends BaseFragment {
 
-    private LinearLayout mLL;
-
-    @Override
-    public View initStatusLayout() {
-        return mLL;
-    }
 
     @Override
     protected void initView() {
-        mLL = fb(R.id.ll_bb);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showTimeoutLayout("ahahah");
+            }
+        },2000);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class TestFragment extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               showEmptyLayout("暂时没有数据啦啦啦啦~");
+               showTimeoutLayout("暂时没有数据啦啦啦啦~");
             }
         },2000);
     }

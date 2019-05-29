@@ -38,6 +38,12 @@ android {
                 GAO_DE_MAP_KEY : "89be9f853395b8c3ee9f9241ddc9c6c8",//高德地图key
         ]
 
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a'
+            // 还可以添加 'arm64-v8a' ，'x86', 'x86_64', 'mips', 'mips64'
+        }
+
 
     }
     buildTypes {

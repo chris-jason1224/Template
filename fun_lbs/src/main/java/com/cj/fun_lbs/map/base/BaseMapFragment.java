@@ -43,11 +43,6 @@ public class BaseMapFragment extends BaseMVPFragment<IBaseMapPresenter> implemen
     }
 
     @Override
-    public View initStatusLayout() {
-        return null;
-    }
-
-    @Override
     protected void initView() {
         textureMapView = fb(R.id.texture_map_view);
     }

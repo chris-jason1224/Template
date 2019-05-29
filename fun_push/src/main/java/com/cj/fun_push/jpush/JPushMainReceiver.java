@@ -1,12 +1,20 @@
 package com.cj.fun_push.jpush;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import com.cj.fun_push.PushCenter;
+import com.cj.fun_push.R;
 import com.cj.log.CJLog;
 
 import org.json.JSONException;
@@ -43,8 +51,6 @@ public class JPushMainReceiver extends BroadcastReceiver {
              * 接收到推送下来的自定义消息
              */
             if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-                String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
                 processCustomMessage(context, bundle);
                 return;
             }
@@ -127,12 +133,74 @@ public class JPushMainReceiver extends BroadcastReceiver {
 
     //处理接收到的消息
     private void processCustomMessage(Context context, Bundle bundle) {
-
+        //message一般是推送下来的主要消息体
         String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        //extras一般是json格式的附带数据
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-
-        PushCenter.getInstance().dispatchPush(message);
-
+        PushCenter.getInstance().dispatchPush(message,extras);
     }
+
+
+    /****弹出通知消息*********/
+//    private void showNotification(Context c,String channelID,String channelName,String title,String message){
+//
+//        Intent intent = new Intent();
+//        intent.setPackage(c.getPackageName());//android 8.0 适配静态广播无法接受隐式intent的问题
+//
+//        //todo 根据业务需求决定intent跳转到哪个页面
+//        intent.setClass(c, BonusDetailsActivity.class);
+//        intent.putExtra("id", entity.getBizID());
+//
+//        NotificationManager notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(c, "jpush");
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            builder.setSmallIcon(R.mipmap.app_logo);
+//            //Android 8.0 必须添加渠道
+//            NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+//            notificationManager.createNotificationChannel(channel);
+//            builder.setChannelId(channelID);
+//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            //Android 7.0
+//            builder.setSmallIcon(R.mipmap.app_logo);
+//        } else {
+//            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+//                //android 6.0  必须设置大图和小图，小图的图片尺寸24x24，图案透明
+//                builder.setLargeIcon(BitmapFactory.decodeResource(c.getResources(), R.mipmap.app_logo));
+//                builder.setSmallIcon(R.mipmap.notification_samll_app_logo);
+//                builder.setColor(c.getResources().getColor(R.color.colorPrimary));
+//            } else {
+//                //Android 6.0以下
+//                builder.setSmallIcon(R.mipmap.app_logo);
+//            }
+//        }
+//        builder.setContentTitle(title);
+//        //魅族手机的坑
+//        message = message.length() > 44 ? message.substring(0, 44) : message;
+//        message = message.replace("!", "。").replace("！", "。");
+//        builder.setContentText(message);
+//        //设置点击通知跳转页面后，通知消失
+//        builder.setDefaults(Notification.DEFAULT_ALL);
+//        builder.setAutoCancel(true);
+//
+//
+//        //设置优先级
+//        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+//        builder.setWhen(System.currentTimeMillis());
+//        PendingIntent pi = null;
+//        if (intent.hasExtra("pushType")) {
+//            pi = PendingIntent.getBroadcast(c, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        } else {
+//            pi = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        }
+//        builder.setContentIntent(pi);
+//        Notification notification = builder.build();
+//        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+//        int notifyId = (int) System.currentTimeMillis();
+//
+//        notificationManager.notify(notifyId, notification);
+//    }
+
 
 }

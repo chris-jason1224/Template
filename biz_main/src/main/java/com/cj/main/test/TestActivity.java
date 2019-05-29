@@ -2,18 +2,26 @@ package com.cj.main.test;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.mvp.BaseMVPActivity;
 import com.cj.main.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Route(path = "/biz_main/ACT/com.cj.main.test.TestActivity")
 public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITestView {
 
     Fragment map;
+    private List<Fragment> fragmentList = new ArrayList<>();
+    private ViewPager mVP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +42,28 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
     protected void initData() {
         TestFragment fragment = new TestFragment();
         map = (Fragment) ARouter.getInstance().build("/fun_lbs/FRG/com.cj.fun_lbs.map.base.BaseMapFragment").navigation();
-        getSupportFragmentManager().beginTransaction().add(R.id.box, map).show(fragment).commit();
+//        getSupportFragmentManager().beginTransaction().add(R.id.box, map).show(fragment).commit();
+
+        fragmentList.add(fragment);
+        fragmentList.add(map);
+
+        mVP.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int i) {
+                return fragmentList.get(i);
+            }
+
+            @Override
+            public int getCount() {
+                return fragmentList.size();
+            }
+        });
+
     }
 
     @Override
     protected void initView() {
-
+        mVP = fb(R.id.vp);
     }
 
     @Override

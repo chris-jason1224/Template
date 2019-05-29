@@ -56,9 +56,10 @@ public class PushCenter {
         }
     }
 
-    public void dispatchPush(String object) {
+    public void dispatchPush(String message,Object ... extras) {
         for (PushObserver observer : observerList) {
-            observer.onPush(object);
+            observer.onPush(message,extras);
+            //observer.onPush(message);
         }
     }
 
