@@ -9,7 +9,7 @@ package com.cj.common.provider.fun$business.auth;
 
 public class AuthParams<T> {
 
-    public int platform;//授权平台
+    public int platform;//授权平台 字典值为AuthCenter.AuthPlatform
 
     public T data;//发起授权的参数
 
