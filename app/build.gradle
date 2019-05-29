@@ -62,6 +62,12 @@ android {
         preDexLibraries = false
     }
 
+//   指定编译jdk版本
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
 }
 
 //因为app模块依赖了fun-business模块，而fun-business模块依赖了支付宝sdk（aar），所以在app模块也需要依赖上路径
