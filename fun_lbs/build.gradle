@@ -46,6 +46,6 @@ dependencies {
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
         annotationProcessor project(':core_processor')
     }
-    api files('libs/AMap3DMap_6.8.0_AMapSearch_6.5.0_AMapLocation_4.6.0_20190423.jar')
     implementation "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintVersion}"
+    api files('libs/AMap3DMap_6.8.0_AMapNavi_6.7.0_AMapSearch_6.5.0_AMapTrack_1.0.0_AMapLocation_4.6.0_20190423.jar')
 }
