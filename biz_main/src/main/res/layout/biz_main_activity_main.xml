@@ -200,10 +200,10 @@
                     android:text="定位" />
 
                 <Button
-                    android:id="@+id/to_map"
+                    android:id="@+id/calculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Map" />
+                    android:text="Calculate" />
 
             </LinearLayout>
 

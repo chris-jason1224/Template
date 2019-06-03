@@ -1,37 +1,22 @@
 package com.cj.login;
 
-import android.arch.lifecycle.Observer;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-
-
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.cj.annontations.module.ModuleRegister;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.bus.DataBus;
-import com.cj.common.bus.DataBusKey;
-import com.cj.log.CJLog;
+import com.cj.common.ipc.IPC;
+import com.cj.common.ipc.PostDataEntity;
 import com.gyf.barlibrary.ImmersionBar;
 
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
 
-
+    IPC ipc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getLoadService().showSuccess();
-            }
-        },3000);
     }
 
     @Override
@@ -42,7 +27,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -63,7 +47,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        fb(R.id.send1).setOnClickListener(this);
+        fb(R.id.send2).setOnClickListener(this);
     }
 
     @Override
@@ -83,9 +68,18 @@ public class LoginActivity extends BaseActivity {
                 init();
     }
 
-    //重写点击事件
     @Override
     public void onClick(View v) {
+        int vid = v.getId();
+        if(vid == R.id.send1){
+            if(ipc==null){
+                ipc = new IPC(this);
+            }
+            for(int i=0;i<20;i++){
+                ipc.notify2MainProcess(new PostDataEntity(11111,"这是第"+String.valueOf(i+1)+"条消息"));
+            }
+
+        }
 
     }
 

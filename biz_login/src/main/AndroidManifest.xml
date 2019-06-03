@@ -3,7 +3,10 @@
     package="com.cj.login">
 
     <application>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity"
+            android:process=":remote">
+
+        </activity>
     </application>
 
 </manifest>
