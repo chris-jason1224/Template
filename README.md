@@ -2,7 +2,16 @@
 
 #feature
 
-   android组件化
+   android组件化模板：
+                  
+                  a.基础组件
+                  b.日志组件
+                  c.ui组件
+                  d.aop组件
+                  e.蓝牙组件
+                  f.支付、分享、授权组件
+                  g.lbs组件
+                  h.推送组件
    
 
 ##更新日志##
