@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
-
+import android.text.TextUtils;
 import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.exception.NotInitException;
+import com.cj.common.util.LooperUtil;
 import com.cj.common.util.ProcessUtil;
-
 import java.util.concurrent.LinkedBlockingQueue;
-
 
 /**
  * Author:chris - jason
@@ -21,6 +20,19 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Package:com.cj.common.ipc
  * 用于子进程与主进程通信工具
  * 子进程发送消息到主进程：connect2MainProcess
+ * 使用说明：
+ *          1、子进程实例化IPC类，将子进程连接到主进程的服务
+ *
+ *          2、子进程往主进程发送消息：
+ *                                  a、ipc.notify2MainProcess()
+ *                                  b、在主进程中通过DataBusKey.ProcessMainDataEvent来接收来自子进程的消息
+ *          3、主进程往子进程发送消息：
+ *                                  a、在主进程中通过DataBusKey.ProcessMainReceiveDataEvent发送消息
+ *                                  b、在子进程中通过DataBusKey.ProcessSubDataEvent来接收来自主进程的消息
+ *
+ *          4、在子进程Activity.onDestroy方法中调用ipc.shutdown()关闭连接
+ *
+ *          注意：主进程和子进程之间发送消息，一定要先建立两个进程之间的连接关系
  */
 public class IPC {
 
@@ -34,22 +46,22 @@ public class IPC {
     private String pName;//当前进程名
 
     private boolean isBindOk = false;//bindService成功标志位
-
     private boolean isConnectOK = false;//服务是否连接成功
 
-    private LinkedBlockingQueue<PostDataEntity> queue;//消息缓存
+    private LinkedBlockingQueue<PostDataEntity> queue;//消息缓存队列
     private PollTask pollTask;//缓存消息分发线程
 
 
     /**
      * @param context Activity is best
+     * IPC在哪一个进程实例化，哪一个进程就和主进程之间建立了联系
      */
-    public IPC(Context context) {
+    public IPC(Context context){
         this.mContext = context;
 
         //初始化工具类时获取一次进程信息即可
         this.pid = android.os.Process.myPid();
-        pName = ProcessUtil.getProcessName(mContext, pid);
+        pName = ProcessUtil.getProcessNameByPid(mContext, pid);
 
         queue = new LinkedBlockingQueue<>();
 
@@ -59,17 +71,19 @@ public class IPC {
             pollTask.start();
         }
 
-        //连接主进程服务
-        //@remark 连接服务是一个耗时的过程，且不可在子线程中执行，应该先实例化IPC类，再调用发送数据方法
-        connect2MainProcess();
+        //当前进程非主进程，才连接主进程
+        if(!TextUtils.equals(mContext.getPackageName(),pName)){
+            connect2MainProcess();
+        }
     }
 
-    //连接进程service
+    //连接进程service，用于子进程和主进程之间建立通信通道
     private void connect2MainProcess() {
         if (mContext == null) {
             throw new NotInitException(IPC.class);
         }
         Intent intent = new Intent(mContext, ProcessMainService.class);
+        intent.putExtra("pName",pName);
         isBindOk = mContext.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
@@ -151,9 +165,14 @@ public class IPC {
         @Override
         public void onReceiveFromMainProcess(PostDataEntity entity) throws RemoteException {
             if (entity != null) {
-                String data = entity.getData();
+                final String data = entity.getData();
                 //发送数据到子进程（实例化该类的进程）各个注册了DataBusKey.ProcessSubEvent接收器的地方
-                DataBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(), DataBusKey.ProcessSubDataEvent.getT()).setValue(data);
+                LooperUtil.getInstance().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        DataBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(), DataBusKey.ProcessSubDataEvent.getT()).setValue(data);
+                    }
+                });
             }
         }
     };

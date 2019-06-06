@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        if(!isModuleModle.toBoolean()){
+        if (!isModuleModle.toBoolean()) {
             //ARouter配置
             javaCompileOptions {
                 annotationProcessorOptions {
@@ -40,10 +40,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':base_common')
-    if(!isModuleModle.toBoolean()){
+    if (!isModuleModle.toBoolean()) {
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
     }
-
     annotationProcessor project(':core_processor')
 
 }

@@ -1,18 +1,21 @@
 package com.cj.login;
 
+import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.base.BaseActivity;
+import com.cj.common.bus.DataBus;
+import com.cj.common.bus.DataBusKey;
 import com.cj.common.ipc.IPC;
 import com.cj.common.ipc.PostDataEntity;
+import com.cj.log.CJLog;
 import com.gyf.barlibrary.ImmersionBar;
 
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
-
-    IPC ipc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
+
     }
 
     @Override
@@ -43,6 +47,12 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+        DataBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(),DataBusKey.ProcessSubDataEvent.getT()).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                CJLog.getInstance().log_e("LoginAct "+ s);
+            }
+        });
     }
 
     @Override
@@ -72,16 +82,15 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View v) {
         int vid = v.getId();
         if(vid == R.id.send1){
-            if(ipc==null){
-                ipc = new IPC(this);
-            }
-            for(int i=0;i<20;i++){
-                ipc.notify2MainProcess(new PostDataEntity(11111,"这是第"+String.valueOf(i+1)+"条消息"));
-            }
 
         }
 
+        if(vid == R.id.send2){
+            startActivity(new Intent(this,PActivity.class));
+        }
+
     }
+
 
 
 }

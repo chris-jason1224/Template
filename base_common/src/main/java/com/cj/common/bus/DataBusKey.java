@@ -31,11 +31,16 @@ public class DataBusKey {
     //蓝牙连接、配对事件 数据发射、接收 key
     public static final DataBusEntity<Intent> BluetoothEvent = new DataBusEntity<>("BluetoothEvent",Intent.class);
 
+    //主进程接收消息key
+    public static final DataBusEntity<String> ProcessMainReceiveDataEvent = new DataBusEntity<>("ProcessMainReceiveDataEvent",String.class);
+
     //主进程消息通信key
     public static final DataBusEntity<String> ProcessMainDataEvent = new DataBusEntity<>("ProcessMainDataEvent",String.class);
 
     //子进程消息通信key
     public static final DataBusEntity<String> ProcessSubDataEvent = new DataBusEntity<>("ProcessSubDataEvent",String.class);
+
+
 
 
 }
