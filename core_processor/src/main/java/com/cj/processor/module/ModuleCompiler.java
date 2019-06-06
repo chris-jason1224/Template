@@ -39,7 +39,7 @@ public class ModuleCompiler extends AbstractProcessor {
 
         Map<String,String> options = processingEnv.getOptions();
         //这个是gradle文件中 配置的javaCompileOptions
-        String module_name = options.get("module_name");
+        String module_name = options.get("AROUTER_MODULE_NAME");
 
     }
 
@@ -82,7 +82,7 @@ public class ModuleCompiler extends AbstractProcessor {
                 return true;
 
             }else {
-                error("@ModuleRegister注解只能用户类上");
+                error("@ModuleRegister注解只能用于类上");
                 return false;
             }
         }
