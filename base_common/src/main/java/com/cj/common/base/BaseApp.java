@@ -17,6 +17,7 @@ import com.cj.common.states.OnTimeoutStateCallback;
 import com.cj.common.util.SPFUtil;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.manager.basement.BaseApplication;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
 
@@ -57,6 +58,12 @@ public class BaseApp extends BaseApplication {
 
         //初始化DBCenter
         DBCenter.init(this);
+
+        //配置LiveEventBus
+        LiveEventBus.get()
+                .config()
+                .lifecycleObserverAlwaysActive(false)
+                .autoClear(false);
 
     }
 
