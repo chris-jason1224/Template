@@ -6,10 +6,10 @@ buildscript {
     ext.objectBoxVersion = "2.3.4"
 
     repositories {
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
         mavenCentral()
-        maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
     }
     dependencies {
@@ -26,7 +26,9 @@ buildscript {
 }
 
 allprojects {
+
     repositories {
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
 
@@ -35,6 +37,7 @@ allprojects {
         }
 
     }
+
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v4'
     }
@@ -51,8 +54,7 @@ task clean(type: Delete) {
 }
 
 ext {
-
-
+    
     // Sdk and tools
     buildToolsVersion = "28.0.3"
 

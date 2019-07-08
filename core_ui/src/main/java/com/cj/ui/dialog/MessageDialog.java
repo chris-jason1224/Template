@@ -21,12 +21,9 @@ import com.cj.ui.R;
  * Date:2019/4/1.
  * Package:com.cj.ui.dialog
  */
-public class MessageDialog extends Dialog implements View.OnClickListener {
+public class MessageDialog extends BaseDialogView implements View.OnClickListener {
 
-    private Context mContext;
-    private View mContentView;
     private MessageDialogCallback callback;
-
     private TextView mTVMessage;
     private RelativeLayout mRLContentView;
     private RelativeLayout mRLButtonLeft, mRLButtonRight;
@@ -40,49 +37,22 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         super(context);
         this.mContext = context;
         this.callback = callback;
-        initAttr();
     }
 
-    private void initAttr() {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View windowView = inflater.inflate(R.layout.core_ui_base_dialog_layout, null);
-
-        //set view
-        super.setContentView(windowView);
-        this.mContentView = windowView;
-
-        setCancelable(true);//点击外部区域可取消
-        setCanceledOnTouchOutside(true);//点击返回键可取消
-
-        Window window = getWindow();
-        window.setGravity(Gravity.CENTER);//显示在中间
-
-        //设置宽高
-        WindowManager.LayoutParams params = window.getAttributes();
-        Display display = getWindow().getWindowManager().getDefaultDisplay();
-
-        params.width = display.getWidth();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(params);
-
+    @Override
+    protected void bindView(View root) {
         color_black = Color.parseColor("#333333");
         color_red = Color.parseColor("#F3363B");
         color_blue = Color.parseColor("#0070FF");
 
-        //bind view
-        bindView(windowView);
-    }
+        mTVMessage = findViewById(R.id.tv_message);
+        mRLContentView = findViewById(R.id.rl_content_view);
 
-    private void bindView(View root) {
+        mRLButtonLeft = findViewById(R.id.rl_button_left);
+        mTVButtonLeft = findViewById(R.id.tv_button_left);
 
-        mTVMessage = root.findViewById(R.id.tv_message);
-        mRLContentView = root.findViewById(R.id.rl_content_view);
-
-        mRLButtonLeft = root.findViewById(R.id.rl_button_left);
-        mTVButtonLeft = root.findViewById(R.id.tv_button_left);
-
-        mRLButtonRight = root.findViewById(R.id.rl_button_right);
-        mTVButtonRight = root.findViewById(R.id.tv_button_right);
+        mRLButtonRight = findViewById(R.id.rl_button_right);
+        mTVButtonRight = findViewById(R.id.tv_button_right);
 
         mRLButtonLeft.setOnClickListener(this);
         mRLButtonRight.setOnClickListener(this);
@@ -90,7 +60,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        super.onClick(v);
         int i = v.getId();
 
         if (callback != null) {
@@ -103,6 +73,11 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
         }
 
+    }
+
+    @Override
+    protected int setDialogLayout() {
+        return R.layout.core_ui_base_dialog_layout;
     }
 
     public interface MessageDialogCallback {
