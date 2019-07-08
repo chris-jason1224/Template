@@ -1,6 +1,6 @@
 package com.cj.business.auth;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import com.cj.business.auth.wechat.WeChatAuth;
 import com.cj.common.provider.fun$business.auth.AuthParams;

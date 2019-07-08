@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         //android 编译工具插件
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
 
         //沪江 aspectJ插件
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
@@ -70,15 +70,20 @@ ext {
 
     javaVersion = JavaVersion.VERSION_1_8
 
-    // App dependencies version
     supportLibraryVersion = "28.0.0"
-    constraintVersion = "1.1.2"
-    multidexVersion = "1.0.2"
+    multidexVersion = "2.0.0"
+    appCompatVersion = "1.0.2"
+    materialVersion = "1.0.0"
+    constraintVersion = "1.1.3"
+    liveDataVersion = "2.0.0"
+    recyclerViewVersion = "1.0.0"
 
     /************第三方库版本***********/
 //    ARouter
     arouterApiVersion = "1.5.0"
     arouterAnnotationProcessor = "1.2.2"
+
+    vLayoutVersion = "1.3.0"
 
 //    gson
     gsonVersion = "2.8.5"
@@ -133,5 +138,11 @@ ext {
     jpushSdkVersion ="3.2.0"
 //  极光推送核心版本
     jpushCoreVersion = "2.0.0"
+//    LiveDataBus
+    liveDataBusVersion = "1.4.4"
 
+//   测试
+    junitVersion = "1.0.0-beta02"
+
+    runnerVersion = "1.1.0-beta02"
 }

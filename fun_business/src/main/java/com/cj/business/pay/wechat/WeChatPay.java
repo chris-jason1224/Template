@@ -1,23 +1,24 @@
 package com.cj.business.pay.wechat;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.Observer;
+
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.cj.business.Config;
 import com.cj.business.pay.lifecycle.PayEventLifecycleObserver;
 import com.cj.business.pay.IPay;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.util.JSONUtils;
 import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.util.LooperUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.tencent.mm.opensdk.constants.Build;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -29,7 +30,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
  * Package:com.cj.business.pay
  */
 
-public class WeChatPay implements IPay,LifecycleOwner {
+public class WeChatPay implements IPay, LifecycleOwner {
 
     private IPayResultCallback callback;
     private LifecycleRegistry lifecycleRegistry;
@@ -41,7 +42,7 @@ public class WeChatPay implements IPay,LifecycleOwner {
         lifecycleRegistry.addObserver(new PayEventLifecycleObserver());
 
         //注册DataBus接收器
-        DataBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).observe(this,observer);
+        LiveEventBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).observe(this,observer);
     }
 
     @NonNull

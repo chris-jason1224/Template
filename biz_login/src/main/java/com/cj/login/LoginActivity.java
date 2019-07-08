@@ -1,18 +1,16 @@
 package com.cj.login;
-
-import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+
 import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
-import com.cj.common.ipc.IPC;
-import com.cj.common.ipc.PostDataEntity;
 import com.cj.log.CJLog;
 import com.gyf.barlibrary.ImmersionBar;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
@@ -47,7 +45,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        DataBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(),DataBusKey.ProcessSubDataEvent.getT()).observe(this, new Observer<String>() {
+        LiveEventBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(),DataBusKey.ProcessSubDataEvent.getT()).observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 CJLog.getInstance().log_e("LoginAct "+ s);

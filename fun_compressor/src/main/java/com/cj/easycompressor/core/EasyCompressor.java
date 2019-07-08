@@ -1,27 +1,17 @@
 package com.cj.easycompressor.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.cj.easycompressor.callback.BatchCompressCallback;
 import com.cj.easycompressor.callback.CompressCallback;
 import com.cj.easycompressor.config.CompressOptions;
 import com.cj.easycompressor.config.ImageOption;
 import com.cj.easycompressor.util.CompressUtil;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;

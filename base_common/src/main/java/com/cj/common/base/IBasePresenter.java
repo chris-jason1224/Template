@@ -3,18 +3,20 @@ package com.cj.common.base;
 /**
  * Created by mayikang on 2018/8/3.
  */
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.support.annotation.NonNull;
+
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 
 /**
  * Presenter层的基础约束
  * @param <V> View层泛型
  * @Link{https://blog.csdn.net/mq2553299/article/details/79029657}
  */
-public interface IBasePresenter<V>  extends LifecycleObserver{
+public interface IBasePresenter<V>  extends LifecycleObserver {
 
      void attachView(V v);
 

@@ -10,7 +10,7 @@ import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;

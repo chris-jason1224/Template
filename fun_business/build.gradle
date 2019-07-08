@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         resourcePrefix "fun_business_"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         if (!isModuleModle.toBoolean()) {
             //ARouter配置
             javaCompileOptions {
@@ -37,7 +37,8 @@ android {
 dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
     api project(':base_common')
 
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:${rootProject.ext.wechatVersion}"

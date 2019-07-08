@@ -1,20 +1,12 @@
 package com.cj.fun_push.jpush;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import com.cj.fun_push.PushCenter;
-import com.cj.fun_push.R;
 import com.cj.log.CJLog;
 
 import org.json.JSONException;

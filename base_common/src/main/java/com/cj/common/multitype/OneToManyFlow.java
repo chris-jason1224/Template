@@ -17,8 +17,8 @@
 package com.cj.common.multitype;
 
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
+import androidx.annotation.CheckResult;
+import androidx.annotation.NonNull;
 
 /**
  * Process and flow operators for one-to-many.

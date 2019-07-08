@@ -20,7 +20,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         lintOptions {
             abortOnError false
@@ -78,11 +78,12 @@ repositories{
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
     //合并时才依赖各个组件
     if (!isModuleModle.toBoolean()) {
         api project(':biz_main')

@@ -1,32 +1,30 @@
 package com.cj.main;
 
 import android.Manifest;
-import android.arch.lifecycle.Observer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.db.IOrm;
 import com.cj.common.db.OrmUtil;
-import com.cj.common.ipc.PostDataEntity;
 import com.cj.common.model.StudentEntity;
 import com.cj.common.provider.fun$bluetooth.BTState;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
@@ -56,16 +54,15 @@ import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
-import com.cj.fun_aop.annotation.WifiNeed;
 import com.cj.log.CJLog;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
-import com.cj.ui.notify.Alerter.Alerter;
 import com.cj.ui.notify.Alerter.AlerterListener;
 import com.cj.utils.io.IOUtil;
 import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import java.io.File;
 import java.io.IOException;
@@ -145,7 +142,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         });
 
 
-        DataBus.get().with(DataBusKey.ProcessMainDataEvent.getKey(),DataBusKey.ProcessMainDataEvent.getT()).
+        LiveEventBus.get().with(DataBusKey.ProcessMainDataEvent.getKey(),DataBusKey.ProcessMainDataEvent.getT()).
                 observe(this, new Observer<String>() {
                     @Override
                     public void onChanged(@Nullable String entity) {

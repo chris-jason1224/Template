@@ -26,7 +26,7 @@
             android:clipToPadding="false"
             android:padding="@dimen/core_ui_alerter_activity_horizontal_margin">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/core_ui_ivIcon"
                 android:layout_width="@dimen/core_ui_alerter_alert_icn_size"
                 android:layout_height="@dimen/core_ui_alerter_alert_icn_size"

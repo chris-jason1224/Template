@@ -1,6 +1,6 @@
 package com.cj.common.provider.fun$bluetooth;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.template.IProvider;
 

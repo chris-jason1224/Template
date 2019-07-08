@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.cj.log.CJLog;
 import com.cj.log.view.CrashDialog;

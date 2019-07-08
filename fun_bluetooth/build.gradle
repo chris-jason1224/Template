@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         resourcePrefix "fun_bluetooth_"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //ARouter配置
         javaCompileOptions {
             annotationProcessorOptions {
@@ -36,7 +36,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
     api project(':base_common')
 
     if (!isModuleModle.toBoolean()) {

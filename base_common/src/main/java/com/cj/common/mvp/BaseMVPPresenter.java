@@ -1,14 +1,11 @@
 package com.cj.common.mvp;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.support.annotation.NonNull;
-
+import androidx.lifecycle.LifecycleOwner;
+import androidx.annotation.NonNull;
 import com.cj.common.base.IBasePresenter;
 import com.cj.common.base.IBaseView;
 import com.cj.common.http.repository.APIStore;
 import com.cj.common.http.repository.RetrofitFactory;
-import com.cj.log.CJLog;
-
 import java.lang.ref.WeakReference;
 
 import io.reactivex.disposables.CompositeDisposable;

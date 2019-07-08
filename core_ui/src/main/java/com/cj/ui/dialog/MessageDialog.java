@@ -3,7 +3,7 @@ package com.cj.ui.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;

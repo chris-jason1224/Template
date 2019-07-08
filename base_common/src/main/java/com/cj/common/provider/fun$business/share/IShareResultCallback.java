@@ -1,6 +1,6 @@
 package com.cj.common.provider.fun$business.share;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Author:chris - jason

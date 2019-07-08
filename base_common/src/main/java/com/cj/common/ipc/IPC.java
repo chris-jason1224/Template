@@ -7,11 +7,13 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import com.cj.common.bus.DataBus;
+
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.exception.NotInitException;
 import com.cj.common.util.LooperUtil;
 import com.cj.common.util.ProcessUtil;
+import com.jeremyliao.liveeventbus.LiveEventBus;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -170,7 +172,7 @@ public class IPC {
                 LooperUtil.getInstance().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        DataBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(), DataBusKey.ProcessSubDataEvent.getT()).setValue(data);
+                        LiveEventBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(), DataBusKey.ProcessSubDataEvent.getT()).post(data);
                     }
                 });
             }

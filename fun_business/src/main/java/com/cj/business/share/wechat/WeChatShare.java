@@ -1,18 +1,19 @@
 package com.cj.business.share.wechat;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.Observer;
+
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.cj.business.Config;
 import com.cj.business.share.IShare;
 import com.cj.business.share.lifecycle.ShareEventLifecycleObserver;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.provider.fun$business.share.IShareResultCallback;
 import com.cj.common.provider.fun$business.share.ShareParams;
@@ -22,6 +23,7 @@ import com.cj.common.util.pkg.PackageUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
 import com.cj.utils.io.IOUtil;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -60,7 +62,7 @@ public class WeChatShare implements IShare, LifecycleOwner {
         lifecycleRegistry.addObserver(new ShareEventLifecycleObserver());
 
         //注册DataBus接收器
-        DataBus.get().with(DataBusKey.WeChatShareResult.getKey(), DataBusKey.WeChatShareResult.getT()).observe(this, observer);
+        LiveEventBus.get().with(DataBusKey.WeChatShareResult.getKey(), DataBusKey.WeChatShareResult.getT()).observe(this, observer);
 
     }
 

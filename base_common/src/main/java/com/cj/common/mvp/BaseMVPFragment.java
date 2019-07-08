@@ -1,7 +1,8 @@
 package com.cj.common.mvp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.cj.common.base.BaseFragment;
 import com.cj.common.base.IBasePresenter;

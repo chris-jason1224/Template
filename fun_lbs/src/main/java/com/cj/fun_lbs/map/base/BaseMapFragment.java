@@ -1,9 +1,10 @@
 package com.cj.fun_lbs.map.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.amap.api.maps.AMap;

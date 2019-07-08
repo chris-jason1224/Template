@@ -1,7 +1,8 @@
 package com.cj.fun_push;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
 
 import com.cj.common.provider.fun$push.PushObserver;
 

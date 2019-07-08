@@ -1,6 +1,6 @@
 package com.cj.business.pay;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import com.cj.business.pay.alipay.AliPay;
 import com.cj.business.pay.wechat.WeChatPay;

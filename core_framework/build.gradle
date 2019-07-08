@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -34,7 +34,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
-    api "com.android.support:multidex:${rootProject.multidexVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
+    compileOnly "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
+    api "androidx.multidex:multidex:${rootProject.ext.multidexVersion}"
     api project(':core_annotations')
 }

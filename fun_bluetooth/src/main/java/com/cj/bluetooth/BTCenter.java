@@ -1,10 +1,9 @@
 package com.cj.bluetooth;
 
 import android.app.Activity;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.Observer;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
@@ -13,10 +12,13 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringDef;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.Observer;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -24,14 +26,13 @@ import android.widget.Toast;
 import com.cj.bluetooth.lifecycle.BTEventLifecycleObserver;
 import com.cj.bluetooth.view.PopBTScanDialog;
 import com.cj.common.base.BaseApp;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
 import com.cj.common.util.DiskCacheUtil;
 import com.cj.bluetooth.receiver.BTReceiver;
 import com.cj.bluetooth.util.BluetoothService;
 import com.cj.log.CJLog;
-import com.cj.ui.tip.UITipDialog;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
@@ -109,7 +110,7 @@ public class BTCenter implements LifecycleOwner {
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         lifecycleRegistry.addObserver(new BTEventLifecycleObserver());
         //注册DataBus接收器
-        DataBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).observe(this, btEventObserver);
+        LiveEventBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).observe(this, btEventObserver);
         initBT();
     }
 

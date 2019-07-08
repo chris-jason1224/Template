@@ -1,16 +1,12 @@
 package com.cj.ui.notify.Alerter;
 
 import android.app.Activity;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.v4.view.ViewCompat;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.core.view.ViewCompat;
 import android.view.ViewGroup;
-
-import com.cj.ui.R;
-
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mayikang on 2018/7/26.

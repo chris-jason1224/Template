@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         resourcePrefix "core_ui_"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -29,5 +29,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
+    compileOnly "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
 }

@@ -1,6 +1,6 @@
 package com.cj.common.util.async;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import io.reactivex.Observable;

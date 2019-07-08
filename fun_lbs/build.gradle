@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         resourcePrefix "fun_lbs"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         if (!isModuleModle.toBoolean()) {
             //ARouter配置
@@ -41,11 +41,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
     api project(':base_common')
     if (!isModuleModle.toBoolean()) {
         annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
         annotationProcessor project(':core_processor')
     }
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintVersion}"
     api files('libs/AMap3DMap_6.8.0_AMapNavi_6.7.0_AMapSearch_6.5.0_AMapTrack_1.0.0_AMapLocation_4.6.0_20190423.jar')
 }

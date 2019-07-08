@@ -1,8 +1,9 @@
 package com.cj.business.share.lifecycle;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.cj.log.CJLog;
 
@@ -12,7 +13,7 @@ import com.cj.log.CJLog;
  * Package:com.cj.business.share.lifecycle
  */
 
-public class ShareEventLifecycleObserver implements LifecycleObserver{
+public class ShareEventLifecycleObserver implements LifecycleObserver {
 
     private String tag = "ShareEventLifeCycle - ";
 

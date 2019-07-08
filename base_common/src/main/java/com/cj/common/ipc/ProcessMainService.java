@@ -1,28 +1,26 @@
 package com.cj.common.ipc;
 
 import android.app.Service;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.Observer;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.Observer;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.ipc.lifecycle.ProcessMainServiceLifecycleObserver;
 import com.cj.common.util.LooperUtil;
 import com.cj.common.util.ProcessUtil;
-import com.cj.log.CJLog;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 
-import java.math.MathContext;
 import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -54,7 +52,7 @@ public class ProcessMainService extends Service implements LifecycleOwner {
         lifecycleRegistry.addObserver(new ProcessMainServiceLifecycleObserver());
 
         //注册DataBus接收器
-        DataBus.get().with(DataBusKey.ProcessMainReceiveDataEvent.getKey(), DataBusKey.ProcessMainReceiveDataEvent.getT()).observe(this, receiver);
+        LiveEventBus.get().with(DataBusKey.ProcessMainReceiveDataEvent.getKey(), DataBusKey.ProcessMainReceiveDataEvent.getT()).observe(this, receiver);
         super.onCreate();
     }
 
@@ -138,7 +136,7 @@ public class ProcessMainService extends Service implements LifecycleOwner {
                 LooperUtil.getInstance().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        DataBus.get().with(DataBusKey.ProcessMainDataEvent.getKey(), DataBusKey.ProcessMainDataEvent.getT()).setValue(data);
+                        LiveEventBus.get().with(DataBusKey.ProcessMainDataEvent.getKey(), DataBusKey.ProcessMainDataEvent.getT()).post(data);
                     }
                 });
 

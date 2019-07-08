@@ -3,8 +3,8 @@ package com.cj.login;
 import android.os.Bundle;
 import android.view.View;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 
 public class PActivity extends BaseActivity {
 
@@ -37,7 +37,7 @@ public class PActivity extends BaseActivity {
     public void onClick(View v) {
         int vid = v.getId();
         if(vid == R.id.send3){
-            DataBus.get().with(DataBusKey.ProcessMainReceiveDataEvent.getKey(),DataBusKey.ProcessMainReceiveDataEvent.getT()).setValue("xxxxxxxx");
+            LiveEventBus.get().with(DataBusKey.ProcessMainReceiveDataEvent.getKey(),DataBusKey.ProcessMainReceiveDataEvent.getT()).post("xxxxxxxx");
         }
     }
 

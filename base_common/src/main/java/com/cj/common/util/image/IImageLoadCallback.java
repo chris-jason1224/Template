@@ -2,7 +2,7 @@ package com.cj.common.util.image;
 
 import android.graphics.drawable.Animatable;
 import android.media.Image;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.facebook.imagepipeline.image.ImageInfo;
 

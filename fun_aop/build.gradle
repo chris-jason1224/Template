@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         resourcePrefix "fun_aop_"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -26,7 +26,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
     //不能依赖传递，必须使用api或者compile的方式
     api "org.aspectj:aspectjrt:${rootProject.ext.aspectJRTVersion}"
 

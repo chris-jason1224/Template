@@ -3,9 +3,10 @@ package com.cj.easycompressor.util;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.cj.easycompressor.config.ImageOption;
 import com.cj.easycompressor.core.EasyCompressor;

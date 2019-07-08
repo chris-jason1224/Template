@@ -8,9 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,14 +22,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.cj.bluetooth.R;
 import com.cj.bluetooth.entity.NotPairedEntity;
 import com.cj.bluetooth.entity.PairedEntity;
 import com.cj.common.base.BaseApp;
-import com.cj.common.bus.DataBus;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.multitype.Items;
 import com.cj.common.multitype.MultiTypeAdapter;
@@ -36,6 +35,7 @@ import com.cj.common.multitype.MultiTypeViewBinder;
 import com.cj.common.multitype.ViewHolder;
 import com.cj.ui.tip.UITipDialog;
 import com.cj.ui.util.ScreenUtil;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -166,7 +166,7 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
                             Intent intent = new Intent();
                             intent.setAction("quest_for_bt_connect");
                             intent.putExtra("remote_device", bluetoothDevice);
-                            DataBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).setValue(intent);
+                            LiveEventBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).post(intent);
 
                             if (BaseApp.getInstance().getCurrentActivity() != null) {
                                 final UITipDialog dialog = new UITipDialog.Builder(BaseApp.getInstance().getCurrentActivity()).
