@@ -31,6 +31,9 @@ import com.kingja.loadsir.core.LoadSir;
 import com.kingja.loadsir.core.Transport;
 import com.orhanobut.logger.LogAdapter;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by mayikang on 2018/7/24.
  * Activity最基础的基类
@@ -43,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected View mContentView;
 
     private TextView mTVEmpty, mTVTimeOut;
-
+    private Unbinder unbinder;
     /**
      * 判断 activity 是否处于激活状态
      **/
@@ -58,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         //加载布局
         mContentView = LayoutInflater.from(this).inflate(resourceLayout(), null);
         setContentView(mContentView);
+        unbinder = ButterKnife.bind(this);
 
         initView();
 
@@ -122,6 +126,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onDestroy();
         if (immersionBar != null)
             immersionBar.destroy();
+
+        unbinder.unbind();
     }
 
     //子类该方法，传入布局文件

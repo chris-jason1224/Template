@@ -28,6 +28,9 @@ import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.kingja.loadsir.core.Transport;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 /**
  * 封装的 Fragment 基类
@@ -36,6 +39,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     private LoadService loadService;
     private TextView mTVEmpty, mTVTimeOut;
+    private Unbinder unbinder;
 
     //是否懒加载
     private boolean isLazyLoad = true;
@@ -86,7 +90,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //1.加载布局 XML 文件
         mRootView = inflater.inflate(setLayoutResource(), container, false);
-
+        //注册butterknife
+        unbinder = ButterKnife.bind(this,mRootView);
         //注册loadSir
         loadService = LoadSir.getDefault().register(mRootView, new Callback.OnReloadListener() {
 
@@ -254,4 +259,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         loadService.showWithConvertor(new StateEntity(4, message));
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(unbinder!=null){
+            unbinder.unbind();
+        }
+    }
 }

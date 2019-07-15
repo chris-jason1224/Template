@@ -141,6 +141,7 @@ public class ImageLoader implements IImageLoader {
             //加载成功
             @Override
             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                super.onFinalImageSet(id,imageInfo,animatable);
                 if(loadCallback!=null){
                     loadCallback.onSuccess(id,imageInfo,animatable);
                 }
@@ -149,6 +150,7 @@ public class ImageLoader implements IImageLoader {
             //加载失败
             @Override
             public void onFailure(String id, Throwable throwable) {
+                super.onFailure(id,throwable);
                 if(loadCallback!=null){
                     loadCallback.onFailed(id,throwable);
                 }

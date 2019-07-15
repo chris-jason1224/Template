@@ -103,4 +103,8 @@ dependencies {
     //LiveEventBus
     api "com.jeremyliao:live-event-bus-x:${rootProject.ext.liveDataBusVersion}"
 
+    //butterknife
+    api "com.jakewharton:butterknife:${rootProject.ext.butterknifeVersion}"
+
+
 }

@@ -75,6 +75,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindView;
 import io.objectbox.query.Query;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -83,10 +84,14 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
 
     private SimpleDraweeView draweeView;
-    private Toolbar toolbar;
+    @BindView(R2.id.base_common_toolbar)
+    Toolbar toolbar;
     private LinearLayout mLLParent;
     private TextView mTVState;
     private ImageView mIVTest;
+
+
+
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -102,6 +107,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     ILBSProvider lbs;
 
     private IOrm orm = new OrmUtil();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +163,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void initView() {
         draweeView = fb(R.id.drawee);
-        toolbar = fb(R.id.base_common_toolbar);
+        //toolbar = fb(R.id.base_common_toolbar);
         mLLParent = fb(R.id.ll_parent);
         mTVState = fb(R.id.tv_state);
         mIVTest = fb(R.id.iv_test);
