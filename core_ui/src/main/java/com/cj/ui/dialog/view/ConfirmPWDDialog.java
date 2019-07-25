@@ -15,7 +15,7 @@ import com.cj.ui.dialog.callback.PWDDialogCallback;
 /**
  * Author:chris - jason
  * Date:2019-06-27.
- * Package:com.iflow.karision.view.dialog
+ * Package:com.cj.ui.dialog.view
  * 输入密码对话框，带文案+两个按钮 +输入框
  */
 public class ConfirmPWDDialog extends BaseDialogView {

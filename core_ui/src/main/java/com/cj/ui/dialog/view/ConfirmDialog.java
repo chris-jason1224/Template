@@ -14,7 +14,7 @@ import com.cj.ui.dialog.callback.DialogCallback;
 /**
  * Author:chris - jason
  * Date:2019-06-27.
- * Package:com.iflow.karision.view.dialog
+ * Package:com.cj.ui.dialog.view
  * 确认对话框，带文案+两个按钮
  */
 public class ConfirmDialog extends BaseDialogView {

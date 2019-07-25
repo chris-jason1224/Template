@@ -11,7 +11,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 /**
  * Author:chris - jason
  * Date:2019-07-24.
- * Package:com.iflow.karision_baseui.utils.image
+ * Package:com.cj.common.util.image
  * SimpleDraweeView 自适应宽高修改
  */
 public class FrescoLoadCallback implements IImageLoadCallback {
