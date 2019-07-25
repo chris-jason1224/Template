@@ -74,7 +74,6 @@ public class LoginInterceptor implements IInterceptor {
         LoginResultReceiver accountReceiver = new LoginResultReceiver();
         IntentFilter intentFilter = new IntentFilter(KeyTag.TAG_LOGIN_FILTER);
         LocalBroadcastManager.getInstance(context).registerReceiver(accountReceiver, intentFilter);
-
     }
 
 
@@ -111,7 +110,6 @@ public class LoginInterceptor implements IInterceptor {
                     Toast.makeText(context, "登录错误", Toast.LENGTH_SHORT).show();
                     mCallback.onInterrupt(new Throwable("登录错误"));
                     break;
-
             }
         }
     }

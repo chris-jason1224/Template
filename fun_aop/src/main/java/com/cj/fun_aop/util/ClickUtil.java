@@ -1,10 +1,5 @@
 package com.cj.fun_aop.util;
 
-import android.util.Log;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class ClickUtil {
 
 
