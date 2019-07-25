@@ -54,6 +54,7 @@ import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
+import com.cj.fun_aop.annotation.WifiNeed;
 import com.cj.log.CJLog;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
@@ -89,9 +90,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private LinearLayout mLLParent;
     private TextView mTVState;
     private ImageView mIVTest;
-
-
-
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -190,6 +188,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fb(R.id.calculate).setOnClickListener(this);
     }
 
+    @WifiNeed
     @ExecutionTimeTrace
     @SingleSubmit
     @Override
@@ -300,12 +299,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
 
         if (R.id.dialog == vid) {
-            DialogUtil.getInstance().showMessageDialog(this, "即将删除该消息", new DialogUtil.ClickCallback() {
-                @Override
-                public void onClick(int position) {
-
-                }
-            });
+            DialogUtil.getInstance().showMessageDialog(this,"hhhhh","f",null);
         }
 
         if (R.id.print == vid) {

@@ -28,7 +28,7 @@ import com.cj.bluetooth.view.PopBTScanDialog;
 import com.cj.common.base.BaseApp;
 import com.cj.common.bus.DataBusKey;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
-import com.cj.common.util.DiskCacheUtil;
+import com.cj.common.util.kv.DiskCacheUtil;
 import com.cj.bluetooth.receiver.BTReceiver;
 import com.cj.bluetooth.util.BluetoothService;
 import com.cj.log.CJLog;

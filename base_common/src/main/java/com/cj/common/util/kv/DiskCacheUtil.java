@@ -1,4 +1,4 @@
-package com.cj.common.util;
+package com.cj.common.util.kv;
 
 /**
  * Created by mayikang on 2018/7/24.

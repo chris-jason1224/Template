@@ -2,4 +2,11 @@
 <resources>
     <color name="core_ui_alert_default_icon_color">@android:color/white</color>
     <color name="core_ui_white">#ffffff</color>
+    <color name="core_ui_colorPrimary">#42bd56</color>
+    <color name="core_ui_color_ebebeb">#ebebeb</color>
+    <color name="core_ui_color_333333">#333333</color>
+    <color name="core_ui_color_fdf8f9">#fdf8f9</color>
+    <color name="core_ui_color_f2f2f2">#f2f2f2</color>
+    <color name="core_ui_color_b52532">#b52532</color>
+    <color name="core_ui_color_999999">#999999</color>
 </resources>

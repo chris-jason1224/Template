@@ -13,7 +13,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Interceptor;
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback;
 import com.alibaba.android.arouter.facade.template.IInterceptor;
-import com.cj.common.util.DiskCacheUtil;
+import com.cj.common.util.kv.DiskCacheUtil;
 import com.cj.common.var.KeyTag;
 import com.cj.common.var.AsyncNotifyCode;
 /**

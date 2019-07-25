@@ -2,12 +2,11 @@ package com.cj.fun_aop.aspect;
 
 import com.cj.common.base.BaseApp;
 import com.cj.common.util.NetUtil;
-import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.fun_aop.annotation.WifiNeed;
-import com.cj.fun_aop.util.ClickUtil;
 import com.cj.manager.basement.BaseApplication;
-import com.cj.ui.dialog.MessageDialog;
-import com.cj.ui.notify.Alerter.AlertManager;
+import com.cj.ui.dialog.DialogUtil;
+import com.cj.ui.dialog.callback.DialogCallback;
+import com.cj.ui.dialog.view.MessageDialog;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -26,7 +25,6 @@ import java.lang.reflect.Method;
 @Aspect
 public class WifiNeedAspect {
 
-    private MessageDialog dialog;
     //切入点：添加了@com.cj.fun_aop.annotation.SingleSubmit注解的方法体
     //格式： 连接点( @注解 类名 方法名 （参数名） )
     @Pointcut("execution(@com.cj.fun_aop.annotation.WifiNeed  * *(..))")
@@ -36,7 +34,7 @@ public class WifiNeedAspect {
 
     //Advice：
     @Around("wifiNeed()")
-    public void SingleSubmitExecute(final ProceedingJoinPoint point) throws Throwable {
+    public void wifiNeed(final ProceedingJoinPoint point) throws Throwable {
 
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
 
@@ -48,31 +46,27 @@ public class WifiNeedAspect {
                 if(annotation!=null){
                     //非wifi情况下
                     if(!NetUtil.isWifi(BaseApp.getInstance())){
-                        if(dialog==null){
-                            dialog = new MessageDialog(BaseApplication.getInstance().getCurrentActivity(), new MessageDialog.MessageDialogCallback() {
-                                @Override
-                                public void onLeftButtonClick() {
-                                    dialog.dismiss();
-                                    dialog = null;
-                                }
+                        DialogUtil.getInstance().showConfirmDialog(BaseApplication.getInstance().getCurrentActivity(), "非wifi环境，请注意流量消耗", "取消", "任性继续", new DialogCallback() {
+                            @Override
+                            public void onNegativeClicked() {
 
-                                @Override
-                                public void onRightButtonClick() {
-                                    dialog.dismiss();
-                                    dialog = null;
-                                    try {
-                                        point.proceed();
-                                    } catch (Throwable throwable) {
-                                        throwable.printStackTrace();
-                                    }
+                            }
+
+                            @Override
+                            public void onPositiveClicked() {
+                                try {
+                                    point.proceed();
+                                } catch (Throwable throwable) {
+                                    throwable.printStackTrace();
                                 }
-                            });
-                            dialog.setCancelable(false);
-                            dialog.setMessage("非wifi环境，请注意流量消耗");
-                            dialog.setLeftButton("取消");
-                            dialog.setRightButton("继续");
-                        }
-                        dialog.show();
+                            }
+
+                            @Override
+                            public void onDismiss() {
+
+                            }
+                        });
+
                         return;
                     }
                 }

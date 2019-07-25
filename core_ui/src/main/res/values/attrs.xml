@@ -109,17 +109,27 @@
         <attr name="core_ui_civ_circle_background_color" format="color" />
     </declare-styleable>
 
-    <style name="core_ui_common_dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-    </style>
+
+
+    <declare-styleable name="core_ui_clear_editText">
+        <attr name="core_ui_type" format="enum">
+            <enum name="phone" value="0" />
+            <enum name="card" value="1" />
+            <enum name="IDCard" value="2" />
+            <!--隐藏的密码框-->
+            <enum name="Password" value="3"/>
+            <!--可显示的密码框-->
+            <enum name="Visible_Password" value="4"/>
+            <!--针对港澳台-->
+            <enum name="IDCardOther" value="5"/>
+            <!--邮政编码-->
+            <enum name="postcode" value="6"/>
+
+        </attr>
+        <attr name="core_ui_maxLength" format="integer"/>
+        <!--清除图标-->
+        <attr name="core_ui_clearDrawable" format="reference|color"/>
+    </declare-styleable>
 
 
 </resources>

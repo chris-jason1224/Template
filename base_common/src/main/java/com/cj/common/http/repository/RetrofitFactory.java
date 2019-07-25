@@ -7,7 +7,7 @@ import android.webkit.WebSettings;
 
 import com.cj.common.BuildConfig;
 import com.cj.common.util.AndroidSystemUtil;
-import com.cj.common.util.DiskCacheUtil;
+import com.cj.common.util.kv.DiskCacheUtil;
 import com.cj.manager.basement.BaseApplication;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

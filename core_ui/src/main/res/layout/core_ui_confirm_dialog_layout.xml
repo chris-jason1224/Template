@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <com.cj.ui.RoundShape.RoundLinearLayout
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:orientation="vertical"
+        app:core_ui_rv_cornerRadius="10dp"
+        android:minHeight="115dp"
+        app:core_ui_rv_backgroundColor="@color/core_ui_white"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="34dp"
+            android:layout_marginTop="34dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请已提交，请等待审核"
+            android:textColor="@color/core_ui_color_333333"
+            android:textSize="16dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="49dp">
+
+            <com.cj.ui.RoundShape.RoundTextView
+                android:id="@+id/rtv_negative_btn"
+                android:gravity="center"
+                tools:text="取消"
+                android:textColor="@color/core_ui_color_999999"
+                android:textSize="17dp"
+                app:core_ui_rv_cornerRadius_BL="10dp"
+                app:core_ui_rv_cornerRadius_BR="10dp"
+                app:core_ui_rv_backgroundColor="@color/core_ui_color_fdf8f9"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <RelativeLayout
+                android:background="@color/core_ui_color_fdf8f9"
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+                <View
+                    android:background="@color/core_ui_color_f2f2f2"
+                    android:layout_centerInParent="true"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"/>
+
+            </RelativeLayout>
+
+            <com.cj.ui.RoundShape.RoundTextView
+                android:id="@+id/rtv_positive_btn"
+                android:gravity="center"
+                tools:text="确定"
+                android:textColor="@color/core_ui_color_b52532"
+                android:textSize="17dp"
+                app:core_ui_rv_cornerRadius_BL="10dp"
+                app:core_ui_rv_cornerRadius_BR="10dp"
+                app:core_ui_rv_backgroundColor="@color/core_ui_color_fdf8f9"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+    </com.cj.ui.RoundShape.RoundLinearLayout>
+
+
+</RelativeLayout>

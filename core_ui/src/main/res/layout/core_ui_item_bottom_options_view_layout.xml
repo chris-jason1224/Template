@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.cj.ui.RoundShape.RoundTextView
+        app:core_ui_rv_backgroundColor="@color/core_ui_white"
+        android:id="@+id/rtv_option"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="拍照"
+        android:textColor="@color/core_ui_color_333333"
+        android:textSize="16dp" />
+    <TextView
+        android:id="@+id/v_divider"
+        android:background="@color/core_ui_color_ebebeb"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+</LinearLayout>

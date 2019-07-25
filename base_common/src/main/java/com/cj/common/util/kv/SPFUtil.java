@@ -1,15 +1,11 @@
-package com.cj.common.util;
+package com.cj.common.util.kv;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
 
-import com.cj.common.exception.NotInitException;
 import com.tencent.mmkv.MMKV;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.Set;
 
 /**

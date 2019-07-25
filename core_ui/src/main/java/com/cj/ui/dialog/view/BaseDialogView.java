@@ -1,24 +1,24 @@
-package com.cj.ui.dialog;
+package com.cj.ui.dialog.view;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import com.cj.ui.R;
-
 
 /**
  * Author:chris - jason
  * Date:2019-06-27.
- * Package:com.iflow.karision.view.dialog
+ * Package:com.cj.ui.dialog.view
  * 通用Dialog弹窗基类
  */
 public abstract class BaseDialogView extends Dialog implements View.OnClickListener,Dialog.OnDismissListener {
@@ -77,8 +77,7 @@ public abstract class BaseDialogView extends Dialog implements View.OnClickListe
     }
 
     //dialog设置布局
-    protected abstract @LayoutRes
-    int  setDialogLayout();
+    protected abstract @LayoutRes int  setDialogLayout();
 
     @Override
     public void show() {

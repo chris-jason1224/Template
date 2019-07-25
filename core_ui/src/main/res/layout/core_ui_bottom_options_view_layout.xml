@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+        <ListView
+            android:divider="@null"
+            android:layout_centerInParent="true"
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+
+    <com.cj.ui.RoundShape.RoundTextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        app:core_ui_rv_backgroundColor="@color/core_ui_white"
+        app:core_ui_rv_cornerRadius="8dp"
+        android:id="@+id/rtv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/core_ui_colorPrimary"
+        android:textSize="16dp" />
+
+</LinearLayout>
