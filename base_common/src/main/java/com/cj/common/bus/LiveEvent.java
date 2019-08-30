@@ -3,6 +3,7 @@ package com.cj.common.bus;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ExternalLiveData;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 /**
@@ -12,7 +13,9 @@ import androidx.lifecycle.Observer;
  */
 public class LiveEvent<T> implements Observable<T> {
 
-    ExternalLiveData<T> data = new ExternalLiveData<>();
+    //ExternalLiveData<T> data = new ExternalLiveData<>();
+
+    private final MutableLiveData<T> data = new MutableLiveData<>();
 
     @Override
     public void post(T value) {
