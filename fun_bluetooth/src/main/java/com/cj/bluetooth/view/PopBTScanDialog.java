@@ -28,19 +28,19 @@ import com.cj.bluetooth.R;
 import com.cj.bluetooth.entity.NotPairedEntity;
 import com.cj.bluetooth.entity.PairedEntity;
 import com.cj.common.base.BaseApp;
-import com.cj.common.bus.DataBusKey;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.multitype.Items;
 import com.cj.common.multitype.MultiTypeAdapter;
 import com.cj.common.multitype.MultiTypeViewBinder;
 import com.cj.common.multitype.ViewHolder;
 import com.cj.ui.tip.UITipDialog;
 import com.cj.ui.util.ScreenUtil;
-import com.jeremyliao.liveeventbus.LiveEventBus;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import gen.com.cj.bus.Gen$fun_bluetooth$Interface;
 
 
 /**
@@ -166,8 +166,7 @@ public class PopBTScanDialog extends Dialog implements View.OnClickListener {
                             Intent intent = new Intent();
                             intent.setAction("quest_for_bt_connect");
                             intent.putExtra("remote_device", bluetoothDevice);
-                            LiveEventBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).post(intent);
-
+                            ModuleBus.getInstance().of(Gen$fun_bluetooth$Interface.class).Gen$BluetoothEvent$Method().post(intent);
                             if (BaseApp.getInstance().getCurrentActivity() != null) {
                                 final UITipDialog dialog = new UITipDialog.Builder(BaseApp.getInstance().getCurrentActivity()).
                                         setIconType(UITipDialog.Builder.ICON_TYPE_INFO).

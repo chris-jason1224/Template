@@ -11,18 +11,19 @@ import android.widget.Toast;
 import com.cj.business.Config;
 import com.cj.business.auth.IAuth;
 import com.cj.business.auth.lifecycle.AuthEventLifecycleObserver;
-import com.cj.common.bus.DataBusKey;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.provider.fun$business.auth.AuthParams;
 import com.cj.common.provider.fun$business.auth.IAuthResultCallback;
 import com.cj.common.util.LooperUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
+
+import gen.com.cj.bus.Gen$fun_business$Interface;
 
 /**
  * Author:chris - jason
@@ -41,7 +42,7 @@ public class WeChatAuth implements IAuth, LifecycleOwner {
         lifecycleRegistry.addObserver(new AuthEventLifecycleObserver());
 
         //注册DataBus接收器
-        LiveEventBus.get().with(DataBusKey.WeChatAuthResult.getKey(), DataBusKey.WeChatAuthResult.getT()).observe(this, observer);
+        ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatAuthResult$Method().observe(this,observer);
     }
 
     @NonNull

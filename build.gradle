@@ -56,7 +56,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    
+
     // Sdk and tools
     buildToolsVersion = "28.0.3"
 
@@ -76,78 +76,73 @@ ext {
     multidexVersion = "2.0.0"
     appCompatVersion = "1.0.2"
     materialVersion = "1.0.0"
-    constraintVersion = "1.1.3"
     liveDataVersion = "2.0.0"
     recyclerViewVersion = "1.0.0"
 
     /************第三方库版本***********/
-//    ARouter
+    //    ARouter
     arouterApiVersion = "1.5.0"
     arouterAnnotationProcessor = "1.2.2"
 
-//  ButterKnife
+    //  ButterKnife
     butterknifeVersion = "10.1.0"
 
     vLayoutVersion = "1.3.0"
 
-//    gson
+    //gson
     gsonVersion = "2.8.5"
 
-//    loadSir
+    //loadSir
     loadSirVersion = "1.3.6"
 
-//    Rxjava2
+    //Rxjava2
     rxJavaVersion = '2.1.17'
     rxAndroidVersion = '2.0.2'
 
-//    logger日志
+    //logger日志
     loggerVersion = "2.2.0"
 
-//    okhttp
+    //okhttp
     okhttpVersion = '3.11.0'
     retrofitVersion = '2.4.0'
     retrofit2RxjavaVersion = '2.4.0'
     gsonConvertVersion = '2.4.0'
 
-//  google Architecture Component
-    liveDataVersion = "1.1.0"
-
-//  google easyPermission
+    //google easyPermission
     easyPermissionVersion = "1.3.0"
 
-//  greenDao
-    greenDaoVersion = "3.2.2"
-
-//   沉浸式状态栏
+    //沉浸式状态栏
     immersionBarVersion = "2.3.2-beta01"
 
-//  腾讯mmkv 高速key-value本地存取框架，替代普通SharedPreference
+    //腾讯mmkv 高速key-value本地存取框架，替代普通SharedPreference
     tencentMMKVVersion = "1.0.12"
 
-//  fresco 主框架
+    //fresco 主框架
     frescoMainLibVersion = "1.11.0"
-//  fresco gif支持库
+    //fresco gif支持库
     frescoSupGifVersion = "1.11.0"
-//  fresco WebP动图支持库
+    //fresco WebP动图支持库
     frescoSupWebPAnimationVersion = "1.11.0"
-//  fresco WebP静态图支持库
+    //fresco WebP静态图支持库
     frescoSupWebPVersion = "1.11.0"
 
-//  微信sdk
+    //微信sdk
     wechatVersion = "5.3.1"
 
-// AspectJ RT Version
+    //AspectJ RT Version
     aspectJRTVersion = "1.9.2"
 
-//  极光推送版本
-    jpushSdkVersion ="3.2.0"
-//  极光推送核心版本
+    //javaPoet
+    javaPoetVersion = "1.11.1"
+
+    //极光推送版本
+    jpushSdkVersion = "3.2.0"
+    //极光推送核心版本
     jpushCoreVersion = "2.0.0"
-//    LiveDataBus
-    liveDataBusVersion = "1.4.4"
 
-//   测试
+    //测试
     junitVersion = "1.0.0-beta02"
-
     runnerVersion = "1.1.0-beta02"
+
+
 }

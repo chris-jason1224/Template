@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.BuildConfig;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.db.DBCenter;
 import com.cj.common.receiver.NetworkStateOBReceiver;
 import com.cj.common.states.OnPlaceHolderCallback;
@@ -16,7 +17,6 @@ import com.cj.common.states.OnTimeoutStateCallback;
 import com.cj.common.util.kv.SPFUtil;
 import com.cj.common.util.image.ImageLoader;
 import com.cj.manager.basement.BaseApplication;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
 
@@ -58,11 +58,8 @@ public class BaseApp extends BaseApplication {
         //初始化DBCenter
         DBCenter.init(this);
 
-        //配置LiveEventBus
-        LiveEventBus.get()
-                .config()
-                .lifecycleObserverAlwaysActive(false)
-                .autoClear(false);
+        //初始化ModuleBus
+        ModuleBus.getInstance().init(this);
 
     }
 

@@ -1,1 +1,2 @@
-com.cj.processor.module.ModuleCompiler
+com.cj.processor.module.ModuleRegisterProcessor
+com.cj.processor.bus.ModuleEventCenterProcessor

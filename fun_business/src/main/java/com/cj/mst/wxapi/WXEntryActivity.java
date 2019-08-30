@@ -6,8 +6,7 @@ import android.os.Bundle;
 import com.cj.business.Config;
 import com.cj.business.auth.wechat.WeChatAuthResult;
 import com.cj.business.share.wechat.WeChatShareResult;
-import com.cj.common.bus.DataBusKey;
-import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.cj.common.bus.ModuleBus;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -17,6 +16,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
+
+import gen.com.cj.bus.Gen$fun_business$Interface;
 
 
 /**
@@ -69,29 +70,29 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
      */
     private void dealAuthResult(SendAuth.Resp resp) {
 
-        HashMap<String,String> map = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>();
 
         switch (resp.errCode) {
 
             //授权成功
             case BaseResp.ErrCode.ERR_OK:
                 map.put("auth_result", WeChatAuthResult.SUCCESS);
-                map.put("code",resp.code);
-                LiveEventBus.get().with(DataBusKey.WeChatAuthResult.getKey(), DataBusKey.WeChatAuthResult.getT()).post(map);
+                map.put("code", resp.code);
+                ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatAuthResult$Method().post(map);
                 break;
 
             //取消授权
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 map.put("auth_result", WeChatAuthResult.CANCEL);
-                map.put("code","");
-                LiveEventBus.get().with(DataBusKey.WeChatAuthResult.getKey(), DataBusKey.WeChatAuthResult.getT()).post(map);
+                map.put("code", "");
+                ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatAuthResult$Method().post(map);
                 break;
 
             //授权失败
             default:
                 map.put("auth_result", WeChatAuthResult.FAILED);
-                map.put("code","");
-                LiveEventBus.get().with(DataBusKey.WeChatAuthResult.getKey(), DataBusKey.WeChatAuthResult.getT()).post(map);
+                map.put("code", "");
+                ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatAuthResult$Method().post(map);
                 break;
         }
 
@@ -111,17 +112,17 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             //分享成功
             //微信新规，分享成功或者失败，回调的结果都是 BaseResp.ErrCode.ERR_OK
             case BaseResp.ErrCode.ERR_OK:
-                LiveEventBus.get().with(DataBusKey.WeChatShareResult.getKey(), DataBusKey.WeChatShareResult.getT()).post(WeChatShareResult.SUCCESS);
+                ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatShareResult$Method().post(WeChatShareResult.SUCCESS);
                 break;
 
             //取消分享
             case BaseResp.ErrCode.ERR_USER_CANCEL:
-                LiveEventBus.get().with(DataBusKey.WeChatShareResult.getKey(), DataBusKey.WeChatShareResult.getT()).post(WeChatShareResult.CANCEL);
+                ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatShareResult$Method().post(WeChatShareResult.CANCEL);
                 break;
 
             //分享失败
             default:
-                LiveEventBus.get().with(DataBusKey.WeChatShareResult.getKey(), DataBusKey.WeChatShareResult.getT()).post(WeChatShareResult.FAILED);
+                ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatShareResult$Method().post(WeChatShareResult.FAILED);
                 break;
         }
 

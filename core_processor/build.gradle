@@ -4,6 +4,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':core_annotations')
     implementation "com.google.code.gson:gson:${rootProject.gsonVersion}"
+    implementation "com.squareup:javapoet:${rootProject.ext.javaPoetVersion}"
 }
 
 sourceCompatibility = rootProject.ext.javaVersion

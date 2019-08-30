@@ -10,19 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
-
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.bus.DataBusKey;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.db.IOrm;
 import com.cj.common.db.OrmUtil;
 import com.cj.common.model.StudentEntity;
@@ -63,8 +61,6 @@ import com.cj.utils.io.IOUtil;
 import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
-import com.jeremyliao.liveeventbus.LiveEventBus;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -75,8 +71,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import butterknife.BindView;
+import gen.com.cj.bus.Gen$biz_login$Interface;
+import gen.com.cj.bus.Gen$biz_main$Interface;
 import io.objectbox.query.Query;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -146,27 +143,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         });
 
 
-        LiveEventBus.get().with(DataBusKey.ProcessMainDataEvent.getKey(),DataBusKey.ProcessMainDataEvent.getT()).
-                observe(this, new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable String entity) {
-                        if(!TextUtils.isEmpty(entity)){
-                            CJLog.getInstance().log_e("MainActivity 收到消息："+entity);
-                        }
-                    }
-                });
+        ModuleBus.getInstance().of(Gen$biz_main$Interface.class).Gen$Refresh_Event$Method().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Toast.makeText(MainActivity.this, "String = "+s, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ModuleBus.getInstance().of(Gen$biz_main$Interface.class).Gen$Close_Event$Method().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Toast.makeText(MainActivity.this, "integer = "+integer.intValue(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
     @Override
     protected void initView() {
         draweeView = fb(R.id.drawee);
-        //toolbar = fb(R.id.base_common_toolbar);
         mLLParent = fb(R.id.ll_parent);
         mTVState = fb(R.id.tv_state);
         mIVTest = fb(R.id.iv_test);
 
-
+        fb(R.id.msg).setOnClickListener(this);
+        fb(R.id.msg2).setOnClickListener(this);
         fb(R.id.goto_biz_login).setOnClickListener(this);
         fb(R.id.alert).setOnClickListener(this);
         fb(R.id.goto_test).setOnClickListener(this);
@@ -196,11 +198,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         int vid = v.getId();
 
-        if(R.id.to_locate == vid){
+        if(R.id.msg  == vid){
+            SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
+            sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");// a为am/pm的标记
+            String time = sdf.format(new Date());
+            ModuleBus.getInstance().of(Gen$biz_main$Interface.class).Gen$Refresh_Event$Method().post(time);
+            return;
+        }
+
+        if(R.id.msg2  == vid){
+            ModuleBus.getInstance().of(Gen$biz_main$Interface.class).Gen$Close_Event$Method().post(1);
+            return;
+        }
+
+        if (R.id.to_locate == vid) {
             //6.0以上系统动态申请定位权限
-            if(Build.VERSION.SDK_INT >= 23 && getApplicationInfo().targetSdkVersion >= 23){
-                if(!EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
-                    EasyPermissions.requestPermissions(this,"请授予我定位权限",1,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (Build.VERSION.SDK_INT >= 23 && getApplicationInfo().targetSdkVersion >= 23) {
+                if (!EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    EasyPermissions.requestPermissions(this, "请授予我定位权限", 1, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     return;
                 }
             }
@@ -209,22 +224,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             lbs.startLocate(new ILocateResultCallback() {
                 @Override
                 public void onLocation(LocationInfoEntity info) {
-                    if(info!=null){
-                        CJLog.getInstance().log_e("定位信息："+info.toString());
+                    if (info != null) {
+                        CJLog.getInstance().log_e("定位信息：" + info.toString());
                     }
                 }
             });
         }
 
-        if(R.id.calculate == vid){
+        if (R.id.calculate == vid) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String  str_start = "2018-01-27";
+            String str_start = "2018-01-27";
             try {
-                Date date_start  = sdf.parse(str_start);
-                long diff =System.currentTimeMillis()-date_start.getTime();
-                long total = diff/(1000*60*60*24);
-                int day =Integer.parseInt(String.valueOf(total));
-                AlertManager.create(this).setTitle( sdf.format(date_start) + " - " + sdf.format(new Date())).setMessage("马牛牛和狗狗已经在一起"+day+"天啦啦啦啦啦啦").show();
+                Date date_start = sdf.parse(str_start);
+                long diff = System.currentTimeMillis() - date_start.getTime();
+                long total = diff / (1000 * 60 * 60 * 24);
+                int day = Integer.parseInt(String.valueOf(total));
+                AlertManager.create(this).setTitle(sdf.format(date_start) + " - " + sdf.format(new Date())).setMessage("马牛牛和狗狗已经在一起" + day + "天啦啦啦啦啦啦").show();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -299,7 +314,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
 
         if (R.id.dialog == vid) {
-            DialogUtil.getInstance().showMessageDialog(this,"hhhhh","f",null);
+            DialogUtil.getInstance().showMessageDialog(this, "hhhhh", "f", null);
         }
 
         if (R.id.print == vid) {
@@ -464,6 +479,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         //打开biz-login module
         if (R.id.goto_biz_login == vid) {
+            ModuleBus.getInstance().of(Gen$biz_login$Interface.class).Gen$LoginEvent$Method().post("xxx");
             ARouter.getInstance().build("/biz_login/ACT/com.cj.login.LoginActivity").navigation();
             return;
         }
@@ -491,7 +507,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         //跳转TestActivity
         if (R.id.goto_test == vid) {
-
             ARouter.getInstance().build("/biz_main/ACT/com.cj.main.test.TestActivity").navigation();
             return;
         }
@@ -516,7 +531,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         lbs.startLocate(new ILocateResultCallback() {
             @Override
             public void onLocation(LocationInfoEntity info) {
-                if(info!=null){
+                if (info != null) {
 
                 }
             }
@@ -527,7 +542,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
 
     }
-
 
 
 }

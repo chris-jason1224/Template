@@ -24,11 +24,22 @@
                 android:gravity="center"
                 android:text="goto_biz_login"/>
 
+            <Button
+                android:id="@+id/msg"
+                android:text="msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/msg2"
+                android:text="msg2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <RelativeLayout
                 android:background="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
 
 
                 <Button

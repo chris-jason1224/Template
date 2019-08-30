@@ -1,16 +1,16 @@
 package com.cj.login;
-import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.lifecycle.Observer;
 
-import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.base.BaseActivity;
-import com.cj.common.bus.DataBusKey;
-import com.cj.log.CJLog;
+import com.cj.common.bus.ModuleBus;
 import com.gyf.barlibrary.ImmersionBar;
-import com.jeremyliao.liveeventbus.LiveEventBus;
+
+import gen.com.cj.bus.Gen$biz_login$Interface;
 
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
@@ -18,12 +18,19 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ModuleBus.getInstance().of(Gen$biz_login$Interface.class).Gen$LoginEvent$Method().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Toast.makeText(LoginActivity.this, "ss = "+s, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-
     }
 
     @Override
@@ -45,12 +52,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        LiveEventBus.get().with(DataBusKey.ProcessSubDataEvent.getKey(),DataBusKey.ProcessSubDataEvent.getT()).observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                CJLog.getInstance().log_e("LoginAct "+ s);
-            }
-        });
     }
 
     @Override
@@ -78,17 +79,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        int vid = v.getId();
-        if(vid == R.id.send1){
-
-        }
-
-        if(vid == R.id.send2){
-            startActivity(new Intent(this,PActivity.class));
-        }
 
     }
-
-
 
 }

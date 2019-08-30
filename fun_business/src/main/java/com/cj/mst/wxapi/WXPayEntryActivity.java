@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cj.business.Config;
 import com.cj.business.pay.wechat.WeChatPayResult;
-import com.cj.common.bus.DataBusKey;
-import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.cj.common.bus.ModuleBus;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -16,6 +15,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import gen.com.cj.bus.Gen$fun_business$Interface;
 
 
 public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
@@ -50,15 +50,15 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 			switch (resp.errCode){
 				//成功
 				case 0:
-					LiveEventBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).post(WeChatPayResult.SUCCESS);
+					ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatPayResult$Method().post(WeChatPayResult.SUCCESS);
 					break;
 				//错误
 				case -1:
-					LiveEventBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).post(WeChatPayResult.FAILED);
+					ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatPayResult$Method().post(WeChatPayResult.FAILED);
 					break;
 				//取消
 				case -2:
-					LiveEventBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).post(WeChatPayResult.CANCEL);
+					ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatPayResult$Method().post(WeChatPayResult.CANCEL);
 					break;
 			}
 

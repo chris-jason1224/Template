@@ -19,7 +19,10 @@ android {
         //ARouter配置
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments = [
+                        AROUTER_MODULE_NAME: project.getName(),
+                        MODULE_NAME : project.getName()
+                ]
                 includeCompileClasspath true
             }
         }
@@ -45,7 +48,6 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
     implementation "com.google.android.material:material:${rootProject.ext.materialVersion}"
-    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintVersion}"
 
     //loadSir
     api "com.kingja.loadsir:loadsir:${rootProject.ext.loadSirVersion}"
@@ -100,11 +102,9 @@ dependencies {
     api "com.alibaba:arouter-api:${rootProject.ext.arouterApiVersion}"
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
 
-    //LiveEventBus
-    api "com.jeremyliao:live-event-bus-x:${rootProject.ext.liveDataBusVersion}"
-
     //butterknife
     api "com.jakewharton:butterknife:${rootProject.ext.butterknifeVersion}"
 
+    annotationProcessor project(':core_processor')
 
 }

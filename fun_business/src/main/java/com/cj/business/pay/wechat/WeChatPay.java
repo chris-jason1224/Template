@@ -12,17 +12,18 @@ import android.widget.Toast;
 import com.cj.business.Config;
 import com.cj.business.pay.lifecycle.PayEventLifecycleObserver;
 import com.cj.business.pay.IPay;
-import com.cj.common.bus.DataBusKey;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.util.JSONUtils;
 import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.util.LooperUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.tencent.mm.opensdk.constants.Build;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import gen.com.cj.bus.Gen$fun_business$Interface;
 
 /**
  * Author:chris - jason
@@ -42,7 +43,7 @@ public class WeChatPay implements IPay, LifecycleOwner {
         lifecycleRegistry.addObserver(new PayEventLifecycleObserver());
 
         //注册DataBus接收器
-        LiveEventBus.get().with(DataBusKey.WeChatPayResult.getKey(),DataBusKey.WeChatPayResult.getT()).observe(this,observer);
+        ModuleBus.getInstance().of(Gen$fun_business$Interface.class).Gen$WeChatPayResult$Method().observe(this,observer);
     }
 
     @NonNull

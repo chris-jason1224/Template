@@ -26,13 +26,12 @@ import android.widget.Toast;
 import com.cj.bluetooth.lifecycle.BTEventLifecycleObserver;
 import com.cj.bluetooth.view.PopBTScanDialog;
 import com.cj.common.base.BaseApp;
-import com.cj.common.bus.DataBusKey;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.provider.fun$bluetooth.BTStateObserver;
 import com.cj.common.util.kv.DiskCacheUtil;
 import com.cj.bluetooth.receiver.BTReceiver;
 import com.cj.bluetooth.util.BluetoothService;
 import com.cj.log.CJLog;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
@@ -40,6 +39,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import gen.com.cj.bus.Gen$fun_bluetooth$Interface;
 
 import static com.cj.bluetooth.BTCenter.BTState.STATE_CONNECTED;
 import static com.cj.bluetooth.BTCenter.BTState.STATE_CONNECTING;
@@ -110,7 +111,7 @@ public class BTCenter implements LifecycleOwner {
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         lifecycleRegistry.addObserver(new BTEventLifecycleObserver());
         //注册DataBus接收器
-        LiveEventBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).observe(this, btEventObserver);
+        ModuleBus.getInstance().of(Gen$fun_bluetooth$Interface.class).Gen$BluetoothEvent$Method().observe(this,btEventObserver);
         initBT();
     }
 

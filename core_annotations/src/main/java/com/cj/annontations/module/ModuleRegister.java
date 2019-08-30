@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * 注解：编译时期自动为添加该注解的module生成配置文件
  */
 
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.TYPE})
 public @interface ModuleRegister {
 

@@ -15,14 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Log;
 
-import com.cj.common.bus.DataBusKey;
+import com.cj.common.bus.ModuleBus;
 import com.cj.common.ipc.lifecycle.ProcessMainServiceLifecycleObserver;
 import com.cj.common.util.LooperUtil;
 import com.cj.common.util.ProcessUtil;
-import com.jeremyliao.liveeventbus.LiveEventBus;
-
 import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import gen.com.cj.bus.Gen$base_common$Interface;
 
 /**
  * 主进程Service Server端
@@ -52,7 +52,7 @@ public class ProcessMainService extends Service implements LifecycleOwner {
         lifecycleRegistry.addObserver(new ProcessMainServiceLifecycleObserver());
 
         //注册DataBus接收器
-        LiveEventBus.get().with(DataBusKey.ProcessMainReceiveDataEvent.getKey(), DataBusKey.ProcessMainReceiveDataEvent.getT()).observe(this, receiver);
+        ModuleBus.getInstance().of(Gen$base_common$Interface.class).Gen$ProcessMainReceiveDataEvent$Method().observe(this,receiver);
         super.onCreate();
     }
 
@@ -136,7 +136,7 @@ public class ProcessMainService extends Service implements LifecycleOwner {
                 LooperUtil.getInstance().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        LiveEventBus.get().with(DataBusKey.ProcessMainDataEvent.getKey(), DataBusKey.ProcessMainDataEvent.getT()).post(data);
+                        ModuleBus.getInstance().of(Gen$base_common$Interface.class).Gen$ProcessMainDataEvent$Method().post(data);
                     }
                 });
 

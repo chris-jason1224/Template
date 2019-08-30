@@ -2,9 +2,13 @@ package com.cj.processor.module;
 
 import com.cj.annontations.module.ModuleInfo;
 import com.cj.annontations.module.ModuleRegister;
+import com.cj.processor.util.LogUtil;
+import com.cj.processor.util.PackageParserHandler;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
+
 import org.xml.sax.SAXException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,6 +17,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -26,21 +31,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class ModuleCompiler extends AbstractProcessor {
+public class ModuleRegisterProcessor extends AbstractProcessor {
 
     private Messager messager;
-    public ModuleCompiler() {}
+
+    public ModuleRegisterProcessor() {
+    }
 
     //执行初始化逻辑
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         this.messager = processingEnv.getMessager();
-
-        Map<String,String> options = processingEnv.getOptions();
-        //这个是gradle文件中 配置的javaCompileOptions
-        String module_name = options.get("AROUTER_MODULE_NAME");
-
     }
 
     //扫描、解析自定义注解
@@ -51,29 +53,29 @@ public class ModuleCompiler extends AbstractProcessor {
         Set annotatedElements = roundEnvironment.getElementsAnnotatedWith(ModuleRegister.class);
 
         //同一个module添加了多次注解
-        if(annotatedElements.size()>1){
-            error("每个module中@ModuleRegister注解只需用一次，请去除重复注解");
+        if (annotatedElements.size() > 1) {
+            LogUtil.getInstance(messager).e_Message("每个module中@ModuleRegister注解只需用一次，请去除重复注解");
             return false;//退出处理
         }
 
-        Iterator<Element> iterator=annotatedElements.iterator();
+        Iterator<Element> iterator = annotatedElements.iterator();
 
-        if(iterator==null){
-            error("@ModuleRegister注解迭代器为空");
+        if (iterator == null) {
+            LogUtil.getInstance(messager).e_Message("@ModuleRegister注解迭代器为空");
             return false;
         }
 
-        while (iterator.hasNext()){
-            Element e=iterator.next();
-            if(e.getKind() == ElementKind.CLASS){
+        while (iterator.hasNext()) {
+            Element e = iterator.next();
+            if (e.getKind() == ElementKind.CLASS) {
                 //获取添加的注解信息
-                ModuleRegister moduleRegister=e.getAnnotation(ModuleRegister.class);
-                if(moduleRegister==null){
-                    error("@ModuleRegister注解对象为空，请检查注解");
+                ModuleRegister moduleRegister = e.getAnnotation(ModuleRegister.class);
+                if (moduleRegister == null) {
+                    LogUtil.getInstance(messager).e_Message("@ModuleRegister注解对象为空，请检查注解");
                     return false;
                 }
 
-                ModuleInfo proxy=new ModuleInfo();
+                ModuleInfo proxy = new ModuleInfo();
                 proxy.setModuleName(moduleRegister.moduleName());
                 proxy.setDelegateName(moduleRegister.delegateName());
                 proxy.setPackageName(getPackageName(moduleRegister.moduleName()));
@@ -81,8 +83,8 @@ public class ModuleCompiler extends AbstractProcessor {
 
                 return true;
 
-            }else {
-                error("@ModuleRegister注解只能用于类上");
+            } else {
+                LogUtil.getInstance(messager).e_Message("@ModuleRegister注解只能用于类上");
                 return false;
             }
         }
@@ -103,12 +105,12 @@ public class ModuleCompiler extends AbstractProcessor {
         return SourceVersion.latestSupported();
     }
 
-    private boolean isEmpty(String str){
-        if(str==null){
+    private boolean isEmpty(String str) {
+        if (str == null) {
             return true;
         }
 
-        if(str.isEmpty()){
+        if (str.isEmpty()) {
             return true;
         }
 
@@ -118,7 +120,7 @@ public class ModuleCompiler extends AbstractProcessor {
 
     private String getPackageName(String moduleName) {
         File manifest = new File(moduleName + "/src/main/AndroidManifest.xml");
-        if(!manifest.exists()) {
+        if (!manifest.exists()) {
             return null;
         } else {
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -140,13 +142,13 @@ public class ModuleCompiler extends AbstractProcessor {
 
     private void writeJsonToAssets(ModuleInfo moduleProxyInfo) {
         File dir = new File(moduleProxyInfo.getModuleName() + "/src/main/assets");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
 
         File file = new File(dir, ModuleInfo.MODULE_PREFIX + moduleProxyInfo.getModuleName() + ".json");
         try {
-            if(file.exists()) {
+            if (file.exists()) {
                 file.delete();
             }
 
@@ -166,8 +168,5 @@ public class ModuleCompiler extends AbstractProcessor {
         writer.close();
     }
 
-    private void error(String msg) {
-        this.messager.printMessage(Kind.ERROR, msg);
-    }
 
 }

@@ -3,8 +3,11 @@ package com.cj.bluetooth.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.cj.common.bus.DataBusKey;
-import com.jeremyliao.liveeventbus.LiveEventBus;
+
+import com.cj.common.bus.ModuleBus;
+
+import gen.com.cj.bus.Gen$fun_bluetooth$Interface;
+
 
 /**
  * Author:chris - jason
@@ -15,9 +18,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 public class BTReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
         //广播监听到状态变化后，即刻发送事件通知 BTCenter
-        LiveEventBus.get().with(DataBusKey.BluetoothEvent.getKey(), DataBusKey.BluetoothEvent.getT()).post(intent);
-
+        ModuleBus.getInstance().of(Gen$fun_bluetooth$Interface.class).Gen$BluetoothEvent$Method().post(intent);
     }
 }

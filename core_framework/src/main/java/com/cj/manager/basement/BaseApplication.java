@@ -46,6 +46,7 @@ public class BaseApplication extends Application {
 
         sInstance = this;
 
+
         /**
          * 多进程app会重复启动Application，只在主进程中执行一次即可
          */
