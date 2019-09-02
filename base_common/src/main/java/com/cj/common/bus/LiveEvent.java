@@ -1,7 +1,6 @@
 package com.cj.common.bus;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ExternalLiveData;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
