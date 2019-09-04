@@ -2,7 +2,7 @@
 package gen.com.cj.bus;
 
 import android.content.Intent;
-import com.cj.common.bus.Observable;
+import com.cj.common.bus.ModuleBus.Observable;
 
 public interface Gen$fun_bluetooth$Interface {
   /**

@@ -172,7 +172,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
 
             //todo javaPoet生成对应的接口
             //接口名：Gen& + moduleName + $Interface
-            //方法名：Gen& +fieldName + $Method ,无参数,返回类型 com.cj.com.bus.Observable<className>
+            //方法名：Gen& +fieldName + $Method ,无参数,返回类型 com.cj.com.bus.ModuleBus.Observable<className>
             if (methodList.size() == 0) {
                 LogUtil.getInstance(messager).e_Message("暂无组件消息注册");
                 return false;
@@ -198,7 +198,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                             methodBuilder("Gen$" + eventRegisterEntity.getFieldName() + "$Method")
                             .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
                             .addJavadoc("获取消息\n") // 添加注释
-                            .returns(ParameterizedTypeName.get(ClassName.get("com.cj.common.bus", "Observable"), ClassName.get(packageName, simpleName)))
+                            .returns(ParameterizedTypeName.get(ClassName.get("com.cj.common.bus.ModuleBus", "Observable"), ClassName.get(packageName, simpleName)))
                             .build();
 
 

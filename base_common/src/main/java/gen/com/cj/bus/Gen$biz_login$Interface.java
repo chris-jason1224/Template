@@ -1,7 +1,7 @@
 // Auto generated code , Do not edit
 package gen.com.cj.bus;
 
-import com.cj.common.bus.Observable;
+import com.cj.common.bus.ModuleBus.Observable;
 import java.lang.String;
 
 public interface Gen$biz_login$Interface {

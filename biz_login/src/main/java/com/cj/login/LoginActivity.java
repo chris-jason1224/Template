@@ -19,12 +19,12 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ModuleBus.getInstance().of(Gen$biz_login$Interface.class).Gen$LoginEvent$Method().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Toast.makeText(LoginActivity.this, "ss = "+s, Toast.LENGTH_SHORT).show();
-            }
-        });
+       ModuleBus.getInstance().of(Gen$biz_login$Interface.class).Gen$LoginEvent$Method().observeSticky(this, new Observer<String>() {
+           @Override
+           public void onChanged(String s) {
+               Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
+           }
+       });
 
     }
 
