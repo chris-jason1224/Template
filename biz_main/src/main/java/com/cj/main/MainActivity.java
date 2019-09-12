@@ -77,7 +77,6 @@ import gen.com.cj.bus.Gen$biz_main$Interface;
 import io.objectbox.query.Query;
 import pub.devrel.easypermissions.EasyPermissions;
 
-
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
 public class MainActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
 
@@ -510,6 +509,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             ARouter.getInstance().build("/biz_main/ACT/com.cj.main.test.TestActivity").navigation();
             return;
         }
+
 
     }
 

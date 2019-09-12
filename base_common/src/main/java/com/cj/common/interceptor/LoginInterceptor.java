@@ -53,7 +53,6 @@ public class LoginInterceptor implements IInterceptor {
             mCallback = callback;
             //todo 未登录，被拦截，跳转登录页面
             if (TextUtils.isEmpty(DiskCacheUtil.getInstance().getToken())) {
-
                 //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {
                 callback.onContinue(postcard);
@@ -99,15 +98,12 @@ public class LoginInterceptor implements IInterceptor {
 
             switch (result) {
                 case AsyncNotifyCode.CODE_LOGIN_SUCCESS:
-                    Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
                     mCallback.onContinue(mPostcard);
                     break;
                 case AsyncNotifyCode.CODE_LOGIN_FAILED:
-                    Toast.makeText(context, "登录失败", Toast.LENGTH_SHORT).show();
                     mCallback.onInterrupt(new Throwable("登录失败"));
                     break;
                 case AsyncNotifyCode.CODE_LOGIN_ERROR:
-                    Toast.makeText(context, "登录错误", Toast.LENGTH_SHORT).show();
                     mCallback.onInterrupt(new Throwable("登录错误"));
                     break;
             }
