@@ -190,7 +190,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                             buffer.append(names[i]);
                         }
                     }
-                    //@EventRegister可能会添加一些系统类，无法直接通过反射回去Type
+                    //@EventRegister可能会添加一些系统类，无法直接通过反射获取Type
                     String packageName = buffer.toString().replaceFirst(".", "");
                     String simpleName = names[names.length - 1];
 
@@ -202,7 +202,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                             .build();
 
 
-                    ClassName.get("android.content", "intent");
+                    //ClassName.get("android.content", "intent");
 
                     methodSpecs.add(methodSpec);
                 } catch (Exception e) {
