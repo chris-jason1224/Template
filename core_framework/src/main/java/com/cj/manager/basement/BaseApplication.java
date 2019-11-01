@@ -46,7 +46,6 @@ public class BaseApplication extends Application {
 
         sInstance = this;
 
-
         /**
          * 多进程app会重复启动Application，只在主进程中执行一次即可
          */
@@ -221,7 +220,8 @@ public class BaseApplication extends Application {
         return false;
     }
 
-    private void exit() {
+    //手动杀死app
+    public void exit() {
 
         if (mActivityList != null && mActivityList.size()>0) {
             try {

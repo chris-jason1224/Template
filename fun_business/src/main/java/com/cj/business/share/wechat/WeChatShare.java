@@ -265,8 +265,7 @@ public class WeChatShare implements IShare, LifecycleOwner {
                         callback.onSuccess();
                         break;
                     case WeChatShareResult.FAILED:
-                        //todo 这里暂时回调一个空错误信息
-                        callback.onFailed(null);
+                        callback.onFailed(new Throwable(msg));
                         break;
                     case WeChatShareResult.CANCEL:
                         callback.onCancel();

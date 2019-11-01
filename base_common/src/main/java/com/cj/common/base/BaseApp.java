@@ -29,7 +29,6 @@ import java.util.List;
 
 public class BaseApp extends BaseApplication {
 
-
     @Override
     public void onCreate() {
         //优先执行各个DelegateApplication的onCreate
@@ -63,8 +62,6 @@ public class BaseApp extends BaseApplication {
 
     }
 
-
-
     @Override
     protected void attachBaseContext(Context context) {
         super.attachBaseContext(context);
@@ -81,21 +78,6 @@ public class BaseApp extends BaseApplication {
                 .addCallback(new OnPlaceHolderCallback())//占位页面
                 .setDefaultCallback(SuccessCallback.class)//默认显示加载成功页面
                 .commit();
-
-        //某个页面单独配置可用以下方式
-//        LoadSir loadSir = new LoadSir.Builder()
-//                .addCallback(new OnErrorStateCallback())
-//                .addCallback(new OnEmptyStateCallback())
-//                .addCallback(new OnPlaceHolderCallback())
-//                .build();
-//        final LoadService loadService = loadSir.register(this, new Callback.OnReloadListener() {
-//            @Override
-//            public void onReload(View v) {
-//                // 重新加载逻辑
-//
-//            }
-//        });
-
     }
 
     /**
@@ -107,31 +89,5 @@ public class BaseApp extends BaseApplication {
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver, filter);
     }
-
-    private boolean isCurrentMainProcess() {
-
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        if (manager != null) {
-            //获取运行的进程列表
-            List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfoList = manager.getRunningAppProcesses();
-
-            if (runningAppProcessInfoList != null && runningAppProcessInfoList.size() > 0) {
-
-                for (ActivityManager.RunningAppProcessInfo info : runningAppProcessInfoList) {
-                    //当前进程 id = 运行进程 id，默认主进程名等于包名
-                    if (info.pid == android.os.Process.myPid()) {
-                        if (TextUtils.equals(info.processName, getPackageName())) {
-                            return true;
-                        }
-                    }
-                }
-
-            }
-        }
-
-        return false;
-    }
-
-
 
 }

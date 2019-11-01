@@ -170,7 +170,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                 }
             }
 
-            //todo javaPoet生成对应的接口
+            //通过javaPoet按规则生成对应的接口
             //接口名：Gen& + moduleName + $Interface
             //方法名：Gen& +fieldName + $Method ,无参数,返回类型 com.cj.com.bus.ModuleBus.Observable<className>
             if (methodList.size() == 0) {

@@ -20,7 +20,6 @@ public abstract class BaseMVPActivity<P extends IBasePresenter> extends BaseActi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
-
         //绑定Presenter
         if(mPresenter==null){
             mPresenter=createPresenter();

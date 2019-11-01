@@ -15,15 +15,12 @@ buildscript {
     dependencies {
         //android 编译工具插件
         classpath 'com.android.tools.build:gradle:3.4.2'
-
         //沪江 aspectJ插件
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
-
         //ObjectBox插件
         classpath "io.objectbox:objectbox-gradle-plugin:$objectBoxVersion"
         //butterknife插件
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
-
     }
 }
 

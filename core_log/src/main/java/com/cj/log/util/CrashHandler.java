@@ -77,6 +77,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 @Override
                 public void run() {
                     //为这个子线程初始化一个消息队列
+                    //主线程的Looper的ThreadLocal不为null
                     Looper.prepare();
                     showDialog();
                     //开启消息队列
@@ -222,7 +223,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         return sb.toString();
     }
 
-
     private PackageInfo getPackageInfo(Context context) {
         PackageInfo pi = null;
 
@@ -238,7 +238,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         return pi;
     }
 
-
     private Intent getLauncherIntent(Context context) {
         PackageManager pkm = context.getPackageManager();
         if (pkm != null) {
@@ -250,22 +249,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void exit() {
-        List<Activity> list = BaseApplication.getInstance().getActivityTaskStack();
-        if (list != null && list.size()>0) {
-            try {
-                Iterator activityIterator = list.iterator();
-                while (activityIterator.hasNext()) {
-                    Activity activity = (Activity) activityIterator.next();
-                    activity.finish();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
-        }
-
-
+        BaseApplication.getInstance().exit();
     }
 
 }

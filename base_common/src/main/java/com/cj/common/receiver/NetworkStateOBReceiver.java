@@ -19,7 +19,6 @@ public class NetworkStateOBReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
         //网络已经发生变化
         if(intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)){
             //将网络状态回调给前台
@@ -46,7 +45,7 @@ public class NetworkStateOBReceiver extends BroadcastReceiver{
          * @param isConnected 当前是否有网络连接
          * @param type 当前连接的类型
          */
-        public void onNetworkChanged(boolean isConnected, int type);
+         void onNetworkChanged(boolean isConnected, int type);
 
     }
 

@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/base_common_color_primary</item>
         <item name="colorPrimaryDark">@color/base_common_color_primary_dark</item>
         <item name="colorAccent">@color/base_common_color_accent</item>
+        <item name="android:screenOrientation">portrait</item>
+
     </style>
 
 </resources>

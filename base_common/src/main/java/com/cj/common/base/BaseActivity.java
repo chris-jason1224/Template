@@ -2,6 +2,7 @@ package com.cj.common.base;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,6 @@ import com.kingja.loadsir.core.Convertor;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.kingja.loadsir.core.Transport;
-import com.orhanobut.logger.LogAdapter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -63,6 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         setContentView(mContentView);
         unbinder = ButterKnife.bind(this);
 
+        //若使用Butterknife注入控件，则该方法的实现只为了实现UI逻辑，比如初始化列表适配器
         initView();
 
         //ARouter注入
@@ -126,8 +127,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onDestroy();
         if (immersionBar != null)
             immersionBar.destroy();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
 
-        unbinder.unbind();
     }
 
     //子类该方法，传入布局文件
