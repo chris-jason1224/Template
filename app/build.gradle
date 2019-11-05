@@ -64,7 +64,7 @@ android {
         preDexLibraries = false
     }
 
-//   指定编译jdk版本
+    //指定编译jdk版本 butterknife 静态接口方法必须在java8下使用
     compileOptions {
         sourceCompatibility rootProject.ext.javaVersion
         targetCompatibility rootProject.ext.javaVersion
@@ -88,18 +88,16 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
     //合并时才依赖各个组件
 
-    api project(':biz_main')
-    api project(':biz_login')
-    //只需要在app中依赖fun_aop module，其他module 用 provide only
-    api project(':fun_aop')
-    api project(':fun_push')
-
-
-    api project(':fun_business')
-    api project(':fun_compressor')
-    api project(':fun_bluetooth')
-
-    api project(':fun_lbs')
+    if(!runAloneMode.toBoolean()){
+        api project(':biz_main')
+        api project(':biz_login')
+        api project(':fun_aop')
+        api project(':fun_push')
+        api project(':fun_business')
+        api project(':fun_compressor')
+        api project(':fun_bluetooth')
+        api project(':fun_lbs')
+    }
 
 }
 

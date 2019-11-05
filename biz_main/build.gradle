@@ -1,4 +1,9 @@
-apply plugin: 'com.android.library'
+if(runAloneMode.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -6,6 +11,10 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
+        if(runAloneMode.toBoolean()){
+            applicationId "com.cj.main"
+        }
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -39,6 +48,22 @@ android {
         abortOnError false
     }
 
+    sourceSets{
+        main{
+            if(runAloneMode.toBoolean()){
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+
+    //指定编译jdk版本 butterknife 静态接口方法必须在java8下使用
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
 }
 
 dependencies {
@@ -51,8 +76,7 @@ dependencies {
     annotationProcessor project(':core_processor')
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterknifeVersion}"
 
-
-    compileOnly project(':fun_aop')
+    //api project(':fun_aop')
 
 
 }

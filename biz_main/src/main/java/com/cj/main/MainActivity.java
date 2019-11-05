@@ -52,11 +52,8 @@ import com.cj.common.util.async.Exec;
 import com.cj.common.util.async.IAsyncCallback;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
-import com.cj.fun_aop.annotation.ExecutionTimeTrace;
-import com.cj.fun_aop.annotation.SingleSubmit;
-import com.cj.fun_aop.annotation.WifiNeed;
+
 import com.cj.log.CJLog;
-import com.cj.ui.banner.Banner;
 import com.cj.ui.banner.loader.ImageLoaderInterface;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
@@ -92,7 +89,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private LinearLayout mLLParent;
     private TextView mTVState;
     private ImageView mIVTest;
-    private Banner banner;
 
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
@@ -204,33 +200,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968392&di=c313712ce7768b428f6bd41f042f74f9&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20130302%2FImg367606372.jpg");
         imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968389&di=1a59ceed2657ae3fe9c7ea5ba16313b0&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw803h449%2F20180110%2F70fa-fyqnick1909052.png");
 
-        banner = fb(R.id.banner);
-        banner.setImages(imgs);
-        banner.setImageLoader(new ImageLoaderInterface() {
-            @Override
-            public void displayImage(Context context, Object path, View imageView) {
-
-                SimpleDraweeView drev = (SimpleDraweeView) imageView;
-                ImageLoader.getInstance().load(MainActivity.this,drev,(String)path);
-            }
-
-            @Override
-            public View createImageView(Context context) {
-                SimpleDraweeView drev = new SimpleDraweeView(MainActivity.this);
-                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.dip2px(MainActivity.this,200));
-                drev.setLayoutParams(lp);
-
-                return drev;
-
-            }
-        });
-        banner.start();
+//        banner = fb(R.id.banner);
+//        banner.setImages(imgs);
+//        banner.setImageLoader(new ImageLoaderInterface() {
+//            @Override
+//            public void displayImage(Context context, Object path, View imageView) {
+//
+//                SimpleDraweeView drev = (SimpleDraweeView) imageView;
+//                ImageLoader.getInstance().load(MainActivity.this,drev,(String)path);
+//            }
+//
+//            @Override
+//            public View createImageView(Context context) {
+//                SimpleDraweeView drev = new SimpleDraweeView(MainActivity.this);
+//                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.dip2px(MainActivity.this,200));
+//                drev.setLayoutParams(lp);
+//
+//                return drev;
+//
+//            }
+//        });
+//        banner.start();
 
     }
 
-    @WifiNeed
-    @ExecutionTimeTrace
-    @SingleSubmit
+//    @WifiNeed
+//    @ExecutionTimeTrace
+//    @SingleSubmit
     @Override
     public void onClick(View v) {
 

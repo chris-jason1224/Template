@@ -1,4 +1,9 @@
-apply plugin: 'com.android.library'
+if(runAloneMode.toBoolean()){
+    apply plugin: 'com.android.application'
+}else {
+    apply plugin: 'com.android.library'
+}
+
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -10,13 +15,15 @@ android {
     }
 
     defaultConfig {
+        if(runAloneMode.toBoolean()){
+            applicationId "com.cj.login"
+        }
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
 
         //ARouter配置
         javaCompileOptions {
@@ -39,14 +46,30 @@ android {
         }
     }
 
+    sourceSets{
+        main{
+            if(runAloneMode.toBoolean()){
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+
+    //指定编译jdk版本 butterknife 静态接口方法必须在java8下使用
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
     androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
-    api project(':base_common')
 
+    api project(':base_common')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterknifeVersion}"
     annotationProcessor project(':core_processor')

@@ -22,7 +22,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.cj.ui.R;
-import com.cj.ui.banner.listener.OnBannerClickListener;
 import com.cj.ui.banner.listener.OnBannerListener;
 import com.cj.ui.banner.loader.ImageLoaderInterface;
 import com.cj.ui.banner.view.BannerViewPager;
@@ -72,7 +71,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private BannerPagerAdapter adapter;
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
     private BannerScroller mScroller;
-    private OnBannerClickListener bannerListener;
     private OnBannerListener listener;
     private DisplayMetrics dm;
 
@@ -452,7 +450,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         if (isAutoPlay)
             startAutoPlay();
     }
-    
+
     public void startAutoPlay() {
         handler.removeCallbacks(task);
         handler.postDelayed(task, delayTime);
@@ -526,16 +524,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         public Object instantiateItem(ViewGroup container, final int position) {
             container.addView(imageViews.get(position));
             View view = imageViews.get(position);
-            if (bannerListener != null) {
-                view.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.e(tag, "你正在使用旧版点击事件接口，下标是从1开始，" +
-                                "为了体验请更换为setOnBannerListener，下标从0开始计算");
-                        bannerListener.OnBannerClick(position);
-                    }
-                });
-            }
+
             if (listener != null) {
                 view.setOnClickListener(new OnClickListener() {
                     @Override
@@ -634,11 +623,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
 
     }
 
-    @Deprecated
-    public Banner setOnBannerClickListener(OnBannerClickListener listener) {
-        this.bannerListener = listener;
-        return this;
-    }
 
     /**
      * 废弃了旧版接口，新版的接口下标是从1开始，同时解决下标越界问题

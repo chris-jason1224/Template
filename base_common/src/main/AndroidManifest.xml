@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cj.common">
 
-    <!--自定义aidl校验权限-->
-    <permission android:name="com.cj.common.PROCESS_MAIN_SERVICE_PERMISSION"
-        android:protectionLevel="normal"/>
-    <uses-permission android:name="com.cj.common.PROCESS_MAIN_SERVICE_PERMISSION"/>
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -14,10 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <service
-            android:name=".ipc.ProcessMainService"
-            android:enabled="true"
-            android:exported="true"></service>
+
     </application>
 
 </manifest>
