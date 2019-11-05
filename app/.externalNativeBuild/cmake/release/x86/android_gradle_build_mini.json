@@ -1,0 +1,17 @@
+{
+  "buildFiles": [
+    "/Users/mayikang/Library/Android/android-ndk-r14b/build/cmake/android.toolchain.cmake",
+    "/Users/mayikang/github/Template/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/x86\" --target clean"
+  ],
+  "libraries": {
+    "native-lib-Release-x86": {
+      "artifactName": "native-lib",
+      "buildCommand": "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/x86\" --target native-lib",
+      "abi": "x86",
+      "output": "/Users/mayikang/github/Template/app/build/intermediates/cmake/release/obj/x86/libnative-lib.so"
+    }
+  }
+}

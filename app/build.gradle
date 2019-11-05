@@ -33,14 +33,14 @@ android {
         //极光推送配置
         manifestPlaceholders = [
                 JPUSH_PKGNAME : "${applicationId}",
-                JPUSH_APPKEY : "ebc918c62b95b99795db7fab", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY  : "ebc918c62b95b99795db7fab", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "Template-debug-channel", //暂时填写默认值即可.
-                GAO_DE_MAP_KEY : "89be9f853395b8c3ee9f9241ddc9c6c8",//高德地图key
+                GAO_DE_MAP_KEY: "89be9f853395b8c3ee9f9241ddc9c6c8",//高德地图key
         ]
 
         ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
-            abiFilters 'x86','armeabi', 'armeabi-v7a','arm64-v8a'
+            abiFilters 'x86', 'armeabi', 'armeabi-v7a', 'arm64-v8a'
             // 还可以添加 'arm64-v8a' ，'x86', 'x86_64', 'mips', 'mips64'
         }
 
@@ -56,6 +56,8 @@ android {
             signingConfig signingConfigs.signature
         }
     }
+
+
     //multidex config
     dexOptions {
         javaMaxHeapSize "4g"
@@ -71,9 +73,9 @@ android {
 }
 
 //因为app模块依赖了fun-business模块，而fun-business模块依赖了支付宝sdk（aar），所以在app模块也需要依赖上路径
-repositories{
+repositories {
     flatDir {
-        dirs 'libs','../fun_business/libs','../fun_lbs/libs'
+        dirs 'libs', '../fun_business/libs', '../fun_lbs/libs'
     }
 }
 
@@ -85,14 +87,14 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
     //合并时才依赖各个组件
-    if (!isModuleModle.toBoolean()) {
-        api project(':biz_main')
-        api project(':biz_login')
-        //只需要在app中依赖fun_aop module，其他module 用 provide only
-        api project(':fun_aop')
-        api project(':fun_push')
-    }
-    
+
+    api project(':biz_main')
+    api project(':biz_login')
+    //只需要在app中依赖fun_aop module，其他module 用 provide only
+    api project(':fun_aop')
+    api project(':fun_push')
+
+
     api project(':fun_business')
     api project(':fun_compressor')
     api project(':fun_bluetooth')
@@ -102,11 +104,11 @@ dependencies {
 }
 
 //AspectJX插件配置项
-aspectjx{
+aspectjx {
     enabled true
     //mac系统下，包名分隔用.
     //不去掉支付宝sdk会导致崩溃
-    exclude 'com.alipay', 'com.tencent','com.jakewharton'
+    exclude 'com.alipay', 'com.tencent', 'com.jakewharton'
 
     //windows系统下,包名分隔用/
     //exclude 'com/alipay'

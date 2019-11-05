@@ -8,32 +8,20 @@
     android:layout_height="match_parent"
     tools:context="com.cj.login.LoginActivity">
 
-
     <TextView
         android:textColor="@color/core_ui_white"
         android:text="沉浸式效果"
         android:background="#42bd56"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="50dp"/>
 
-    </TextView>
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/drev"
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
 
-    <TextView
-        android:gravity="center"
-        android:text="biz-login"
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
 
-    <Button
-        android:id="@+id/send1"
-        android:text="send1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/send2"
-        android:text="send2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 </LinearLayout>

@@ -1,0 +1,40 @@
+{
+  "stringTable": {
+    "0": "/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/x86",
+    "1": "--target=i686-none-linux-android --gcc-toolchain=/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/x86-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/mayikang/Library/Android/android-ndk-r14b/platforms/android-19/arch-x86 -Dnative_lib_EXPORTS -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include/backward -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -Wa,--noexecstack -Wformat -Werror=format-security -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -Wa,--noexecstack -Wformat -Werror=format-security -O2 -DNDEBUG -O2 -DNDEBUG -fPIC"
+  },
+  "buildFiles": [
+    "/Users/mayikang/Library/Android/android-ndk-r14b/build/cmake/android.toolchain.cmake",
+    "/Users/mayikang/github/Template/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/x86\" --target clean"
+  ],
+  "libraries": {
+    "native-lib-Release-x86": {
+      "buildCommand": "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/x86\" --target native-lib",
+      "buildType": "release",
+      "toolchain": "1916343304",
+      "abi": "x86",
+      "artifactName": "native-lib",
+      "files": [
+        {
+          "src": "/Users/mayikang/github/Template/app/src/main/cpp/native-lib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/mayikang/github/Template/app/build/intermediates/cmake/release/obj/x86/libnative-lib.so"
+    }
+  },
+  "toolchains": {
+    "1916343304": {
+      "cppCompilerExecutable": "/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

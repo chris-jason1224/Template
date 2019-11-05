@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/arm64-v8a",
+  "command": "/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android --gcc-toolchain=/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/mayikang/Library/Android/android-ndk-r14b/platforms/android-21/arch-arm64  -Dnative_lib_EXPORTS -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/libs/arm64-v8a/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -O2 -DNDEBUG -O2 -DNDEBUG  -fPIC   -o CMakeFiles/native-lib.dir/native-lib.cpp.o -c /Users/mayikang/github/Template/app/src/main/cpp/native-lib.cpp",
+  "file": "/Users/mayikang/github/Template/app/src/main/cpp/native-lib.cpp"
+}
+]

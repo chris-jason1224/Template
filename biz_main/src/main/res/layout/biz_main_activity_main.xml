@@ -16,6 +16,15 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.cj.ui.banner.Banner
+                android:id="@+id/banner"
+                app:core_ui_delay_time="2000"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+            </com.cj.ui.banner.Banner>
+
             <TextView
                 android:id="@+id/goto_biz_login"
                 android:layout_width="match_parent"

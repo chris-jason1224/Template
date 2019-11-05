@@ -1,6 +1,7 @@
 package com.cj.main;
 
 import android.Manifest;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,9 +56,12 @@ import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.fun_aop.annotation.WifiNeed;
 import com.cj.log.CJLog;
+import com.cj.ui.banner.Banner;
+import com.cj.ui.banner.loader.ImageLoaderInterface;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
+import com.cj.ui.util.ScreenUtil;
 import com.cj.utils.io.IOUtil;
 import com.cj.utils.list.ListUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -69,6 +74,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import butterknife.BindView;
@@ -86,6 +92,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private LinearLayout mLLParent;
     private TextView mTVState;
     private ImageView mIVTest;
+    private Banner banner;
+
 
     @Autowired(name = "/fun_business/SEV/com.cj.business.pay.PayService")
     IPayProvider pay;
@@ -120,6 +128,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     protected void initData() {
+
         String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547813416419&di=cd93b735d229213f2e0dee2759ad81d3&imgtype=0&src=http%3A%2F%2Fattimg.dospy.com%2Fimg%2Fday_111004%2F20111004_f4e8d9f067a3542375c920PXx4HtkkZZ.jpg";
         ImageLoader.getInstance().load(this, draweeView, url, new IImageLoadCallback() {
             @Override
@@ -187,6 +196,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fb(R.id.get).setOnClickListener(this);
         fb(R.id.to_locate).setOnClickListener(this);
         fb(R.id.calculate).setOnClickListener(this);
+
+        //////////////////////////
+        List<String> imgs = new ArrayList<>();
+        imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968395&di=f1ffda3814f533f319b3e2f62277e176&imgtype=0&src=http%3A%2F%2Fimg.52jbj.com%2Fuploads%2Fallimg%2F160117%2Fco16011G64453-0.jpg");
+        imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968393&di=0ee1d72b7493abeb623b84a654008aef&imgtype=0&src=http%3A%2F%2Fi4.bbs.fd.zol-img.com.cn%2Ft_s1200x5000%2Fg5%2FM00%2F0F%2F0B%2FChMkJ1hjc3aIAGHyAAIQm0TYxUsAAY7aAB4_wsAAhCz914.jpg");
+        imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968392&di=c313712ce7768b428f6bd41f042f74f9&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20130302%2FImg367606372.jpg");
+        imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968389&di=1a59ceed2657ae3fe9c7ea5ba16313b0&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw803h449%2F20180110%2F70fa-fyqnick1909052.png");
+
+        banner = fb(R.id.banner);
+        banner.setImages(imgs);
+        banner.setImageLoader(new ImageLoaderInterface() {
+            @Override
+            public void displayImage(Context context, Object path, View imageView) {
+
+                SimpleDraweeView drev = (SimpleDraweeView) imageView;
+                ImageLoader.getInstance().load(MainActivity.this,drev,(String)path);
+            }
+
+            @Override
+            public View createImageView(Context context) {
+                SimpleDraweeView drev = new SimpleDraweeView(MainActivity.this);
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.dip2px(MainActivity.this,200));
+                drev.setLayoutParams(lp);
+
+                return drev;
+
+            }
+        });
+        banner.start();
+
     }
 
     @WifiNeed
@@ -542,6 +581,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
 
     }
+
 
 
 }

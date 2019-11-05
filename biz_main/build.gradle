@@ -13,18 +13,18 @@ android {
         resourcePrefix "biz_main_"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        if (!isModuleModle.toBoolean()) {
-            //ARouter配置
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [
-                            AROUTER_MODULE_NAME: project.getName(),
-                            MODULE_NAME:project.getName()
-                    ]
-                    includeCompileClasspath true
-                }
+
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        AROUTER_MODULE_NAME: project.getName(),
+                        MODULE_NAME        : project.getName()
+                ]
+                includeCompileClasspath true
             }
         }
+
 
     }
 
@@ -46,11 +46,11 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
     androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
     api project(':base_common')
-    if (!isModuleModle.toBoolean()) {
-        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
-        annotationProcessor project(':core_processor')
-        annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterknifeVersion}"
-    }
+
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+    annotationProcessor project(':core_processor')
+    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterknifeVersion}"
+
 
     compileOnly project(':fun_aop')
 

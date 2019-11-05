@@ -12,16 +12,14 @@ android {
         resourcePrefix "fun_lbs"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        if (!isModuleModle.toBoolean()) {
-            //ARouter配置
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [AROUTER_MODULE_NAME: project.getName()]
-                    includeCompileClasspath true
-                }
+
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath true
             }
         }
-
 
 
     }
@@ -44,9 +42,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
     androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
     api project(':base_common')
-    if (!isModuleModle.toBoolean()) {
-        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
-        annotationProcessor project(':core_processor')
-    }
+
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+    annotationProcessor project(':core_processor')
+
     api files('libs/AMap3DMap_6.8.0_AMapNavi_6.7.0_AMapSearch_6.5.0_AMapTrack_1.0.0_AMapLocation_4.6.0_20190423.jar')
 }

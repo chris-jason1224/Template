@@ -12,18 +12,18 @@ android {
         resourcePrefix "fun_business_"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        if (!isModuleModle.toBoolean()) {
-            //ARouter配置
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [
-                            AROUTER_MODULE_NAME: project.getName(),
-                            MODULE_NAME:project.getName()
-                    ]
-                    includeCompileClasspath true
-                }
+
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        AROUTER_MODULE_NAME: project.getName(),
+                        MODULE_NAME        : project.getName()
+                ]
+                includeCompileClasspath true
             }
         }
+
 
     }
 
@@ -46,12 +46,9 @@ dependencies {
 
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:${rootProject.ext.wechatVersion}"
 
-    if (!isModuleModle.toBoolean()) {
-        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
-    }
-
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
     annotationProcessor project(':core_processor')
     //支付宝sdk aar包
-    implementation(name:'alipaySdk-15.5.9' ,ext:'aar')
+    implementation(name: 'alipaySdk-15.5.9', ext: 'aar')
 
 }

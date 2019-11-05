@@ -1,0 +1,5 @@
+# ninja log v5
+0	91	1572853659	build.ninja	b9ed32fe913c70b7
+0	300	1572853659	CMakeFiles/native-lib.dir/native-lib.cpp.o	863b1dfc0c5a893e
+301	462	1572853659	/Users/mayikang/github/Template/app/build/intermediates/cmake/debug/obj/armeabi/libnative-lib.so	9d573e70fe71b15
+1	74	1572853888	build.ninja	b9ed32fe913c70b7

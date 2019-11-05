@@ -132,4 +132,36 @@
     </declare-styleable>
 
 
+    <declare-styleable name="core_ui_Banner">
+        <attr name="core_ui_delay_time" format="integer" />
+        <attr name="core_ui_scroll_time" format="integer" />
+        <attr name="core_ui_is_auto_play" format="boolean" />
+        <attr name="core_ui_title_background" format="color|reference" />
+        <attr name="core_ui_title_textcolor" format="color" />
+        <attr name="core_ui_title_textsize" format="dimension" />
+        <attr name="core_ui_title_height" format="dimension" />
+        <attr name="core_ui_indicator_width" format="dimension" />
+        <attr name="core_ui_indicator_height" format="dimension" />
+        <attr name="core_ui_indicator_selected_width" format="dimension" />
+        <attr name="core_ui_indicator_selected_height" format="dimension" />
+        <attr name="core_ui_indicator_margin" format="dimension" />
+        <attr name="core_ui_indicator_drawable_selected" format="reference" />
+        <attr name="core_ui_indicator_drawable_unselected" format="reference" />
+        <attr name="core_ui_banner_layout" format="reference"/>
+        <attr name="core_ui_banner_default_image" format="reference"/>
+        <attr name="core_ui_image_scale_type" format="enum">
+            <enum name="center" value="0" />
+            <enum name="center_crop" value="1" />
+            <enum name="center_inside" value="2" />
+            <enum name="fit_center" value="3" />
+            <enum name="fit_end" value="4" />
+            <enum name="fit_start" value="5" />
+            <enum name="fit_xy" value="6" />
+            <enum name="matrix" value="7" />
+        </attr>
+        <!--<attr name="indicator_animator" format="reference" />-->
+        <!--<attr name="indicator_animator_reverse" format="reference" />-->
+    </declare-styleable>
+
+
 </resources>

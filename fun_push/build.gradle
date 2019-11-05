@@ -12,19 +12,18 @@ android {
         resourcePrefix "fun_push_"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        if (!isModuleModle.toBoolean()) {
-            //ARouter配置
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [AROUTER_MODULE_NAME: project.getName()]
-                    includeCompileClasspath true
-                }
+
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath true
             }
         }
 
 
     }
-    
+
     packagingOptions {
         doNotStrip '*/mips/*.so'
         doNotStrip '*/mips64/*.so'
@@ -43,10 +42,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':base_common')
 
-    if (!isModuleModle.toBoolean()) {
-        annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
-        annotationProcessor project(':core_processor')
-    }
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterAnnotationProcessor"
+    annotationProcessor project(':core_processor')
 
     //极光推送sdk
     api "cn.jiguang.sdk:jpush:${rootProject.ext.jpushSdkVersion}"

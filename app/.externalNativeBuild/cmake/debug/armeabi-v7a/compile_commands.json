@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/debug/armeabi-v7a",
+  "command": "/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/mayikang/Library/Android/android-ndk-r14b/platforms/android-19/arch-arm  -Dnative_lib_EXPORTS -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/native-lib.dir/native-lib.cpp.o -c /Users/mayikang/github/Template/app/src/main/cpp/native-lib.cpp",
+  "file": "/Users/mayikang/github/Template/app/src/main/cpp/native-lib.cpp"
+}
+]

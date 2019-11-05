@@ -1,0 +1,40 @@
+{
+  "stringTable": {
+    "0": "/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/armeabi",
+    "1": "--target=armv5te-none-linux-androideabi --gcc-toolchain=/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/mayikang/Library/Android/android-ndk-r14b/platforms/android-19/arch-arm -Dnative_lib_EXPORTS -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi/include -isystem /Users/mayikang/Library/Android/android-ndk-r14b/sources/cxx-stl/gnu-libstdc++/4.9/include/backward -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv5te -mtune=xscale -msoft-float -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv5te -mtune=xscale -msoft-float -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -Os -DNDEBUG -Os -DNDEBUG -fPIC"
+  },
+  "buildFiles": [
+    "/Users/mayikang/Library/Android/android-ndk-r14b/build/cmake/android.toolchain.cmake",
+    "/Users/mayikang/github/Template/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/armeabi\" --target clean"
+  ],
+  "libraries": {
+    "native-lib-Release-armeabi": {
+      "buildCommand": "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/armeabi\" --target native-lib",
+      "buildType": "release",
+      "toolchain": "1916343304",
+      "abi": "armeabi",
+      "artifactName": "native-lib",
+      "files": [
+        {
+          "src": "/Users/mayikang/github/Template/app/src/main/cpp/native-lib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/mayikang/github/Template/app/build/intermediates/cmake/release/obj/armeabi/libnative-lib.so"
+    }
+  },
+  "toolchains": {
+    "1916343304": {
+      "cppCompilerExecutable": "/Users/mayikang/Library/Android/android-ndk-r14b/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

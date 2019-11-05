@@ -1,0 +1,17 @@
+{
+  "buildFiles": [
+    "/Users/mayikang/Library/Android/android-ndk-r14b/build/cmake/android.toolchain.cmake",
+    "/Users/mayikang/github/Template/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/armeabi\" --target clean"
+  ],
+  "libraries": {
+    "native-lib-Release-armeabi": {
+      "artifactName": "native-lib",
+      "buildCommand": "/Users/mayikang/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake --build \"/Users/mayikang/github/Template/app/.externalNativeBuild/cmake/release/armeabi\" --target native-lib",
+      "abi": "armeabi",
+      "output": "/Users/mayikang/github/Template/app/build/intermediates/cmake/release/obj/armeabi/libnative-lib.so"
+    }
+  }
+}

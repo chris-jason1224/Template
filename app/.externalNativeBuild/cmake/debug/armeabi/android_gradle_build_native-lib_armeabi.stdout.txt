@@ -1,0 +1,5 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/mayikang/github/Template/app/.externalNativeBuild/cmake/debug/armeabi
+ninja: no work to do.
