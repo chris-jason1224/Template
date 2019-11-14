@@ -53,6 +53,7 @@ import com.cj.common.util.async.IAsyncCallback;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
 
+import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.log.CJLog;
 import com.cj.ui.banner.loader.ImageLoaderInterface;
 import com.cj.ui.dialog.DialogUtil;
@@ -126,7 +127,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void initData() {
 
         String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547813416419&di=cd93b735d229213f2e0dee2759ad81d3&imgtype=0&src=http%3A%2F%2Fattimg.dospy.com%2Fimg%2Fday_111004%2F20111004_f4e8d9f067a3542375c920PXx4HtkkZZ.jpg";
-        ImageLoader.getInstance().load(this, draweeView, url, new IImageLoadCallback() {
+
+        ImageLoader.getInstance().load(this, draweeView,ScreenUtil.getScreenWidth(this),ScreenUtil.dip2px(this,300),url, new IImageLoadCallback() {
             @Override
             public void onSuccess(String id, ImageInfo imageInfo, Animatable animatable) {
 
@@ -226,7 +228,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
 //    @WifiNeed
 //    @ExecutionTimeTrace
-//    @SingleSubmit
+    @SingleSubmit
     @Override
     public void onClick(View v) {
 

@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity {
     protected void initData() {
         String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968392&di=c313712ce7768b428f6bd41f042f74f9&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20130302%2FImg367606372.jpg";
 
-        ImageLoader.getInstance().load(this,drev,url);
+        ImageLoader.getInstance().load(this,drev,800,300,url);
     }
 
     @Override

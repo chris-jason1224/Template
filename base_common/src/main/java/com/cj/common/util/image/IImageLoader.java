@@ -18,17 +18,16 @@ import java.io.File;
 public interface IImageLoader {
 
     //加载网络图
-    void load(Context context,@NonNull SimpleDraweeView view, @NonNull String url);
-    void load(Context context,@NonNull SimpleDraweeView view,@NonNull String url,IImageLoadCallback loadCallback);
+    void load(Context context,@NonNull SimpleDraweeView view,int width,int height,@NonNull String url);
+    void load(Context context,@NonNull SimpleDraweeView view,int width,int height,@NonNull String url,IImageLoadCallback loadCallback);
 
     //加载本地资源图
-    void loadDrawable(Context context,@NonNull SimpleDraweeView view,@DrawableRes int drawable);
-    void loadDrawable(Context context,@NonNull SimpleDraweeView view,@DrawableRes int drawable,IImageLoadCallback loadCallback);
+    void loadDrawable(Context context,@NonNull SimpleDraweeView view,int width,int height,@DrawableRes int drawable);
+    void loadDrawable(Context context,@NonNull SimpleDraweeView view,int width,int height,@DrawableRes int drawable,IImageLoadCallback loadCallback);
 
     //加载本地文件图
-//    void loadFileImage(Context context,@NonNull SimpleDraweeView view,@NonNull File file);
-//    void loadFileImage(Context context,@NonNull SimpleDraweeView view,@NonNull File file,IImageLoadCallback loadCallback);
-
+    void loadFileImage(Context context,@NonNull SimpleDraweeView view,int width,int height,@NonNull File file);
+    void loadFileImage(Context context,@NonNull SimpleDraweeView view,int width,int height,@NonNull File file,IImageLoadCallback loadCallback);
 
     /*****删除缓存*******/
     void removeOneCache(Uri uri);

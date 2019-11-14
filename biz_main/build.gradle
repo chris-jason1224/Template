@@ -76,7 +76,7 @@ dependencies {
     annotationProcessor project(':core_processor')
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterknifeVersion}"
 
-    //api project(':fun_aop')
+    api project(':fun_aop')
 
 
 }
