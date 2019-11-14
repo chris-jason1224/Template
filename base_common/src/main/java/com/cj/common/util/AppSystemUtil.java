@@ -18,17 +18,17 @@ import java.util.List;
  * 系统工具类
  */
 
-public class AndroidSystemUtil {
+public class AppSystemUtil {
 
-    private AndroidSystemUtil() {
+    private AppSystemUtil() {
 
     }
 
     private static class Holder {
-        private static final AndroidSystemUtil instance = new AndroidSystemUtil();
+        private static final AppSystemUtil instance = new AppSystemUtil();
     }
 
-    public static AndroidSystemUtil getInstance() {
+    public static AppSystemUtil getInstance() {
         return Holder.instance;
     }
 

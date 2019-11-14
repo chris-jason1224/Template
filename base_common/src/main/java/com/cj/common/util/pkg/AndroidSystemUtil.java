@@ -11,15 +11,15 @@ import java.util.List;
 /**
  * Created by Chris-Jason on 2016/10/4.
  */
-public class PackageUtil {
+public class AndroidSystemUtil {
 
-    private String TAG="PackageUtil";
+    private String TAG="AndroidSystemUtil";
     private static Context context;
-    private static PackageUtil instance;
+    private static AndroidSystemUtil instance;
 
-    public static PackageUtil getInstance(Context cont){
+    public static AndroidSystemUtil getInstance(Context cont){
         if(instance==null){
-            instance=new PackageUtil();
+            instance=new AndroidSystemUtil();
             context=cont;
         }
         return instance;

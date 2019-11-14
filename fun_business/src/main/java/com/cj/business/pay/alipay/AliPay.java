@@ -11,7 +11,7 @@ import com.alipay.sdk.app.PayTask;
 import com.cj.business.pay.IPay;
 import com.cj.common.provider.fun$business.pay.IPayResultCallback;
 import com.cj.common.util.LooperUtil;
-import com.cj.common.util.pkg.PackageUtil;
+import com.cj.common.util.pkg.AndroidSystemUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
 
@@ -56,7 +56,7 @@ public class AliPay implements IPay {
             return;
         }
 
-        if (!PackageUtil.getInstance(BaseApplication.getInstance()).isXInstalled("com.eg.android.AlipayGphone")) {
+        if (!AndroidSystemUtil.getInstance(BaseApplication.getInstance()).isXInstalled("com.eg.android.AlipayGphone")) {
             LooperUtil.getInstance().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

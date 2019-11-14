@@ -115,13 +115,13 @@ ext {
     tencentMMKVVersion = "1.0.12"
 
     //fresco 主框架
-    frescoMainLibVersion = "1.11.0"
+    frescoMainLibVersion = "2.0.0"
     //fresco gif支持库
-    frescoSupGifVersion = "1.11.0"
+    frescoSupGifVersion = "2.0.0"
     //fresco WebP动图支持库
-    frescoSupWebPAnimationVersion = "1.11.0"
+    frescoSupWebPAnimationVersion = "2.0.0"
     //fresco WebP静态图支持库
-    frescoSupWebPVersion = "1.11.0"
+    frescoSupWebPVersion = "2.0.0"
 
     //微信sdk
     wechatVersion = "5.3.1"

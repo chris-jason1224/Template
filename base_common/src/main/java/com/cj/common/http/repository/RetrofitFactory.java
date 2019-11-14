@@ -6,7 +6,7 @@ import android.os.Build;
 import android.webkit.WebSettings;
 
 import com.cj.common.BuildConfig;
-import com.cj.common.util.AndroidSystemUtil;
+import com.cj.common.util.AppSystemUtil;
 import com.cj.common.util.kv.DiskCacheUtil;
 import com.cj.manager.basement.BaseApplication;
 import com.google.gson.FieldNamingPolicy;
@@ -87,9 +87,9 @@ public class RetrofitFactory {
                         //设置User-Agent
                         .addHeader("User-Agent", Build.VERSION.SDK_INT > 17 ? WebSettings.getDefaultUserAgent(BaseApplication.getInstance().getApplicationContext()) : System.getProperty("http.agent"))
                         //app版本号
-                        .addHeader("AppVersionCode", AndroidSystemUtil.getInstance().getAppVersionCode(BaseApplication.getInstance().getApplicationContext()) + "")
+                        .addHeader("AppVersionCode", AppSystemUtil.getInstance().getAppVersionCode(BaseApplication.getInstance().getApplicationContext()) + "")
                         //app版本名
-                        .addHeader("AppVersionName", AndroidSystemUtil.getInstance().getAppVersionName(BaseApplication.getInstance().getApplicationContext()) + "")
+                        .addHeader("AppVersionName", AppSystemUtil.getInstance().getAppVersionName(BaseApplication.getInstance().getApplicationContext()) + "")
                         //Content-Type
                         .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
                         //

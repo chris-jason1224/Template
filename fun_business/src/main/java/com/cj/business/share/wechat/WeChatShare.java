@@ -19,7 +19,7 @@ import com.cj.common.provider.fun$business.share.IShareResultCallback;
 import com.cj.common.provider.fun$business.share.ShareParams;
 import com.cj.common.provider.fun$business.share.WeChatShareParams;
 import com.cj.common.util.LooperUtil;
-import com.cj.common.util.pkg.PackageUtil;
+import com.cj.common.util.pkg.AndroidSystemUtil;
 import com.cj.log.CJLog;
 import com.cj.manager.basement.BaseApplication;
 import com.cj.utils.io.IOUtil;
@@ -108,7 +108,7 @@ public class WeChatShare implements IShare, LifecycleOwner {
             return;
         }
 
-        if (!PackageUtil.getInstance(BaseApplication.getInstance()).isXInstalled("com.tencent.mm")) {
+        if (!AndroidSystemUtil.getInstance(BaseApplication.getInstance()).isXInstalled("com.tencent.mm")) {
             LooperUtil.getInstance().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

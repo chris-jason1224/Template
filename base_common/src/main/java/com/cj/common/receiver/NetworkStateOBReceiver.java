@@ -29,7 +29,6 @@ public class NetworkStateOBReceiver extends BroadcastReceiver{
     }
 
 
-
     /**
      * 暴露回调接口给前台使用
      * @param onNetworkChangedListener

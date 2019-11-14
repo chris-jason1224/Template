@@ -1,7 +1,6 @@
 package com.cj.main;
 
 import android.Manifest;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
@@ -13,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +42,7 @@ import com.cj.common.provider.fun$compressor.compress.ICompressProvider;
 import com.cj.common.provider.fun$lbs.ILBSProvider;
 import com.cj.common.provider.fun$lbs.ILocateResultCallback;
 import com.cj.common.provider.fun$lbs.locate.LocationInfoEntity;
-import com.cj.common.util.AndroidSystemUtil;
+import com.cj.common.util.AppSystemUtil;
 import com.cj.common.util.JSONUtils;
 import com.cj.common.util.ProgressUtil;
 import com.cj.common.util.async.AsyncCenter;
@@ -55,7 +53,6 @@ import com.cj.common.util.image.ImageLoader;
 
 import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.log.CJLog;
-import com.cj.ui.banner.loader.ImageLoaderInterface;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
@@ -502,7 +499,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
 
         if (R.id.foreground == vid) {
-            AndroidSystemUtil.getInstance().isAppForeground(this);
+            AppSystemUtil.getInstance().isAppForeground(this);
             return;
         }
 

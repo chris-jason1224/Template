@@ -30,8 +30,9 @@ android {
         //multidex config
         multiDexEnabled true
 
-        //极光推送配置
+        //whole app manifestPlaceHolders
         manifestPlaceholders = [
+                //极光推送配置
                 JPUSH_PKGNAME : "${applicationId}",
                 JPUSH_APPKEY  : "ebc918c62b95b99795db7fab", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "Template-debug-channel", //暂时填写默认值即可.
