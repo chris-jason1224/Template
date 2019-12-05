@@ -1,6 +1,7 @@
 package com.cj.main;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
@@ -51,7 +52,9 @@ import com.cj.common.util.async.IAsyncCallback;
 import com.cj.common.util.image.IImageLoadCallback;
 import com.cj.common.util.image.ImageLoader;
 
+import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
+import com.cj.fun_aop.annotation.WifiNeed;
 import com.cj.log.CJLog;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
@@ -73,6 +76,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import butterknife.BindView;
+import butterknife.OnClick;
 import gen.com.cj.bus.Gen$biz_login$Interface;
 import gen.com.cj.bus.Gen$biz_main$Interface;
 import io.objectbox.query.Query;
@@ -145,7 +149,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         });
 
-
         ModuleBus.getInstance().of(Gen$biz_main$Interface.class).Gen$Refresh_Event$Method().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -170,6 +173,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mTVState = fb(R.id.tv_state);
         mIVTest = fb(R.id.iv_test);
 
+
         fb(R.id.msg).setOnClickListener(this);
         fb(R.id.msg2).setOnClickListener(this);
         fb(R.id.goto_biz_login).setOnClickListener(this);
@@ -192,44 +196,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fb(R.id.to_locate).setOnClickListener(this);
         fb(R.id.calculate).setOnClickListener(this);
 
-        //////////////////////////
+
         List<String> imgs = new ArrayList<>();
         imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968395&di=f1ffda3814f533f319b3e2f62277e176&imgtype=0&src=http%3A%2F%2Fimg.52jbj.com%2Fuploads%2Fallimg%2F160117%2Fco16011G64453-0.jpg");
         imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968393&di=0ee1d72b7493abeb623b84a654008aef&imgtype=0&src=http%3A%2F%2Fi4.bbs.fd.zol-img.com.cn%2Ft_s1200x5000%2Fg5%2FM00%2F0F%2F0B%2FChMkJ1hjc3aIAGHyAAIQm0TYxUsAAY7aAB4_wsAAhCz914.jpg");
         imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968392&di=c313712ce7768b428f6bd41f042f74f9&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20130302%2FImg367606372.jpg");
         imgs.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968389&di=1a59ceed2657ae3fe9c7ea5ba16313b0&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw803h449%2F20180110%2F70fa-fyqnick1909052.png");
 
-//        banner = fb(R.id.banner);
-//        banner.setImages(imgs);
-//        banner.setImageLoader(new ImageLoaderInterface() {
-//            @Override
-//            public void displayImage(Context context, Object path, View imageView) {
-//
-//                SimpleDraweeView drev = (SimpleDraweeView) imageView;
-//                ImageLoader.getInstance().load(MainActivity.this,drev,(String)path);
-//            }
-//
-//            @Override
-//            public View createImageView(Context context) {
-//                SimpleDraweeView drev = new SimpleDraweeView(MainActivity.this);
-//                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.dip2px(MainActivity.this,200));
-//                drev.setLayoutParams(lp);
-//
-//                return drev;
-//
-//            }
-//        });
-//        banner.start();
-
     }
 
-//    @WifiNeed
-//    @ExecutionTimeTrace
+    @OnClick({R2.id.sharing})
+    @WifiNeed
+    @ExecutionTimeTrace
     @SingleSubmit
     @Override
     public void onClick(View v) {
 
         int vid = v.getId();
+
+        if(R.id.sharing == vid){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+        }
 
         if(R.id.msg  == vid){
             SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间

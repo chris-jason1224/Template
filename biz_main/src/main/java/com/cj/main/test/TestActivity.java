@@ -1,6 +1,7 @@
 package com.cj.main.test;
 
 import android.os.Bundle;
+
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,7 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -64,6 +66,7 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
     @Override
     protected void initView() {
         mVP = fb(R.id.vp);
+
     }
 
     @Override
@@ -75,4 +78,5 @@ public class TestActivity extends BaseMVPActivity<ITestPresenter> implements ITe
     public void onClick(View v) {
 
     }
+
 }
