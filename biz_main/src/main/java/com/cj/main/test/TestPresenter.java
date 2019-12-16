@@ -21,7 +21,7 @@ public class TestPresenter extends BaseMVPPresenter implements ITestPresenter {
     @Override
     public void doTest(String obj) {
         mAPIStore.testJSON("u_4")
-                .compose(CJSchedulers.<BaseHttpResultEntity<List<Object>>>compose()).
+                .compose(CJSchedulers.compose()).
                 subscribe(new HttpResultObserver(mDisposable, new HttpCallback<List<Object>>() {
                     @Override
                     public void onSuccess(List<Object> jsonArray) {

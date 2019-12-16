@@ -16,7 +16,6 @@ import com.cj.log.CJLog;
 public abstract class BaseMVPActivity<P extends IBasePresenter> extends BaseActivity implements IBaseView{
 
     protected P mPresenter;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
