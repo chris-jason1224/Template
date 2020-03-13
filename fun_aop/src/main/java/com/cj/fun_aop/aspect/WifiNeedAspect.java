@@ -65,6 +65,11 @@ public class WifiNeedAspect {
                             public void onDismiss() {
 
                             }
+
+                            @Override
+                            public void onCancel() {
+
+                            }
                         });
 
                         return;

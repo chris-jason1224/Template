@@ -124,7 +124,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                     ModuleEventCenter annotation = e.getAnnotation(ModuleEventCenter.class);
                     String str = ((TypeElement) e).getQualifiedName().toString();
                     if (annotation != null && str != null) {
-                        qualifiedName = ((TypeElement) e).getQualifiedName().toString();
+                        qualifiedName = str;
                         break;
                     }
                 }
@@ -210,7 +210,7 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                 }
             }
 
-            // interfaceBuilder方法标志生成接口类 2017/4/25 09:25
+            // interfaceBuilder方法标志生成接口类
             TypeSpec typeSpec = TypeSpec.
                     interfaceBuilder("Gen$" + moduleName + "$Interface")
                     .addModifiers(Modifier.PUBLIC)
@@ -223,7 +223,8 @@ public class ModuleEventCenterProcessor extends AbstractProcessor {
                     .build();
             try {
                 //生成代码路径
-                javaFile.writeTo(new File("base_common/src/main/java/"));
+                File f = new File("base_common/src/main/java/");
+                javaFile.writeTo(f);
             } catch (IOException e) {
                 e.printStackTrace();
             }

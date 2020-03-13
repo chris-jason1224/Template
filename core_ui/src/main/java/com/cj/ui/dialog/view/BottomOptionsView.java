@@ -1,6 +1,7 @@
 package com.cj.ui.dialog.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -80,6 +81,13 @@ public class BottomOptionsView extends BaseDialogView {
     @Override
     protected int setDialogLayout() {
         return R.layout.core_ui_bottom_options_view_layout;
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        if(callback!=null){
+            callback.onCancel();
+        }
     }
 
     class Adapter extends BaseAdapter {

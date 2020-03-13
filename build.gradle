@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         //android 编译工具插件
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         //沪江 aspectJ插件
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
         //ObjectBox插件

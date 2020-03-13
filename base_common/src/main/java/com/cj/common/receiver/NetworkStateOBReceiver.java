@@ -10,6 +10,7 @@ import com.cj.common.util.NetUtil;
 
 /**
  * Created by mayikang on 2018/7/24.
+ * api level 28 google移除 CONNECTIVITY_ACTION，改为NetworkCallback
  */
 
 public class NetworkStateOBReceiver extends BroadcastReceiver{

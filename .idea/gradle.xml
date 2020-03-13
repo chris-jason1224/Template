@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base_common" />
+            <option value="$PROJECT_DIR$/biz_login" />
+            <option value="$PROJECT_DIR$/biz_main" />
+            <option value="$PROJECT_DIR$/core_annotations" />
+            <option value="$PROJECT_DIR$/core_framework" />
+            <option value="$PROJECT_DIR$/core_jutils" />
+            <option value="$PROJECT_DIR$/core_log" />
+            <option value="$PROJECT_DIR$/core_processor" />
+            <option value="$PROJECT_DIR$/core_ui" />
+            <option value="$PROJECT_DIR$/fun_aop" />
+            <option value="$PROJECT_DIR$/fun_bluetooth" />
+            <option value="$PROJECT_DIR$/fun_business" />
+            <option value="$PROJECT_DIR$/fun_compressor" />
+            <option value="$PROJECT_DIR$/fun_lbs" />
+            <option value="$PROJECT_DIR$/fun_push" />
+          </set>
+        </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -1,11 +1,8 @@
 package androidx.lifecycle;
 
-
 import androidx.annotation.NonNull;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-
 import static androidx.lifecycle.Lifecycle.State.CREATED;
 import static androidx.lifecycle.Lifecycle.State.DESTROYED;
 

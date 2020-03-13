@@ -81,4 +81,11 @@ public class ConfirmPWDDialog extends BaseDialogView {
             callback.onDismiss();
         }
     }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        if(callback!=null){
+            callback.onCancel();
+        }
+    }
 }

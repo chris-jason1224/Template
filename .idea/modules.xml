@@ -2,23 +2,23 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Template.iml" filepath="$PROJECT_DIR$/Template.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/base_common/base_common.iml" filepath="$PROJECT_DIR$/base_common/base_common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/biz_login/biz_login.iml" filepath="$PROJECT_DIR$/biz_login/biz_login.iml" />
-      <module fileurl="file://$PROJECT_DIR$/biz_main/biz_main.iml" filepath="$PROJECT_DIR$/biz_main/biz_main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_annotations/core_annotations.iml" filepath="$PROJECT_DIR$/core_annotations/core_annotations.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_framework/core_framework.iml" filepath="$PROJECT_DIR$/core_framework/core_framework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_jutils/core_jutils.iml" filepath="$PROJECT_DIR$/core_jutils/core_jutils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_log/core_log.iml" filepath="$PROJECT_DIR$/core_log/core_log.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_processor/core_processor.iml" filepath="$PROJECT_DIR$/core_processor/core_processor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core_ui/core_ui.iml" filepath="$PROJECT_DIR$/core_ui/core_ui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_aop/fun_aop.iml" filepath="$PROJECT_DIR$/fun_aop/fun_aop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" filepath="$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_business/fun_business.iml" filepath="$PROJECT_DIR$/fun_business/fun_business.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_compressor/fun_compressor.iml" filepath="$PROJECT_DIR$/fun_compressor/fun_compressor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_lbs/fun_lbs.iml" filepath="$PROJECT_DIR$/fun_lbs/fun_lbs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fun_push/fun_push.iml" filepath="$PROJECT_DIR$/fun_push/fun_push.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Template.iml" filepath="$PROJECT_DIR$/Template.iml" group="Template" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Template/app" />
+      <module fileurl="file://$PROJECT_DIR$/base_common/base_common.iml" filepath="$PROJECT_DIR$/base_common/base_common.iml" group="Template/base_common" />
+      <module fileurl="file://$PROJECT_DIR$/biz_login/biz_login.iml" filepath="$PROJECT_DIR$/biz_login/biz_login.iml" group="Template/biz_login" />
+      <module fileurl="file://$PROJECT_DIR$/biz_main/biz_main.iml" filepath="$PROJECT_DIR$/biz_main/biz_main.iml" group="Template/biz_main" />
+      <module fileurl="file://$PROJECT_DIR$/core_annotations/core_annotations.iml" filepath="$PROJECT_DIR$/core_annotations/core_annotations.iml" group="Template/core_annotations" />
+      <module fileurl="file://$PROJECT_DIR$/core_framework/core_framework.iml" filepath="$PROJECT_DIR$/core_framework/core_framework.iml" group="Template/core_framework" />
+      <module fileurl="file://$PROJECT_DIR$/core_jutils/core_jutils.iml" filepath="$PROJECT_DIR$/core_jutils/core_jutils.iml" group="Template/core_jutils" />
+      <module fileurl="file://$PROJECT_DIR$/core_log/core_log.iml" filepath="$PROJECT_DIR$/core_log/core_log.iml" group="Template/core_log" />
+      <module fileurl="file://$PROJECT_DIR$/core_processor/core_processor.iml" filepath="$PROJECT_DIR$/core_processor/core_processor.iml" group="Template/core_processor" />
+      <module fileurl="file://$PROJECT_DIR$/core_ui/core_ui.iml" filepath="$PROJECT_DIR$/core_ui/core_ui.iml" group="Template/core_ui" />
+      <module fileurl="file://$PROJECT_DIR$/fun_aop/fun_aop.iml" filepath="$PROJECT_DIR$/fun_aop/fun_aop.iml" group="Template/fun_aop" />
+      <module fileurl="file://$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" filepath="$PROJECT_DIR$/fun_bluetooth/fun_bluetooth.iml" group="Template/fun_bluetooth" />
+      <module fileurl="file://$PROJECT_DIR$/fun_business/fun_business.iml" filepath="$PROJECT_DIR$/fun_business/fun_business.iml" group="Template/fun_business" />
+      <module fileurl="file://$PROJECT_DIR$/fun_compressor/fun_compressor.iml" filepath="$PROJECT_DIR$/fun_compressor/fun_compressor.iml" group="Template/fun_compressor" />
+      <module fileurl="file://$PROJECT_DIR$/fun_lbs/fun_lbs.iml" filepath="$PROJECT_DIR$/fun_lbs/fun_lbs.iml" group="Template/fun_lbs" />
+      <module fileurl="file://$PROJECT_DIR$/fun_push/fun_push.iml" filepath="$PROJECT_DIR$/fun_push/fun_push.iml" group="Template/fun_push" />
     </modules>
   </component>
 </project>

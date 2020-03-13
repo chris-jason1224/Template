@@ -79,4 +79,11 @@ public class ConfirmDialog extends BaseDialogView {
             callback.onDismiss();
         }
     }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        if(callback!=null){
+            callback.onDismiss();
+        }
+    }
 }

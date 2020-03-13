@@ -84,7 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             public void onNetworkChanged(boolean isConnected, int type) {
                 //每一个继承自BaseActivity的activity都会回调这个方法，避免重复提醒，需要判断当前activity是否在栈顶
                 if (isActivityReady) {
-                    //有网络
+                    //无网络
                     if (!isConnected) {
                         final UITipDialog tipDialog = new UITipDialog.Builder(BaseActivity.this)
                                 .setIconType(UITipDialog.Builder.ICON_TYPE_INFO)

@@ -5,6 +5,6 @@ package com.cj.ui.dialog.callback;
  * Date:2019-07-16.
  * Package:com.cj.ui.dialog.callback
  */
-public interface ItemClickCallback {
+public interface ItemClickCallback extends BaseDialogCallback {
     void onClick(String option, int position);
 }

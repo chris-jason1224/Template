@@ -52,6 +52,10 @@ public class LoginInterceptor implements IInterceptor {
             mPostcard = postcard;
             mCallback = callback;
             //todo 未登录，被拦截，跳转登录页面
+            /**
+             * 拦截器运行在子线程中，跳转activity先切换到主线程
+             * 跳转登录页面添加greenChannel，跳过拦截
+             */
             if (TextUtils.isEmpty(DiskCacheUtil.getInstance().getToken())) {
                 //ARouter.getInstance().build(TargetPage.PAGE_AFTER_LOGIN_INTERCEPTED).navigation();
             } else {
@@ -82,6 +86,7 @@ public class LoginInterceptor implements IInterceptor {
     public class LoginResultReceiver extends BroadcastReceiver {
 
         /**
+         * LocalBroadcastReceiver 于 androidX被废弃 用LiveData替代
          * 登录成功后发送本地广播
          * Intent intent=new Intent(Tag.TAG_LOGIN_FILTER);
          * intent.putExtra(TAG_LOGIN_RESULT,CODE_LOGIN_SUCCESS);

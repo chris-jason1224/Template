@@ -21,7 +21,7 @@ import com.cj.ui.R;
  * Package:com.cj.ui.dialog.view
  * 通用Dialog弹窗基类
  */
-public abstract class BaseDialogView extends Dialog implements View.OnClickListener,Dialog.OnDismissListener {
+public abstract class BaseDialogView extends Dialog implements View.OnClickListener,Dialog.OnDismissListener, DialogInterface.OnCancelListener {
 
     //Dialog弹出需要依赖于activity
     protected Context mContext;
@@ -37,6 +37,8 @@ public abstract class BaseDialogView extends Dialog implements View.OnClickListe
 
         //初始化属性
         initAttr();
+        setOnDismissListener(this);
+        setOnCancelListener(this);
     }
 
     private void initAttr() {
@@ -81,20 +83,20 @@ public abstract class BaseDialogView extends Dialog implements View.OnClickListe
 
     @Override
     public void show() {
-        // Dialog 在初始化时会生成新的 Window，先禁止 Dialog Window 获取焦点，
-        // 等 Dialog 显示后对 Dialog Window 的 DecorView 设置 setSystemUiVisibility ，
-        // 接着再获取焦点。 这样表面上看起来就没有退出沉浸模式。
-        // Set the dialog to not focusable (makes navigation ignore us adding the window)
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-        //Show the dialog!
-        super.show();
-
-        //Set the dialog to immersive
-        fullScreenImmersive(getWindow().getDecorView());
-
-        //Clear the not focusable flag from the window
-        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+//        // Dialog 在初始化时会生成新的 Window，先禁止 Dialog Window 获取焦点，
+//        // 等 Dialog 显示后对 Dialog Window 的 DecorView 设置 setSystemUiVisibility ，
+//        // 接着再获取焦点。 这样表面上看起来就没有退出沉浸模式。
+//        // Set the dialog to not focusable (makes navigation ignore us adding the window)
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+//
+//        //Show the dialog!
+//        super.show();
+//
+//        //Set the dialog to immersive
+//        fullScreenImmersive(getWindow().getDecorView());
+//
+//        //Clear the not focusable flag from the window
+//        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
     }
     /**

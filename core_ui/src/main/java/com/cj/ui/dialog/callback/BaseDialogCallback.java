@@ -11,4 +11,6 @@ public interface BaseDialogCallback {
 
     void onDismiss();
 
+    void onCancel();
+
 }

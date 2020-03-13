@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
  * 2、java.util.concurrent.ThreadPoolExecutor 实现了ExecutorService，是最基础的线程池
  * 3、预设的四种线程池，FixedThreadPool、CachedThreadPool、ScheduledThreadPool、SingleThreadExecutor四种线程池是对ThreadPoolExecutor的封装
  */
-public class AsyncCenter<T> {
+public class AsyncCenter {
 
     //线程池
     private ScheduledExecutorService executor;
@@ -43,7 +43,7 @@ public class AsyncCenter<T> {
         return Holder.instance;
     }
 
-    public void submit(Exec<T> exec, @NonNull final IAsyncCallback<T> callback) {
+    public  <T> void submit(Exec<T> exec, @NonNull final IAsyncCallback<T> callback) {
 
         if (callback == null) {
             return;
@@ -63,7 +63,7 @@ public class AsyncCenter<T> {
                     callback.onFailed(throwable);
                 }
             }
-        }, new Action() {
+        },new Action() {
             @Override
             public void run() throws Exception {
                 if(callback!=null){
@@ -75,7 +75,7 @@ public class AsyncCenter<T> {
     }
 
     //切换到子线程中来执行实际的耗时操作
-    private Observable getResult(final Exec<T> exec) {
+    private  <T> Observable getResult(final Exec<T> exec) {
         return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(ObservableEmitter<T> emitter) throws Exception {
