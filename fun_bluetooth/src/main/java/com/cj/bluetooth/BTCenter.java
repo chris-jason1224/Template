@@ -36,6 +36,7 @@ import com.cj.log.CJLog;
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -102,7 +103,6 @@ public class BTCenter implements LifecycleOwner {
     private List<BluetoothDevice> pairedList;//已配对蓝牙设备集合
     private List<BluetoothDevice> unPairedList;//未配对蓝牙设备集合
     private static List<BTStateObserver> observerList;//蓝牙观察者集合
-
     //构造方法
     private BTCenter() {
         observerList = new ArrayList<>();
@@ -127,6 +127,12 @@ public class BTCenter implements LifecycleOwner {
     public  void register(BTStateObserver observer) {
         if (observerList != null && !observerList.contains(observer)) {
             observerList.add(observer);
+        }
+    }
+    //取消注册回调接口
+    public void unRegister(BTStateObserver observer){
+        if (observerList != null && observerList.contains(observer)) {
+            observerList.remove(observer);
         }
     }
 
@@ -311,7 +317,7 @@ public class BTCenter implements LifecycleOwner {
             return;
         }
 
-        for (BTStateObserver observer : observerList) {
+        for (BTStateObserver observer: observerList) {
             observer.onStateChanged(new com.cj.common.provider.fun$bluetooth.BTState(state));
         }
 
@@ -368,6 +374,31 @@ public class BTCenter implements LifecycleOwner {
     public void printSize(int size){
         mBTService.printSize(size);
     }
+
+    /**
+     *             String start = "*** 懒购外卖 ***\n\n";
+     *             bt.printCenter();
+     *             bt.printSize(1);
+     *             bt.printMessage(start);
+     *
+     *             //订单小号
+     *             String StoreOrderNo = "NO:1234567890abc%$#@" + "\n\n";
+     *             bt.printCenter();
+     *             bt.printSize(1);
+     *             bt.printMessage(StoreOrderNo);
+     *
+     *             //店铺名字
+     *             String storeName = "韩式烤肉" + "\n\n";
+     *             bt.printCenter();
+     *             bt.printSize(1);
+     *             bt.printMessage(storeName);
+     *
+     *             //下单时间
+     *             String payTime = "支付时间:" + "2019-03-24 12:26" + "\n\n";
+     *             bt.printLeft();
+     *             bt.printSize(0);
+     *             bt.printMessage(payTime);
+     */
 
     /****
      *     //title
@@ -579,7 +610,6 @@ public class BTCenter implements LifecycleOwner {
 
 
             }
-
         }
     };
 

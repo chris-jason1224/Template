@@ -1,12 +1,8 @@
 package com.cj.common.base;
 
-import android.app.ActivityManager;
-import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.text.TextUtils;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cj.common.BuildConfig;
 import com.cj.common.bus.ModuleBus;
@@ -16,13 +12,9 @@ import com.cj.common.states.OnPlaceHolderCallback;
 import com.cj.common.states.OnEmptyStateCallback;
 import com.cj.common.states.OnTimeoutStateCallback;
 import com.cj.common.util.kv.SPFUtil;
-import com.cj.common.util.image.ImageLoader;
 import com.cj.manager.basement.BaseApplication;
-import com.facebook.imagepipeline.core.ImagePipelineFactory;
 import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
-
-import java.util.List;
 
 
 /**
@@ -53,9 +45,6 @@ public class BaseApp extends BaseApplication {
         //注册多布局
         registerLoadSir();
 
-        //初始化图片加载框架
-        ImageLoader.init(this);
-
         //初始化DBCenter
         DBCenter.init(this);
 
@@ -72,25 +61,11 @@ public class BaseApp extends BaseApplication {
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        //Fresco清理内存缓存
-        try {
-            if (level >= ComponentCallbacks2.TRIM_MEMORY_MODERATE) {
-                ImagePipelineFactory.getInstance().getImagePipeline().clearMemoryCaches();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        //fresco清理内存缓存
-        try {
-            ImagePipelineFactory.getInstance().getImagePipeline().clearMemoryCaches();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**

@@ -8,6 +8,10 @@ import android.net.NetworkInfo;
 
 import com.cj.common.util.NetUtil;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mayikang on 2018/7/24.
  * api level 28 google移除 CONNECTIVITY_ACTION，改为NetworkCallback
@@ -15,7 +19,7 @@ import com.cj.common.util.NetUtil;
 
 public class NetworkStateOBReceiver extends BroadcastReceiver{
 
-    private static OnNetworkChangedListener listener;
+    private static List<OnNetworkChangedListener> listeners = new ArrayList<>();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,7 +27,10 @@ public class NetworkStateOBReceiver extends BroadcastReceiver{
         //网络已经发生变化
         if(intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)){
             //将网络状态回调给前台
-            if(listener!=null){
+            for (OnNetworkChangedListener listener:listeners){
+                if(listener==null){
+                    continue;
+                }
                 listener.onNetworkChanged(NetUtil.isConnected(context),NetUtil.getCurrentNetType(context));
             }
         }
@@ -36,7 +43,18 @@ public class NetworkStateOBReceiver extends BroadcastReceiver{
      * //注意：Receiver接收完之后，会被回收，listener可能为空
      */
     public static void setOnNetworkChangedListener(OnNetworkChangedListener onNetworkChangedListener) {
-        listener=onNetworkChangedListener;
+            if(!listeners.contains(onNetworkChangedListener)){
+                listeners.add(onNetworkChangedListener);
+            }
+    }
+
+    public static void unRegisterNetworkChangedListener(OnNetworkChangedListener onNetworkChangedListener){
+        //移除回调时可能正在发生网络改变
+        synchronized (listeners){
+            if(listeners.contains(onNetworkChangedListener)){
+                listeners.remove(onNetworkChangedListener);
+            }
+        }
     }
 
     //回调接口

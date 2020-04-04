@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ import butterknife.Unbinder;
  * Activity最基础的基类
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener,NetworkStateOBReceiver.OnNetworkChangedListener {
 
     private LoadService loadService;
     protected ImmersionBar immersionBar;
@@ -51,6 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * 判断 activity 是否处于激活状态
      **/
     private boolean isActivityReady = false;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,22 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         initLoadSir(initStatusLayout());
 
         //注入网络变化监听回调
-        NetworkStateOBReceiver.setOnNetworkChangedListener(new NetworkStateOBReceiver.OnNetworkChangedListener() {
-            @Override
-            public void onNetworkChanged(boolean isConnected, int type) {
-                //每一个继承自BaseActivity的activity都会回调这个方法，避免重复提醒，需要判断当前activity是否在栈顶
-                if (isActivityReady) {
-                    //无网络
-                    if (!isConnected) {
-                        final UITipDialog tipDialog = new UITipDialog.Builder(BaseActivity.this)
-                                .setIconType(UITipDialog.Builder.ICON_TYPE_INFO)
-                                .setTipWord("网络断开")
-                                .create();
-                        tipDialog.show();
-                    }
-                }
-            }
-        });
+        NetworkStateOBReceiver.setOnNetworkChangedListener(this);
 
         initData();
 
@@ -124,13 +112,15 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (immersionBar != null)
             immersionBar.destroy();
         if (unbinder != null) {
             unbinder.unbind();
         }
+        //取消网络监听
+        NetworkStateOBReceiver.unRegisterNetworkChangedListener(this);
 
+        super.onDestroy();
     }
 
     //子类该方法，传入布局文件
@@ -307,5 +297,18 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         return (T) findViewById(resID);
     }
 
-
+    @Override
+    public void onNetworkChanged(boolean isConnected, int type) {
+        //每一个继承自BaseActivity的activity都会回调这个方法，避免重复提醒，需要判断当前activity是否在栈顶
+        if (isActivityReady) {
+            //无网络
+            if (!isConnected) {
+                final UITipDialog tipDialog = new UITipDialog.Builder(BaseActivity.this)
+                        .setIconType(UITipDialog.Builder.ICON_TYPE_INFO)
+                        .setTipWord("网络断开")
+                        .create();
+                tipDialog.show();
+            }
+        }
+    }
 }

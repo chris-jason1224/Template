@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -138,22 +139,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.facebook.drawee.view.SimpleDraweeView
-                    app:roundTopLeft="false"
-                    app:roundBottomEnd="false"
-                    android:background="#000000"
-                    app:roundTopEnd="true"
-                    app:roundedCornerRadius="10dp"
-                    app:roundAsCircle="false"
-                    app:placeholderImage="@drawable/placeholder"
-                    android:id="@+id/drawee"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp" />
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    app:placeholderImage="@drawable/base_common_pic_timeout"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp" />
             </LinearLayout>
 
             <LinearLayout

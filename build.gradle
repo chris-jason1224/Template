@@ -114,15 +114,6 @@ ext {
     //腾讯mmkv 高速key-value本地存取框架，替代普通SharedPreference
     tencentMMKVVersion = "1.0.12"
 
-    //fresco 主框架
-    frescoMainLibVersion = "2.0.0"
-    //fresco gif支持库
-    frescoSupGifVersion = "2.0.0"
-    //fresco WebP动图支持库
-    frescoSupWebPAnimationVersion = "2.0.0"
-    //fresco WebP静态图支持库
-    frescoSupWebPVersion = "2.0.0"
-
     //微信sdk
     wechatVersion = "5.3.1"
 

@@ -1,9 +1,11 @@
 package com.cj.common.bus;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import androidx.annotation.MainThread;
@@ -21,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -523,5 +526,20 @@ public class ModuleBus {
        return Looper.myLooper() == Looper.getMainLooper();
     }
 
+    static class H extends Handler{
+        private WeakReference<Activity> ref;
+
+        public H(Activity act){
+            ref = new WeakReference<>(act);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+
+            //在activity未被销毁时才处理消息
+            if(ref!=null && ref.get()!=null){
+                //todo handle msg
+            }
+        }
+    }
 
 }

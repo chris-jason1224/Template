@@ -4,13 +4,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,9 +50,6 @@ import com.cj.common.util.ProgressUtil;
 import com.cj.common.util.async.AsyncCenter;
 import com.cj.common.util.async.Exec;
 import com.cj.common.util.async.IAsyncCallback;
-import com.cj.common.util.image.IImageLoadCallback;
-import com.cj.common.util.image.ImageLoader;
-
 import com.cj.fun_aop.annotation.ExecutionTimeTrace;
 import com.cj.fun_aop.annotation.SingleSubmit;
 import com.cj.fun_aop.annotation.WifiNeed;
@@ -59,11 +57,8 @@ import com.cj.log.CJLog;
 import com.cj.ui.dialog.DialogUtil;
 import com.cj.ui.notify.Alerter.AlertManager;
 import com.cj.ui.notify.Alerter.AlerterListener;
-import com.cj.ui.util.ScreenUtil;
 import com.cj.utils.io.IOUtil;
 import com.cj.utils.list.ListUtil;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.image.ImageInfo;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,7 +80,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 @Route(path = "/biz_main/ACT/com.cj.main.MainActivity")
 public class MainActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
 
-    private SimpleDraweeView draweeView;
     @BindView(R2.id.base_common_toolbar)
     Toolbar toolbar;
     private LinearLayout mLLParent;
@@ -129,25 +123,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547813416419&di=cd93b735d229213f2e0dee2759ad81d3&imgtype=0&src=http%3A%2F%2Fattimg.dospy.com%2Fimg%2Fday_111004%2F20111004_f4e8d9f067a3542375c920PXx4HtkkZZ.jpg";
 
-        ImageLoader.getInstance().load(this, draweeView,ScreenUtil.getScreenWidth(this),ScreenUtil.dip2px(this,300),url, new IImageLoadCallback() {
-            @Override
-            public void onSuccess(String id, ImageInfo imageInfo, Animatable animatable) {
-
-            }
-
-            @Override
-            public void onFailed(String id, Throwable throwable) {
-
-            }
-        });
-
-        bt.registerBTStateObserver(new BTStateObserver() {
-            @Override
-            public void onStateChanged(BTState btState) {
-                CJLog.getInstance().log_e("main - state  -" + btState.getState());
-                mTVState.setText("状态=" + btState.getState());
-            }
-        });
 
         ModuleBus.getInstance().of(Gen$biz_main$Interface.class).Gen$Refresh_Event$Method().observe(this, new Observer<String>() {
             @Override
@@ -168,7 +143,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     protected void initView() {
-        draweeView = fb(R.id.drawee);
         mLLParent = fb(R.id.ll_parent);
         mTVState = fb(R.id.tv_state);
         mIVTest = fb(R.id.iv_test);
@@ -187,7 +161,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fb(R.id.share).setOnClickListener(this);
         fb(R.id.auth).setOnClickListener(this);
         fb(R.id.compress).setOnClickListener(this);
-        fb(R.id.bt).setOnClickListener(this);
         fb(R.id.print).setOnClickListener(this);
         fb(R.id.dialog).setOnClickListener(this);
         fb(R.id.async).setOnClickListener(this);
@@ -206,9 +179,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @OnClick({R2.id.sharing})
-    @WifiNeed
-    @ExecutionTimeTrace
-    @SingleSubmit
+//    @WifiNeed
+//    @ExecutionTimeTrace
+//    @SingleSubmit
     @Override
     public void onClick(View v) {
 
@@ -219,7 +192,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
             sendIntent.setType("text/plain");
-
             Intent shareIntent = Intent.createChooser(sendIntent, null);
             startActivity(shareIntent);
         }
@@ -343,52 +315,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             DialogUtil.getInstance().showMessageDialog(this, "hhhhh", "f", null);
         }
 
-        if (R.id.print == vid) {
 
-            CJLog.getInstance().log_file("ffffffff{}fff");
-
-            String start = "*** 懒购外卖 ***\n\n";
-            bt.printCenter();
-            bt.printSize(1);
-            bt.printMessage(start);
-
-            //订单小号
-            String StoreOrderNo = "NO:1234567890abc%$#@" + "\n\n";
-            bt.printCenter();
-            bt.printSize(1);
-            bt.printMessage(StoreOrderNo);
-
-            //店铺名字
-            String storeName = "韩式烤肉" + "\n\n";
-            bt.printCenter();
-            bt.printSize(1);
-            bt.printMessage(storeName);
-
-            //下单时间
-            String payTime = "支付时间:" + "2019-03-24 12:26" + "\n\n";
-            bt.printLeft();
-            bt.printSize(0);
-            bt.printMessage(payTime);
-
-        }
-
-        if (R.id.bt == vid) {
-            bt.scan();
-        }
-
-        if (R.id.compress == vid) {
-            compress.invokeCompress("", new ICompressCallback() {
-                @Override
-                public void onSuccess(File compressedFile) {
-
-                }
-
-                @Override
-                public void onFailed(Throwable throwable) {
-
-                }
-            });
-        }
 
         if (R.id.auth == vid) {
             AuthParams<String> params = new AuthParams<>();

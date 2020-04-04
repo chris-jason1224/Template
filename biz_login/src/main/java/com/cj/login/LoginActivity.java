@@ -6,8 +6,6 @@ import androidx.lifecycle.Observer;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cj.common.base.BaseActivity;
 import com.cj.common.bus.ModuleBus;
-import com.cj.common.util.image.ImageLoader;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.gyf.barlibrary.ImmersionBar;
 import butterknife.BindView;
 import gen.com.cj.bus.Gen$biz_login$Interface;
@@ -15,7 +13,6 @@ import gen.com.cj.bus.Gen$biz_login$Interface;
 @Route(path="/biz_login/ACT/com.cj.login.LoginActivity")
 public class LoginActivity extends BaseActivity {
 
-    @BindView(R2.id.drev) SimpleDraweeView drev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,6 @@ public class LoginActivity extends BaseActivity {
     protected void initData() {
         String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572609968392&di=c313712ce7768b428f6bd41f042f74f9&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20130302%2FImg367606372.jpg";
 
-        ImageLoader.getInstance().load(this,drev,800,300,url);
     }
 
     @Override
