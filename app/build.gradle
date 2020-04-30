@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 //沪江 aspectJ插件
 apply plugin: 'android-aspectjx'
 
@@ -78,6 +80,7 @@ repositories {
     flatDir {
         dirs 'libs', '../fun_business/libs', '../fun_lbs/libs'
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -102,6 +105,8 @@ dependencies {
         api project(':fun_bluetooth')
         api project(':fun_lbs')
     }
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
 

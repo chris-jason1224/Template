@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -50,5 +52,10 @@ dependencies {
     annotationProcessor project(':core_processor')
     //支付宝sdk aar包
     implementation(name: 'alipaySdk-15.5.9', ext: 'aar')
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

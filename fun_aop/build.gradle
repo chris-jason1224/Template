@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -32,7 +34,12 @@ dependencies {
     api "org.aspectj:aspectjrt:${rootProject.ext.aspectJRTVersion}"
 
     implementation project(':base_common')
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
 
 

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 apply plugin: 'io.objectbox' //依赖ObjectBox插件
 
 android {
@@ -98,5 +100,10 @@ dependencies {
     api "com.jakewharton:butterknife:${rootProject.ext.butterknifeVersion}"
 
     annotationProcessor project(':core_processor')
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

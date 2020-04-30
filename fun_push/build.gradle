@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -48,5 +50,10 @@ dependencies {
     //极光推送sdk
     api "cn.jiguang.sdk:jpush:${rootProject.ext.jpushSdkVersion}"
     api "cn.jiguang.sdk:jcore:${rootProject.ext.jpushCoreVersion}"
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
